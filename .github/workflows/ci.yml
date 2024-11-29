@@ -63,7 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Login to the Docker registry
-        run: docker login --username ${{ vars.DOCKER_USERNAME  }} --password ${{ secrets.DOCKER_TOKEN }}
+        run: docker login --username ${{ vars.DH_USERNAME  }} --password ${{ secrets.DH_TOKEN }}
       - name: Login to the Github Container registry
         run: docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
       - name: Login to the Aliyun ACR registry

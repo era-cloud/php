@@ -4,7 +4,7 @@ set -Eeuo pipefail
 declare -A aliases=(
     [8.3]='8 latest'
 )
-# ACR_NAMESPACE=forlong
+# ACR_NAMESPACE=eracloud
 # GH_NAMESPACE=meta-era
 echo $ACR_NAMESPACE
 echo $GH_NAMESPACE
