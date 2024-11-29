@@ -1,8 +1,8 @@
-# https://github.com/meta-era/php/pkgs/container/php
+# https://github.com/era-cloud/php/pkgs/container/php
 
 ## ghcr
 ```sh
-docker pull ghcr.io/meta-era/php:swoole-alpine
+docker pull ghcr.io/era-cloud/php:swoole-alpine
 ```
 
 ## Aliyun ACR
@@ -34,12 +34,12 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
   docker compose -f docker-compose.yml -f --tail 100
   ```
 
-## 维护者: [@长久同学](https://github.com/meta-era/php)
+## 维护者: [@长久同学](https://github.com/littlezo/php) [@Era Cloud](https://github.com/era-cloud/php) [@Era X](https://github.com/meta-era/php)
 
 fork 自 [Docker "Official Image"](https://github.com/docker-library/php) 
 
 ## 说明
-这是[eracloud/php of ghcr.io/meta-era/php]的 Git 存储库（不要与上游提供的php任何官方镜像混淆）。请参阅Docker Hub 页面，了解有关如何使用此 Docker 映像的完整自述文件以及有关贡献和问题的信息。`php`
+这是[`eracloud/php` of `ghcr.io/era-cloud/php`]的 Git 存储库（不要与上游提供的php任何官方镜像混淆）。请参阅Docker Hub 页面，了解有关如何使用此 Docker 映像的完整自述文件以及有关贡献和问题的信息。`php`
 
 不定期同步[Docker "Official Image"](https://github.com/docker-library/php)
 
