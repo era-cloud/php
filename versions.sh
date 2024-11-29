@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
-
+rm -rf 8.{1,2,3,4}-rc
+mkdir 8.{1,2,3,4}-rc
 cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
 # TODO consume https://www.php.net/releases/branches.php and https://www.php.net/release-candidates.php?format=json here like in Go, Julia, etc (so we can have a canonical "here's all the versions possible" mode, and more automated metadata like EOL 👀)
 
 versions=( "$@" )
 if [ ${#versions[@]} -eq 0 ]; then
-	versions=( */ )
+	versions=(*/)
 	json='{}'
 else
-	json="$(< versions.json)"
+	json="$(<versions.json)"
 fi
-versions=( "${versions[@]%/}" )
+versions=("${versions[@]%/}")
 
 for version in "${versions[@]}"; do
 	rcVersion="${version%-rc}"
@@ -46,13 +47,12 @@ for version in "${versions[@]}"; do
 		'
 	fi
 	IFS=$'\n'
-	possibles=( $(
-		curl -fsSL "$apiUrl" \
-			| jq --raw-output "$apiJqExpr | @sh" \
-			| sort -rV
-	) )
+	possibles=($(
+		curl -fsSL "$apiUrl" |
+			jq --raw-output "$apiJqExpr | @sh" |
+			sort -rV
+	))
 	unset IFS
-
 	if [ "${#possibles[@]}" -eq 0 ]; then
 		echo >&2 "warning: skipping/removing '$version' (does not appear to exist upstream)"
 		json="$(jq <<<"$json" -c '.[env.version] = null')"
@@ -69,7 +69,7 @@ for version in "${versions[@]}"; do
 
 	if ! wget -q --spider "$url"; then
 		echo >&2 "error: '$url' appears to be missing"
-		exit 1
+		continue
 	fi
 
 	# if we don't have a .asc URL, let's see if we can figure one out :)
@@ -85,19 +85,32 @@ for version in "${versions[@]}"; do
 		alpine3.21 \
 		alpine3.20 \
 	; do
-		for variant in cli apache fpm zts; do
-			if [[ "$suite" = alpine* ]]; then
-				if [ "$variant" = 'apache' ]; then
-					continue
-				fi
-			fi
+		for variant in cli swoole zts swow; do
+			# if [[ "$version" == "8.0" && !("$suite" == "bullseye" || "$suite" == "alpine3.16") ]]; then
+			# 	echo "Skipping $version $suite"
+			# 	continue
+			# fi
+			# if [[ "$version" != "8.0" &&  "$suite" == "alpine3.16" ]]; then
+			# 	echo "Skipping $version $suite"
+			# 	continue
+			# fi
 			export suite variant
 			variants="$(jq <<<"$variants" -c '. + [ env.suite + "/" + env.variant ]')"
 		done
 	done
 
 	echo "$version: $fullVersion"
-
+	if ! grep -q "^$version=" .env.current.version; then
+		echo "$version=$fullVersion" >> .env.current.version
+	else
+		if [ "$(uname)" == 'Darwin' ]; then
+			# Mac OS X 操作系统
+			sed -i '' "s/\($version=[^ ]*\)/$version=$fullVersion/" .env.current.version
+		else
+			# GNU/Linux操作系统
+			sed -i "s/\($version=[^ ]*\)/$version=$fullVersion/" .env.current.version
+		fi
+	fi
 	export fullVersion url ascUrl sha256
 	json="$(
 		jq <<<"$json" -c --argjson variants "$variants" '

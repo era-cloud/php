@@ -57,11 +57,11 @@ getArches() {
 getArches 'php'
 
 cat <<-EOH
-# this file is generated via https://github.com/docker-library/php/blob/$(fileCommit "$self")/$self
+# this file is generated via https://github.com/meta-era/php/blob/$(fileCommit "$self")/$self
 
-Maintainers: Tianon Gravi <admwiggin@gmail.com> (@tianon),
-             Joseph Ferguson <yosifkit@gmail.com> (@yosifkit)
-GitRepo: https://github.com/docker-library/php.git
+Maintainers: @长久同学 <x@era-x.cn> (@era-x),
+             @小小只同学 <x@era-x.wiki> (@era-x)
+GitRepo: https://github.com/meta-era/php.git
 EOH
 
 # prints "$2$1$3$1...$N"
