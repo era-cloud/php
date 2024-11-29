@@ -5,7 +5,7 @@ declare -A aliases=(
     [8.3]='8 latest'
 )
 # ACR_NAMESPACE=eracloud
-# GH_NAMESPACE=meta-era
+# GH_NAMESPACE=era-cloud
 echo $ACR_NAMESPACE
 echo $GH_NAMESPACE
 cat ~/.docker/config.json

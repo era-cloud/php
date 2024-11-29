@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-OWNER="meta-era"
+OWNER="era-cloud"
 REPO="php"
 PACKAGE_NAME="php"
 TOKEN="$GITHUB_TOKEN"
