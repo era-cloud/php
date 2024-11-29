@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
-
+rm -rf 8.{1,2,3,4,5}-rc
+mkdir 8.{1,2,3,4,5}-rc
 cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
 # TODO consume https://www.php.net/releases/branches.php and https://www.php.net/release-candidates.php?format=json here like in Go, Julia, etc (so we can have a canonical "here's all the versions possible" mode, and more automated metadata like EOL 👀)
@@ -85,11 +86,14 @@ for version in "${versions[@]}"; do
 		alpine3.22 \
 		alpine3.21 \
 	; do
-		for variant in cli apache fpm zts; do
-			if [[ "$suite" = alpine* ]]; then
-				if [ "$variant" = 'apache' ]; then
-					continue
-				fi
+		for variant in cli swoole zts swow; do
+			# if [[ "$version" == "8.0" && !("$suite" == "bullseye" || "$suite" == "alpine3.16") ]]; then
+			# 	echo "Skipping $version $suite"
+			# 	continue
+			# fi
+			if [[ ("$version" == "8.4" || "$version" == "8.4-rc") &&  "$variant" == "swow" ]]; then
+				echo "Skipping $variant $version $suite"
+				continue
 			fi
 			export suite variant
 			variants="$(jq <<<"$variants" -c '. + [ env.suite + "/" + env.variant ]')"
@@ -97,7 +101,17 @@ for version in "${versions[@]}"; do
 	done
 
 	echo "$version: $fullVersion"
-
+	if ! grep -q "^$version=" .env.current.version; then
+		echo "$version=$fullVersion" >> .env.current.version
+	else
+		if [ "$(uname)" == 'Darwin' ]; then
+			# Mac OS X 操作系统
+			sed -i '' "s/\($version=[^ ]*\)/$version=$fullVersion/" .env.current.version
+		else
+			# GNU/Linux操作系统
+			sed -i "s/\($version=[^ ]*\)/$version=$fullVersion/" .env.current.version
+		fi
+	fi
 	export fullVersion url ascUrl sha256
 	json="$(
 		jq <<<"$json" -c --argjson variants "$variants" '
