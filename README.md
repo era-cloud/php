@@ -7,7 +7,7 @@ docker pull ghcr.io/meta-era/php:swoole-alpine
 
 ## Aliyun ACR
 ```sh
-docker pull registry.cn-beijing.aliyuncs.com/forlong/php:version-tag
+docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/php:version-tag
 ```
 
 ### hyper swow 一键启动配置
@@ -39,7 +39,7 @@ docker pull registry.cn-beijing.aliyuncs.com/forlong/php:version-tag
 fork 自 [Docker "Official Image"](https://github.com/docker-library/php) 
 
 ## 说明
-这是[meta-era/php of meta-era/php]的 Git 存储库（不要与上游提供的php任何官方镜像混淆）。请参阅Docker Hub 页面，了解有关如何使用此 Docker 映像的完整自述文件以及有关贡献和问题的信息。`php`
+这是[eracloud/php of ghcr.io/meta-era/php]的 Git 存储库（不要与上游提供的php任何官方镜像混淆）。请参阅Docker Hub 页面，了解有关如何使用此 Docker 映像的完整自述文件以及有关贡献和问题的信息。`php`
 
 不定期同步[Docker "Official Image"](https://github.com/docker-library/php)
 

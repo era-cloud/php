@@ -2,9 +2,8 @@
 set -Eeuo pipefail
 
 image="${GITHUB_REPOSITORY##*/}" # "python", "golang", etc
-image=php
-REGISTRY=ghcr.io
-
+# image=php
+REGISTRYS="eracloud,ghcr.io/meta-era,crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud"
 [ -n "${GENERATE_STACKBREW_LIBRARY:-}" ] || [ -x ./generate-stackbrew-library.sh ] # sanity check
 
 tmp="$(mktemp -d)"
@@ -95,7 +94,7 @@ for tag in $tags; do
 						+ (
 							.tags
 							| map(
-								["--tag " + ("littleof/" + . | @sh), "--tag " + ("ghcr.io/meta-era/" + . | @sh), "--tag " + ("registry.cn-beijing.aliyuncs.com/forlong/" + . | @sh)] | join(" ")
+								. as $tag | "'${REGISTRYS}'" | split(",") | map("--tag " + (. + "/" + $tag | @sh)) | join(" ")
 							)
 						)
 						+ if .file != "Dockerfile" then
@@ -111,7 +110,7 @@ for tag in $tags; do
 					push: ((
 							.tags
 							| map(
-								["docker push " + ("littleof/" + . | @sh), "docker push " + ("ghcr.io/meta-era/" + . | @sh), "docker push " + ("registry.cn-beijing.aliyuncs.com/forlong/" + . | @sh)] | join(" && ")
+								. as $tag | "'${REGISTRYS}'" | split(",") | map("docker push " + (. + "/" + $tag | @sh)) | join(" && ")
 							)
 						) | join(" && ")),
 					history: ("docker history " + ("ghcr.io/meta-era/" + .tags[0] | @sh)),
