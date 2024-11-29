@@ -12,7 +12,7 @@ services:
   api:
     container_name: api
     hostname: api
-    # image: registry-vpc.cn-beijing.aliyuncs.com/forlong/php:swoole
+    # image: crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/php:swoole
     image: ghcr.io/meta-era/php:swoole
     volumes:
       - ./:/app-src:rw
