@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 image="${GITHUB_REPOSITORY##*/}" # "python", "golang", etc
 # image=php
-REGISTRYS="eracloud,ghcr.io/meta-era,crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud"
+REGISTRYS="eracloud,ghcr.io/era-cloud,crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud"
 [ -n "${GENERATE_STACKBREW_LIBRARY:-}" ] || [ -x ./generate-stackbrew-library.sh ] # sanity check
 
 tmp="$(mktemp -d)"
@@ -113,10 +113,10 @@ for tag in $tags; do
 								. as $tag | "'${REGISTRYS}'" | split(",") | map("docker push " + (. + "/" + $tag | @sh)) | join(" && ")
 							)
 						) | join(" && ")),
-					history: ("docker history " + ("ghcr.io/meta-era/" + .tags[0] | @sh)),
+					history: ("docker history " + ("ghcr.io/era-cloud/" + .tags[0] | @sh)),
 					test: (
 						[
-							"set -- " + ("ghcr.io/meta-era/" + .tags[0] | @sh),
+							"set -- " + ("ghcr.io/era-cloud/" + .tags[0] | @sh),
 							# https://github.com/docker-library/bashbrew/issues/46#issuecomment-1152567694 (allow local test config / tests)
 							"if [ -s ./.test/config.sh ]; then set -- --config ~/oi/test/config.sh --config ./.test/config.sh \"$@\"; fi",
 							"~/oi/test/run.sh \"$@\""

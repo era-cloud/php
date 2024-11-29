@@ -57,11 +57,11 @@ getArches() {
 getArches 'php'
 
 cat <<-EOH
-# this file is generated via https://github.com/meta-era/php/blob/$(fileCommit "$self")/$self
+# this file is generated via https://github.com/era-cloud/php/blob/$(fileCommit "$self")/$self
 
 Maintainers: @长久同学 <x@era-x.cn> (@era-x),
              @小小只同学 <x@era-x.wiki> (@era-x)
-GitRepo: https://github.com/meta-era/php.git
+GitRepo: https://github.com/era-cloud/php.git
 EOH
 
 # prints "$2$1$3$1...$N"
