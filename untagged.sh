@@ -26,17 +26,22 @@ remove() {
   done
   wait
 }
-test(){
-  result=$(fctch)
+run(){
+  result=$( fctch )
   if [ "$((echo $result) | jq -r '. | type')" == "array" ]; then
+      length=($((echo $result) | jq -r '.[]'))
+      if [ "${#length[@]}" -eq 0 ]; then
+        echo 'empty tags'
+        exit 0
+      fi
       untagged_versions=($((echo $result) | jq -r '.[] | select(.metadata.container.tags | length == 0) | .id'))
       if [ "${#untagged_versions[@]}" -gt 0 ]; then
         remove $untagged_versions
-        test
+        run
       else 
         page=$((page+1))
-        test
+        run
       fi
   fi
 }
-test
+run
