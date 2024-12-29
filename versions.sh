@@ -88,8 +88,8 @@ for version in "${versions[@]}"; do
 	for suite in \
 		bookworm \
 		bullseye \
+		alpine3.21 \
 		alpine3.20 \
-		alpine3.19 \
 	; do
 		for variant in cli swoole zts swow; do
 			# if [[ "$version" == "8.0" && !("$suite" == "bullseye" || "$suite" == "alpine3.16") ]]; then
