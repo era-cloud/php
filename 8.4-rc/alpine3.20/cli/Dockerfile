@@ -65,9 +65,15 @@ ENV PHP_LDFLAGS="-Wl,-O1 -pie"
 
 ENV GPG_KEYS AFD8691FDAEDF03BDF6E460563F15A9B715376CA 9D7F99A0CB8F05C8A6958D6256A97AF7600A39A6 0616E93D95AF471243E26761770426E17EBBB3DD
 
-ENV PHP_VERSION 8.4.8RC1
-ENV PHP_URL="https://downloads.php.net/~calvinb/php-8.4.8RC1.tar.xz" PHP_ASC_URL="https://downloads.php.net/~calvinb/php-8.4.8RC1.tar.xz.asc"
-ENV PHP_SHA256="c8a8b11d8239c6d748197badacb81881973e79401a652756083c18ab04343602"
+<<<<<<< HEAD:8.4-rc/alpine3.20/cli/Dockerfile
+ENV PHP_VERSION 8.4.7RC1
+ENV PHP_URL="https://downloads.php.net/~saki/php-8.4.7RC1.tar.xz" PHP_ASC_URL="https://downloads.php.net/~saki/php-8.4.7RC1.tar.xz.asc"
+ENV PHP_SHA256="6cb37632eb65ee311cb4427ad070b6ab27fdaf13e8f0103701b2b78907326c93"
+=======
+ENV PHP_VERSION 8.3.17
+ENV PHP_URL="https://www.php.net/distributions/php-8.3.17.tar.xz" PHP_ASC_URL="https://www.php.net/distributions/php-8.3.17.tar.xz.asc"
+ENV PHP_SHA256="6158ee678e698395da13d72c7679a406d2b7554323432f14d37b60ed87d8ccfb"
+>>>>>>> 632b4dc3 (Update 8.3 to 8.3.17):8.3/alpine3.21/swoole/Dockerfile
 
 RUN set -eux; \
 	\
@@ -219,7 +225,7 @@ RUN set -eux; \
 	# pecl install --configureoptions 'enable-redis-igbinary="yes" \
 	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
 	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
-	\ 
+	\
 	pecl install redis; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/pear ~/.pearrc; \
