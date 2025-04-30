@@ -65,9 +65,9 @@ ENV PHP_LDFLAGS="-Wl,-O1 -pie"
 
 ENV GPG_KEYS AFD8691FDAEDF03BDF6E460563F15A9B715376CA 9D7F99A0CB8F05C8A6958D6256A97AF7600A39A6 0616E93D95AF471243E26761770426E17EBBB3DD
 
-ENV PHP_VERSION 8.4.4
-ENV PHP_URL="https://www.php.net/distributions/php-8.4.4.tar.xz" PHP_ASC_URL="https://www.php.net/distributions/php-8.4.4.tar.xz.asc"
-ENV PHP_SHA256="05a6c9a2cc894dd8be719ecab221b311886d5e0c02cb6fac648dd9b3459681ac"
+ENV PHP_VERSION 8.4.6
+ENV PHP_URL="https://www.php.net/distributions/php-8.4.6.tar.xz" PHP_ASC_URL="https://www.php.net/distributions/php-8.4.6.tar.xz.asc"
+ENV PHP_SHA256="089b08a5efef02313483325f3bacd8c4fe311cf1e1e56749d5cc7d059e225631"
 
 RUN set -eux; \
 	\
@@ -220,7 +220,7 @@ RUN set -eux; \
 	# pecl install --configureoptions 'enable-redis-igbinary="yes" \
 	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
 	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
-	\
+	\ 
 	pecl install redis; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/pear ~/.pearrc; \
