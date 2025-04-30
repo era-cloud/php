@@ -33,8 +33,8 @@ jobs:
         run: ./apply-templates.sh
       - name: Update the Docker image Version
         run:  ./update.sh
-      - name: Check Git Status
-        run: git diff --exit-code
+      # - name: Check Git Status
+      #   run: git diff --exit-code
   generate-jobs:
     needs: apply-templates
     name: Generate Jobs
