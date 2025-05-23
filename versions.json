@@ -75,7 +75,30 @@
     ],
     "version": "8.3.21"
   },
-  "8.3-rc": null,
+  "8.3-rc": {
+    "ascUrl": "https://downloads.php.net/~jakub/php-8.3.22RC1.tar.xz.asc",
+    "sha256": "394bc99ecc9faa5afe5b586c76b0c53a9fe7a565073e43151d2c66bdfea5afc6",
+    "url": "https://downloads.php.net/~jakub/php-8.3.22RC1.tar.xz",
+    "variants": [
+      "bookworm/cli",
+      "bookworm/swoole",
+      "bookworm/zts",
+      "bookworm/swow",
+      "bullseye/cli",
+      "bullseye/swoole",
+      "bullseye/zts",
+      "bullseye/swow",
+      "alpine3.21/cli",
+      "alpine3.21/swoole",
+      "alpine3.21/zts",
+      "alpine3.21/swow",
+      "alpine3.20/cli",
+      "alpine3.20/swoole",
+      "alpine3.20/zts",
+      "alpine3.20/swow"
+    ],
+    "version": "8.3.22RC1"
+  },
   "8.4": {
     "ascUrl": "https://www.php.net/distributions/php-8.4.7.tar.xz.asc",
     "sha256": "e29f4c23be2816ed005aa3f06bbb8eae0f22cc133863862e893515fc841e65e3",
@@ -100,5 +123,28 @@
     ],
     "version": "8.4.7"
   },
-  "8.4-rc": null
+  "8.4-rc": {
+    "ascUrl": "https://downloads.php.net/~calvinb/php-8.4.8RC1.tar.xz.asc",
+    "sha256": "c8a8b11d8239c6d748197badacb81881973e79401a652756083c18ab04343602",
+    "url": "https://downloads.php.net/~calvinb/php-8.4.8RC1.tar.xz",
+    "variants": [
+      "bookworm/cli",
+      "bookworm/swoole",
+      "bookworm/zts",
+      "bookworm/swow",
+      "bullseye/cli",
+      "bullseye/swoole",
+      "bullseye/zts",
+      "bullseye/swow",
+      "alpine3.21/cli",
+      "alpine3.21/swoole",
+      "alpine3.21/zts",
+      "alpine3.21/swow",
+      "alpine3.20/cli",
+      "alpine3.20/swoole",
+      "alpine3.20/zts",
+      "alpine3.20/swow"
+    ],
+    "version": "8.4.8RC1"
+  }
 }

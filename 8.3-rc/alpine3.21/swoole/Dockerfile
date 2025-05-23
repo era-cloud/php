@@ -4,7 +4,7 @@
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
 
-FROM alpine:3.20
+FROM alpine:3.21
 
 # dependencies required for running "phpize"
 # these get automatically installed and removed by "docker-php-ext-*" (unless they're already installed)
@@ -63,17 +63,11 @@ ENV PHP_CFLAGS="-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_
 ENV PHP_CPPFLAGS="$PHP_CFLAGS"
 ENV PHP_LDFLAGS="-Wl,-O1 -pie"
 
-ENV GPG_KEYS AFD8691FDAEDF03BDF6E460563F15A9B715376CA 9D7F99A0CB8F05C8A6958D6256A97AF7600A39A6 0616E93D95AF471243E26761770426E17EBBB3DD
+ENV GPG_KEYS 1198C0117593497A5EC5C199286AF1F9897469DC C28D937575603EB4ABB725861C0779DC5C0A9DE4 AFD8691FDAEDF03BDF6E460563F15A9B715376CA
 
-<<<<<<< HEAD
-ENV PHP_VERSION 8.4.7RC1
-ENV PHP_URL="https://downloads.php.net/~saki/php-8.4.7RC1.tar.xz" PHP_ASC_URL="https://downloads.php.net/~saki/php-8.4.7RC1.tar.xz.asc"
-ENV PHP_SHA256="6cb37632eb65ee311cb4427ad070b6ab27fdaf13e8f0103701b2b78907326c93"
-=======
-ENV PHP_VERSION 8.4.8RC1
-ENV PHP_URL="https://downloads.php.net/~calvinb/php-8.4.8RC1.tar.xz" PHP_ASC_URL="https://downloads.php.net/~calvinb/php-8.4.8RC1.tar.xz.asc"
-ENV PHP_SHA256="c8a8b11d8239c6d748197badacb81881973e79401a652756083c18ab04343602"
->>>>>>> e525ac18 (ci: Update Docker image version)
+ENV PHP_VERSION 8.3.22RC1
+ENV PHP_URL="https://downloads.php.net/~jakub/php-8.3.22RC1.tar.xz" PHP_ASC_URL="https://downloads.php.net/~jakub/php-8.3.22RC1.tar.xz.asc"
+ENV PHP_SHA256="394bc99ecc9faa5afe5b586c76b0c53a9fe7a565073e43151d2c66bdfea5afc6"
 
 RUN set -eux; \
 	\
@@ -170,13 +164,14 @@ RUN set -eux; \
 		--with-readline \
 		--with-zlib \
 		\
-# https://github.com/docker-library/php/pull/1259
-		--enable-phpdbg \
-		--enable-phpdbg-readline \
+# https://github.com/bwoebi/phpdbg-docs/issues/1#issuecomment-163872806 ("phpdbg is primarily a CLI debugger, and is not suitable for debugging an fpm stack.")
+		--disable-phpdbg \
 		\
 # in PHP 7.4+, the pecl/pear installers are officially deprecated (requiring an explicit "--with-pear")
 		--with-pear \
 		\
+		\
+		--disable-cgi \
 	; \
 	make -j "$(nproc)"; \
 	find -type f -name '*.a' -delete; \
@@ -225,11 +220,7 @@ RUN set -eux; \
 	# pecl install --configureoptions 'enable-redis-igbinary="yes" \
 	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
 	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
-<<<<<<< HEAD
-	\
-=======
 	\ 
->>>>>>> e525ac18 (ci: Update Docker image version)
 	pecl install redis; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/pear ~/.pearrc; \
@@ -253,6 +244,82 @@ RUN docker-php-ext-enable sodium; \
 	sed -i "s@memory_limit = 128M@memory_limit = 2048M@g" "$PHP_INI_DIR/php.ini"; \
 	php --ri redis
 
+# swoole module
+ENV EXTRA_EXT \
+  bcmath bz2 calendar exif ffi gd gettext intl \
+  mysqli pcntl pdo_mysql pdo_pgsql shmop soap \
+  sockets sysvmsg sysvsem sysvshm tidy zip
+
+ENV EXTRA_LIBS \
+  autoconf \
+	libbz2 \
+  libffi-dev \
+	zlib-dev \
+  libpng-dev \
+	icu-dev \
+  libpq-dev \
+  libxml2-dev \
+  libzip-dev \
+	curl-dev \
+	linux-headers \
+	openssl-dev \
+	pcre-dev \
+	pcre2-dev \
+	libintl \
+	gettext-dev \
+	brotli-dev \
+	sqlite-dev \
+	lz4 \
+	lz4-dev \
+	lz4-libs \
+	zstd-dev \
+	zstd-libs \
+	tidyhtml-dev \
+	c-ares-dev \
+	zlib-dev
+
+RUN set -eux; \
+	runDeps="$( \
+		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
+			| tr ',' '\n' \
+			| sort -u \
+			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+	)"; \
+	apk add --no-cache $runDeps; \
+	apk add --no-cache  --update --virtual .build-deps \
+	g++ \
+	gcc \
+	libc-dev \
+	make \
+	pkgconf \
+	autoconf $EXTRA_LIBS
+
+RUN set -ex; \
+	pecl channel-update pecl.php.net; \
+	docker-php-ext-install $EXTRA_EXT; \
+	docker-php-ext-enable redis; \
+	docker-php-ext-install sockets; \
+	docker-php-source extract; \
+	pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" \
+	enable-mysqlnd="no" enable-http2="yes" enable-swoole-json="yes" enable-swoole-curl="yes"\
+	enable-cares="yes" enable-brotli="yes" enable-swoole-pgsql="yes" \
+	with-swoole-odbc="no" with-swoole-oracle="no" enable-swoole-sqlite="yes" \
+	with-openssl-dir="/usr"' \
+	swoole; \
+	docker-php-ext-enable swoole; \
+	docker-php-source delete; \
+	php --version; \
+	php -m; \
+	{ \
+	echo "[swoole]"; \
+	echo "extension=swoole"; \
+	echo "swoole.unixsock_buffer_size=512M"; \
+	echo "swoole.use_shortname=Off"; \
+	echo "swoole.enable_preemptive_scheduler=On"; \
+	} | tee /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini; \
+	apk del --no-network .build-deps; \
+	rm -rf /tmp/pear ~/.pearrc; \
+	rm -rf /tmp/*
 
 RUN set -eux; \
 	curl -o /usr/local/bin/composer https://mirrors.aliyun.com/composer/composer.phar; \
