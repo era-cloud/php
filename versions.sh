@@ -8,12 +8,12 @@ cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
 versions=( "$@" )
 if [ ${#versions[@]} -eq 0 ]; then
-	versions=(*/)
+	versions=( */ )
 	json='{}'
 else
-	json="$(<versions.json)"
+	json="$(< versions.json)"
 fi
-versions=("${versions[@]%/}")
+versions=( "${versions[@]%/}" )
 
 for version in "${versions[@]}"; do
 	rcVersion="${version%-rc}"
@@ -47,12 +47,13 @@ for version in "${versions[@]}"; do
 		'
 	fi
 	IFS=$'\n'
-	possibles=($(
-		curl -fsSL "$apiUrl" |
-			jq --raw-output "$apiJqExpr | @sh" |
-			sort -rV
-	))
+	possibles=( $(
+		curl -fsSL "$apiUrl" \
+			| jq --raw-output "$apiJqExpr | @sh" \
+			| sort -rV
+	) )
 	unset IFS
+
 	if [ "${#possibles[@]}" -eq 0 ]; then
 		echo >&2 "warning: skipping/removing '$version' (does not appear to exist upstream)"
 		json="$(jq <<<"$json" -c '.[env.version] = null')"
@@ -69,7 +70,7 @@ for version in "${versions[@]}"; do
 
 	if ! wget -q --spider "$url"; then
 		echo >&2 "error: '$url' appears to be missing"
-		continue
+		exit 1
 	fi
 
 	# if we don't have a .asc URL, let's see if we can figure one out :)

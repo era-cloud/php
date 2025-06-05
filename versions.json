@@ -21,8 +21,7 @@
       "alpine3.20/swoole",
       "alpine3.20/zts",
       "alpine3.20/swow"
-    ],
-    "version": "8.1.32"
+    ]
   },
   "8.1-rc": null,
   "8.2": {
@@ -47,14 +46,14 @@
       "alpine3.20/swoole",
       "alpine3.20/zts",
       "alpine3.20/swow"
-    ],
-    "version": "8.2.28"
+    ]
   },
   "8.2-rc": null,
   "8.3": {
+    "version": "8.3.21",
+    "url": "https://www.php.net/distributions/php-8.3.21.tar.xz",
     "ascUrl": "https://www.php.net/distributions/php-8.3.21.tar.xz.asc",
     "sha256": "4dfb329f209a552c3716394fc123bb62e80a468b55ce27fc8cb0fd5f30b9dcd6",
-    "url": "https://www.php.net/distributions/php-8.3.21.tar.xz",
     "variants": [
       "bookworm/cli",
       "bookworm/swoole",
@@ -72,13 +71,13 @@
       "alpine3.20/swoole",
       "alpine3.20/zts",
       "alpine3.20/swow"
-    ],
-    "version": "8.3.21"
+    ]
   },
   "8.3-rc": {
+    "version": "8.3.22RC1",
+    "url": "https://downloads.php.net/~jakub/php-8.3.22RC1.tar.xz",
     "ascUrl": "https://downloads.php.net/~jakub/php-8.3.22RC1.tar.xz.asc",
     "sha256": "394bc99ecc9faa5afe5b586c76b0c53a9fe7a565073e43151d2c66bdfea5afc6",
-    "url": "https://downloads.php.net/~jakub/php-8.3.22RC1.tar.xz",
     "variants": [
       "bookworm/cli",
       "bookworm/swoole",
@@ -96,13 +95,13 @@
       "alpine3.20/swoole",
       "alpine3.20/zts",
       "alpine3.20/swow"
-    ],
-    "version": "8.3.22RC1"
+    ]
   },
   "8.4": {
+    "version": "8.4.7",
+    "url": "https://www.php.net/distributions/php-8.4.7.tar.xz",
     "ascUrl": "https://www.php.net/distributions/php-8.4.7.tar.xz.asc",
     "sha256": "e29f4c23be2816ed005aa3f06bbb8eae0f22cc133863862e893515fc841e65e3",
-    "url": "https://www.php.net/distributions/php-8.4.7.tar.xz",
     "variants": [
       "bookworm/cli",
       "bookworm/swoole",
@@ -116,13 +115,13 @@
       "alpine3.20/cli",
       "alpine3.20/swoole",
       "alpine3.20/zts"
-    ],
-    "version": "8.4.7"
+    ]
   },
   "8.4-rc": {
+    "version": "8.4.8RC1",
+    "url": "https://downloads.php.net/~calvinb/php-8.4.8RC1.tar.xz",
     "ascUrl": "https://downloads.php.net/~calvinb/php-8.4.8RC1.tar.xz.asc",
     "sha256": "c8a8b11d8239c6d748197badacb81881973e79401a652756083c18ab04343602",
-    "url": "https://downloads.php.net/~calvinb/php-8.4.8RC1.tar.xz",
     "variants": [
       "bookworm/cli",
       "bookworm/swoole",
@@ -136,7 +135,6 @@
       "alpine3.20/cli",
       "alpine3.20/swoole",
       "alpine3.20/zts"
-    ],
-    "version": "8.4.8RC1"
+    ]
   }
 }
