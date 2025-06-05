@@ -251,7 +251,7 @@ RUN set -eux; \
 	# pecl install --configureoptions 'enable-redis-igbinary="yes" \
 	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
 	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
-	\ 
+	\
 	pecl install redis; \
 	 \
 	rm -rf /tmp/pear ~/.pearrc; \

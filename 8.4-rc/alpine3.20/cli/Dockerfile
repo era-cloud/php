@@ -226,10 +226,14 @@ RUN set -eux; \
 	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
 	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
 <<<<<<< HEAD
+<<<<<<< HEAD
 	\
 =======
 	\ 
 >>>>>>> e525ac18 (ci: Update Docker image version)
+=======
+	\
+>>>>>>> 8c6f5a83 (fix: 8.4 swow)
 	pecl install redis; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/pear ~/.pearrc; \

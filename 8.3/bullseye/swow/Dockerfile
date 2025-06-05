@@ -238,7 +238,7 @@ RUN set -eux; \
 	# pecl install --configureoptions 'enable-redis-igbinary="yes" \
 	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
 	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
-	\ 
+	\
 	pecl install redis; \
 	 \
 	rm -rf /tmp/pear ~/.pearrc; \
@@ -305,7 +305,7 @@ RUN set -ex; \
 	docker-php-source delete; \
 	# download
  	cd /tmp; \
-	curl -SL "https://github.com/swow/swow/archive/v1.0.0.tar.gz" -o swow.tar.gz; \
+	curl -SL "https://github.com/swow/swow/archive/v1.5.3.tar.gz" -o swow.tar.gz; \
 	ls -alh; \
 	# php extension:swow
 	cd /tmp; \
