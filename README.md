@@ -34,7 +34,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
   docker compose -f docker-compose.yml -f --tail 100
   ```
 
-## 维护者: [@长久同学](https://github.com/littlezo/php) [@Era Cloud](https://github.com/era-cloud/php) [@Era X](https://github.com/meta-era/php)
+## 维护者: [@长久同学](https://github.com/littlezo/php) [@Era Cloud](https://github.com/era-cloud/php) [@Era Meta](https://github.com/meta-era)
 
 fork 自 [Docker "Official Image"](https://github.com/docker-library/php) 
 
