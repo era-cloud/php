@@ -1,4 +1,4 @@
-# https://github.com/era-cloud/php/pkgs/container/php
+# [ghcr pkgs](https://github.com/era-cloud/php/pkgs/container/php)
 
 ## ghcr
 ```sh
