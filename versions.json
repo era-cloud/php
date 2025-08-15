@@ -94,5 +94,24 @@
       "alpine3.20/zts"
     ]
   },
-  "8.4-rc": null
+  "8.4-rc": {
+    "version": "8.4.12RC1",
+    "url": "https://downloads.php.net/~saki/php-8.4.12RC1.tar.xz",
+    "ascUrl": "https://downloads.php.net/~saki/php-8.4.12RC1.tar.xz.asc",
+    "sha256": "3b0b299f4fefe348ffbceeee08efa2db85782a290efd09f2996107b34403c062",
+    "variants": [
+      "bookworm/cli",
+      "bookworm/swoole",
+      "bookworm/zts",
+      "bullseye/cli",
+      "bullseye/swoole",
+      "bullseye/zts",
+      "alpine3.21/cli",
+      "alpine3.21/swoole",
+      "alpine3.21/zts",
+      "alpine3.20/cli",
+      "alpine3.20/swoole",
+      "alpine3.20/zts"
+    ]
+  }
 }
