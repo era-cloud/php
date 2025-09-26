@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 image="${GITHUB_REPOSITORY##*/}" # "python", "golang", etc
 # image=php
-REGISTRYS="eracloud,ghcr.io/era-cloud,crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud"
+REGISTRYS="ghcr.io/era-cloud,crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud"
 [ -n "${GENERATE_STACKBREW_LIBRARY:-}" ] || [ -x ./generate-stackbrew-library.sh ] # sanity check
 
 tmp="$(mktemp -d)"
