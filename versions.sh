@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
-rm -rf 8.{1,2,3,4}-rc
-mkdir 8.{1,2,3,4}-rc
+rm -rf 8.{1,2,3,4,5}-rc
+mkdir 8.{1,2,3,4,5}-rc
 cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
 # TODO consume https://www.php.net/releases/branches.php and https://www.php.net/release-candidates.php?format=json here like in Go, Julia, etc (so we can have a canonical "here's all the versions possible" mode, and more automated metadata like EOL 👀)
@@ -34,7 +34,7 @@ for version in "${versions[@]}"; do
 			) ]
 		'
 	else
-		apiUrl='https://qa.php.net/api.php?type=qa-releases&format=json'
+		apiUrl='https://www.php.net/release-candidates.php?format=json'
 		apiJqExpr='
 			(.releases // [])[]
 			| select(.version | startswith(env.rcVersion))
@@ -68,23 +68,23 @@ for version in "${versions[@]}"; do
 	ascUrl="${possi[2]}"
 	sha256="${possi[3]}"
 
-	if ! wget -q --spider "$url"; then
+	if ! curl --head -fsSL "$url" -o /dev/null; then
 		echo >&2 "error: '$url' appears to be missing"
 		exit 1
 	fi
 
-	# if we don't have a .asc URL, let's see if we can figure one out :)
-	if [ -z "$ascUrl" ] && wget -q --spider "$url.asc"; then
+	# if we don't have a .asc URL, let's just assume one :)
+	if [ -z "$ascUrl" ]; then
 		ascUrl="$url.asc"
 	fi
 
 	variants='[]'
 	# order here controls the order of the library/ file
 	for suite in \
+		trixie \
 		bookworm \
-		bullseye \
+		alpine3.22 \
 		alpine3.21 \
-		alpine3.20 \
 	; do
 		for variant in cli swoole zts swow; do
 			# if [[ "$version" == "8.0" && !("$suite" == "bullseye" || "$suite" == "alpine3.16") ]]; then
