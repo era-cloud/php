@@ -41,19 +41,9 @@ RUN set -eux; \
 		ca-certificates \
 		curl \
 		xz-utils \
+		adduser \
 	; \
 	apt-get dist-clean
-# RUN set -eux; \
-# { \
-# 	echo "deb https://mirrors.aliyun.com/debian/ bullseye main non-free contrib"; \
-#   echo "deb-src https://mirrors.aliyun.com/debian/ bullseye main non-free contrib"; \
-#   echo "deb https://mirrors.aliyun.com/debian-security/ bullseye-security main"; \
-#   echo "deb-src https://mirrors.aliyun.com/debian-security/ bullseye-security main"; \
-#   echo "deb https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib"; \
-#   echo "deb-src https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib"; \
-#   echo "deb https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib"; \
-#   echo "deb-src https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib"; \
-# } | tee /etc/apt/sources.list
 # ensure app user exists
 RUN set -eux; \
 	addgroup --gid 82 --system app; \
@@ -68,7 +58,7 @@ RUN set -eux; \
 	[ ! -d ${APP_ROOT} ]; \
 	mkdir -p ${APP_ROOT}; \
 	chown app:app ${APP_ROOT}; \
-	chmod 777 ${APP_ROOT}
+	chmod 1777 ${APP_ROOT}
 
 # Apply stack smash protection to functions using local buffers and alloca()
 # Make PHP's main executable position-independent (improves ASLR security mechanism, and has no performance impact on x86_64)
@@ -249,6 +239,7 @@ RUN set -eux; \
 	\
 # smoke test
 	php --version
+
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 
 # enable OPcache by default (https://wiki.php.net/rfc/make_opcache_required)
@@ -288,8 +279,6 @@ ENV EXTRA_LIBS \
 	openssl \
 	git \
 	bash \
-	libpcre3 \
-	libpcre3-dev\
 	libssl-dev \
 	libcurl4-openssl-dev \
 	libtidy-dev \
@@ -311,7 +300,7 @@ RUN set -ex; \
 	docker-php-source delete; \
 	# download
 	cd /tmp; \
-	curl -SL "https://github.com/swow/swow/archive/v1.5.3.tar.gz" -o swow.tar.gz; \
+	curl -SL $(curl -s https://api.github.com/repos/swow/swow/releases/latest | grep tarball_url | cut -d '"' -f 4) -o swow.tar.gz; \
 	ls -alh; \
 	# php extension:swow
 	cd /tmp; \

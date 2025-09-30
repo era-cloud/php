@@ -41,19 +41,9 @@ RUN set -eux; \
 		ca-certificates \
 		curl \
 		xz-utils \
+		adduser \
 	; \
 	rm -rf /var/lib/apt/lists/*
-# RUN set -eux; \
-# { \
-# 	echo "deb https://mirrors.aliyun.com/debian/ bullseye main non-free contrib"; \
-#   echo "deb-src https://mirrors.aliyun.com/debian/ bullseye main non-free contrib"; \
-#   echo "deb https://mirrors.aliyun.com/debian-security/ bullseye-security main"; \
-#   echo "deb-src https://mirrors.aliyun.com/debian-security/ bullseye-security main"; \
-#   echo "deb https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib"; \
-#   echo "deb-src https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib"; \
-#   echo "deb https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib"; \
-#   echo "deb-src https://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib"; \
-# } | tee /etc/apt/sources.list
 # ensure app user exists
 RUN set -eux; \
 	addgroup --gid 82 --system app; \
@@ -68,7 +58,7 @@ RUN set -eux; \
 	[ ! -d ${APP_ROOT} ]; \
 	mkdir -p ${APP_ROOT}; \
 	chown app:app ${APP_ROOT}; \
-	chmod 777 ${APP_ROOT}
+	chmod 1777 ${APP_ROOT}
 
 # Apply stack smash protection to functions using local buffers and alloca()
 # Make PHP's main executable position-independent (improves ASLR security mechanism, and has no performance impact on x86_64)
@@ -251,6 +241,7 @@ RUN set -eux; \
 	\
 # smoke test
 	php --version
+
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 
 # sodium was built as a shared module (so that it can be replaced later if so desired), so let's enable it too (https://github.com/docker-library/php/issues/598)
