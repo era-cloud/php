@@ -22,9 +22,6 @@ ENV PHPIZE_DEPS \
 	re2c
 
 # persistent / runtime deps
-# RUN set -eux; \
-# 	sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
-
 RUN apk add --no-cache \
 		ca-certificates \
 		curl \
@@ -35,8 +32,7 @@ RUN apk add --no-cache \
 # ensure app user exists
 RUN set -eux; \
 	addgroup -Sg 83 app; \
-	adduser -u 82 -D -S  -s /sbin/nologin -G app -g app app
-#	adduser -u 82 -D -S -G app app
+	adduser -u 82 -D -S -s /sbin/nologin -G app -g app app
 # 82 is the standard uid/gid for "app" in Alpine
 # https://git.alpinelinux.org/aports/tree/main/apache2/apache2.pre-install?h=3.14-stable
 # https://git.alpinelinux.org/aports/tree/main/lighttpd/lighttpd.pre-install?h=3.14-stable
@@ -51,7 +47,7 @@ RUN set -eux; \
 	[ ! -d ${APP_ROOT} ]; \
 	mkdir -p ${APP_ROOT}; \
 	chown app:app ${APP_ROOT}; \
-	chmod 777 ${APP_ROOT}
+	chmod 1777 ${APP_ROOT}
 
 # Apply stack smash protection to functions using local buffers and alloca()
 # Make PHP's main executable position-independent (improves ASLR security mechanism, and has no performance impact on x86_64)
@@ -196,11 +192,7 @@ RUN set -eux; \
 			| sort -u \
 			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
 	)"; \
-	apk add --no-cache $runDeps; \
-		\
-	# apk del --no-network .build-deps; \
-		\
-	apk add --no-cache --virtual .build-deps \
+	apk add --no-cache --virtual .build-deps $runDeps \
 	g++ \
 	gcc \
 	libc-dev \
@@ -225,6 +217,7 @@ RUN set -eux; \
 	\
 # smoke test
 	php --version
+
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 
 # enable OPcache by default (https://wiki.php.net/rfc/make_opcache_required)
