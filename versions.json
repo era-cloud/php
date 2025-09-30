@@ -83,15 +83,19 @@
       "trixie/cli",
       "trixie/swoole",
       "trixie/zts",
+      "trixie/swow",
       "bookworm/cli",
       "bookworm/swoole",
       "bookworm/zts",
+      "bookworm/swow",
       "alpine3.22/cli",
       "alpine3.22/swoole",
       "alpine3.22/zts",
+      "alpine3.22/swow",
       "alpine3.21/cli",
       "alpine3.21/swoole",
-      "alpine3.21/zts"
+      "alpine3.21/zts",
+      "alpine3.21/swow"
     ]
   },
   "8.4-rc": null,
