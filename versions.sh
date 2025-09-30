@@ -91,10 +91,10 @@ for version in "${versions[@]}"; do
 			# 	echo "Skipping $version $suite"
 			# 	continue
 			# fi
-			if [[ ("$version" == "8.4" || "$version" == "8.4-rc") &&  "$variant" == "swow" ]]; then
-				echo "Skipping $variant $version $suite"
-				continue
-			fi
+			# if [[ ("$version" == "8.4" || "$version" == "8.4-rc") &&  "$variant" == "swow" ]]; then
+			# 	echo "Skipping $variant $version $suite"
+			# 	continue
+			# fi
 			export suite variant
 			variants="$(jq <<<"$variants" -c '. + [ env.suite + "/" + env.variant ]')"
 		done
