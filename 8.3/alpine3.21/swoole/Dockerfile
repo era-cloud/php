@@ -193,7 +193,8 @@ RUN set -eux; \
 			| sort -u \
 			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
 	)"; \
-	apk add --no-cache --virtual .build-deps $runDeps \
+	apk add --no-cache $runDeps; \
+	apk add --no-cache --virtual .build-deps \
 	g++ \
 	gcc \
 	libc-dev \
@@ -211,7 +212,7 @@ RUN set -eux; \
 	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
 	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
 	\
-	pecl install redis;\
+	pecl install redis; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \
@@ -246,7 +247,7 @@ ENV EXTRA_EXT \
 
 ENV EXTRA_LIBS \
 	autoconf \
-	libbz2 \
+	bzip2-dev \
 	libffi-dev \
 	zlib-dev \
 	libpng-dev \
@@ -274,21 +275,14 @@ ENV EXTRA_LIBS \
 	zlib-dev
 
 RUN set -eux; \
-	runDeps="$( \
-		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
-			| tr ',' '\n' \
-			| sort -u \
-			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-	)"; \
-	apk add --no-cache --virtual .build-deps $runDeps \
+	apk add --no-cache --virtual .build-deps \
 	g++ \
 	gcc \
 	libc-dev \
 	make \
 	pkgconf \
-	autoconf $EXTRA_LIBS
-	# rm -vf /usr/include/iconv.h
-
+	autoconf \
+	$EXTRA_LIBS;
 
 RUN set -ex; \
 	pecl channel-update pecl.php.net; \
@@ -313,7 +307,14 @@ RUN set -ex; \
 	echo "swoole.use_shortname=Off"; \
 	echo "swoole.enable_preemptive_scheduler=On"; \
 	} | tee /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini; \
-	apk del --no-network .build-deps;\
+	runDeps="$( \
+		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
+			| tr ',' '\n' \
+			| sort -u \
+			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+	)"; \
+	apk add --no-cache $runDeps; \
+	apk del --no-network .build-deps; \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*
 

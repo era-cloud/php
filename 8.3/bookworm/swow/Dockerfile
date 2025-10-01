@@ -228,7 +228,7 @@ RUN set -eux; \
 	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
 	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
 	\
-	pecl install redis;\
+	pecl install redis; \
 	 \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \
@@ -315,7 +315,8 @@ RUN set -ex; \
 	php --version; \
 	php -m; \
 	php --ri swow; \
-	 \
+apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	rm -rf /var/lib/apt/lists/*; \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*
 
