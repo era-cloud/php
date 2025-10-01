@@ -444,7 +444,8 @@ RUN set -eux; \
 			| sort -u \
 			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
 	)"; \
-	apk add --no-cache --virtual .build-deps $runDeps \
+	apk add --no-cache $runDeps; \
+	apk add --no-cache --virtual .build-deps \
 	g++ \
 	gcc \
 	libc-dev \
@@ -478,7 +479,7 @@ RUN set -eux; \
 	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
 	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
 	\
-	{{ if [ "8.4" ] | index(env.version | rtrimstr("-rc")) then "pecl install redis;" else "pecl install redis;" end}}\
+	pecl install redis; \
 	{{ if is_alpine then "apk del --no-network .build-deps;" else "" end}} \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \
@@ -498,7 +499,7 @@ RUN docker-php-ext-enable sodium; \
 	docker-php-ext-enable ds; \
 	docker-php-ext-enable igbinary; \
 	docker-php-ext-enable msgpack; \
-	{{ if [ "8.4" ] | index(env.version | rtrimstr("-rc")) then "docker-php-ext-enable redis;" else "docker-php-ext-enable redis;" end}} \
+	docker-php-ext-enable redis; \
 	sed -i "s@;date.timezone =@date.timezone = Asia/Shanghai@g" "$PHP_INI_DIR/php.ini"; \
 	sed -i "s@upload_max_filesize = 2M@upload_max_filesize = 2048M@g" "$PHP_INI_DIR/php.ini"; \
 	sed -i "s@post_max_size = 8M@post_max_size = 2048M@g" "$PHP_INI_DIR/php.ini"; \
@@ -516,7 +517,7 @@ ENV EXTRA_EXT \
 
 ENV EXTRA_LIBS \
 	autoconf \
-	{{ if is_alpine then "libbz2" else "libbz2-dev" end }} \
+	{{ if is_alpine then "bzip2-dev" else "libbz2-dev" end }} \
 	libffi-dev \
 	{{ if is_alpine then "zlib-dev" else "zlib1g-dev" end }} \
 	libpng-dev \
@@ -555,21 +556,14 @@ ENV EXTRA_LIBS \
 
 RUN set -eux; \
 {{ if is_alpine then ( -}}
-	runDeps="$( \
-		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
-			| tr ',' '\n' \
-			| sort -u \
-			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-	)"; \
-	apk add --no-cache --virtual .build-deps $runDeps \
+	apk add --no-cache --virtual .build-deps \
 	g++ \
 	gcc \
 	libc-dev \
 	make \
 	pkgconf \
-	autoconf $EXTRA_LIBS
-	# rm -vf /usr/include/iconv.h
-
+	autoconf \
+	$EXTRA_LIBS;
 {{ ) else ( -}}
 	apt-get update; \
 	apt-get install -y --no-install-recommends $EXTRA_LIBS; \
@@ -580,7 +574,7 @@ RUN set -eux; \
 RUN set -ex; \
 	pecl channel-update pecl.php.net; \
 	docker-php-ext-install $EXTRA_EXT; \
-	{{ if [ "8.4" ] | index(env.version | rtrimstr("-rc")) then "docker-php-ext-enable redis;" else "docker-php-ext-enable redis;" end}} \
+	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \
 	docker-php-source extract; \
 	pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" \
@@ -600,7 +594,19 @@ RUN set -ex; \
 	echo "swoole.use_shortname=Off"; \
 	echo "swoole.enable_preemptive_scheduler=On"; \
 	} | tee /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini; \
-	{{ if is_alpine then "apk del --no-network .build-deps;" else "" end}}\
+{{ if is_alpine then ( -}}
+	runDeps="$( \
+		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
+			| tr ',' '\n' \
+			| sort -u \
+			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+	)"; \
+	apk add --no-cache $runDeps; \
+	apk del --no-network .build-deps; \
+{{ ) else ( -}}
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	{{ clean_apt }}; \
+{{ ) end -}}
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*
 {{ ) else "" end -}}
@@ -614,7 +620,7 @@ ENV EXTRA_EXT \
 ENV EXTRA_LIBS \
   	autoconf \
 	$PHPIZE_DEPS \
-	{{ if is_alpine then "libbz2" else "libbz2-dev" end }} \
+	{{ if is_alpine then "bzip2-dev" else "libbz2-dev" end }} \
   	libffi-dev \
 	{{ if is_alpine then "zlib-dev" else "zlib1g-dev" end }} \
   	libpng-dev \
@@ -643,19 +649,14 @@ ENV EXTRA_LIBS \
 
 RUN set -eux; \
 {{ if is_alpine then ( -}}
-	runDeps="$( \
-		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
-			| tr ',' '\n' \
-			| sort -u \
-			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-	)"; \
-	apk add --no-cache --virtual .build-deps $runDeps; \
+	apk add --no-cache --virtual .build-deps \
 	g++ \
 	gcc \
 	libc-dev \
 	make \
 	pkgconf \
-	autoconf $EXTRA_LIBS
+	autoconf \
+	$EXTRA_LIBS;
 {{ ) else ( -}}
 	apt-get update; \
 	apt-get install -y --no-install-recommends $EXTRA_LIBS; \
@@ -666,7 +667,7 @@ RUN set -eux; \
 RUN set -ex; \
 	pecl channel-update pecl.php.net; \
 	docker-php-ext-install $EXTRA_EXT; \
-	{{ if [ "8.4" ] | index(env.version | rtrimstr("-rc")) then "docker-php-ext-enable redis;" else "docker-php-ext-enable redis;" end}} \
+	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \
 	docker-php-source extract; \
 	docker-php-source delete; \
@@ -691,7 +692,19 @@ RUN set -ex; \
 	php --version; \
 	php -m; \
 	php --ri swow; \
-	{{ if is_alpine then "apk del --no-network .build-deps;" else "" end}} \
+{{ if is_alpine then ( -}}
+	runDeps="$( \
+		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
+			| tr ',' '\n' \
+			| sort -u \
+			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+	)"; \
+	apk add --no-cache $runDeps; \
+	apk del --no-network .build-deps; \
+{{ ) else ( -}}
+apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	{{ clean_apt }}; \
+{{ ) end -}}
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*
 {{ ) else "" end -}}

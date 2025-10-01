@@ -234,7 +234,7 @@ RUN set -eux; \
 	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
 	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
 	\
-	pecl install redis;\
+	pecl install redis; \
 	 \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \
@@ -317,7 +317,8 @@ RUN set -ex; \
 	echo "swoole.use_shortname=Off"; \
 	echo "swoole.enable_preemptive_scheduler=On"; \
 	} | tee /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini; \
-	\
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	rm -rf /var/lib/apt/lists/*; \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*
 
