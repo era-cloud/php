@@ -73,7 +73,30 @@
       "alpine3.21/swow"
     ]
   },
-  "8.3-rc": null,
+  "8.3-rc": {
+    "version": "8.3.27RC1",
+    "url": "https://downloads.php.net/~eric/php-8.3.27RC1.tar.xz",
+    "ascUrl": "https://downloads.php.net/~eric/php-8.3.27RC1.tar.xz.asc",
+    "sha256": "2c34e49f4396b8de245970f9717abe4431b46e16b6fa4d937208928931dfc2f5",
+    "variants": [
+      "trixie/cli",
+      "trixie/swoole",
+      "trixie/zts",
+      "trixie/swow",
+      "bookworm/cli",
+      "bookworm/swoole",
+      "bookworm/zts",
+      "bookworm/swow",
+      "alpine3.22/cli",
+      "alpine3.22/swoole",
+      "alpine3.22/zts",
+      "alpine3.22/swow",
+      "alpine3.21/cli",
+      "alpine3.21/swoole",
+      "alpine3.21/zts",
+      "alpine3.21/swow"
+    ]
+  },
   "8.4": {
     "version": "8.4.14",
     "url": "https://www.php.net/distributions/php-8.4.14.tar.xz",
@@ -98,12 +121,35 @@
       "alpine3.21/swow"
     ]
   },
-  "8.4-rc": null,
+  "8.4-rc": {
+    "version": "8.4.14RC1",
+    "url": "https://downloads.php.net/~saki/php-8.4.14RC1.tar.xz",
+    "ascUrl": "https://downloads.php.net/~saki/php-8.4.14RC1.tar.xz.asc",
+    "sha256": "afa5d25db94f1f34baeddcb8682dfea212f56e3a142651c27a11ca96c1fe5484",
+    "variants": [
+      "trixie/cli",
+      "trixie/swoole",
+      "trixie/zts",
+      "trixie/swow",
+      "bookworm/cli",
+      "bookworm/swoole",
+      "bookworm/zts",
+      "bookworm/swow",
+      "alpine3.22/cli",
+      "alpine3.22/swoole",
+      "alpine3.22/zts",
+      "alpine3.22/swow",
+      "alpine3.21/cli",
+      "alpine3.21/swoole",
+      "alpine3.21/zts",
+      "alpine3.21/swow"
+    ]
+  },
   "8.5-rc": {
-    "version": "8.5.0RC3",
-    "url": "https://downloads.php.net/~daniels/php-8.5.0RC3.tar.xz",
-    "ascUrl": "https://downloads.php.net/~daniels/php-8.5.0RC3.tar.xz.asc",
-    "sha256": "d3dd9e8b5e458277f86ca79f47b5001cb2c7d6d6742cdd2298790fd58a5ce7d3",
+    "version": "8.5.0RC2",
+    "url": "https://downloads.php.net/~edorian/php-8.5.0RC2.tar.xz",
+    "ascUrl": "https://downloads.php.net/~edorian/php-8.5.0RC2.tar.xz.asc",
+    "sha256": "ddd3edd3d627174b192f9f95934d483da0ba4bbce0bf3f7d255ec65d43dccea0",
     "variants": [
       "trixie/cli",
       "trixie/swoole",
