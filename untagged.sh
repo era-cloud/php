@@ -4,7 +4,7 @@ set -Eeuo pipefail
 OWNER="era-cloud"
 REPO="php"
 PACKAGE_NAME="php"
-TOKEN="$GITHUB_TOKEN"
+TOKEN=${GITHUB_TOKEN:-$(gh auth token)}
 # 获取所有未标记的版本
 # untagged_versions=$(curl -H "Authorization: bearer $TOKEN" -H "Accept: application/vnd.github.v3+json" \
 # "https://api.github.com/user/packages/container/php/versions?per_page=200")
@@ -38,7 +38,7 @@ run(){
       if [ "${#untagged_versions[@]}" -gt 0 ]; then
         remove $untagged_versions
         run
-      else 
+      else
         page=$((page+1))
         run
       fi
