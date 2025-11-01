@@ -50,10 +50,10 @@
   },
   "8.2-rc": null,
   "8.3": {
-    "version": "8.3.26",
-    "url": "https://www.php.net/distributions/php-8.3.26.tar.xz",
-    "ascUrl": "https://www.php.net/distributions/php-8.3.26.tar.xz.asc",
-    "sha256": "2f522eefa02c400c94610d07f25c4fd4c771f95e4a1f55102332ccb40663cbd2",
+    "version": "8.3.27",
+    "url": "https://www.php.net/distributions/php-8.3.27.tar.xz",
+    "ascUrl": "https://www.php.net/distributions/php-8.3.27.tar.xz.asc",
+    "sha256": "c15a09a9d199437144ecfef7d712ec4ca5c6820cf34acc24cc8489dd0cee41ba",
     "variants": [
       "trixie/cli",
       "trixie/swoole",
@@ -75,10 +75,10 @@
   },
   "8.3-rc": null,
   "8.4": {
-    "version": "8.4.13",
-    "url": "https://www.php.net/distributions/php-8.4.13.tar.xz",
-    "ascUrl": "https://www.php.net/distributions/php-8.4.13.tar.xz.asc",
-    "sha256": "b4f27adf30bcf262eacf93c78250dd811980f20f3b90d79a3dc11248681842df",
+    "version": "8.4.14",
+    "url": "https://www.php.net/distributions/php-8.4.14.tar.xz",
+    "ascUrl": "https://www.php.net/distributions/php-8.4.14.tar.xz.asc",
+    "sha256": "bac90ee7cf738e814c89b6b27d4d2c4b70e50942a420837e1a22f5fd5f9867a3",
     "variants": [
       "trixie/cli",
       "trixie/swoole",
@@ -100,10 +100,10 @@
   },
   "8.4-rc": null,
   "8.5-rc": {
-    "version": "8.5.0RC1",
-    "url": "https://downloads.php.net/~daniels/php-8.5.0RC1.tar.xz",
-    "ascUrl": "https://downloads.php.net/~daniels/php-8.5.0RC1.tar.xz.asc",
-    "sha256": "96f064b5d604e00e5fe1c993d4881da659a99d6d1d8ac0b1df8fec6406e34a9d",
+    "version": "8.5.0RC3",
+    "url": "https://downloads.php.net/~daniels/php-8.5.0RC3.tar.xz",
+    "ascUrl": "https://downloads.php.net/~daniels/php-8.5.0RC3.tar.xz.asc",
+    "sha256": "d3dd9e8b5e458277f86ca79f47b5001cb2c7d6d6742cdd2298790fd58a5ce7d3",
     "variants": [
       "trixie/cli",
       "trixie/swoole",
