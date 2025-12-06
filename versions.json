@@ -169,5 +169,28 @@
       "alpine3.21/swow"
     ]
   },
-  "8.5-rc": null
+  "8.5-rc": {
+    "version": "8.5.1RC1",
+    "url": "https://downloads.php.net/~edorian/php-8.5.1RC1.tar.xz",
+    "ascUrl": "https://downloads.php.net/~edorian/php-8.5.1RC1.tar.xz.asc",
+    "sha256": "67ea20de4c3038df65ac4d1521bd05a8752aeb79c6e65340410e1f71a599e56e",
+    "variants": [
+      "trixie/cli",
+      "trixie/swoole",
+      "trixie/zts",
+      "trixie/swow",
+      "bookworm/cli",
+      "bookworm/swoole",
+      "bookworm/zts",
+      "bookworm/swow",
+      "alpine3.22/cli",
+      "alpine3.22/swoole",
+      "alpine3.22/zts",
+      "alpine3.22/swow",
+      "alpine3.21/cli",
+      "alpine3.21/swoole",
+      "alpine3.21/zts",
+      "alpine3.21/swow"
+    ]
+  }
 }
