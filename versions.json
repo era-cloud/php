@@ -147,10 +147,10 @@
     ]
   },
   "8.5-rc": {
-    "version": "8.5.6RC1",
-    "url": "https://downloads.php.net/~daniels/php-8.5.6RC1.tar.xz",
-    "ascUrl": "https://downloads.php.net/~daniels/php-8.5.6RC1.tar.xz.asc",
-    "sha256": "d57fa52541f8f2dd9511efb42e2b9307af49189a64f07cb69ae078371f70b4dc",
+    "version": "8.5.6RC3",
+    "url": "https://downloads.php.net/~daniels/php-8.5.6RC3.tar.xz",
+    "ascUrl": "https://downloads.php.net/~daniels/php-8.5.6RC3.tar.xz.asc",
+    "sha256": "5faeca2a67e766f897a51c7a93414706d168d75c862f86343f6c4658c318eee5",
     "variants": [
       "trixie/cli",
       "trixie/swoole",
