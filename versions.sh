@@ -115,6 +115,7 @@ for version in "${versions[@]}"; do
 						"swoole",
 						"zts",
 						"swow",
+						"thread",
 						empty
 					) as $variant
 					| "\($suite)/\($variant)"

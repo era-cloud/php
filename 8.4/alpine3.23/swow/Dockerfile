@@ -26,10 +26,12 @@ RUN apk add --no-cache \
 		ca-certificates \
 		curl \
 		git \
+		lz4 \
 		openssl \
 		tar \
 		unzip \
-		xz
+		xz \
+		zstd
 
 # ensure app user exists
 RUN set -eux; \
@@ -217,7 +219,14 @@ RUN set -eux; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension phpredis/phpredis; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check phpredis/phpredis \
+		--enable-redis \
+		--enable-redis-igbinary \
+		--enable-redis-lz4 \
+		--enable-redis-msgpack \
+		--enable-redis-zstd \
+		--with-liblz4=yes \
+		--with-libzstd=yes; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \
@@ -292,21 +301,7 @@ RUN set -ex; \
 	docker-php-ext-install sockets; \
 	docker-php-source extract; \
 	docker-php-source delete; \
-	# download
-	cd /tmp; \
-	curl -SL $(curl -s https://api.github.com/repos/swow/swow/releases/latest | grep tarball_url | cut -d '"' -f 4) -o swow.tar.gz; \
-	ls -alh; \
-	# php extension:swow
-	cd /tmp; \
-	mkdir -p swow; \
-	tar -xf swow.tar.gz -C swow --strip-components=1; \
-	( \
-			cd swow/ext; \
-			phpize; \
-			./configure --enable-swow --enable-swow-ssl --enable-swow-curl; \
-			make -s -j$(nproc); \
-			make install \
-	); \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check swow/swow-extension; \
 	echo "memory_limit=1G" >  /usr/local/etc/php/conf.d/00-default.ini; \
 	echo "opcache.enable_cli = 'On'" >>  /usr/local/etc/php/conf.d/50-opcache.ini; \
 	echo "extension=swow.so" > /usr/local/etc/php/conf.d/docker-php-ext-swow.ini; \

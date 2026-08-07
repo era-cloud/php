@@ -244,7 +244,14 @@ RUN set -eux; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension phpredis/phpredis; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check phpredis/phpredis \
+		--enable-redis \
+		--enable-redis-igbinary \
+		--enable-redis-lz4 \
+		--enable-redis-msgpack \
+		--enable-redis-zstd \
+		--with-liblz4=yes \
+		--with-libzstd=yes; \
 	 \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \

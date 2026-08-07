@@ -20,7 +20,11 @@
       "alpine3.23/cli",
       "alpine3.23/swoole",
       "alpine3.23/zts",
-      "alpine3.23/swow"
+      "alpine3.23/swow",
+      "trixie/thread",
+      "bookworm/thread",
+      "alpine3.24/thread",
+      "alpine3.23/thread"
     ]
   },
   "8.2-rc": null,
@@ -45,7 +49,11 @@
       "alpine3.23/cli",
       "alpine3.23/swoole",
       "alpine3.23/zts",
-      "alpine3.23/swow"
+      "alpine3.23/swow",
+      "trixie/thread",
+      "bookworm/thread",
+      "alpine3.24/thread",
+      "alpine3.23/thread"
     ]
   },
   "8.3-rc": null,
@@ -70,7 +78,11 @@
       "alpine3.23/cli",
       "alpine3.23/swoole",
       "alpine3.23/zts",
-      "alpine3.23/swow"
+      "alpine3.23/swow",
+      "trixie/thread",
+      "bookworm/thread",
+      "alpine3.24/thread",
+      "alpine3.23/thread"
     ]
   },
   "8.4-rc": null,
@@ -95,7 +107,11 @@
       "alpine3.23/cli",
       "alpine3.23/swoole",
       "alpine3.23/zts",
-      "alpine3.23/swow"
+      "alpine3.23/swow",
+      "trixie/thread",
+      "bookworm/thread",
+      "alpine3.24/thread",
+      "alpine3.23/thread"
     ]
   },
   "8.5-rc": null
