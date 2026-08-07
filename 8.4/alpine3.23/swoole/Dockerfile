@@ -294,13 +294,12 @@ RUN set -ex; \
 	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \
 	docker-php-source extract; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension swoole/swoole \
-		--enable-swoole-curl \
-		--enable-cares \
-		--enable-brotli \
-		--enable-swoole-pgsql \
-		--enable-swoole-sqlite \
-		--with-openssl-dir=/usr; \
+	pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" \
+	enable-mysqlnd="no" enable-http2="yes" enable-swoole-json="yes" enable-swoole-curl="yes"\
+	enable-cares="yes" enable-brotli="yes" enable-swoole-pgsql="yes" \
+	with-swoole-odbc="no" with-swoole-oracle="no" enable-swoole-sqlite="yes" \
+	with-openssl-dir="/usr"' \
+	swoole; \
 	docker-php-ext-enable swoole; \
 	docker-php-source delete; \
 	php --version; \
