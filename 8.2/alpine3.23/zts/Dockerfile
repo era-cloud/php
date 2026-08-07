@@ -28,6 +28,7 @@ RUN apk add --no-cache \
 		git \
 		openssl \
 		tar \
+		unzip \
 		xz
 
 # ensure app user exists
@@ -233,7 +234,7 @@ RUN set -eux; \
 	chmod +x /usr/local/bin/pie; \
 	\
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension igbinary/igbinary; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension phpredis/phpredis; \
 	apk del --no-network .build-deps; \

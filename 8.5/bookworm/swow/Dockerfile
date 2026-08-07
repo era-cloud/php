@@ -41,6 +41,7 @@ RUN set -eux; \
 		ca-certificates \
 		curl \
 		git \
+		unzip \
 		xz-utils \
 		adduser \
 	; \
@@ -230,7 +231,7 @@ RUN set -eux; \
 	chmod +x /usr/local/bin/pie; \
 	\
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension igbinary/igbinary; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension phpredis/phpredis; \
 	 \

@@ -41,6 +41,7 @@ RUN set -eux; \
 		ca-certificates \
 		curl \
 		git \
+		unzip \
 		xz-utils \
 		adduser \
 	; \
@@ -234,7 +235,7 @@ RUN set -eux; \
 	chmod +x /usr/local/bin/pie; \
 	\
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension igbinary/igbinary; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension phpredis/phpredis; \
 	 \
@@ -302,18 +303,11 @@ RUN set -ex; \
 	docker-php-ext-install sockets; \
 	docker-php-source extract; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension swoole/swoole \
-		--enable-sockets=no \
-		--enable-openssl=yes \
-		--enable-mysqlnd=no \
-		--enable-http2=yes \
-		--enable-swoole-json=yes \
-		--enable-swoole-curl=yes \
-		--enable-cares=yes \
-		--enable-brotli=yes \
-		--enable-swoole-pgsql=yes \
-		--with-swoole-odbc=no \
-		--with-swoole-oracle=no \
-		--enable-swoole-sqlite=yes \
+		--enable-swoole-curl \
+		--enable-cares \
+		--enable-brotli \
+		--enable-swoole-pgsql \
+		--enable-swoole-sqlite \
 		--with-openssl-dir=/usr; \
 	docker-php-ext-enable swoole; \
 	docker-php-source delete; \
