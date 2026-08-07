@@ -117,13 +117,6 @@ for version; do
 			)
 		)
 		| .[0]
-		# intl will not compile on Alpine 3.22 causing build failures for downstream images (joomla, mediawiki, wordpress): https://github.com/docker-library/php/issues/1585
-		# since PHP 8.1 is EOL at the end of the year and wont likely get fixes, keep the default Alpine at 3.21
-		| if env.version == "8.1" then
-			"alpine3.21"
-		else
-			.
-		end
 	' versions.json)"
 
 	for dir in "${variants[@]}"; do
@@ -150,6 +143,17 @@ for version; do
 
 		variantParent="$(awk 'toupper($1) == "FROM" { print $2 }' "$dir/Dockerfile")"
 		variantArches="${parentRepoToArches[$variantParent]}"
+
+		# php segfaults on arm32v6 for these pre-releases
+		# https://github.com/docker-library/php/issues/1675
+		if [[ "$suite" =~ 'alpine'* ]]; then
+			if [[ "$fullVersion" == '8.6.0alpha'[23] ]]; then
+				variantArches="$(jq <<<"$variantArches" --raw-input --raw-output '
+					split(" ") - [ "arm32v6" ]
+					| join(" ")
+				')"
+			fi
+		fi
 
 		commit="$(dirCommit "$dir")"
 

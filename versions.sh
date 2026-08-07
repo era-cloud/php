@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
-rm -rf 8.{1,2,3,4,5}-rc
-mkdir 8.{1,2,3,4,5}-rc
+rm -rf 8.{2,3,4,5}-rc
+mkdir 8.{2,3,4,5}-rc
 cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
-# TODO consume https://www.php.net/releases/branches.php and https://www.php.net/release-candidates.php?format=json here like in Go, Julia, etc (so we can have a canonical "here's all the versions possible" mode, and more automated metadata like EOL 👀)
+# TODO consume https://www.php.net/releases/branches.php and https://www.php.net/pre-release-builds.php?format=json here like in Go, Julia, etc (so we can have a canonical "here's all the versions possible" mode, and more automated metadata like EOL 👀)
 
 versions=( "$@" )
 if [ ${#versions[@]} -eq 0 ]; then
@@ -14,6 +14,8 @@ else
 	json="$(< versions.json)"
 fi
 versions=( "${versions[@]%/}" )
+
+now="$(date --utc '+%s')"
 
 for version in "${versions[@]}"; do
 	rcVersion="${version%-rc}"
@@ -34,7 +36,7 @@ for version in "${versions[@]}"; do
 			) ]
 		'
 	else
-		apiUrl='https://www.php.net/release-candidates.php?format=json'
+		apiUrl='https://www.php.net/pre-release-builds.php?format=json'
 		apiJqExpr='
 			(.releases // [])[]
 			| select(.version | startswith(env.rcVersion))
@@ -46,6 +48,7 @@ for version in "${versions[@]}"; do
 			]
 		'
 	fi
+	apiUrl+="&cachebuster=$now" # combat over-aggressive cache on php.net
 	IFS=$'\n'
 	possibles=( $(
 		curl -fsSL "$apiUrl" \
@@ -78,28 +81,6 @@ for version in "${versions[@]}"; do
 		ascUrl="$url.asc"
 	fi
 
-	variants='[]'
-	# order here controls the order of the library/ file
-	for suite in \
-		trixie \
-		bookworm \
-		alpine3.22 \
-		alpine3.21 \
-	; do
-		for variant in cli swoole zts swow; do
-			# if [[ "$version" == "8.0" && !("$suite" == "bullseye" || "$suite" == "alpine3.16") ]]; then
-			# 	echo "Skipping $version $suite"
-			# 	continue
-			# fi
-			# if [[ ("$version" == "8.4" || "$version" == "8.4-rc") &&  "$variant" == "swow" ]]; then
-			# 	echo "Skipping $variant $version $suite"
-			# 	continue
-			# fi
-			export suite variant
-			variants="$(jq <<<"$variants" -c '. + [ env.suite + "/" + env.variant ]')"
-		done
-	done
-
 	echo "$version: $fullVersion"
 	if ! grep -q "^$version=" .env.current.version; then
 		echo "$version=$fullVersion" >> .env.current.version
@@ -114,13 +95,30 @@ for version in "${versions[@]}"; do
 	fi
 	export fullVersion url ascUrl sha256
 	json="$(
-		jq <<<"$json" -c --argjson variants "$variants" '
+		jq <<<"$json" -c '
 			.[env.version] = {
 				version: env.fullVersion,
 				url: env.url,
 				ascUrl: env.ascUrl,
 				sha256: env.sha256,
-				variants: $variants,
+				variants: [
+					# order here controls the order of the library/ file
+					(
+						"trixie",
+						"bookworm",
+						"alpine3.24",
+						"alpine3.23",
+						empty
+					) as $suite
+					| (
+						"cli",
+						"swoole",
+						"zts",
+						"swow",
+						empty
+					) as $variant
+					| "\($suite)/\($variant)"
+				],
 			}
 		'
 	)"

@@ -5,9 +5,14 @@ on:
     workflows: ["Release"]
     types:
       - completed
+  workflow_dispatch:
+    inputs:
+      variants:
+        description: '只构建匹配的变体（逗号分隔、子串匹配，可为空=全部）。例: 8.5-bookworm-swoole, swoole, alpine3.24'
+        required: false
+        default: ''
   # pull_request:
   # push:
-  # workflow_dispatch:
   # schedule:
   #   - cron: '0 0 * * *'
 defaults:
@@ -46,6 +51,8 @@ jobs:
       - uses: docker-library/bashbrew@HEAD
       - id: generate-jobs
         name: Generate Jobs
+        env:
+          VARIANTS: ${{ inputs.variants || '' }}
         run: |
           strategy="$("./.github/scripts/generate.sh")"
 

@@ -22,19 +22,16 @@
 			"rm -rf /var/lib/apt/lists/*"
 		else "apt-get dist-clean" end
 	;
-	def need_patch_11678:
-		# https://github.com/docker-library/php/pull/1552
-		# https://github.com/php/php-src/issues/11678 "Build fails on musl 1.2.4 - lfs64" stream_cookie_seeker
-		# https://github.com/php/php-src/issues/14834 "Error installing PHP when --with-pear is used" xml errors
-		is_alpine and rcVersion == "8.1"
-	;
 	def need_patch_18743:
 		# https://github.com/docker-library/php/pull/1580
 		# https://github.com/php/php-src/issues/18743 "Incompatibility in Inline TLS Assembly on Alpine 3.22 with zend_jit_ir.c"
 		env.variant == "zts" # only needed for ZTS builds
 		and is_alpine
-		and env.from != "alpine:3.21" # only needed for Alpine 3.22+
-		and IN(rcVersion; "8.1", "8.2")
+		and IN(rcVersion; "8.2")
+	;
+	def install_pear_pecl:
+		# https://github.com/docker-library/php/issues/1554
+		IN(rcVersion; "8.2", "8.3", "8.4", "8.5")
 -}}
 FROM {{ env.from }}
 
@@ -73,6 +70,7 @@ ENV PHPIZE_DEPS \
 RUN apk add --no-cache \
 		ca-certificates \
 		curl \
+		git \
 		openssl \
 		tar \
 		xz
@@ -95,6 +93,7 @@ RUN set -eux; \
 		ncat \
 		ca-certificates \
 		curl \
+		git \
 		xz-utils \
 		adduser \
 	; \
@@ -131,6 +130,14 @@ ENV GPG_KEYS {{
 		# https://www.php.net/gpg-keys.php
 		# https://www.php.net/downloads.php
 
+		"8.6": [
+			# https://wiki.php.net/todo/php86#release_managers
+			# https://www.php.net/gpg-keys.php#gpg-8.6
+			"D95C 03BC 702B E951 5344  AE33 74E4 4BC9 0677 01A5", # daniels
+			"0168 95DE 9A47 5111 D537  A6E6 9134 FF30 BC5A 99B5", # mbeccati
+			"5CFF 17B6 4DC1 C244 F5D0  EAC3 E435 35E2 EB19 010E"  # svpernova09
+		],
+
 		"8.5": [
 			# https://wiki.php.net/todo/php85#release_managers
 			# https://www.php.net/gpg-keys.php#gpg-8.5
@@ -161,14 +168,6 @@ ENV GPG_KEYS {{
 			"39B6 4134 3D8C 104B 2B14  6DC3 F9C3 9DC0 B969 8544", # ramsey
 			"E609 13E4 DF20 9907 D8E3  0D96 659A 97C9 CF2A 795A", # sergey
 			"1198 C011 7593 497A 5EC5  C199 286A F1F9 8974 69DC"  # pierrick
-		],
-
-		"8.1": [
-			# https://wiki.php.net/todo/php81#release_managers
-			# https://www.php.net/gpg-keys.php#gpg-8.1
-			"5289 95BF EDFB A719 1D46  839E F9BA 0ADA 31CB D89E", # krakjoe
-			"39B6 4134 3D8C 104B 2B14  6DC3 F9C3 9DC0 B969 8544", # ramsey
-			"F1F6 9223 8FBC 1666 E5A5  CCD4 199F 9DFE F6FF BAFD"  # patrickallaert
 		],
 	}[rcVersion] // error("missing GPG keys for " + rcVersion)
 	| map(gsub(" "; ""))
@@ -239,8 +238,8 @@ RUN set -eux; \
 			"libsodium-dev",
 			"libxml2-dev",
 			"openssl-dev",
-			# https://github.com/docker-library/php/pull/1552 (11678) & https://github.com/docker-library/php/pull/1580 (14834)
-			if need_patch_11678 or need_patch_18743 then "patch", "patchutils" else empty end,
+			# https://github.com/docker-library/php/pull/1580 (18743)
+			if need_patch_18743 then "patch", "patchutils" else empty end,
 			"readline-dev",
 			"sqlite-dev",
 			# https://github.com/docker-library/php/issues/888
@@ -290,32 +289,11 @@ RUN set -eux; \
 	; \
 	docker-php-source extract; \
 	cd /usr/src/php; \
-{{ if need_patch_11678 then ( -}}
-# Apply patches; see https://github.com/docker-library/php/pull/1552
-	# https://github.com/php/php-src/issues/11678
-	curl -fL 'https://github.com/php/php-src/commit/577b8ae4226368e66fee7a9b5c58f9e2428372fc.patch?full_index=1' -o 11678.patch; \
-	echo '6edc20c3bb3e7cc13515abce7f2fffa8ebea6cf7469abfbc78fcdc120350b239 *11678.patch' | sha256sum -c -; \
-	patch -p1 < 11678.patch; \
-	rm 11678.patch; \
-	# https://github.com/php/php-src/issues/14834
-	curl -fL 'https://github.com/php/php-src/commit/67259e451d5d58b4842776c5696a66d74e157609.patch?full_index=1' -o 14834.patch; \
-	echo 'ed10a1b254091ad676ed204e55628ecbd6c8962004d6185a1821cedecd526c0f *14834.patch' | sha256sum -c -; \
-	filterdiff -x '*/NEWS' 14834.patch | patch -p1; \
-	rm 14834.patch; \
-{{ ) else "" end -}}
-{{
-	if need_patch_18743 then
-		# https://github.com/docker-library/php/pull/1580#issuecomment-2957191901
-		{
-			"8.1": { url: "https://github.com/php/php-src/commit/6b105d4bc57e20a2472c9a6ff11fba32768556d4.patch?full_index=1", sha256: "037e1610ae5d444e9a8c3ecd9d5f0cd215fd0aac90bdd7b9f0b259bffdf3566b" },
-		}[rcVersion]
-		// { url: "https://github.com/php/php-src/commit/b3c8afe272a6919248986c703c2e1defc73ff707.patch?full_index=1", sha256: "b334f73434c9732a4b27a42eb5d417e10df842e854c02a3e753b2479f8978bf5" }
-		| (
--}}
+{{ if need_patch_18743 then ( -}}
 	# https://github.com/php/php-src/issues/18743 "Incompatibility in Inline TLS Assembly on Alpine 3.22 with zend_jit_ir.c"
 	# https://github.com/docker-library/php/pull/1580
-	curl -fL {{ .url | @sh }} -o 18743.patch; \
-	echo {{ "\(.sha256) *18743.patch" | @sh }} | sha256sum -c -; \
+	curl -fL 'https://github.com/php/php-src/commit/b3c8afe272a6919248986c703c2e1defc73ff707.patch?full_index=1' -o 18743.patch; \
+	echo 'b334f73434c9732a4b27a42eb5d417e10df842e854c02a3e753b2479f8978bf5 *18743.patch' | sha256sum -c -; \
 	filterdiff -x '*/NEWS' 18743.patch | patch -p1; \
 	rm 18743.patch; \
 {{ ) else "" end -}}
@@ -327,8 +305,10 @@ RUN set -eux; \
 		ln -sT "/usr/include/$debMultiarch/curl" /usr/local/include/curl; \
 	fi; \
 {{ ) end -}}
+	test "$PHP_INI_DIR" != "${PHP_INI_DIR%/php}"; \
 	./configure \
 		--build="$gnuArch" \
+		--sysconfdir="${PHP_INI_DIR%/php}" \
 		--with-config-file-path="$PHP_INI_DIR" \
 		--with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
 		\
@@ -338,15 +318,20 @@ RUN set -eux; \
 # https://github.com/docker-library/php/issues/439
 		--with-mhash \
 		\
+{{ if rcVersion | IN("8.2", "8.3", "8.4", "8.5") then ( -}}
 # https://github.com/docker-library/php/issues/822
 		--with-pic \
 		\
-{{ if rcVersion == "8.1" then ( -}}
-# --enable-ftp is included here for compatibility with existing versions. ftp_ssl_connect() needed ftp to be compiled statically before PHP 7.0 (see https://github.com/docker-library/php/issues/236).
-		--enable-ftp \
-{{ ) else "" end -}}
+{{ ) else ( -}}
+# https://github.com/docker-library/php/issues/822
+# https://github.com/php/php-src/pull/21067/changes#diff-4b9db5b77bcd56aa33b310dc44c8bc99c729c9abb195df2e98e6985b81289ae8R130
+		--enable-pic \
+		\
+{{ ) end -}}
+{{ if install_pear_pecl then ( -}}
 # --enable-mbstring is included here because otherwise there's no way to get pecl to use it properly (see https://github.com/docker-library/php/issues/195)
 		--enable-mbstring \
+{{ ) else "" end -}}
 # --enable-mysqlnd is included here because it's harder to compile after the fact than extensions are (since it's a plugin for several extensions, not an extension in itself)
 		--enable-mysqlnd \
 # https://wiki.php.net/rfc/argon2_password_hash
@@ -372,10 +357,12 @@ RUN set -eux; \
 		--disable-phpdbg \
 {{ ) end -}}
 		\
+{{ if install_pear_pecl then ( -}}
 # in PHP 7.4+, the pecl/pear installers are officially deprecated (requiring an explicit "--with-pear")
 		--with-pear \
 		\
-{{ if rcVersion | IN("8.1", "8.2") then ( -}}
+{{ ) else "" end -}}
+{{ if rcVersion | IN("8.2") then ( -}}
 # bundled pcre does not support JIT on riscv64 until 10.41 (php 8.3+)
 # https://github.com/PCRE2Project/pcre2/commits/pcre2-10.41/src/sljit/sljitNativeRISCV_64.c
 # https://github.com/php/php-src/tree/php-8.3.0/ext/pcre/pcre2lib
@@ -404,7 +391,7 @@ RUN set -eux; \
 		--enable-zts \
 # https://externals.io/message/118859
 		--disable-zend-signals \
-{{ if rcVersion | IN("8.1", "8.2") then ( -}}
+{{ if rcVersion | IN("8.2") then ( -}}
 		--enable-zend-max-execution-timers \
 {{ ) else "" end -}}
 {{ ) else "" end -}}
@@ -469,27 +456,30 @@ RUN set -eux; \
 	{{ clean_apt }}; \
 {{ ) end -}}
 	\
-	# update pecl channel definitions https://github.com/docker-library/php/issues/443
+{{ if install_pear_pecl then ( -}}
+# update pecl channel definitions https://github.com/docker-library/php/issues/443
 	pecl update-channels; \
-	pecl install msgpack; \
-	pecl install igbinary; \
-	pecl install ds; \
 	\
-	# pecl install --configureoptions 'enable-redis-igbinary="yes" \
-	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
-	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
+# install PIE (PHP Installer for Extensions), the official replacement for PECL
+# https://php.github.io/pie/ https://github.com/php/pie
+	curl -fL --output /usr/local/bin/pie 'https://github.com/php/pie/releases/latest/download/pie.phar'; \
+	chmod +x /usr/local/bin/pie; \
 	\
-	pecl install redis; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension igbinary/igbinary; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension phpredis/phpredis; \
 	{{ if is_alpine then "apk del --no-network .build-deps;" else "" end}} \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \
 	\
+{{ ) else "" end -}}
 # smoke test
 	php --version
 
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 
-{{ if IN(rcVersion; "8.1", "8.2", "8.3", "8.4") then ( -}}
+{{ if IN(rcVersion; "8.2", "8.3", "8.4") then ( -}}
 # enable OPcache by default (https://wiki.php.net/rfc/make_opcache_required)
 RUN docker-php-ext-enable opcache
 
@@ -570,19 +560,26 @@ RUN set -eux; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	{{ clean_apt }}
 {{ ) end -}}
-
 RUN set -ex; \
 	pecl channel-update pecl.php.net; \
 	docker-php-ext-install $EXTRA_EXT; \
 	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \
 	docker-php-source extract; \
-	pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" \
-	enable-mysqlnd="no" enable-http2="yes" enable-swoole-json="yes" enable-swoole-curl="yes"\
-	enable-cares="yes" enable-brotli="yes" enable-swoole-pgsql="yes" \
-	with-swoole-odbc="no" with-swoole-oracle="no" enable-swoole-sqlite="yes" \
-	with-openssl-dir="/usr"' \
-	swoole; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension swoole/swoole \
+		--enable-sockets=no \
+		--enable-openssl=yes \
+		--enable-mysqlnd=no \
+		--enable-http2=yes \
+		--enable-swoole-json=yes \
+		--enable-swoole-curl=yes \
+		--enable-cares=yes \
+		--enable-brotli=yes \
+		--enable-swoole-pgsql=yes \
+		--with-swoole-odbc=no \
+		--with-swoole-oracle=no \
+		--enable-swoole-sqlite=yes \
+		--with-openssl-dir=/usr; \
 	docker-php-ext-enable swoole; \
 	docker-php-source delete; \
 	php --version; \

@@ -239,6 +239,27 @@ strategy="$(
 	'
 )"
 
+# single-point control: when VARIANTS is set (e.g. via "workflow_dispatch"), keep only the matching matrix nodes
+# (comma-separated substrings, case-insensitive, matched against the node name and all of its tags)
+if [ -n "${VARIANTS:-}" ]; then
+	re="$(printf '%s' "$VARIANTS" | tr ',' '|')"
+	strategy="$(
+		jq --arg re "$re" '
+			.matrix.include |= [
+				.[]
+				| select(
+					( .name | test($re; "i") )
+					or ( any(.meta.entries[].tags[]?; test($re; "i")) )
+				)
+			]
+		' <<<"$strategy"
+	)"
+	if [ "$(jq '.matrix.include | length' <<<"$strategy")" -eq 0 ]; then
+		echo >&2 "error: VARIANTS '$VARIANTS' did not match any variant (e.g. try 'swoole' or '8.5-bookworm-swoole')"
+		exit 1
+	fi
+fi
+
 if [ -t 1 ]; then
 	jq <<<"$strategy"
 else

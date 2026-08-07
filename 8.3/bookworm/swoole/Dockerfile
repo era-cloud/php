@@ -40,6 +40,7 @@ RUN set -eux; \
 		ncat \
 		ca-certificates \
 		curl \
+		git \
 		xz-utils \
 		adduser \
 	; \
@@ -141,8 +142,10 @@ RUN set -eux; \
 	if [ ! -d /usr/include/curl ]; then \
 		ln -sT "/usr/include/$debMultiarch/curl" /usr/local/include/curl; \
 	fi; \
+	test "$PHP_INI_DIR" != "${PHP_INI_DIR%/php}"; \
 	./configure \
 		--build="$gnuArch" \
+		--sysconfdir="${PHP_INI_DIR%/php}" \
 		--with-config-file-path="$PHP_INI_DIR" \
 		--with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
 		\
@@ -218,17 +221,18 @@ RUN set -eux; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
-	# update pecl channel definitions https://github.com/docker-library/php/issues/443
+# update pecl channel definitions https://github.com/docker-library/php/issues/443
 	pecl update-channels; \
-	pecl install msgpack; \
-	pecl install igbinary; \
-	pecl install ds; \
 	\
-	# pecl install --configureoptions 'enable-redis-igbinary="yes" \
-	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
-	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
+# install PIE (PHP Installer for Extensions), the official replacement for PECL
+# https://php.github.io/pie/ https://github.com/php/pie
+	curl -fL --output /usr/local/bin/pie 'https://github.com/php/pie/releases/latest/download/pie.phar'; \
+	chmod +x /usr/local/bin/pie; \
 	\
-	pecl install redis; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension igbinary/igbinary; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension phpredis/phpredis; \
 	 \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \
@@ -287,19 +291,26 @@ RUN set -eux; \
 	apt-get install -y --no-install-recommends $EXTRA_LIBS; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*
-
 RUN set -ex; \
 	pecl channel-update pecl.php.net; \
 	docker-php-ext-install $EXTRA_EXT; \
 	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \
 	docker-php-source extract; \
-	pecl install --configureoptions 'enable-sockets="no" enable-openssl="yes" \
-	enable-mysqlnd="no" enable-http2="yes" enable-swoole-json="yes" enable-swoole-curl="yes"\
-	enable-cares="yes" enable-brotli="yes" enable-swoole-pgsql="yes" \
-	with-swoole-odbc="no" with-swoole-oracle="no" enable-swoole-sqlite="yes" \
-	with-openssl-dir="/usr"' \
-	swoole; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension swoole/swoole \
+		--enable-sockets=no \
+		--enable-openssl=yes \
+		--enable-mysqlnd=no \
+		--enable-http2=yes \
+		--enable-swoole-json=yes \
+		--enable-swoole-curl=yes \
+		--enable-cares=yes \
+		--enable-brotli=yes \
+		--enable-swoole-pgsql=yes \
+		--with-swoole-odbc=no \
+		--with-swoole-oracle=no \
+		--enable-swoole-sqlite=yes \
+		--with-openssl-dir=/usr; \
 	docker-php-ext-enable swoole; \
 	docker-php-source delete; \
 	php --version; \

@@ -40,6 +40,7 @@ RUN set -eux; \
 		ncat \
 		ca-certificates \
 		curl \
+		git \
 		xz-utils \
 		adduser \
 	; \
@@ -141,8 +142,10 @@ RUN set -eux; \
 	if [ ! -d /usr/include/curl ]; then \
 		ln -sT "/usr/include/$debMultiarch/curl" /usr/local/include/curl; \
 	fi; \
+	test "$PHP_INI_DIR" != "${PHP_INI_DIR%/php}"; \
 	./configure \
 		--build="$gnuArch" \
+		--sysconfdir="${PHP_INI_DIR%/php}" \
 		--with-config-file-path="$PHP_INI_DIR" \
 		--with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
 		\
@@ -222,17 +225,18 @@ RUN set -eux; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	apt-get dist-clean; \
 	\
-	# update pecl channel definitions https://github.com/docker-library/php/issues/443
+# update pecl channel definitions https://github.com/docker-library/php/issues/443
 	pecl update-channels; \
-	pecl install msgpack; \
-	pecl install igbinary; \
-	pecl install ds; \
 	\
-	# pecl install --configureoptions 'enable-redis-igbinary="yes" \
-	# enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" \
-	# enable-redis-lz4="yes" with-liblz4="yes"' redis \
+# install PIE (PHP Installer for Extensions), the official replacement for PECL
+# https://php.github.io/pie/ https://github.com/php/pie
+	curl -fL --output /usr/local/bin/pie 'https://github.com/php/pie/releases/latest/download/pie.phar'; \
+	chmod +x /usr/local/bin/pie; \
 	\
-	pecl install redis; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension igbinary/igbinary; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension phpredis/phpredis; \
 	 \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \

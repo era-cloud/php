@@ -1,29 +1,4 @@
 {
-  "8.1": {
-    "version": "8.1.34",
-    "url": "https://www.php.net/distributions/php-8.1.34.tar.xz",
-    "ascUrl": "https://www.php.net/distributions/php-8.1.34.tar.xz.asc",
-    "sha256": "ffa9e0982e82eeaea848f57687b425ed173aa278fe563001310ae2638db5c251",
-    "variants": [
-      "trixie/cli",
-      "trixie/swoole",
-      "trixie/zts",
-      "trixie/swow",
-      "bookworm/cli",
-      "bookworm/swoole",
-      "bookworm/zts",
-      "bookworm/swow",
-      "alpine3.22/cli",
-      "alpine3.22/swoole",
-      "alpine3.22/zts",
-      "alpine3.22/swow",
-      "alpine3.21/cli",
-      "alpine3.21/swoole",
-      "alpine3.21/zts",
-      "alpine3.21/swow"
-    ]
-  },
-  "8.1-rc": null,
   "8.2": {
     "version": "8.2.33",
     "url": "https://www.php.net/distributions/php-8.2.33.tar.xz",
@@ -38,14 +13,14 @@
       "bookworm/swoole",
       "bookworm/zts",
       "bookworm/swow",
-      "alpine3.22/cli",
-      "alpine3.22/swoole",
-      "alpine3.22/zts",
-      "alpine3.22/swow",
-      "alpine3.21/cli",
-      "alpine3.21/swoole",
-      "alpine3.21/zts",
-      "alpine3.21/swow"
+      "alpine3.24/cli",
+      "alpine3.24/swoole",
+      "alpine3.24/zts",
+      "alpine3.24/swow",
+      "alpine3.23/cli",
+      "alpine3.23/swoole",
+      "alpine3.23/zts",
+      "alpine3.23/swow"
     ]
   },
   "8.2-rc": null,
@@ -63,14 +38,14 @@
       "bookworm/swoole",
       "bookworm/zts",
       "bookworm/swow",
-      "alpine3.22/cli",
-      "alpine3.22/swoole",
-      "alpine3.22/zts",
-      "alpine3.22/swow",
-      "alpine3.21/cli",
-      "alpine3.21/swoole",
-      "alpine3.21/zts",
-      "alpine3.21/swow"
+      "alpine3.24/cli",
+      "alpine3.24/swoole",
+      "alpine3.24/zts",
+      "alpine3.24/swow",
+      "alpine3.23/cli",
+      "alpine3.23/swoole",
+      "alpine3.23/zts",
+      "alpine3.23/swow"
     ]
   },
   "8.3-rc": null,
@@ -88,14 +63,14 @@
       "bookworm/swoole",
       "bookworm/zts",
       "bookworm/swow",
-      "alpine3.22/cli",
-      "alpine3.22/swoole",
-      "alpine3.22/zts",
-      "alpine3.22/swow",
-      "alpine3.21/cli",
-      "alpine3.21/swoole",
-      "alpine3.21/zts",
-      "alpine3.21/swow"
+      "alpine3.24/cli",
+      "alpine3.24/swoole",
+      "alpine3.24/zts",
+      "alpine3.24/swow",
+      "alpine3.23/cli",
+      "alpine3.23/swoole",
+      "alpine3.23/zts",
+      "alpine3.23/swow"
     ]
   },
   "8.4-rc": null,
@@ -113,15 +88,16 @@
       "bookworm/swoole",
       "bookworm/zts",
       "bookworm/swow",
-      "alpine3.22/cli",
-      "alpine3.22/swoole",
-      "alpine3.22/zts",
-      "alpine3.22/swow",
-      "alpine3.21/cli",
-      "alpine3.21/swoole",
-      "alpine3.21/zts",
-      "alpine3.21/swow"
+      "alpine3.24/cli",
+      "alpine3.24/swoole",
+      "alpine3.24/zts",
+      "alpine3.24/swow",
+      "alpine3.23/cli",
+      "alpine3.23/swoole",
+      "alpine3.23/zts",
+      "alpine3.23/swow"
     ]
   },
-  "8.5-rc": null
+  "8.5-rc": null,
+  "8.6-rc": null
 }
