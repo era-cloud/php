@@ -107,12 +107,16 @@ for tag in $tags; do
 						]
 						| join(" ")
 					),
-					push: ((
+					push: (
+						"retry_push() { for i in 1 2 3 4 5; do docker push \"$1\" && return 0; sleep 10; done; return 1; }; "
+						+ (
 							.tags
 							| map(
-								. as $tag | "'${REGISTRYS}'" | split(",") | map("docker push " + (. + "/" + $tag | @sh)) | join(" && ")
+								. as $tag | "'${REGISTRYS}'" | split(",") | map("retry_push " + (. + "/" + $tag | @sh)) | join(" && ")
 							)
-						) | join(" && ")),
+							| join(" && ")
+						)
+					),
 					history: ("docker history " + ("ghcr.io/era-cloud/" + .tags[0] | @sh)),
 					test: (
 						[
