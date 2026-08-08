@@ -51,7 +51,7 @@ for version in "${versions[@]}"; do
 	apiUrl+="&cachebuster=$now" # combat over-aggressive cache on php.net
 	IFS=$'\n'
 	possibles=( $(
-		curl -fsSL "$apiUrl" \
+		curl -fsSL --retry 5 --retry-delay 5 --retry-all-errors "$apiUrl" \
 			| jq --raw-output "$apiJqExpr | @sh" \
 			| sort -rV
 	) )
@@ -71,7 +71,7 @@ for version in "${versions[@]}"; do
 	ascUrl="${possi[2]}"
 	sha256="${possi[3]}"
 
-	if ! curl --head -fsSL "$url" -o /dev/null; then
+	if ! curl --head -fsSL --retry 5 --retry-delay 5 --retry-all-errors "$url" -o /dev/null; then
 		echo >&2 "error: '$url' appears to be missing"
 		exit 1
 	fi
