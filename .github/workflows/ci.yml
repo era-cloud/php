@@ -33,7 +33,7 @@ jobs:
     name: Check For Uncomitted Changes
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Apply Templates
         run: ./apply-templates.sh
       - name: Update the Docker image Version
@@ -47,8 +47,19 @@ jobs:
     outputs:
       strategy: ${{ steps.generate-jobs.outputs.strategy }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker-library/bashbrew@HEAD
+      - uses: actions/checkout@v7
+      - name: Clone bashbrew
+        run: git clone --depth 1 https://github.com/docker-library/bashbrew "$RUNNER_TEMP/bashbrew"
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: "${{ runner.temp }}/bashbrew/go.mod"
+          cache: false
+      - name: Set up bashbrew
+        run: |
+          cd "$RUNNER_TEMP/bashbrew"
+          ./bashbrew.sh --version
+          echo "$RUNNER_TEMP/bashbrew/bin" >> "$GITHUB_PATH"
+          echo "BASHBREW_SCRIPTS=$RUNNER_TEMP/bashbrew/scripts" >> "$GITHUB_ENV"
       - id: generate-jobs
         name: Generate Jobs
         env:
@@ -67,7 +78,7 @@ jobs:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       # - name: Login to the Docker registry
       #   run: docker login --username ${{ vars.DH_USERNAME  }} --password ${{ secrets.DH_TOKEN }}
       - name: Login to the Github Container registry
@@ -92,7 +103,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Check Git Status
       run: git diff --exit-code
     - name: Push changes
