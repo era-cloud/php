@@ -71,12 +71,12 @@ RUN apk add --no-cache \
 		ca-certificates \
 		curl \
 		git \
-		lz4 \
+		lz4-libs \
 		openssl \
 		tar \
 		unzip \
 		xz \
-		zstd
+		zstd-libs
 
 # ensure app user exists
 RUN set -eux; \
