@@ -316,6 +316,9 @@ RUN set -ex; \
 	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \
 	docker-php-source extract; \
+	# swoole 6.2.2 fails to compile on newer g++ (GCC 15) without -fpermissive:
+	# "converting to 'bool' from 'std::nullptr_t' requires direct-initialization"
+	export CXXFLAGS="$CXXFLAGS -fpermissive"; \
 	pecl install --configureoptions 'enable-swoole-thread="yes" enable-sockets="no" enable-openssl="yes" \
 	enable-mysqlnd="no" enable-http2="yes" enable-swoole-json="yes" enable-swoole-curl="yes"\
 	enable-cares="yes" enable-brotli="yes" enable-swoole-pgsql="yes" \
