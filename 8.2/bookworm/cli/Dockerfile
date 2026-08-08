@@ -230,6 +230,9 @@ RUN set -eux; \
 	\
 # update pecl channel definitions https://github.com/docker-library/php/issues/443
 	pecl update-channels; \
+	# the PHP build purge above removed liblz4-dev/libzstd-dev; reinstall them for the phpredis build
+	apt-get update; \
+	apt-get install -y --no-install-recommends liblz4-dev libzstd-dev; \
 	\
 # install PIE (PHP Installer for Extensions), the official replacement for PECL
 # https://php.github.io/pie/ https://github.com/php/pie
@@ -247,6 +250,10 @@ RUN set -eux; \
 		--enable-redis-zstd \
 		--with-liblz4=yes \
 		--with-libzstd=yes; \
+	# keep the runtime libs (liblz4-1/libzstd1) in the final image, drop the -dev packages
+	apt-mark manual liblz4-1 libzstd1; \
+	apt-get purge -y liblz4-dev libzstd-dev; \
+	rm -rf /var/lib/apt/lists/*; \
 	 \
 	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \

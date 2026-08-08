@@ -210,7 +210,9 @@ RUN set -eux; \
 	libc-dev \
 	make \
 	pkgconf \
-	autoconf; \
+	autoconf \
+	lz4-dev \
+	zstd-dev; \
 	\
 # update pecl channel definitions https://github.com/docker-library/php/issues/443
 	pecl update-channels; \
