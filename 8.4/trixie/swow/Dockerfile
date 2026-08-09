@@ -159,7 +159,7 @@ RUN set -eux; \
 # https://github.com/docker-library/php/issues/822
 		--with-pic \
 		\
-# --enable-mbstring is included here because otherwise there's no way to get pecl to use it properly (see https://github.com/docker-library/php/issues/195)
+# --enable-mbstring is included here because otherwise there's no way to get the extension installers (PIE) to use it properly (see https://github.com/docker-library/php/issues/195)
 		--enable-mbstring \
 # --enable-mysqlnd is included here because it's harder to compile after the fact than extensions are (since it's a plugin for several extensions, not an extension in itself)
 		--enable-mysqlnd \
@@ -179,10 +179,6 @@ RUN set -eux; \
 		\
 # https://github.com/bwoebi/phpdbg-docs/issues/1#issuecomment-163872806 ("phpdbg is primarily a CLI debugger, and is not suitable for debugging an fpm stack.")
 		--disable-phpdbg \
-		\
-# in PHP 7.4+, the pecl/pear installers are officially deprecated (requiring an explicit "--with-pear")
-		--with-pear \
-		\
 		--with-libdir="lib/$debMultiarch" \
 		\
 		--disable-cgi \
@@ -222,8 +218,6 @@ RUN set -eux; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	apt-get dist-clean; \
 	\
-# update pecl channel definitions https://github.com/docker-library/php/issues/443
-	pecl update-channels; \
 	# the PHP build purge above removed liblz4-dev/libzstd-dev; reinstall them for the phpredis build
 	apt-get update; \
 	apt-get install -y --no-install-recommends liblz4-dev libzstd-dev; \
@@ -249,7 +243,6 @@ RUN set -eux; \
 	apt-get purge -y liblz4-dev libzstd-dev; \
 	apt-get dist-clean; \
 	 \
-	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*; \
 	\
 # smoke test
@@ -307,7 +300,6 @@ RUN set -eux; \
 	apt-get dist-clean
 
 RUN set -ex; \
-	pecl channel-update pecl.php.net; \
 	docker-php-ext-install $EXTRA_EXT; \
 	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \
@@ -322,7 +314,6 @@ RUN set -ex; \
 	php --ri swow; \
 apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	apt-get dist-clean; \
-	rm -rf /tmp/pear ~/.pearrc; \
 	rm -rf /tmp/*
 
 RUN set -eux; \
