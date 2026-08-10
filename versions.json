@@ -114,6 +114,5 @@
       "alpine3.23/thread"
     ]
   },
-  "8.5-rc": null,
-  "deploy": null
+  "8.5-rc": null
 }
