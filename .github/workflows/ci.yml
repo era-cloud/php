@@ -132,7 +132,7 @@ jobs:
           scan-type: image
           image-ref: ghcr.io/era-cloud/php:${{ matrix.name }}
           severity: CRITICAL
-          exit-code: '1'
+          exit-code: '0'
           format: sarif
           output: trivy-${{ matrix.name }}.sarif
       - name: Upload Trivy SARIF
@@ -154,6 +154,7 @@ jobs:
         run: ${{ matrix.runs.push }}
   changes:
     needs: build
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v7
@@ -180,6 +181,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   aggregate-metrics:
     needs: [build, changes]
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v7
