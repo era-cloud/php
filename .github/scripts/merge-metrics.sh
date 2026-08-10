@@ -3,8 +3,15 @@ set -Eeuo pipefail
 
 cd "$(dirname "$(readlink -f "$BASH_SOURCE")")/../.."
 
+# 0. nothing built this run (no size artifacts) -> skip all updates so we don't
+#    clobber previously recorded metrics on no-op / change-skip runs
+if ! find . -path './.git' -prune -o -type f -name 'size-*.json' -print -quit 2>/dev/null | grep -q .; then
+	echo "no size artifacts found; nothing built this run, skipping metrics update"
+	exit 0
+fi
+
 # 1. base structure (tag/version/variant/distro) from versions.json
-metrics="$(
+base="$(
 	jq -c '
 		[
 			to_entries | map(select(.value)) | .[]
@@ -16,6 +23,16 @@ metrics="$(
 		]
 	' versions.json
 )"
+
+# 1b. start from previously recorded metrics where present, so variants not
+#     rebuilt in this run keep their last known size/build time/scan results
+if [ -f .image-metrics.json ]; then
+	metrics="$(jq -c --argjson existing "$(cat .image-metrics.json)" \
+		'[ .[] | . as $b | (first($existing[] | select(.tag == $b.tag)) // $b) ]' \
+		<<<"$base")"
+else
+	metrics="$base"
+fi
 
 # 2. merge image size / build time from uploaded artifacts (size-<tag>.json)
 #    artifact tags are full (8.2.33-cli-trixie); normalize to short (8.2-cli-trixie) to match base
