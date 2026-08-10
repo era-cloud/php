@@ -18,8 +18,9 @@ metrics="$(
 )"
 
 # 2. merge image size / build time from uploaded artifacts (size-<tag>.json)
+#    artifact tags are full (8.2.33-cli-trixie); normalize to short (8.2-cli-trixie) to match base
 while IFS= read -r -d '' f; do
-	tag="$(jq -r '.tag' "$f")"
+	tag="$(jq -r '.tag' "$f" | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/')"
 	size="$(jq -r '.size' "$f")"
 	built_at="$(jq -r '.built_at // ""' "$f")"
 	metrics="$(jq -c --arg t "$tag" --argjson s "$size" --arg b "$built_at" \
@@ -29,7 +30,7 @@ done < <(find . -path './.git' -prune -o -type f -name 'size-*.json' -print0 2>/
 # 3. merge scan results from uploaded SARIF files (trivy-<tag>.sarif)
 #    Trivy SARIF levels: critical -> "error", high -> "warning"
 while IFS= read -r -d '' f; do
-	tag="$(basename "$f" | sed 's/^trivy-//; s/\.sarif$//')"
+	tag="$(basename "$f" | sed 's/^trivy-//; s/\.sarif$//' | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/')"
 	critical="$(jq '[.runs[].results[]? | select(.level == "error")] | length' "$f" 2>/dev/null || echo 0)"
 	high="$(jq '[.runs[].results[]? | select(.level == "warning")] | length' "$f" 2>/dev/null || echo 0)"
 	metrics="$(jq -c --arg t "$tag" --argjson c "$critical" --argjson h "$high" \

@@ -126,6 +126,7 @@ jobs:
           jq -n --arg t "${{ matrix.name }}" --argjson s "$size" --arg b "$built_at" \
             '{tag:$t,size:$s,built_at:$b}' > size-${{ matrix.name }}.json
       - name: Trivy security scan
+        id: scan
         if: steps.changed.outputs.changed == 'true'
         uses: aquasecurity/trivy-action@master
         with:
@@ -136,8 +137,8 @@ jobs:
           format: sarif
           output: trivy-${{ matrix.name }}.sarif
       - name: Upload Trivy SARIF
-        if: ${{ always() && steps.changed.outputs.changed == 'true' }}
-        uses: github/codeql-action/upload-sarif@v3
+        if: ${{ steps.scan.outcome == 'success' }}
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: trivy-${{ matrix.name }}.sarif
       - name: Upload metrics artifact

@@ -85,7 +85,13 @@ RUN set -eux; \
 	curl -fsSL -o php.tar.xz.asc "$PHP_ASC_URL"; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	for key in $GPG_KEYS; do \
-		gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key"; \
+		i=0; \
+		until gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key"; do \
+			i=$((i+1)); \
+			if [ "$i" -ge 3 ]; then exit 1; fi; \
+			echo "gpg: keyserver timeout, retry $i/3 for key $key"; \
+			sleep 5; \
+		done; \
 	done; \
 	gpg --batch --verify php.tar.xz.asc php.tar.xz; \
 	gpgconf --kill all; \
