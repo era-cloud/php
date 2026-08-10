@@ -50,6 +50,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 <!-- TAG-MATRIX-START -->
 ### cli
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
+| --- | --- | --- | --- | --- | --- |
 | latest | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
 | 8.5-cli-trixie | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
 | 8.5-cli-alpine3.24 | 8.5 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
@@ -69,6 +70,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.2-cli-bookworm | 8.2 | bookworm | 待构建 | 待扫描 | 待扫描 |
 ### zts
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
+| --- | --- | --- | --- | --- | --- |
 | 8.5-zts-alpine3.24 | 8.5 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
 | 8.5-zts-alpine3.23 | 8.5 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
 | 8.5-zts-trixie | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
@@ -87,6 +89,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.2-zts-bookworm | 8.2 | bookworm | 待构建 | 待扫描 | 待扫描 |
 ### swoole
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
+| --- | --- | --- | --- | --- | --- |
 | 8.5-swoole-alpine3.24 | 8.5 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
 | 8.5-swoole-alpine3.23 | 8.5 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
 | 8.5-swoole-trixie | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
@@ -105,6 +108,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.2-swoole-bookworm | 8.2 | bookworm | 待构建 | 待扫描 | 待扫描 |
 ### thread
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
+| --- | --- | --- | --- | --- | --- |
 | 8.5-thread-alpine3.24 | 8.5 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
 | 8.5-thread-alpine3.23 | 8.5 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
 | 8.5-thread-trixie | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
@@ -123,6 +127,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.2-thread-bookworm | 8.2 | bookworm | 待构建 | 待扫描 | 待扫描 |
 ### swow
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
+| --- | --- | --- | --- | --- | --- |
 | 8.5-swow-alpine3.24 | 8.5 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
 | 8.5-swow-alpine3.23 | 8.5 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
 | 8.5-swow-trixie | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
