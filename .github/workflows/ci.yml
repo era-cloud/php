@@ -80,6 +80,20 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check variant changed
+        id: changed
+        run: |
+          last="$(jq -r --arg n "${{ matrix.name }}" '.[$n] // empty' .build-state.json 2>/dev/null || true)"
+          variant_dir="$(dirname "${{ matrix.meta.dockerfiles[0] }}")"
+          paths="$variant_dir Dockerfile-linux.template versions.json docker-php-entrypoint docker-php-ext-configure docker-php-ext-enable docker-php-ext-install docker-php-source apply-templates.sh"
+          changed="true"
+          if [ -n "$last" ] && git diff --quiet "$last"..HEAD -- $paths; then
+            changed="false"
+          fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          echo "last=$last changed=$changed"
       # - name: Login to the Docker registry
       #   run: docker login --username ${{ vars.DH_USERNAME  }} --password ${{ secrets.DH_TOKEN }}
       - name: Login to the Github Container registry
@@ -87,24 +101,32 @@ jobs:
       - name: Login to the Aliyun ACR registry
         run: docker login --username ${{ vars.ACR_USERNAME }} --password ${{ secrets.ACR_TOKEN }}  ${{ vars.ACR_REGISTRY }}
       - name: Prepare Environment
+        if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.prepare }}
       - name: Pull Dependencies
+        if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.pull }}
       - name: Build ${{ matrix.name }}
+        if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.build }}
       - name: History ${{ matrix.name }}
+        if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.history }}
       - name: Test ${{ matrix.name }}
+        if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.test }}
       - name: '"Docker images"'
+        if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.images }}
       - name: Record image metrics
+        if: steps.changed.outputs.changed == 'true'
         run: |
           size="$(docker image inspect --format '{{.Size}}' ghcr.io/era-cloud/php:${{ matrix.name }})"
           built_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           jq -n --arg t "${{ matrix.name }}" --argjson s "$size" --arg b "$built_at" \
             '{tag:$t,size:$s,built_at:$b}' > size-${{ matrix.name }}.json
       - name: Trivy security scan
+        if: steps.changed.outputs.changed == 'true'
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
@@ -114,12 +136,12 @@ jobs:
           format: sarif
           output: trivy-${{ matrix.name }}.sarif
       - name: Upload Trivy SARIF
-        if: always()
+        if: ${{ always() && steps.changed.outputs.changed == 'true' }}
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: trivy-${{ matrix.name }}.sarif
       - name: Upload metrics artifact
-        if: always()
+        if: ${{ always() && steps.changed.outputs.changed == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: metrics-${{ matrix.name }}
@@ -128,6 +150,7 @@ jobs:
             trivy-*.sarif
           if-no-files-found: ignore
       - name: Push images ${{ matrix.name }}
+        if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.push }}
   changes:
     needs: build
@@ -174,8 +197,8 @@ jobs:
         else
           git config --global user.name 'GitHub Actions'
           git config --global user.email github-actions@github.com
-          git add .image-metrics.json README.md
-          git commit -m "ci: update image metrics (size/build time/security scan)"
+          git add .image-metrics.json .build-state.json README.md
+          git commit -m "ci: update image metrics (size/build time/security scan) + build state"
           git config pull.rebase false
           git pull
           git merge

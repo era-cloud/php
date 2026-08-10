@@ -36,5 +36,15 @@ while IFS= read -r -d '' f; do
 		'map(if .tag == $t then .critical = $c | .high = $h else . end)' <<<"$metrics")"
 done < <(find . -path './.git' -prune -o -type f -name 'trivy-*.sarif' -print0 2>/dev/null)
 
+# 4. update .build-state.json: record HEAD for every built variant (has a size artifact)
+if [ ! -f .build-state.json ]; then
+	echo '{}' > .build-state.json
+fi
+head_sha="$(git rev-parse HEAD)"
+while IFS= read -r -d '' f; do
+	tag="$(basename "$f" | sed 's/^size-//; s/\.json$//')"
+	jq --arg t "$tag" --arg h "$head_sha" '.[$t] = $h' .build-state.json > .build-state.json.tmp && mv .build-state.json.tmp .build-state.json
+done < <(find . -path './.git' -prune -o -type f -name 'size-*.json' -print0 2>/dev/null)
+
 jq . <<<"$metrics" > .image-metrics.json
-echo "wrote .image-metrics.json ($(jq 'length' .image-metrics.json) entries)"
+echo "wrote .image-metrics.json ($(jq 'length' .image-metrics.json) entries) and .build-state.json"
