@@ -54,6 +54,28 @@ while IFS= read -r -d '' f; do
 		'map(if .tag == $t then .critical = $c | .high = $h else . end)' <<<"$metrics")"
 done < <(find . -path './.git' -prune -o -type f -name 'trivy-*.sarif' -print0 2>/dev/null)
 
+# 3b. record detailed CRITICAL/HIGH findings (CVE id / package / version) per
+#     variant into .scan-results.json; start from previous details so variants
+#     not scanned this run keep their last recorded findings
+if [ -f .scan-results.json ]; then
+	details="$(jq -c '.' .scan-results.json)"
+else
+	details='{}'
+fi
+while IFS= read -r -d '' f; do
+	tag="$(basename "$f" | sed 's/^trivy-//; s/\.sarif$//' | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/')"
+	findings="$(jq -c '[.runs[].results[]? | select(.level == "error" or .level == "warning") | {
+		id: (.ruleId // "unknown"),
+		package: (.message.text | capture("Package: (?<p>[^\\n]*)") | .p // ""),
+		version: (.message.text | capture("Installed Version: (?<v>[^\\n]*)") | .v // ""),
+		severity: (if .level == "error" then "CRITICAL" else "HIGH" end)
+	}]' "$f" 2>/dev/null || echo '[]')"
+	crit="$(jq -c '[.[] | select(.severity == "CRITICAL") | del(.severity)]' <<<"$findings")"
+	high="$(jq -c '[.[] | select(.severity == "HIGH") | del(.severity)]' <<<"$findings")"
+	details="$(jq -c --arg t "$tag" --argjson c "$crit" --argjson h "$high" \
+		'.[$t] = { critical: $c, high: $h }' <<<"$details")"
+done < <(find . -path './.git' -prune -o -type f -name 'trivy-*.sarif' -print0 2>/dev/null)
+
 # 4. update .build-state.json: record HEAD for every built variant (has a size artifact)
 if [ ! -f .build-state.json ]; then
 	echo '{}' > .build-state.json
@@ -65,4 +87,5 @@ while IFS= read -r -d '' f; do
 done < <(find . -path './.git' -prune -o -type f -name 'size-*.json' -print0 2>/dev/null)
 
 jq . <<<"$metrics" > .image-metrics.json
-echo "wrote .image-metrics.json ($(jq 'length' .image-metrics.json) entries) and .build-state.json"
+jq -S . <<<"$details" > .scan-results.json
+echo "wrote .image-metrics.json ($(jq 'length' .image-metrics.json) entries), .scan-results.json ($(jq 'length' .scan-results.json) variants) and .build-state.json"

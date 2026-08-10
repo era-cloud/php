@@ -132,7 +132,8 @@ jobs:
         with:
           scan-type: image
           image-ref: ghcr.io/era-cloud/php:${{ matrix.name }}
-          severity: CRITICAL
+          severity: CRITICAL,HIGH
+          limit-severities-for-sarif: "true"
           exit-code: '0'
           format: sarif
           output: trivy-${{ matrix.name }}.sarif
@@ -201,7 +202,7 @@ jobs:
         else
           git config --global user.name 'GitHub Actions'
           git config --global user.email github-actions@github.com
-          git add .image-metrics.json .build-state.json README.md
+          git add .image-metrics.json .build-state.json README.md .scan-results.json
           git commit -m "ci: update image metrics (size/build time/security scan) + build state"
           git config pull.rebase false
           git pull
