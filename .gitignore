@@ -1,2 +1,13 @@
 .jq-template.awk
 *.list
+
+# deploy 运行时数据（compose 卷挂载）
+deploy/postgresql/
+deploy/mysql/*
+!deploy/mysql/my.cnf
+deploy/redis/data/
+deploy/rabbitmq/lib/
+deploy/rabbitmq/log/
+deploy/runtime/
+deploy/dist/
+deploy/caddy/.env

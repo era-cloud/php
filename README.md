@@ -185,12 +185,15 @@ docker compose --profile deps up -d pgsql
 docker compose logs -f --tail 100
 ```
 
-> 使用前先修改 `env_file`（依赖服务环境变量）并准备 `.caddy/.env`、`Caddyfile`。
+> 使用前先修改 `deploy/.env`（依赖服务环境变量）并准备 `deploy/caddy/.env`、`deploy/caddy/Caddyfile`。
 
 ## 配置
 
-- `env_file` — 依赖服务（pgsql/redis/mysql）的环境变量
-- `Caddyfile` — gateway（Caddy）反向代理配置
+- `deploy/.env` — 依赖服务（pgsql/redis/mysql）的环境变量
+- `deploy/caddy/Caddyfile` — gateway（Caddy）反向代理配置
+- `deploy/caddy/.env` — gateway（Caddy）环境变量
+- `deploy/mysql/my.cnf`、`deploy/redis/redis.conf`、`deploy/rabbitmq/rabbitmq.conf` — 依赖服务配置文件
+- `deploy/` 下 `postgresql/`、`mysql/`、`redis/data/`、`rabbitmq/`、`runtime/`、`dist/` — 运行时数据/构建产物（compose 卷挂载）
 - `app-src` 挂载 — `api` 服务将当前目录挂载到容器 `/app-src`，用于 hyperf/swoole 应用开发
 - `api` 环境变量：
   - `NODE` — 节点名称（默认 `dev`）

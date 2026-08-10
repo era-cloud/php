@@ -5,10 +5,10 @@ services:
     hostname: gateway_caddy
     restart: always
     network_mode: host
-    env_file: .caddy/.env
+    env_file: deploy/caddy/.env
     volumes:
-      - ./ui/dist:/website
-      - ./Caddyfile:/etc/Caddyfile
+      - ./deploy/dist:/website
+      - ./deploy/caddy/Caddyfile:/etc/Caddyfile
   api:
     container_name: api
     hostname: api
@@ -17,7 +17,7 @@ services:
     volumes:
       - ./:/app-src:rw
       - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro"
-      - '/var/tmp/cache/hyperf/runtime:/app-src/runtime:rw' # 避免本地运行时污染 docker 运行时
+      - './deploy/runtime:/app-src/runtime:rw' # 避免本地运行时污染 docker 运行时
     restart: on-failure
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -93,9 +93,9 @@ services:
     hostname: pgsql
     image: postgres:16-alpine
     profiles: ["deps"]
-    env_file: env_file
+    env_file: deploy/.env
     volumes:
-      - "././postgresql:/var/lib/postgresql/data:rw"
+      - "./deploy/postgresql:/var/lib/postgresql/data:rw"
       - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro"
     restart: always
     network_mode: host
@@ -104,10 +104,10 @@ services:
     hostname: redis
     image: redis:7-alpine
     profiles: ["deps"]
-    env_file: env_file
+    env_file: deploy/.env
     volumes:
-      -  "./redis.cnf:/usr/local/etc/redis/redis.conf:ro"
-      - "././redis/data:/data:rw"
+      -  "./deploy/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro"
+      - "./deploy/redis/data:/data:rw"
       - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro"
     restart: always
     network_mode: host
@@ -117,10 +117,10 @@ services:
     hostname: mysql
     image: mysql:8.4
     profiles: ["deps"]
-    env_file: env_file
+    env_file: deploy/.env
     volumes:
-      - "./my.cnf:/etc/my.cnf:rw"
-      - "././mysql:/var/lib/mysql:rw"
+      - "./deploy/mysql/my.cnf:/etc/my.cnf:rw"
+      - "./deploy/mysql:/var/lib/mysql:rw"
       - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro"
     restart: always
     command: --default-authentication-plugin=mysql_native_password --skip-external-locking
@@ -135,8 +135,8 @@ services:
       - RABBITMQ_PLUGINS=rabbitmq_management
     volumes:
       - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro"
-      - "././rabbitmq/lib:/var/lib/rabbitmq:rw"
-      - "././rabbitmq/log:/var/log/rabbitmq:rw"
-      - "./rabbitmq.conf:/etc/rabbitmq/conf.d/99-rabbitmq.conf:rw"
+      - "./deploy/rabbitmq/lib:/var/lib/rabbitmq:rw"
+      - "./deploy/rabbitmq/log:/var/log/rabbitmq:rw"
+      - "./deploy/rabbitmq/rabbitmq.conf:/etc/rabbitmq/conf.d/99-rabbitmq.conf:rw"
     restart: always
     network_mode: host
