@@ -28,6 +28,7 @@ env:
 permissions:
   contents: write
   packages: write
+  security-events: write
 jobs:
   apply-templates:
     name: Check For Uncomitted Changes
@@ -97,6 +98,35 @@ jobs:
         run: ${{ matrix.runs.test }}
       - name: '"Docker images"'
         run: ${{ matrix.runs.images }}
+      - name: Record image metrics
+        run: |
+          size="$(docker image inspect --format '{{.Size}}' ghcr.io/era-cloud/php:${{ matrix.name }})"
+          built_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          jq -n --arg t "${{ matrix.name }}" --argjson s "$size" --arg b "$built_at" \
+            '{tag:$t,size:$s,built_at:$b}' > size-${{ matrix.name }}.json
+      - name: Trivy security scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: image
+          image-ref: ghcr.io/era-cloud/php:${{ matrix.name }}
+          severity: CRITICAL
+          exit-code: '1'
+          format: sarif
+          output: trivy-${{ matrix.name }}.sarif
+      - name: Upload Trivy SARIF
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-${{ matrix.name }}.sarif
+      - name: Upload metrics artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: metrics-${{ matrix.name }}
+          path: |
+            size-*.json
+            trivy-*.sarif
+          if-no-files-found: ignore
       - name: Push images ${{ matrix.name }}
         run: ${{ matrix.runs.push }}
   changes:
@@ -125,3 +155,29 @@ jobs:
       run: ./untagged.sh
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  aggregate-metrics:
+    needs: [build, changes]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - uses: actions/download-artifact@v4
+      with:
+        path: metrics-artifacts
+    - name: Merge metrics
+      run: ./.github/scripts/merge-metrics.sh
+    - name: Update README matrix
+      run: ./.github/scripts/update-readme.sh
+    - name: Commit and push metrics
+      run: |
+        if git diff --exit-code; then
+          echo "No changes to commit"
+        else
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email github-actions@github.com
+          git add .image-metrics.json README.md
+          git commit -m "ci: update image metrics (size/build time/security scan)"
+          git config pull.rebase false
+          git pull
+          git merge
+          git push
+        fi

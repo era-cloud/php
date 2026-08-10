@@ -2,6 +2,7 @@
 
 [![Release](https://img.shields.io/github/actions/workflow/status/era-cloud/php/release.yml?branch=main&label=Release)](https://github.com/era-cloud/php/actions/workflows/release.yml)
 [![Build and Push](https://img.shields.io/github/actions/workflow/status/era-cloud/php/ci.yml?branch=main&label=Build%20and%20Push)](https://github.com/era-cloud/php/actions/workflows/ci.yml)
+[![Security Scan](https://img.shields.io/github/actions/workflow/status/era-cloud/php/security-scan.yml?branch=main&label=Security%20Scan)](https://github.com/era-cloud/php/actions/workflows/security-scan.yml)
 [![License](https://img.shields.io/github/license/era-cloud/php)](https://github.com/era-cloud/php/blob/main/LICENSE)
 [![Last Updated](https://img.shields.io/github/last-commit/era-cloud/php)](https://github.com/era-cloud/php/commits/main)
 [![PHP](https://img.shields.io/badge/PHP-8.2%20%7C%208.3%20%7C%208.4%20%7C%208.5-777BB4)](https://www.php.net/)
@@ -41,6 +42,104 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 - `swoole` — 内置 [Swoole](https://github.com/swoole/swoole-src) 扩展
 - `swow` — 内置 [Swow](https://github.com/swow/swow) 扩展
 - `thread` — **ZTS PHP + Swoole 线程模式**（`--enable-swoole-thread`，单进程多线程）
+
+## 镜像 Tag 矩阵
+
+> 镜像大小与安全扫描（CRITICAL/HIGH）由 CI 自动更新（每次推送快照 + 每 8 小时安全扫描）。
+
+<!-- TAG-MATRIX-START -->
+### cli
+| tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
+| latest | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.5-cli-trixie | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.5-cli-alpine3.24 | 8.5 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.5-cli-alpine3.23 | 8.5 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.5-cli-bookworm | 8.5 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.4-cli-alpine3.24 | 8.4 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.4-cli-alpine3.23 | 8.4 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.4-cli-trixie | 8.4 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.4-cli-bookworm | 8.4 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.3-cli-alpine3.24 | 8.3 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.3-cli-alpine3.23 | 8.3 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.3-cli-trixie | 8.3 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.3-cli-bookworm | 8.3 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.2-cli-alpine3.24 | 8.2 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.2-cli-alpine3.23 | 8.2 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.2-cli-trixie | 8.2 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.2-cli-bookworm | 8.2 | bookworm | 待构建 | 待扫描 | 待扫描 |
+### zts
+| tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
+| 8.5-zts-alpine3.24 | 8.5 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.5-zts-alpine3.23 | 8.5 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.5-zts-trixie | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.5-zts-bookworm | 8.5 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.4-zts-alpine3.24 | 8.4 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.4-zts-alpine3.23 | 8.4 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.4-zts-trixie | 8.4 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.4-zts-bookworm | 8.4 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.3-zts-alpine3.24 | 8.3 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.3-zts-alpine3.23 | 8.3 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.3-zts-trixie | 8.3 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.3-zts-bookworm | 8.3 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.2-zts-alpine3.24 | 8.2 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.2-zts-alpine3.23 | 8.2 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.2-zts-trixie | 8.2 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.2-zts-bookworm | 8.2 | bookworm | 待构建 | 待扫描 | 待扫描 |
+### swoole
+| tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
+| 8.5-swoole-alpine3.24 | 8.5 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.5-swoole-alpine3.23 | 8.5 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.5-swoole-trixie | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.5-swoole-bookworm | 8.5 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.4-swoole-alpine3.24 | 8.4 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.4-swoole-alpine3.23 | 8.4 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.4-swoole-trixie | 8.4 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.4-swoole-bookworm | 8.4 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.3-swoole-alpine3.24 | 8.3 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.3-swoole-alpine3.23 | 8.3 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.3-swoole-trixie | 8.3 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.3-swoole-bookworm | 8.3 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.2-swoole-alpine3.24 | 8.2 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.2-swoole-alpine3.23 | 8.2 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.2-swoole-trixie | 8.2 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.2-swoole-bookworm | 8.2 | bookworm | 待构建 | 待扫描 | 待扫描 |
+### thread
+| tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
+| 8.5-thread-alpine3.24 | 8.5 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.5-thread-alpine3.23 | 8.5 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.5-thread-trixie | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.5-thread-bookworm | 8.5 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.4-thread-alpine3.24 | 8.4 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.4-thread-alpine3.23 | 8.4 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.4-thread-trixie | 8.4 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.4-thread-bookworm | 8.4 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.3-thread-alpine3.24 | 8.3 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.3-thread-alpine3.23 | 8.3 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.3-thread-trixie | 8.3 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.3-thread-bookworm | 8.3 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.2-thread-alpine3.24 | 8.2 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.2-thread-alpine3.23 | 8.2 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.2-thread-trixie | 8.2 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.2-thread-bookworm | 8.2 | bookworm | 待构建 | 待扫描 | 待扫描 |
+### swow
+| tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
+| 8.5-swow-alpine3.24 | 8.5 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.5-swow-alpine3.23 | 8.5 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.5-swow-trixie | 8.5 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.5-swow-bookworm | 8.5 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.4-swow-alpine3.24 | 8.4 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.4-swow-alpine3.23 | 8.4 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.4-swow-trixie | 8.4 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.4-swow-bookworm | 8.4 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.3-swow-alpine3.24 | 8.3 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.3-swow-alpine3.23 | 8.3 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.3-swow-trixie | 8.3 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.3-swow-bookworm | 8.3 | bookworm | 待构建 | 待扫描 | 待扫描 |
+| 8.2-swow-alpine3.24 | 8.2 | alpine3.24 | 待构建 | 待扫描 | 待扫描 |
+| 8.2-swow-alpine3.23 | 8.2 | alpine3.23 | 待构建 | 待扫描 | 待扫描 |
+| 8.2-swow-trixie | 8.2 | trixie | 待构建 | 待扫描 | 待扫描 |
+| 8.2-swow-bookworm | 8.2 | bookworm | 待构建 | 待扫描 | 待扫描 |
+<!-- TAG-MATRIX-END -->
 
 ## 镜像标签规则
 
