@@ -1,0 +1,37 @@
+name: Diagnose Ghcr Manifest Curl
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login ghcr
+        run: docker login ghcr.io --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }}
+      - name: Push a marker tag for a known image
+        run: |
+          docker pull ghcr.io/era-cloud/php:8.4.24-cli-trixie
+          docker tag ghcr.io/era-cloud/php:8.4.24-cli-trixie ghcr.io/era-cloud/php:diag-curltest
+          docker push ghcr.io/era-cloud/php:diag-curltest
+      - name: Curl manifest with GITHUB_TOKEN
+        run: |
+          echo "=== curl status/body ==="
+          code=$(curl -sSL -o /tmp/resp.json -w "%{http_code}" \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json" \
+            "https://ghcr.io/v2/era-cloud/php/manifests/diag-curltest")
+          echo "HTTP=$code"
+          head -c 300 /tmp/resp.json
+          echo
+          echo "=== with -f (as the real step) ==="
+          curl -fsSL -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json" \
+            "https://ghcr.io/v2/era-cloud/php/manifests/diag-curltest" | jq -r 'if .layers then "plain manifest, layers=" + ((.layers|length)|tostring) elif .manifests then "index, submanifests=" + ((.manifests|length)|tostring) else "unexpected" end'
