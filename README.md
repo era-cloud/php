@@ -74,7 +74,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.5-zts-alpine3.24 | 8.5 | alpine3.24 | 2026-08-11T16:25:13Z | 108.6 MB | 38.9 MB | 0/0 |
 | 8.5-zts-alpine3.23 | 8.5 | alpine3.23 | 2026-08-11T16:12:10Z | 108.5 MB | 38.8 MB | 0/0 |
 | 8.5-zts-trixie | 8.5 | trixie | 2026-08-11T16:04:48Z | 499.4 MB | 159.1 MB | 17/42 |
-| 8.5-zts-bookworm | 8.5 | bookworm | 2026-08-11T09:15:48Z | 501.6 MB | 待扫描 | 19/44 |
+| 8.5-zts-bookworm | 8.5 | bookworm | 2026-08-11T17:08:19Z | 501.6 MB | 161.4 MB | 19/45 |
 | 8.4-zts-alpine3.24 | 8.4 | alpine3.24 | 2026-08-11T16:30:17Z | 93.2 MB | 37 MB | 0/0 |
 | 8.4-zts-alpine3.23 | 8.4 | alpine3.23 | 2026-08-11T16:21:49Z | 93.1 MB | 36.9 MB | 0/0 |
 | 8.4-zts-trixie | 8.4 | trixie | 2026-08-11T16:04:14Z | 485.8 MB | 157.2 MB | 17/42 |

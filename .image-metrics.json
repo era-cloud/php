@@ -739,10 +739,11 @@
     "version": "8.5",
     "variant": "zts",
     "distro": "bookworm",
-    "built_at": "2026-08-11T09:15:48Z",
+    "built_at": "2026-08-11T17:08:19Z",
     "size": 526002935,
     "critical": 19,
-    "high": 44
+    "high": 45,
+    "pull_size": 169257469
   },
   {
     "tag": "8.5-swow-bookworm",
