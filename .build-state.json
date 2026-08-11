@@ -76,5 +76,7 @@
   "8.4.24-swoole-alpine3.23": "53fda1444d2b47cc0063d5ccc6b041010728086d",
   "8.4.24-cli-bookworm": "53fda1444d2b47cc0063d5ccc6b041010728086d",
   "8.3.33-swoole-alpine3.23": "53fda1444d2b47cc0063d5ccc6b041010728086d",
-  "8.5.9-zts-bookworm": "4d3e6a5a3ba53307b386f5b3510b613ebb726370"
+  "8.5.9-zts-bookworm": "4d3e6a5a3ba53307b386f5b3510b613ebb726370",
+  "8.4.24-zts-bookworm": "1576d8aea13db96ff33587bc0b6e26167387ac01",
+  "8.2.33-swoole-alpine3.23": "1576d8aea13db96ff33587bc0b6e26167387ac01"
 }

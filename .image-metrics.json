@@ -180,10 +180,11 @@
     "version": "8.2",
     "variant": "swoole",
     "distro": "alpine3.23",
-    "built_at": "2026-08-11T09:45:52Z",
+    "built_at": "2026-08-11T17:26:46Z",
     "size": 99955469,
     "critical": 0,
-    "high": 0
+    "high": 0,
+    "pull_size": 39413027
   },
   {
     "tag": "8.2-zts-alpine3.23",
@@ -520,10 +521,11 @@
     "version": "8.4",
     "variant": "zts",
     "distro": "bookworm",
-    "built_at": "2026-08-11T09:40:34Z",
+    "built_at": "2026-08-11T17:20:54Z",
     "size": 511659735,
     "critical": 19,
-    "high": 44
+    "high": 45,
+    "pull_size": 167295178
   },
   {
     "tag": "8.4-swow-bookworm",

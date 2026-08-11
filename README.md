@@ -78,7 +78,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.4-zts-alpine3.24 | 8.4 | alpine3.24 | 2026-08-11T16:30:17Z | 93.2 MB | 37 MB | 0/0 |
 | 8.4-zts-alpine3.23 | 8.4 | alpine3.23 | 2026-08-11T16:21:49Z | 93.1 MB | 36.9 MB | 0/0 |
 | 8.4-zts-trixie | 8.4 | trixie | 2026-08-11T16:04:14Z | 485.8 MB | 157.2 MB | 17/42 |
-| 8.4-zts-bookworm | 8.4 | bookworm | 2026-08-11T09:40:34Z | 488 MB | 待扫描 | 19/44 |
+| 8.4-zts-bookworm | 8.4 | bookworm | 2026-08-11T17:20:54Z | 488 MB | 159.5 MB | 19/45 |
 | 8.3-zts-alpine3.24 | 8.3 | alpine3.24 | 2026-08-11T16:17:58Z | 87.8 MB | 34 MB | 0/0 |
 | 8.3-zts-alpine3.23 | 8.3 | alpine3.23 | 2026-08-11T16:28:33Z | 87.7 MB | 34 MB | 0/0 |
 | 8.3-zts-trixie | 8.3 | trixie | 2026-08-11T16:03:46Z | 480.4 MB | 154.3 MB | 17/42 |
@@ -103,7 +103,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.3-swoole-trixie | 8.3 | trixie | 2026-08-11T16:28:14Z | 518.6 MB | 168.8 MB | 17/43 |
 | 8.3-swoole-bookworm | 8.3 | bookworm | 2026-08-11T16:06:23Z | 484.7 MB | 157.3 MB | 20/45 |
 | 8.2-swoole-alpine3.24 | 8.2 | alpine3.24 | 2026-08-11T16:43:49Z | 95.5 MB | 37.7 MB | 0/0 |
-| 8.2-swoole-alpine3.23 | 8.2 | alpine3.23 | 2026-08-11T09:45:52Z | 95.3 MB | 待扫描 | 0/0 |
+| 8.2-swoole-alpine3.23 | 8.2 | alpine3.23 | 2026-08-11T17:26:46Z | 95.3 MB | 37.6 MB | 0/0 |
 | 8.2-swoole-trixie | 8.2 | trixie | 2026-08-11T16:25:31Z | 516.1 MB | 168.2 MB | 17/43 |
 | 8.2-swoole-bookworm | 8.2 | bookworm | 2026-08-11T16:41:09Z | 482.1 MB | 156.7 MB | 20/45 |
 ### thread
