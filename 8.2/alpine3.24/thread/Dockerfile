@@ -247,6 +247,7 @@ RUN set -eux; \
 		--with-libzstd=yes; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/*; \
+	rm -rf /root/.pie; \
 	 \
 	\
 # smoke test
@@ -350,7 +351,8 @@ RUN set -ex; \
 	)"; \
 	apk add --no-cache $runDeps; \
 	apk del --no-network .build-deps; \
-	rm -rf /tmp/*
+	rm -rf /tmp/*; \
+	rm -rf /root/.pie
 
 RUN set -eux; \
 	curl -o /usr/local/bin/composer https://mirrors.aliyun.com/composer/composer.phar; \

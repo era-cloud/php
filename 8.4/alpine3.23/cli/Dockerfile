@@ -169,9 +169,10 @@ RUN set -eux; \
 		--with-readline \
 		--with-zlib \
 		\
-# https://github.com/docker-library/php/pull/1259
-		--enable-phpdbg \
-		--enable-phpdbg-readline \
+# https://github.com/bwoebi/phpdbg-docs/issues/1#issuecomment-163872806 ("phpdbg is primarily a CLI debugger, and is not suitable for debugging an fpm stack.")
+		--disable-phpdbg \
+		\
+		--disable-cgi \
 	; \
 	make -j "$(nproc)"; \
 	find -type f -name '*.a' -delete; \
@@ -229,6 +230,7 @@ RUN set -eux; \
 		--with-libzstd=yes; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/*; \
+	rm -rf /root/.pie; \
 	 \
 	\
 # smoke test

@@ -13,7 +13,7 @@ services:
     container_name: api
     hostname: api
     # image: crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/php:swoole
-    image: ghcr.io/era-cloud/php:swoole
+    image: ghcr.io/era-cloud/php:8.5-swoole-alpine3.24
     volumes:
       - ./:/app-src:rw
       - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro"

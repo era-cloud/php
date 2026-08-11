@@ -177,13 +177,14 @@ RUN set -eux; \
 		--with-readline \
 		--with-zlib \
 		\
-# https://github.com/docker-library/php/pull/1259
-		--enable-phpdbg \
-		--enable-phpdbg-readline \
+# https://github.com/bwoebi/phpdbg-docs/issues/1#issuecomment-163872806 ("phpdbg is primarily a CLI debugger, and is not suitable for debugging an fpm stack.")
+		--disable-phpdbg \
 # bundled pcre does not support JIT on riscv64 until 10.41 (php 8.3+)
 # https://github.com/PCRE2Project/pcre2/commits/pcre2-10.41/src/sljit/sljitNativeRISCV_64.c
 # https://github.com/php/php-src/tree/php-8.3.0/ext/pcre/pcre2lib
 		$(test "$gnuArch" = 'riscv64-linux-musl' && echo '--without-pcre-jit') \
+		\
+		--disable-cgi \
 		\
 # https://github.com/docker-library/php/pull/939#issuecomment-730501748
 		--enable-embed \
@@ -249,6 +250,7 @@ RUN set -eux; \
 		--with-libzstd=yes; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/*; \
+	rm -rf /root/.pie; \
 	 \
 	\
 # smoke test

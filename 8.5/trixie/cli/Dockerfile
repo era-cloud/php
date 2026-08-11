@@ -183,10 +183,11 @@ RUN set -eux; \
 		--with-readline \
 		--with-zlib \
 		\
-# https://github.com/docker-library/php/pull/1259
-		--enable-phpdbg \
-		--enable-phpdbg-readline \
+# https://github.com/bwoebi/phpdbg-docs/issues/1#issuecomment-163872806 ("phpdbg is primarily a CLI debugger, and is not suitable for debugging an fpm stack.")
+		--disable-phpdbg \
 		--with-libdir="lib/$debMultiarch" \
+		\
+		--disable-cgi \
 		\
 # https://github.com/docker-library/php/pull/939#issuecomment-730501748
 		--enable-embed \
@@ -252,6 +253,7 @@ RUN set -eux; \
 	apt-get dist-clean; \
 	 \
 	rm -rf /tmp/*; \
+	rm -rf /root/.pie; \
 	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
 	\
 # smoke test

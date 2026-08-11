@@ -254,6 +254,7 @@ RUN set -eux; \
 	rm -rf /var/lib/apt/lists/*; \
 	 \
 	rm -rf /tmp/*; \
+	rm -rf /root/.pie; \
 	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
 	\
 # smoke test
@@ -351,7 +352,8 @@ RUN set -ex; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*; \
 	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
-	rm -rf /tmp/*
+	rm -rf /tmp/*; \
+	rm -rf /root/.pie
 
 RUN set -eux; \
 	curl -o /usr/local/bin/composer https://mirrors.aliyun.com/composer/composer.phar; \
