@@ -40,12 +40,12 @@ RUN set -eux; \
 		ncat \
 		ca-certificates \
 		curl \
-		git \
 		unzip \
 		xz-utils \
 		adduser \
 	; \
-	apt-get dist-clean
+	apt-get dist-clean; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug
 # ensure app user exists
 RUN set -eux; \
 	addgroup --gid 82 --system app; \
@@ -254,6 +254,7 @@ RUN set -eux; \
 	apt-get dist-clean; \
 	 \
 	rm -rf /tmp/*; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
 	\
 # smoke test
 	php --version
@@ -301,12 +302,11 @@ ENV EXTRA_LIBS \
 	libc-ares-dev \
 	libzip-dev
 
-RUN set -eux; \
+RUN set -ex; \
+	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends $EXTRA_LIBS; \
-	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-	apt-get dist-clean
-RUN set -ex; \
+	apt-get dist-clean; \
 	docker-php-ext-install $EXTRA_EXT; \
 	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \
@@ -334,8 +334,20 @@ RUN set -ex; \
 	echo "swoole.use_shortname=Off"; \
 	echo "swoole.enable_preemptive_scheduler=On"; \
 	} | tee /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini; \
+	# drop the -dev build dependencies while keeping the runtime libs the
+	# compiled extensions actually link against (mirrors the PHP build above)
+	apt-mark auto '.*' > /dev/null; \
+	apt-mark manual $savedAptMark; \
+	find /usr/local -type f -executable -exec ldd '{}' ';' \
+		| awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }' \
+		| sort -u \
+		| xargs -r dpkg-query --search \
+		| awk 'sub(":$", "", $1) { print $1 }' \
+		| sort -u \
+		| xargs -r apt-mark manual; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	apt-get dist-clean; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
 	rm -rf /tmp/*
 
 RUN set -eux; \

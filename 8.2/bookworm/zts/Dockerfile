@@ -40,12 +40,12 @@ RUN set -eux; \
 		ncat \
 		ca-certificates \
 		curl \
-		git \
 		unzip \
 		xz-utils \
 		adduser \
 	; \
-	rm -rf /var/lib/apt/lists/*
+	rm -rf /var/lib/apt/lists/*; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug
 # ensure app user exists
 RUN set -eux; \
 	addgroup --gid 82 --system app; \
@@ -261,6 +261,7 @@ RUN set -eux; \
 	rm -rf /var/lib/apt/lists/*; \
 	 \
 	rm -rf /tmp/*; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
 	\
 # smoke test
 	php --version

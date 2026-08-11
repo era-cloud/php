@@ -25,7 +25,6 @@ ENV PHPIZE_DEPS \
 RUN apk add --no-cache \
 		ca-certificates \
 		curl \
-		git \
 		lz4-libs \
 		openssl \
 		tar \
@@ -230,6 +229,7 @@ RUN set -eux; \
 		--with-libzstd=yes; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/*; \
+	 \
 	\
 # smoke test
 	php --version

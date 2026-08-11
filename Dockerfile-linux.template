@@ -70,7 +70,6 @@ ENV PHPIZE_DEPS \
 RUN apk add --no-cache \
 		ca-certificates \
 		curl \
-		git \
 		lz4-libs \
 		openssl \
 		tar \
@@ -96,12 +95,12 @@ RUN set -eux; \
 		ncat \
 		ca-certificates \
 		curl \
-		git \
 		unzip \
 		xz-utils \
 		adduser \
 	; \
-	{{ clean_apt }}
+	{{ clean_apt }}; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug
 # ensure app user exists
 RUN set -eux; \
 	addgroup --gid 82 --system app; \
@@ -493,6 +492,7 @@ RUN set -eux; \
 {{ ) end -}}
 	{{ if is_alpine then "apk del --no-network .build-deps;" else "" end}} \
 	rm -rf /tmp/*; \
+	{{ if is_alpine then "" else "rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug;" end}} \
 	\
 {{ ) else "" end -}}
 # smoke test
@@ -565,7 +565,7 @@ ENV EXTRA_LIBS \
 	{{ if is_alpine then "c-ares-dev" else "libc-ares-dev" end }} \
 	{{ if is_alpine then "zlib-dev" else "libzip-dev" end }}
 
-RUN set -eux; \
+RUN set -ex; \
 {{ if is_alpine then ( -}}
 	apk add --no-cache --virtual .build-deps \
 	g++ \
@@ -576,12 +576,11 @@ RUN set -eux; \
 	autoconf \
 	$EXTRA_LIBS;
 {{ ) else ( -}}
+	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends $EXTRA_LIBS; \
-	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-	{{ clean_apt }}
+	{{ clean_apt }}; \
 {{ ) end -}}
-RUN set -ex; \
 	docker-php-ext-install $EXTRA_EXT; \
 	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \
@@ -621,8 +620,20 @@ RUN set -ex; \
 	apk add --no-cache $runDeps; \
 	apk del --no-network .build-deps; \
 {{ ) else ( -}}
+	# drop the -dev build dependencies while keeping the runtime libs the
+	# compiled extensions actually link against (mirrors the PHP build above)
+	apt-mark auto '.*' > /dev/null; \
+	apt-mark manual $savedAptMark; \
+	find /usr/local -type f -executable -exec ldd '{}' ';' \
+		| awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }' \
+		| sort -u \
+		| xargs -r dpkg-query --search \
+		| awk 'sub(":$", "", $1) { print $1 }' \
+		| sort -u \
+		| xargs -r apt-mark manual; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	{{ clean_apt }}; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
 {{ ) end -}}
 	rm -rf /tmp/*
 {{ ) else "" end -}}
@@ -663,7 +674,7 @@ ENV EXTRA_LIBS \
 	{{ if is_alpine then "c-ares-dev" else "libc-ares-dev" end }} \
 	{{ if is_alpine then "zlib-dev" else "libzip-dev" end }}
 
-RUN set -eux; \
+RUN set -ex; \
 {{ if is_alpine then ( -}}
 	apk add --no-cache --virtual .build-deps \
 	g++ \
@@ -674,13 +685,11 @@ RUN set -eux; \
 	autoconf \
 	$EXTRA_LIBS;
 {{ ) else ( -}}
+	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends $EXTRA_LIBS; \
-	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-	{{ clean_apt }}
+	{{ clean_apt }}; \
 {{ ) end -}}
-
-RUN set -ex; \
 	docker-php-ext-install $EXTRA_EXT; \
 	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \
@@ -703,8 +712,20 @@ RUN set -ex; \
 	apk add --no-cache $runDeps; \
 	apk del --no-network .build-deps; \
 {{ ) else ( -}}
-apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	# drop the -dev build dependencies while keeping the runtime libs the
+	# compiled extensions actually link against (mirrors the PHP build above)
+	apt-mark auto '.*' > /dev/null; \
+	apt-mark manual $savedAptMark; \
+	find /usr/local -type f -executable -exec ldd '{}' ';' \
+		| awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }' \
+		| sort -u \
+		| xargs -r dpkg-query --search \
+		| awk 'sub(":$", "", $1) { print $1 }' \
+		| sort -u \
+		| xargs -r apt-mark manual; \
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	{{ clean_apt }}; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
 {{ ) end -}}
 	rm -rf /tmp/*
 {{ ) else "" end -}}
