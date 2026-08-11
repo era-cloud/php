@@ -174,13 +174,17 @@ jobs:
         run: |
           # compressed (zstd) layer size of the pushed ghcr image = what a pull downloads
           idx="$(curl -fsSL -H "Authorization: Bearer $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json" \
+            -H "Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json" \
             "https://ghcr.io/v2/era-cloud/php/manifests/${{ matrix.name }}")"
-          digest="$(jq -r '.manifests[]? | select((.platform.os // "") == "linux" and (.platform.architecture // "") == "amd64") | .digest' <<<"$idx" | head -1)"
-          if [ -z "$digest" ]; then digest="$(jq -r '.config.digest // empty' <<<"$idx")"; fi
-          mf="$(curl -fsSL -H "Authorization: Bearer $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json" \
-            "https://ghcr.io/v2/era-cloud/php/manifests/$digest")"
+          if jq -e '.layers' <<<"$idx" >/dev/null 2>&1; then
+            mf="$idx"
+          else
+            # image index: fetch the linux/amd64 manifest
+            digest="$(jq -r '.manifests[]? | select((.platform.os // "") == "linux" and (.platform.architecture // "") == "amd64") | .digest' <<<"$idx" | head -1)"
+            mf="$(curl -fsSL -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.oci.image.manifest.v1+json, application/vnd.docker.distribution.manifest.v2+json" \
+              "https://ghcr.io/v2/era-cloud/php/manifests/$digest")"
+          fi
           pull_size="$(jq '[.layers[]?.size] | add' <<<"$mf")"
           jq -n --arg t "${{ matrix.name }}" --argjson p "$pull_size" '{tag:$t, pull_size:$p}' > pull-size-${{ matrix.name }}.json
           echo "pull_size=$pull_size"
