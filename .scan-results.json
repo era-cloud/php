@@ -217,6 +217,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -516,6 +521,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -847,6 +857,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -1151,6 +1166,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -1482,6 +1502,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -1781,6 +1806,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -2112,6 +2142,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -2416,6 +2451,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -2742,6 +2782,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -3041,6 +3086,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -3367,6 +3417,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -3666,6 +3721,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -3997,6 +4057,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -4301,6 +4366,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -4632,6 +4702,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -4931,6 +5006,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -5262,6 +5342,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -5566,6 +5651,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -5892,6 +5982,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -6191,6 +6286,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -6517,6 +6617,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -6816,6 +6921,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -7147,6 +7257,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -7451,6 +7566,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -7782,6 +7902,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -8081,6 +8206,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -8412,6 +8542,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -8716,6 +8851,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -9343,6 +9483,11 @@
         "version": "2.41-5"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
+      },
+      {
         "id": "CVE-2025-69720",
         "package": "libtinfo6",
         "version": "6.5+20250216-2"
@@ -9667,6 +9812,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -9966,6 +10116,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -10297,6 +10452,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -10601,6 +10761,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -10932,6 +11097,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -11231,6 +11401,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -11562,6 +11737,11 @@
         "version": "2.38.1-5+deb12u3"
       },
       {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1",
+        "version": "1.10.0-3+b1"
+      },
+      {
         "id": "CVE-2026-7598",
         "package": "libssh2-1",
         "version": "1.10.0-3+b1"
@@ -11866,6 +12046,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
@@ -12491,6 +12676,11 @@
         "id": "CVE-2026-53615",
         "package": "libsmartcols1",
         "version": "2.41-5"
+      },
+      {
+        "id": "CVE-2026-58050",
+        "package": "libssh2-1t64",
+        "version": "1.11.1-1+deb13u1"
       },
       {
         "id": "CVE-2025-69720",
