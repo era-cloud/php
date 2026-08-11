@@ -30,6 +30,7 @@ jobs:
         image: ${{ fromJson(needs.generate-tags.outputs.tags) }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v7
       - uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
