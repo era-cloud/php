@@ -100,6 +100,11 @@ jobs:
         run: docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
       - name: Login to the Aliyun ACR registry
         run: docker login --username ${{ vars.ACR_USERNAME }} --password ${{ secrets.ACR_TOKEN }}  ${{ vars.ACR_REGISTRY }}
+      - name: Set up buildx (docker-container)
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          # docker-container driver is required for zstd layer compression
+          docker buildx create --driver docker-container --name ci-builder --use --bootstrap
       - name: Prepare Environment
         if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.prepare }}

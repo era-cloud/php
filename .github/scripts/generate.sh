@@ -4,6 +4,10 @@ set -Eeuo pipefail
 image="${GITHUB_REPOSITORY##*/}" # "python", "golang", etc
 # image=php
 REGISTRYS="ghcr.io/era-cloud,crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud"
+# primary registry gets zstd-compressed layers (buildx direct push);
+# the aliyun mirror gets plain gzip (docker push re-encodes to gzip)
+REGISTRYS_ZSTD="ghcr.io/era-cloud"
+REGISTRYS_GZIP="crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud"
 [ -n "${GENERATE_STACKBREW_LIBRARY:-}" ] || [ -x ./generate-stackbrew-library.sh ] # sanity check
 
 tmp="$(mktemp -d)"
@@ -77,15 +81,9 @@ for tag in $tags; do
 				runs: {
 					build: (
 						[
-							# https://github.com/docker-library/bashbrew/pull/43
-							if .builder == "classic" or .builder == "" then
-								"DOCKER_BUILDKIT=0 docker build"
-							elif .builder == "buildkit" then
-								"docker buildx build --progress plain --build-arg BUILDKIT_SYNTAX=\"$BASHBREW_BUILDKIT_SYNTAX\""
-							# TODO elif .builder == "oci-import" then ????
-							else
-								"echo >&2 " + ("error: unknown/unsupported builder: " + .builder | @sh) + "\nexit 1\n#"
-							end
+							# zstd-compressed layers via buildx (docker-container driver, set up in the job);
+							# --load keeps a local copy for the metrics/test steps
+							"docker buildx build --progress plain"
 						]
 						+ [
 							# TODO error out on unsupported platforms, or just let the emulation go wild?
@@ -94,7 +92,7 @@ for tag in $tags; do
 						+ (
 							.tags
 							| map(
-								. as $tag | "'${REGISTRYS}'" | split(",") | map("--tag " + (. + "/" + $tag | @sh)) | join(" ")
+								. as $tag | "'${REGISTRYS_ZSTD}'" | split(",") | map("--tag " + (. + "/" + $tag | @sh)) | join(" ")
 							)
 						)
 						+ if .file != "Dockerfile" then
@@ -103,16 +101,22 @@ for tag in $tags; do
 							[]
 						end
 						+ [
+							"--output", "type=image,push=true,compression=zstd,compression-level=3,force-compression=true,oci-mediatypes=true",
+							"--load"
+						]
+						+ [
 							(.directory | @sh)
 						]
 						| join(" ")
 					),
 					push: (
+						# aliyun mirror: re-tag the locally-loaded ghcr image and push (docker push -> gzip)
 						"retry_push() { for i in 1 2 3 4 5; do docker push \"$1\" && return 0; sleep 10; done; return 1; }; "
+						+ "src=" + ("ghcr.io/era-cloud/" + .tags[0] | @sh) + "; "
 						+ (
 							.tags
 							| map(
-								. as $tag | "'${REGISTRYS}'" | split(",") | map("retry_push " + (. + "/" + $tag | @sh)) | join(" && ")
+								. as $tag | "'${REGISTRYS_GZIP}'" | split(",") | map("docker tag $src " + (. + "/" + $tag | @sh) + " && retry_push " + (. + "/" + $tag | @sh)) | join(" && ")
 							)
 							| join(" && ")
 						)
