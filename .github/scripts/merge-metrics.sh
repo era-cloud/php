@@ -45,11 +45,13 @@ while IFS= read -r -d '' f; do
 done < <(find . -path './.git' -prune -o -type f -name 'size-*.json' -print0 2>/dev/null)
 
 # 3. merge scan results from uploaded SARIF files (trivy-<tag>.sarif)
-#    Trivy SARIF levels: critical -> "error", high -> "warning"
+#    count severities from the message text ("Severity: CRITICAL/HIGH") instead
+#    of the SARIF level: trivy emits HIGH at level "error" when a multi-value
+#    --severity filter is applied, so level-based counting is unreliable
 while IFS= read -r -d '' f; do
 	tag="$(basename "$f" | sed 's/^trivy-//; s/\.sarif$//' | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/')"
-	critical="$(jq '[.runs[].results[]? | select(.level == "error")] | length' "$f" 2>/dev/null || echo 0)"
-	high="$(jq '[.runs[].results[]? | select(.level == "warning")] | length' "$f" 2>/dev/null || echo 0)"
+	critical="$(jq '[.runs[].results[]? | .message.text | capture("Severity: (?<s>[A-Z]+)") | select(.s == "CRITICAL")] | length' "$f" 2>/dev/null || echo 0)"
+	high="$(jq '[.runs[].results[]? | .message.text | capture("Severity: (?<s>[A-Z]+)") | select(.s == "HIGH")] | length' "$f" 2>/dev/null || echo 0)"
 	metrics="$(jq -c --arg t "$tag" --argjson c "$critical" --argjson h "$high" \
 		'map(if .tag == $t then .critical = $c | .high = $h else . end)' <<<"$metrics")"
 done < <(find . -path './.git' -prune -o -type f -name 'trivy-*.sarif' -print0 2>/dev/null)
@@ -64,11 +66,11 @@ else
 fi
 while IFS= read -r -d '' f; do
 	tag="$(basename "$f" | sed 's/^trivy-//; s/\.sarif$//' | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/')"
-	findings="$(jq -c '[.runs[].results[]? | select(.level == "error" or .level == "warning") | {
+	findings="$(jq -c '[.runs[].results[]? | .message.text as $t | ($t | capture("Severity: (?<s>[A-Z]+)").s // "") as $s | select(($s == "CRITICAL") or ($s == "HIGH")) | {
 		id: (.ruleId // "unknown"),
-		package: (.message.text | capture("Package: (?<p>[^\\n]*)") | .p // ""),
-		version: (.message.text | capture("Installed Version: (?<v>[^\\n]*)") | .v // ""),
-		severity: (if .level == "error" then "CRITICAL" else "HIGH" end)
+		package: ($t | capture("Package: (?<p>[^\\n]*)").p // ""),
+		version: ($t | capture("Installed Version: (?<v>[^\\n]*)").v // ""),
+		severity: $s
 	}]' "$f" 2>/dev/null || echo '[]')"
 	crit="$(jq -c '[.[] | select(.severity == "CRITICAL") | del(.severity)]' <<<"$findings")"
 	high="$(jq -c '[.[] | select(.severity == "HIGH") | del(.severity)]' <<<"$findings")"

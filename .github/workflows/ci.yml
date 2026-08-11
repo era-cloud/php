@@ -133,7 +133,6 @@ jobs:
           scan-type: image
           image-ref: ghcr.io/era-cloud/php:${{ matrix.name }}
           severity: CRITICAL,HIGH
-          limit-severities-for-sarif: "true"
           exit-code: '0'
           format: sarif
           output: trivy-${{ matrix.name }}.sarif

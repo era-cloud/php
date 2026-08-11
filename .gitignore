@@ -11,3 +11,4 @@ deploy/rabbitmq/log/
 deploy/runtime/
 deploy/dist/
 deploy/caddy/.env
+metrics-artifacts/
