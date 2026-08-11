@@ -19,7 +19,7 @@ base="$(
 			| $e.key as $v
 			| $e.value.variants[]
 			| split("/") as $p
-			| { tag: ("\($v)-\($p[1])-\($p[0])"), version: $v, variant: $p[1], distro: $p[0], built_at: null, size: null, critical: null, high: null }
+			| { tag: ("\($v)-\($p[1])-\($p[0])"), version: $v, variant: $p[1], distro: $p[0], built_at: null, size: null, pull_size: null, critical: null, high: null }
 		]
 	' versions.json
 )"
@@ -43,6 +43,14 @@ while IFS= read -r -d '' f; do
 	metrics="$(jq -c --arg t "$tag" --argjson s "$size" --arg b "$built_at" \
 		'map(if .tag == $t then .size = $s | .built_at = $b else . end)' <<<"$metrics")"
 done < <(find . -path './.git' -prune -o -type f -name 'size-*.json' -print0 2>/dev/null)
+
+# 2b. merge compressed (pull) size from pull-size-<tag>.json artifacts
+while IFS= read -r -d '' f; do
+	tag="$(jq -r '.tag' "$f" | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/')"
+	pull_size="$(jq -r '.pull_size' "$f")"
+	metrics="$(jq -c --arg t "$tag" --argjson p "$pull_size" \
+		'map(if .tag == $t then .pull_size = $p else . end)' <<<"$metrics")"
+done < <(find . -path './.git' -prune -o -type f -name 'pull-size-*.json' -print0 2>/dev/null)
 
 # 3. merge scan results from uploaded SARIF files (trivy-<tag>.sarif)
 #    count severities from the message text ("Severity: CRITICAL/HIGH") instead

@@ -62,7 +62,7 @@ for tag in $tags; do
 				"froms": {{- json ($.ArchDockerFroms $arch $e) -}},
 				"platform": {{- json (ociPlatform $arch).String -}}
 			{{- "}" -}}
-		' "$bashbrewImage" | jq -c '
+		' "$bashbrewImage" | jq -c --arg repo "${GITHUB_REPOSITORY:-}" '
 			{
 				name: .name,
 				os: (
@@ -102,7 +102,12 @@ for tag in $tags; do
 						end
 						+ [
 							"--output", "type=image,push=true,compression=zstd,compression-level=3,force-compression=true,oci-mediatypes=true",
-							"--load"
+							"--load",
+							# link the image to the source repository so ghcr inherits repository access
+							# permissions (org.opencontainers.image.source)
+							"--label", ("org.opencontainers.image.source=https://github.com/" + $repo | @sh),
+							# skip the default provenance attestation (keeps the registry manifest a plain OCI manifest)
+							"--provenance=false"
 						]
 						+ [
 							(.directory | @sh)

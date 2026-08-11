@@ -17,6 +17,7 @@ block="$(
 				.distro,
 				(.built_at // "待构建"),
 				(if .size then (((.size / 1024 / 1024) * 10 | round) / 10 | tostring) + " MB" else "待扫描" end),
+				(if .pull_size then (((.pull_size / 1024 / 1024) * 10 | round) / 10 | tostring) + " MB" else "待扫描" end),
 				(if (.critical == null and .high == null) then "待扫描" else ((.critical // 0 | tostring) + "/" + (.high // 0 | tostring)) end)
 			] | @tsv;
 
@@ -27,8 +28,8 @@ block="$(
 			| select( [.[].variant] | index($g) )
 			| [
 				"### " + $g,
-				"tag\tPHP\t发行版\t构建时间\t镜像大小\t安全扫描 CRITICAL/HIGH",
-				"---\t---\t---\t---\t---\t---",
+				"tag\tPHP\t发行版\t构建时间\t镜像大小\t拉取大小\t安全扫描 CRITICAL/HIGH",
+				"---\t---\t---\t---\t---\t---\t---",
 				(
 					if $g == "cli" then
 						(
