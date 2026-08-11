@@ -36,6 +36,7 @@ jobs:
           image-ref: ghcr.io/era-cloud/php:${{ matrix.image }}
           severity: CRITICAL,HIGH
           limit-severities-for-sarif: "true"
+          ignore-policy: rego-policy.rego
           exit-code: '0'
           format: sarif
           output: trivy.sarif
