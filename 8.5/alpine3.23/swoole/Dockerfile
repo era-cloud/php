@@ -294,7 +294,7 @@ RUN set -ex; \
 	make \
 	pkgconf \
 	autoconf \
-	$EXTRA_LIBS;
+	$EXTRA_LIBS; \
 	docker-php-ext-install $EXTRA_EXT; \
 	docker-php-ext-enable redis; \
 	docker-php-ext-install sockets; \

@@ -574,7 +574,7 @@ RUN set -ex; \
 	make \
 	pkgconf \
 	autoconf \
-	$EXTRA_LIBS;
+	$EXTRA_LIBS; \
 {{ ) else ( -}}
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
@@ -683,7 +683,7 @@ RUN set -ex; \
 	make \
 	pkgconf \
 	autoconf \
-	$EXTRA_LIBS;
+	$EXTRA_LIBS; \
 {{ ) else ( -}}
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
