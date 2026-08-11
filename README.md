@@ -62,7 +62,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.4-cli-bookworm | 8.4 | bookworm | 2026-08-11T01:59:35Z | 529.4 MB | 20/179 |
 | 8.3-cli-alpine3.24 | 8.3 | alpine3.24 | 2026-08-11T01:52:10Z | 111.4 MB | 0/0 |
 | 8.3-cli-alpine3.23 | 8.3 | alpine3.23 | 2026-08-11T02:05:32Z | 111.3 MB | 0/0 |
-| 8.3-cli-trixie | 8.3 | trixie | 2026-08-11T01:49:33Z | 520.4 MB | 18/81 |
+| 8.3-cli-trixie | 8.3 | trixie | 2026-08-11T02:42:37Z | 520.4 MB | 18/81 |
 | 8.3-cli-bookworm | 8.3 | bookworm | 2026-08-11T01:53:54Z | 522.6 MB | 20/179 |
 | 8.2-cli-alpine3.24 | 8.2 | alpine3.24 | 2026-08-11T02:13:18Z | 104.9 MB | 0/0 |
 | 8.2-cli-alpine3.23 | 8.2 | alpine3.23 | 2026-08-11T02:12:44Z | 104.8 MB | 0/0 |
