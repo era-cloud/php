@@ -51,99 +51,99 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 ### cli
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- |
-| latest | 8.5 | trixie | 2026-08-11T01:39:12Z | 557 MB | 99/0 |
-| 8.5-cli-trixie | 8.5 | trixie | 2026-08-11T01:39:12Z | 557 MB | 99/0 |
+| latest | 8.5 | trixie | 2026-08-11T01:39:12Z | 557 MB | 18/81 |
+| 8.5-cli-trixie | 8.5 | trixie | 2026-08-11T01:39:12Z | 557 MB | 18/81 |
 | 8.5-cli-alpine3.24 | 8.5 | alpine3.24 | 2026-08-11T02:04:36Z | 140.8 MB | 0/0 |
 | 8.5-cli-alpine3.23 | 8.5 | alpine3.23 | 2026-08-11T02:03:25Z | 140.7 MB | 0/0 |
-| 8.5-cli-bookworm | 8.5 | bookworm | 2026-08-11T01:38:03Z | 559.2 MB | 199/0 |
+| 8.5-cli-bookworm | 8.5 | bookworm | 2026-08-11T01:38:03Z | 559.2 MB | 20/179 |
 | 8.4-cli-alpine3.24 | 8.4 | alpine3.24 | 2026-08-11T01:54:15Z | 115.5 MB | 0/0 |
 | 8.4-cli-alpine3.23 | 8.4 | alpine3.23 | 2026-08-11T02:04:22Z | 115.4 MB | 0/0 |
-| 8.4-cli-trixie | 8.4 | trixie | 2026-08-11T01:39:00Z | 527.2 MB | 99/0 |
-| 8.4-cli-bookworm | 8.4 | bookworm | 2026-08-11T01:59:35Z | 529.4 MB | 199/0 |
+| 8.4-cli-trixie | 8.4 | trixie | 2026-08-11T01:39:00Z | 527.2 MB | 18/81 |
+| 8.4-cli-bookworm | 8.4 | bookworm | 2026-08-11T01:59:35Z | 529.4 MB | 20/179 |
 | 8.3-cli-alpine3.24 | 8.3 | alpine3.24 | 2026-08-11T01:52:10Z | 111.4 MB | 0/0 |
 | 8.3-cli-alpine3.23 | 8.3 | alpine3.23 | 2026-08-11T02:05:32Z | 111.3 MB | 0/0 |
-| 8.3-cli-trixie | 8.3 | trixie | 2026-08-11T01:49:33Z | 520.4 MB | 99/0 |
-| 8.3-cli-bookworm | 8.3 | bookworm | 2026-08-11T01:53:54Z | 522.6 MB | 199/0 |
+| 8.3-cli-trixie | 8.3 | trixie | 2026-08-11T01:49:33Z | 520.4 MB | 18/81 |
+| 8.3-cli-bookworm | 8.3 | bookworm | 2026-08-11T01:53:54Z | 522.6 MB | 20/179 |
 | 8.2-cli-alpine3.24 | 8.2 | alpine3.24 | 2026-08-11T02:13:18Z | 104.9 MB | 0/0 |
 | 8.2-cli-alpine3.23 | 8.2 | alpine3.23 | 2026-08-11T02:12:44Z | 104.8 MB | 0/0 |
-| 8.2-cli-trixie | 8.2 | trixie | 2026-08-11T01:58:32Z | 512.8 MB | 99/0 |
-| 8.2-cli-bookworm | 8.2 | bookworm | 2026-08-11T02:10:05Z | 515 MB | 199/0 |
+| 8.2-cli-trixie | 8.2 | trixie | 2026-08-11T01:58:32Z | 512.8 MB | 18/81 |
+| 8.2-cli-bookworm | 8.2 | bookworm | 2026-08-11T02:10:05Z | 515 MB | 20/179 |
 ### zts
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- |
 | 8.5-zts-alpine3.24 | 8.5 | alpine3.24 | 2026-08-11T02:05:24Z | 166.2 MB | 0/0 |
 | 8.5-zts-alpine3.23 | 8.5 | alpine3.23 | 2026-08-11T02:08:28Z | 166.1 MB | 0/0 |
-| 8.5-zts-trixie | 8.5 | trixie | 2026-08-11T01:50:38Z | 557 MB | 99/0 |
-| 8.5-zts-bookworm | 8.5 | bookworm | 2026-08-11T01:39:09Z | 559.3 MB | 199/0 |
+| 8.5-zts-trixie | 8.5 | trixie | 2026-08-11T01:50:38Z | 557 MB | 18/81 |
+| 8.5-zts-bookworm | 8.5 | bookworm | 2026-08-11T01:39:09Z | 559.3 MB | 20/179 |
 | 8.4-zts-alpine3.24 | 8.4 | alpine3.24 | 2026-08-11T01:49:41Z | 134.8 MB | 0/0 |
 | 8.4-zts-alpine3.23 | 8.4 | alpine3.23 | 2026-08-11T01:53:21Z | 134.7 MB | 0/0 |
-| 8.4-zts-trixie | 8.4 | trixie | 2026-08-11T02:06:46Z | 527.4 MB | 99/0 |
-| 8.4-zts-bookworm | 8.4 | bookworm | 2026-08-11T01:39:12Z | 529.6 MB | 199/0 |
+| 8.4-zts-trixie | 8.4 | trixie | 2026-08-11T02:06:46Z | 527.4 MB | 18/81 |
+| 8.4-zts-bookworm | 8.4 | bookworm | 2026-08-11T01:39:12Z | 529.6 MB | 20/179 |
 | 8.3-zts-alpine3.24 | 8.3 | alpine3.24 | 2026-08-11T02:00:10Z | 127.9 MB | 0/0 |
 | 8.3-zts-alpine3.23 | 8.3 | alpine3.23 | 2026-08-11T01:51:51Z | 127.8 MB | 0/0 |
-| 8.3-zts-trixie | 8.3 | trixie | 2026-08-11T01:50:35Z | 520.5 MB | 99/0 |
-| 8.3-zts-bookworm | 8.3 | bookworm | 2026-08-11T01:38:36Z | 522.7 MB | 199/0 |
+| 8.3-zts-trixie | 8.3 | trixie | 2026-08-11T01:50:35Z | 520.5 MB | 18/81 |
+| 8.3-zts-bookworm | 8.3 | bookworm | 2026-08-11T01:38:36Z | 522.7 MB | 20/179 |
 | 8.2-zts-alpine3.24 | 8.2 | alpine3.24 | 2026-08-11T02:15:25Z | 120.3 MB | 0/0 |
 | 8.2-zts-alpine3.23 | 8.2 | alpine3.23 | 2026-08-11T02:16:20Z | 120.2 MB | 0/0 |
-| 8.2-zts-trixie | 8.2 | trixie | 2026-08-11T01:38:53Z | 512.9 MB | 99/0 |
-| 8.2-zts-bookworm | 8.2 | bookworm | 2026-08-11T02:13:58Z | 515.2 MB | 199/0 |
+| 8.2-zts-trixie | 8.2 | trixie | 2026-08-11T01:38:53Z | 512.9 MB | 18/81 |
+| 8.2-zts-bookworm | 8.2 | bookworm | 2026-08-11T02:13:58Z | 515.2 MB | 20/179 |
 ### swoole
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- |
 | 8.5-swoole-alpine3.24 | 8.5 | alpine3.24 | 2026-08-11T01:54:04Z | 110.4 MB | 0/0 |
 | 8.5-swoole-alpine3.23 | 8.5 | alpine3.23 | 2026-08-11T02:16:11Z | 110.2 MB | 0/0 |
-| 8.5-swoole-trixie | 8.5 | trixie | 2026-08-11T01:42:51Z | 531 MB | 100/0 |
-| 8.5-swoole-bookworm | 8.5 | bookworm | 2026-08-11T01:43:11Z | 497.1 MB | 200/0 |
+| 8.5-swoole-trixie | 8.5 | trixie | 2026-08-11T01:42:51Z | 531 MB | 18/82 |
+| 8.5-swoole-bookworm | 8.5 | bookworm | 2026-08-11T01:43:11Z | 497.1 MB | 21/179 |
 | 8.4-swoole-alpine3.24 | 8.4 | alpine3.24 | 2026-08-11T02:05:29Z | 101 MB | 0/0 |
 | 8.4-swoole-alpine3.23 | 8.4 | alpine3.23 | 2026-08-11T01:45:59Z | 100.8 MB | 0/0 |
-| 8.4-swoole-trixie | 8.4 | trixie | 2026-08-11T01:50:37Z | 521.5 MB | 100/0 |
-| 8.4-swoole-bookworm | 8.4 | bookworm | 2026-08-11T01:42:26Z | 487.5 MB | 200/0 |
+| 8.4-swoole-trixie | 8.4 | trixie | 2026-08-11T01:50:37Z | 521.5 MB | 18/82 |
+| 8.4-swoole-bookworm | 8.4 | bookworm | 2026-08-11T01:42:26Z | 487.5 MB | 21/179 |
 | 8.3-swoole-alpine3.24 | 8.3 | alpine3.24 | 2026-08-11T02:04:10Z | 98.2 MB | 0/0 |
 | 8.3-swoole-alpine3.23 | 8.3 | alpine3.23 | 2026-08-11T02:06:05Z | 98 MB | 0/0 |
-| 8.3-swoole-trixie | 8.3 | trixie | 2026-08-11T01:48:30Z | 518.7 MB | 100/0 |
-| 8.3-swoole-bookworm | 8.3 | bookworm | 2026-08-11T01:50:40Z | 484.7 MB | 200/0 |
+| 8.3-swoole-trixie | 8.3 | trixie | 2026-08-11T01:48:30Z | 518.7 MB | 18/82 |
+| 8.3-swoole-bookworm | 8.3 | bookworm | 2026-08-11T01:50:40Z | 484.7 MB | 21/179 |
 | 8.2-swoole-alpine3.24 | 8.2 | alpine3.24 | 2026-08-11T02:17:53Z | 95.6 MB | 0/0 |
 | 8.2-swoole-alpine3.23 | 8.2 | alpine3.23 | 2026-08-11T02:20:45Z | 95.4 MB | 0/0 |
-| 8.2-swoole-trixie | 8.2 | trixie | 2026-08-11T02:10:41Z | 516.1 MB | 100/0 |
-| 8.2-swoole-bookworm | 8.2 | bookworm | 2026-08-11T02:13:21Z | 482.2 MB | 200/0 |
+| 8.2-swoole-trixie | 8.2 | trixie | 2026-08-11T02:10:41Z | 516.1 MB | 18/82 |
+| 8.2-swoole-bookworm | 8.2 | bookworm | 2026-08-11T02:13:21Z | 482.2 MB | 21/179 |
 ### thread
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- |
 | 8.5-thread-alpine3.24 | 8.5 | alpine3.24 | 2026-08-11T02:07:03Z | 110.7 MB | 0/0 |
 | 8.5-thread-alpine3.23 | 8.5 | alpine3.23 | 2026-08-11T02:06:19Z | 110.5 MB | 0/0 |
-| 8.5-thread-trixie | 8.5 | trixie | 2026-08-11T01:42:39Z | 531.3 MB | 100/0 |
-| 8.5-thread-bookworm | 8.5 | bookworm | 2026-08-11T01:41:08Z | 497.3 MB | 200/0 |
+| 8.5-thread-trixie | 8.5 | trixie | 2026-08-11T01:42:39Z | 531.3 MB | 18/82 |
+| 8.5-thread-bookworm | 8.5 | bookworm | 2026-08-11T01:41:08Z | 497.3 MB | 21/179 |
 | 8.4-thread-alpine3.24 | 8.4 | alpine3.24 | 2026-08-11T01:53:36Z | 101.3 MB | 0/0 |
 | 8.4-thread-alpine3.23 | 8.4 | alpine3.23 | 2026-08-11T01:59:10Z | 101.1 MB | 0/0 |
-| 8.4-thread-trixie | 8.4 | trixie | 2026-08-11T01:42:23Z | 521.8 MB | 100/0 |
-| 8.4-thread-bookworm | 8.4 | bookworm | 2026-08-11T01:42:40Z | 487.8 MB | 200/0 |
+| 8.4-thread-trixie | 8.4 | trixie | 2026-08-11T01:42:23Z | 521.8 MB | 18/82 |
+| 8.4-thread-bookworm | 8.4 | bookworm | 2026-08-11T01:42:40Z | 487.8 MB | 21/179 |
 | 8.3-thread-alpine3.24 | 8.3 | alpine3.24 | 2026-08-11T01:56:06Z | 98.5 MB | 0/0 |
 | 8.3-thread-alpine3.23 | 8.3 | alpine3.23 | 2026-08-11T02:02:39Z | 98.3 MB | 0/0 |
-| 8.3-thread-trixie | 8.3 | trixie | 2026-08-11T02:11:00Z | 519.1 MB | 100/0 |
-| 8.3-thread-bookworm | 8.3 | bookworm | 2026-08-11T01:41:58Z | 485.1 MB | 200/0 |
+| 8.3-thread-trixie | 8.3 | trixie | 2026-08-11T02:11:00Z | 519.1 MB | 18/82 |
+| 8.3-thread-bookworm | 8.3 | bookworm | 2026-08-11T01:41:58Z | 485.1 MB | 21/179 |
 | 8.2-thread-alpine3.24 | 8.2 | alpine3.24 | 2026-08-11T02:19:46Z | 96 MB | 0/0 |
 | 8.2-thread-alpine3.23 | 8.2 | alpine3.23 | 2026-08-11T02:18:45Z | 95.8 MB | 0/0 |
-| 8.2-thread-trixie | 8.2 | trixie | 2026-08-11T02:18:39Z | 516.5 MB | 100/0 |
-| 8.2-thread-bookworm | 8.2 | bookworm | 2026-08-11T02:18:15Z | 482.5 MB | 200/0 |
+| 8.2-thread-trixie | 8.2 | trixie | 2026-08-11T02:18:39Z | 516.5 MB | 18/82 |
+| 8.2-thread-bookworm | 8.2 | bookworm | 2026-08-11T02:18:15Z | 482.5 MB | 21/179 |
 ### swow
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- |
 | 8.5-swow-alpine3.24 | 8.5 | alpine3.24 | 2026-08-11T01:45:19Z | 102.9 MB | 0/0 |
 | 8.5-swow-alpine3.23 | 8.5 | alpine3.23 | 2026-08-11T01:53:51Z | 102.7 MB | 0/0 |
-| 8.5-swow-trixie | 8.5 | trixie | 2026-08-11T01:42:04Z | 522.8 MB | 99/0 |
-| 8.5-swow-bookworm | 8.5 | bookworm | 2026-08-11T01:41:52Z | 488.4 MB | 200/0 |
+| 8.5-swow-trixie | 8.5 | trixie | 2026-08-11T01:42:04Z | 522.8 MB | 18/81 |
+| 8.5-swow-bookworm | 8.5 | bookworm | 2026-08-11T01:41:52Z | 488.4 MB | 21/179 |
 | 8.4-swow-alpine3.24 | 8.4 | alpine3.24 | 2026-08-11T01:44:51Z | 93.5 MB | 0/0 |
 | 8.4-swow-alpine3.23 | 8.4 | alpine3.23 | 2026-08-11T01:57:38Z | 93.3 MB | 0/0 |
-| 8.4-swow-trixie | 8.4 | trixie | 2026-08-11T01:52:35Z | 513.4 MB | 99/0 |
-| 8.4-swow-bookworm | 8.4 | bookworm | 2026-08-11T02:02:25Z | 478.9 MB | 200/0 |
+| 8.4-swow-trixie | 8.4 | trixie | 2026-08-11T01:52:35Z | 513.4 MB | 18/81 |
+| 8.4-swow-bookworm | 8.4 | bookworm | 2026-08-11T02:02:25Z | 478.9 MB | 21/179 |
 | 8.3-swow-alpine3.24 | 8.3 | alpine3.24 | 2026-08-11T01:51:16Z | 90.7 MB | 0/0 |
 | 8.3-swow-alpine3.23 | 8.3 | alpine3.23 | 2026-08-11T02:06:54Z | 90.5 MB | 0/0 |
-| 8.3-swow-trixie | 8.3 | trixie | 2026-08-11T02:06:40Z | 510.6 MB | 99/0 |
-| 8.3-swow-bookworm | 8.3 | bookworm | 2026-08-11T02:04:39Z | 476.1 MB | 200/0 |
+| 8.3-swow-trixie | 8.3 | trixie | 2026-08-11T02:06:40Z | 510.6 MB | 18/81 |
+| 8.3-swow-bookworm | 8.3 | bookworm | 2026-08-11T02:04:39Z | 476.1 MB | 21/179 |
 | 8.2-swow-alpine3.24 | 8.2 | alpine3.24 | 2026-08-11T02:16:35Z | 88.2 MB | 0/0 |
 | 8.2-swow-alpine3.23 | 8.2 | alpine3.23 | 2026-08-11T02:16:15Z | 87.9 MB | 0/0 |
-| 8.2-swow-trixie | 8.2 | trixie | 2026-08-11T01:55:52Z | 508 MB | 99/0 |
-| 8.2-swow-bookworm | 8.2 | bookworm | 2026-08-11T02:14:49Z | 473.6 MB | 200/0 |
+| 8.2-swow-trixie | 8.2 | trixie | 2026-08-11T01:55:52Z | 508 MB | 18/81 |
+| 8.2-swow-bookworm | 8.2 | bookworm | 2026-08-11T02:14:49Z | 473.6 MB | 21/179 |
 <!-- TAG-MATRIX-END -->
 
 ## 镜像标签规则
