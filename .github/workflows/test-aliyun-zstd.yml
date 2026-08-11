@@ -1,0 +1,50 @@
+name: Test Aliyun Zstd
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Login ACR
+        run: docker login --username ${{ vars.ACR_USERNAME }} --password ${{ secrets.ACR_TOKEN }} ${{ vars.ACR_REGISTRY }}
+      - name: Set up buildx (docker-container)
+        run: docker buildx create --driver docker-container --name t --use --bootstrap
+      - name: Build and push zstd test image
+        run: |
+          mkdir -p "$RUNNER_TEMP/zt"
+          printf 'FROM alpine:3.24\nRUN echo aliyun-zstd-test > /z.txt\n' > "$RUNNER_TEMP/zt/Dockerfile"
+          cd "$RUNNER_TEMP/zt"
+          docker buildx build \
+            --output type=image,push=true,compression=zstd,compression-level=3,force-compression=true,oci-mediatypes=true \
+            --tag ${{ vars.ACR_REGISTRY }}/eracloud/zstd-test .
+      - name: Pull back
+        run: docker pull ${{ vars.ACR_REGISTRY }}/eracloud/zstd-test
+      - name: Check layer media types
+        run: |
+          docker save ${{ vars.ACR_REGISTRY }}/eracloud/zstd-test -o /tmp/zt.tar
+          rm -rf /tmp/zto && mkdir /tmp/zto && tar -xf /tmp/zt.tar -C /tmp/zto
+          python3 - <<'PY'
+          import json, glob
+          zstd = 0
+          for f in glob.glob('/tmp/zto/blobs/sha256/*'):
+              try:
+                  d = json.load(open(f))
+              except Exception:
+                  continue
+              if 'layers' in d:
+                  mts = [l.get('mediaType', '?') for l in d['layers']]
+                  print('manifest layer media types:', mts)
+                  if any('zstd' in mt for mt in mts):
+                      zstd = 1
+          if zstd:
+              print('ALIYUN_ZSTD=SUPPORTED')
+          else:
+              print('ALIYUN_ZSTD=NOT-SUPPORTED')
+          PY
