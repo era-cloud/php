@@ -133,9 +133,19 @@ jobs:
           scan-type: image
           image-ref: ghcr.io/era-cloud/php:${{ matrix.name }}
           severity: CRITICAL,HIGH
+          limit-severities-for-sarif: "true"
           exit-code: '0'
           format: sarif
           output: trivy-${{ matrix.name }}.sarif
+      - name: Fix Trivy SARIF levels
+        if: steps.scan.outcome == 'success'
+        run: |
+          # trivy 0.73.0 emits HIGH findings at level "error" when a multi-value
+          # --severity filter is applied; restore HIGH -> "warning" so code
+          # scanning shows the correct severity
+          jq '(.runs[].results[]? | select((.message.text // "") | contains("Severity: HIGH"))) |= (.level = "warning")' \
+            trivy-${{ matrix.name }}.sarif > trivy-${{ matrix.name }}.fixed.sarif
+          mv trivy-${{ matrix.name }}.fixed.sarif trivy-${{ matrix.name }}.sarif
       - name: Upload Trivy SARIF
         if: ${{ steps.scan.outcome == 'success' }}
         uses: github/codeql-action/upload-sarif@v4
