@@ -12,3 +12,5 @@ deploy/runtime/
 deploy/dist/
 deploy/caddy/.env
 metrics-artifacts/
+
+.playwright-mcp/
