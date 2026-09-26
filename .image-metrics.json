@@ -4,879 +4,879 @@
     "version": "8.2",
     "variant": "cli",
     "distro": "trixie",
-    "built_at": "2026-09-25T03:07:54Z",
+    "built_at": "2026-09-26T02:54:59Z",
     "size": 502026640,
     "critical": 1,
     "high": 65,
-    "pull_size": 161155189
+    "pull_size": 161155425
   },
   {
     "tag": "8.2-swoole-trixie",
     "version": "8.2",
     "variant": "swoole",
     "distro": "trixie",
-    "built_at": "2026-09-25T03:03:07Z",
+    "built_at": "2026-09-26T03:07:22Z",
     "size": 543331970,
     "critical": 1,
     "high": 68,
-    "pull_size": 176485768
+    "pull_size": 176487513
   },
   {
     "tag": "8.2-zts-trixie",
     "version": "8.2",
     "variant": "zts",
     "distro": "trixie",
-    "built_at": "2026-09-25T03:02:46Z",
+    "built_at": "2026-09-26T03:02:44Z",
     "size": 502187974,
     "critical": 1,
     "high": 65,
-    "pull_size": 161252222
+    "pull_size": 161249367
   },
   {
     "tag": "8.2-swow-trixie",
     "version": "8.2",
     "variant": "swow",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:42:37Z",
-    "size": 534880261,
+    "built_at": "2026-09-26T03:09:47Z",
+    "size": 534789512,
     "critical": 1,
     "high": 65,
-    "pull_size": 175510464
+    "pull_size": 175494986
   },
   {
     "tag": "8.2-thread-trixie",
     "version": "8.2",
     "variant": "thread",
     "distro": "trixie",
-    "built_at": "2026-09-25T03:13:06Z",
+    "built_at": "2026-09-26T03:16:35Z",
     "size": 543676693,
     "critical": 1,
     "high": 68,
-    "pull_size": 176629214
+    "pull_size": 176628909
   },
   {
     "tag": "8.2-cli-bookworm",
     "version": "8.2",
     "variant": "cli",
     "distro": "bookworm",
-    "built_at": "2026-09-25T03:12:33Z",
-    "size": 504142510,
+    "built_at": "2026-09-26T03:15:07Z",
+    "size": 504150710,
     "critical": 15,
     "high": 91,
-    "pull_size": 163646098
+    "pull_size": 163662747
   },
   {
     "tag": "8.2-swoole-bookworm",
     "version": "8.2",
     "variant": "swoole",
     "distro": "bookworm",
-    "built_at": "2026-09-25T03:19:21Z",
-    "size": 507506939,
+    "built_at": "2026-09-26T03:13:43Z",
+    "size": 507515139,
     "critical": 16,
     "high": 91,
-    "pull_size": 164503855
+    "pull_size": 164522104
   },
   {
     "tag": "8.2-zts-bookworm",
     "version": "8.2",
     "variant": "zts",
     "distro": "bookworm",
-    "built_at": "2026-09-25T03:08:52Z",
-    "size": 504307924,
+    "built_at": "2026-09-26T03:11:32Z",
+    "size": 504316124,
     "critical": 15,
     "high": 91,
-    "pull_size": 163725555
+    "pull_size": 163745461
   },
   {
     "tag": "8.2-swow-bookworm",
     "version": "8.2",
     "variant": "swow",
     "distro": "bookworm",
-    "built_at": "2026-09-25T03:17:09Z",
-    "size": 498460963,
+    "built_at": "2026-09-26T03:15:17Z",
+    "size": 498469163,
     "critical": 16,
     "high": 91,
-    "pull_size": 163470430
+    "pull_size": 163490986
   },
   {
     "tag": "8.2-thread-bookworm",
     "version": "8.2",
     "variant": "thread",
     "distro": "bookworm",
-    "built_at": "2026-09-25T03:16:36Z",
-    "size": 507852950,
+    "built_at": "2026-09-26T03:19:22Z",
+    "size": 507861150,
     "critical": 16,
     "high": 91,
-    "pull_size": 164601948
+    "pull_size": 164618382
   },
   {
     "tag": "8.2-cli-alpine3.24",
     "version": "8.2",
     "variant": "cli",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T03:16:33Z",
+    "built_at": "2026-09-26T03:14:14Z",
     "size": 74170530,
     "critical": 0,
     "high": 0,
-    "pull_size": 31093362
+    "pull_size": 31093522
   },
   {
     "tag": "8.2-swoole-alpine3.24",
     "version": "8.2",
     "variant": "swoole",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T03:18:51Z",
+    "built_at": "2026-09-26T03:22:57Z",
     "size": 102219219,
     "critical": 0,
     "high": 0,
-    "pull_size": 39699371
+    "pull_size": 39698860
   },
   {
     "tag": "8.2-zts-alpine3.24",
     "version": "8.2",
     "variant": "zts",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T03:14:33Z",
+    "built_at": "2026-09-26T03:15:52Z",
     "size": 90343071,
     "critical": 0,
     "high": 0,
-    "pull_size": 35223593
+    "pull_size": 35222840
   },
   {
     "tag": "8.2-swow-alpine3.24",
     "version": "8.2",
     "variant": "swow",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T03:12:50Z",
+    "built_at": "2026-09-26T03:21:53Z",
     "size": 94360385,
     "critical": 0,
     "high": 0,
-    "pull_size": 38904445
+    "pull_size": 38904474
   },
   {
     "tag": "8.2-thread-alpine3.24",
     "version": "8.2",
     "variant": "thread",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T03:12:33Z",
+    "built_at": "2026-09-26T03:18:27Z",
     "size": 102577866,
     "critical": 0,
     "high": 0,
-    "pull_size": 39820533
+    "pull_size": 39820522
   },
   {
     "tag": "8.2-cli-alpine3.23",
     "version": "8.2",
     "variant": "cli",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:12:05Z",
+    "built_at": "2026-09-26T03:18:22Z",
     "size": 74090782,
     "critical": 0,
     "high": 0,
-    "pull_size": 31027935
+    "pull_size": 31027171
   },
   {
     "tag": "8.2-swoole-alpine3.23",
     "version": "8.2",
     "variant": "swoole",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:16:05Z",
+    "built_at": "2026-09-26T03:15:25Z",
     "size": 102035857,
     "critical": 0,
     "high": 0,
-    "pull_size": 39570052
+    "pull_size": 39569992
   },
   {
     "tag": "8.2-zts-alpine3.23",
     "version": "8.2",
     "variant": "zts",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:12:32Z",
+    "built_at": "2026-09-26T03:13:27Z",
     "size": 90263323,
     "critical": 0,
     "high": 0,
-    "pull_size": 35138756
+    "pull_size": 35138813
   },
   {
     "tag": "8.2-swow-alpine3.23",
     "version": "8.2",
     "variant": "swow",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:16:07Z",
+    "built_at": "2026-09-26T03:14:54Z",
     "size": 94177059,
     "critical": 0,
     "high": 0,
-    "pull_size": 38808773
+    "pull_size": 38809489
   },
   {
     "tag": "8.2-thread-alpine3.23",
     "version": "8.2",
     "variant": "thread",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:19:56Z",
+    "built_at": "2026-09-26T03:18:43Z",
     "size": 102394512,
     "critical": 0,
     "high": 0,
-    "pull_size": 39728419
+    "pull_size": 39727423
   },
   {
     "tag": "8.3-cli-trixie",
     "version": "8.3",
     "variant": "cli",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:51:25Z",
-    "size": 505771244,
+    "built_at": "2026-09-26T03:00:31Z",
+    "size": 505781331,
     "critical": 1,
     "high": 65,
-    "pull_size": 161810477
+    "pull_size": 161820012
   },
   {
     "tag": "8.3-swoole-trixie",
     "version": "8.3",
     "variant": "swoole",
     "distro": "trixie",
-    "built_at": "2026-09-25T03:03:56Z",
-    "size": 546028630,
+    "built_at": "2026-09-26T02:53:42Z",
+    "size": 546038749,
     "critical": 1,
     "high": 68,
-    "pull_size": 177070503
+    "pull_size": 177073236
   },
   {
     "tag": "8.3-zts-trixie",
     "version": "8.3",
     "variant": "zts",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:59:46Z",
-    "size": 505932440,
+    "built_at": "2026-09-26T02:42:27Z",
+    "size": 505989867,
     "critical": 1,
     "high": 65,
-    "pull_size": 161897956
+    "pull_size": 161915387
   },
   {
     "tag": "8.3-swow-trixie",
     "version": "8.3",
     "variant": "swow",
     "distro": "trixie",
-    "built_at": "2026-09-25T03:10:31Z",
-    "size": 537480788,
+    "built_at": "2026-09-26T02:54:11Z",
+    "size": 537490907,
     "critical": 1,
     "high": 65,
-    "pull_size": 176067586
+    "pull_size": 176079200
   },
   {
     "tag": "8.3-thread-trixie",
     "version": "8.3",
     "variant": "thread",
     "distro": "trixie",
-    "built_at": "2026-09-25T03:02:57Z",
-    "size": 546377015,
+    "built_at": "2026-09-26T02:52:58Z",
+    "size": 546387134,
     "critical": 1,
     "high": 68,
-    "pull_size": 177181989
+    "pull_size": 177195956
   },
   {
     "tag": "8.3-cli-bookworm",
     "version": "8.3",
     "variant": "cli",
     "distro": "bookworm",
-    "built_at": "2026-09-25T03:04:41Z",
-    "size": 507891178,
+    "built_at": "2026-09-26T03:01:16Z",
+    "size": 507913561,
     "critical": 15,
     "high": 91,
-    "pull_size": 164262767
+    "pull_size": 164304858
   },
   {
     "tag": "8.3-swoole-bookworm",
     "version": "8.3",
     "variant": "swoole",
     "distro": "bookworm",
-    "built_at": "2026-09-25T02:52:07Z",
-    "size": 510204015,
+    "built_at": "2026-09-26T03:05:19Z",
+    "size": 510222334,
     "critical": 16,
     "high": 91,
-    "pull_size": 165054682
+    "pull_size": 165088341
   },
   {
     "tag": "8.3-zts-bookworm",
     "version": "8.3",
     "variant": "zts",
     "distro": "bookworm",
-    "built_at": "2026-09-25T03:01:54Z",
-    "size": 508056510,
+    "built_at": "2026-09-26T02:57:36Z",
+    "size": 508078893,
     "critical": 15,
     "high": 91,
-    "pull_size": 164365829
+    "pull_size": 164393544
   },
   {
     "tag": "8.3-swow-bookworm",
     "version": "8.3",
     "variant": "swow",
     "distro": "bookworm",
-    "built_at": "2026-09-25T03:02:40Z",
-    "size": 501152503,
+    "built_at": "2026-09-26T02:45:36Z",
+    "size": 501170822,
     "critical": 16,
     "high": 91,
-    "pull_size": 164029049
+    "pull_size": 164063216
   },
   {
     "tag": "8.3-thread-bookworm",
     "version": "8.3",
     "variant": "thread",
     "distro": "bookworm",
-    "built_at": "2026-09-25T02:52:00Z",
-    "size": 510557872,
+    "built_at": "2026-09-26T03:03:07Z",
+    "size": 510580287,
     "critical": 16,
     "high": 91,
-    "pull_size": 165151712
+    "pull_size": 165211623
   },
   {
     "tag": "8.3-cli-alpine3.24",
     "version": "8.3",
     "variant": "cli",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T03:08:02Z",
-    "size": 76833154,
+    "built_at": "2026-09-26T02:56:01Z",
+    "size": 76843241,
     "critical": 0,
     "high": 0,
-    "pull_size": 31640648
+    "pull_size": 31645359
   },
   {
     "tag": "8.3-swoole-alpine3.24",
     "version": "8.3",
     "variant": "swoole",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:54:57Z",
-    "size": 104911187,
+    "built_at": "2026-09-26T03:05:20Z",
+    "size": 104921274,
     "critical": 0,
     "high": 0,
-    "pull_size": 40243635
+    "pull_size": 40248031
   },
   {
     "tag": "8.3-zts-alpine3.24",
     "version": "8.3",
     "variant": "zts",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:54:15Z",
-    "size": 94078290,
+    "built_at": "2026-09-26T02:52:45Z",
+    "size": 94092473,
     "critical": 0,
     "high": 0,
-    "pull_size": 35848229
+    "pull_size": 35859346
   },
   {
     "tag": "8.3-swow-alpine3.24",
     "version": "8.3",
     "variant": "swow",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:51:50Z",
-    "size": 97045673,
+    "built_at": "2026-09-26T03:10:24Z",
+    "size": 97055760,
     "critical": 0,
     "high": 0,
-    "pull_size": 39459721
+    "pull_size": 39464061
   },
   {
     "tag": "8.3-thread-alpine3.24",
     "version": "8.3",
     "variant": "thread",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:54:05Z",
-    "size": 105268820,
+    "built_at": "2026-09-26T03:04:27Z",
+    "size": 105278907,
     "critical": 0,
     "high": 0,
-    "pull_size": 40383224
+    "pull_size": 40385178
   },
   {
     "tag": "8.3-cli-alpine3.23",
     "version": "8.3",
     "variant": "cli",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:06:08Z",
-    "size": 76753406,
+    "built_at": "2026-09-26T03:09:41Z",
+    "size": 76763493,
     "critical": 0,
     "high": 0,
-    "pull_size": 31594959
+    "pull_size": 31602436
   },
   {
     "tag": "8.3-swoole-alpine3.23",
     "version": "8.3",
     "variant": "swoole",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:08:33Z",
-    "size": 104727825,
+    "built_at": "2026-09-26T03:10:54Z",
+    "size": 104737912,
     "critical": 0,
     "high": 0,
-    "pull_size": 40153513
+    "pull_size": 40159051
   },
   {
     "tag": "8.3-zts-alpine3.23",
     "version": "8.3",
     "variant": "zts",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T02:41:37Z",
-    "size": 93998542,
+    "built_at": "2026-09-26T02:47:53Z",
+    "size": 94012725,
     "critical": 0,
     "high": 0,
-    "pull_size": 35800720
+    "pull_size": 35817029
   },
   {
     "tag": "8.3-swow-alpine3.23",
     "version": "8.3",
     "variant": "swow",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:05:53Z",
-    "size": 96862339,
+    "built_at": "2026-09-26T02:46:31Z",
+    "size": 96872426,
     "critical": 0,
     "high": 0,
-    "pull_size": 39389962
+    "pull_size": 39396720
   },
   {
     "tag": "8.3-thread-alpine3.23",
     "version": "8.3",
     "variant": "thread",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:08:06Z",
-    "size": 105085466,
+    "built_at": "2026-09-26T02:53:42Z",
+    "size": 105095553,
     "critical": 0,
     "high": 0,
-    "pull_size": 40286676
+    "pull_size": 40297578
   },
   {
     "tag": "8.4-cli-trixie",
     "version": "8.4",
     "variant": "cli",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:40:53Z",
+    "built_at": "2026-09-26T02:52:31Z",
     "size": 511423219,
     "critical": 1,
     "high": 65,
-    "pull_size": 164929254
+    "pull_size": 164927486
   },
   {
     "tag": "8.4-swoole-trixie",
     "version": "8.4",
     "variant": "swoole",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:44:19Z",
-    "size": 549069132,
+    "built_at": "2026-09-26T02:52:24Z",
+    "size": 548978383,
     "critical": 1,
     "high": 68,
-    "pull_size": 179419752
+    "pull_size": 179398598
   },
   {
     "tag": "8.4-zts-trixie",
     "version": "8.4",
     "variant": "zts",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:52:30Z",
+    "built_at": "2026-09-26T03:00:29Z",
     "size": 511584538,
     "critical": 1,
     "high": 65,
-    "pull_size": 165032298
+    "pull_size": 165033611
   },
   {
     "tag": "8.4-swow-trixie",
     "version": "8.4",
     "variant": "swow",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:55:20Z",
-    "size": 540434471,
+    "built_at": "2026-09-26T02:44:01Z",
+    "size": 540481811,
     "critical": 1,
     "high": 65,
-    "pull_size": 178410815
+    "pull_size": 178420176
   },
   {
     "tag": "8.4-thread-trixie",
     "version": "8.4",
     "variant": "thread",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:44:02Z",
-    "size": 549405336,
+    "built_at": "2026-09-26T02:45:41Z",
+    "size": 549361927,
     "critical": 1,
     "high": 68,
-    "pull_size": 179592296
+    "pull_size": 179581445
   },
   {
     "tag": "8.4-cli-bookworm",
     "version": "8.4",
     "variant": "cli",
     "distro": "bookworm",
-    "built_at": "2026-09-25T02:50:05Z",
-    "size": 513530905,
+    "built_at": "2026-09-26T02:57:44Z",
+    "size": 513539105,
     "critical": 15,
     "high": 91,
-    "pull_size": 167392850
+    "pull_size": 167411251
   },
   {
     "tag": "8.4-swoole-bookworm",
     "version": "8.4",
     "variant": "swoole",
     "distro": "bookworm",
-    "built_at": "2026-09-25T03:03:18Z",
-    "size": 513151056,
+    "built_at": "2026-09-26T03:05:00Z",
+    "size": 513159256,
     "critical": 16,
     "high": 91,
-    "pull_size": 167424765
+    "pull_size": 167444084
   },
   {
     "tag": "8.4-zts-bookworm",
     "version": "8.4",
     "variant": "zts",
     "distro": "bookworm",
-    "built_at": "2026-09-25T02:49:33Z",
-    "size": 513696288,
+    "built_at": "2026-09-26T02:41:45Z",
+    "size": 513704488,
     "critical": 15,
     "high": 91,
-    "pull_size": 167461750
+    "pull_size": 167481051
   },
   {
     "tag": "8.4-swow-bookworm",
     "version": "8.4",
     "variant": "swow",
     "distro": "bookworm",
-    "built_at": "2026-09-25T03:01:48Z",
-    "size": 504108386,
+    "built_at": "2026-09-26T03:11:19Z",
+    "size": 504116586,
     "critical": 16,
     "high": 91,
-    "pull_size": 166398924
+    "pull_size": 166418162
   },
   {
     "tag": "8.4-thread-bookworm",
     "version": "8.4",
     "variant": "thread",
     "distro": "bookworm",
-    "built_at": "2026-09-25T02:57:59Z",
-    "size": 513488620,
+    "built_at": "2026-09-26T02:58:47Z",
+    "size": 513496820,
     "critical": 16,
     "high": 91,
-    "pull_size": 167500121
+    "pull_size": 167518299
   },
   {
     "tag": "8.4-cli-alpine3.24",
     "version": "8.4",
     "variant": "cli",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:43:05Z",
+    "built_at": "2026-09-26T02:54:51Z",
     "size": 79568328,
     "critical": 0,
     "high": 0,
-    "pull_size": 33924112
+    "pull_size": 33925009
   },
   {
     "tag": "8.4-swoole-alpine3.24",
     "version": "8.4",
     "variant": "swoole",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T03:01:57Z",
+    "built_at": "2026-09-26T03:01:19Z",
     "size": 107896351,
     "critical": 0,
     "high": 0,
-    "pull_size": 42609790
+    "pull_size": 42609010
   },
   {
     "tag": "8.4-zts-alpine3.24",
     "version": "8.4",
     "variant": "zts",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T03:00:44Z",
+    "built_at": "2026-09-26T03:04:14Z",
     "size": 99778233,
     "critical": 0,
     "high": 0,
-    "pull_size": 39025586
+    "pull_size": 39025545
   },
   {
     "tag": "8.4-swow-alpine3.24",
     "version": "8.4",
     "variant": "swow",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:57:22Z",
+    "built_at": "2026-09-26T02:57:23Z",
     "size": 100031735,
     "critical": 0,
     "high": 0,
-    "pull_size": 41833883
+    "pull_size": 41835070
   },
   {
     "tag": "8.4-thread-alpine3.24",
     "version": "8.4",
     "variant": "thread",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:57:14Z",
+    "built_at": "2026-09-26T03:10:16Z",
     "size": 108237715,
     "critical": 0,
     "high": 0,
-    "pull_size": 42755881
+    "pull_size": 42756265
   },
   {
     "tag": "8.4-cli-alpine3.23",
     "version": "8.4",
     "variant": "cli",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:08:12Z",
+    "built_at": "2026-09-26T03:06:03Z",
     "size": 79488580,
     "critical": 0,
     "high": 0,
-    "pull_size": 33888761
+    "pull_size": 33888987
   },
   {
     "tag": "8.4-swoole-alpine3.23",
     "version": "8.4",
     "variant": "swoole",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:10:10Z",
+    "built_at": "2026-09-26T03:01:23Z",
     "size": 107712989,
     "critical": 0,
     "high": 0,
-    "pull_size": 42540537
+    "pull_size": 42539980
   },
   {
     "tag": "8.4-zts-alpine3.23",
     "version": "8.4",
     "variant": "zts",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:12:20Z",
+    "built_at": "2026-09-26T02:44:51Z",
     "size": 99698485,
     "critical": 0,
     "high": 0,
-    "pull_size": 38985330
+    "pull_size": 38985296
   },
   {
     "tag": "8.4-swow-alpine3.23",
     "version": "8.4",
     "variant": "swow",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T02:55:47Z",
+    "built_at": "2026-09-26T02:44:17Z",
     "size": 99848353,
     "critical": 0,
     "high": 0,
-    "pull_size": 41769958
+    "pull_size": 41769117
   },
   {
     "tag": "8.4-thread-alpine3.23",
     "version": "8.4",
     "variant": "thread",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T02:59:00Z",
+    "built_at": "2026-09-26T03:07:59Z",
     "size": 108054361,
     "critical": 0,
     "high": 0,
-    "pull_size": 42684503
+    "pull_size": 42683681
   },
   {
     "tag": "8.5-cli-trixie",
     "version": "8.5",
     "variant": "cli",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:40:35Z",
-    "size": 525933366,
+    "built_at": "2026-09-26T02:43:08Z",
+    "size": 525889957,
     "critical": 1,
     "high": 65,
-    "pull_size": 166913355
+    "pull_size": 166901645
   },
   {
     "tag": "8.5-swoole-trixie",
     "version": "8.5",
     "variant": "swoole",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:44:27Z",
-    "size": 559067810,
+    "built_at": "2026-09-26T03:04:50Z",
+    "size": 558977061,
     "critical": 1,
     "high": 68,
-    "pull_size": 180521311
+    "pull_size": 180498388
   },
   {
     "tag": "8.5-zts-trixie",
     "version": "8.5",
     "variant": "zts",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:40:33Z",
-    "size": 525951117,
+    "built_at": "2026-09-26T02:42:58Z",
+    "size": 525907708,
     "critical": 1,
     "high": 65,
-    "pull_size": 167019635
+    "pull_size": 167010943
   },
   {
     "tag": "8.5-swow-trixie",
     "version": "8.5",
     "variant": "swow",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:43:24Z",
+    "built_at": "2026-09-26T02:45:02Z",
     "size": 550393641,
     "critical": 1,
     "high": 65,
-    "pull_size": 179518369
+    "pull_size": 179518713
   },
   {
     "tag": "8.5-thread-trixie",
     "version": "8.5",
     "variant": "thread",
     "distro": "trixie",
-    "built_at": "2026-09-25T02:44:40Z",
-    "size": 559374454,
+    "built_at": "2026-09-26T02:46:42Z",
+    "size": 559331045,
     "critical": 1,
     "high": 68,
-    "pull_size": 180665953
+    "pull_size": 180655311
   },
   {
     "tag": "8.5-cli-bookworm",
     "version": "8.5",
     "variant": "cli",
     "distro": "bookworm",
-    "built_at": "2026-09-25T02:39:31Z",
-    "size": 528023959,
+    "built_at": "2026-09-26T02:43:13Z",
+    "size": 528032159,
     "critical": 15,
     "high": 91,
-    "pull_size": 169354125
+    "pull_size": 169372071
   },
   {
     "tag": "8.5-swoole-bookworm",
     "version": "8.5",
     "variant": "swoole",
     "distro": "bookworm",
-    "built_at": "2026-09-25T02:42:25Z",
-    "size": 523166758,
+    "built_at": "2026-09-26T02:44:51Z",
+    "size": 523174958,
     "critical": 16,
     "high": 91,
-    "pull_size": 168478648
+    "pull_size": 168496189
   },
   {
     "tag": "8.5-zts-bookworm",
     "version": "8.5",
     "variant": "zts",
     "distro": "bookworm",
-    "built_at": "2026-09-25T02:52:06Z",
-    "size": 528045838,
+    "built_at": "2026-09-26T02:52:56Z",
+    "size": 528054038,
     "critical": 15,
     "high": 91,
-    "pull_size": 169447951
+    "pull_size": 169468572
   },
   {
     "tag": "8.5-swow-bookworm",
     "version": "8.5",
     "variant": "swow",
     "distro": "bookworm",
-    "built_at": "2026-09-25T02:43:31Z",
-    "size": 514027248,
+    "built_at": "2026-09-26T03:08:59Z",
+    "size": 514035448,
     "critical": 16,
     "high": 91,
-    "pull_size": 167465883
+    "pull_size": 167484128
   },
   {
     "tag": "8.5-thread-bookworm",
     "version": "8.5",
     "variant": "thread",
     "distro": "bookworm",
-    "built_at": "2026-09-25T02:44:35Z",
-    "size": 523483010,
+    "built_at": "2026-09-26T03:03:06Z",
+    "size": 523491210,
     "critical": 16,
     "high": 91,
-    "pull_size": 168611655
+    "pull_size": 168629059
   },
   {
     "tag": "8.5-cli-alpine3.24",
     "version": "8.5",
     "variant": "cli",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:41:45Z",
+    "built_at": "2026-09-26T02:45:50Z",
     "size": 89335527,
     "critical": 0,
     "high": 0,
-    "pull_size": 35013868
+    "pull_size": 35013503
   },
   {
     "tag": "8.5-swoole-alpine3.24",
     "version": "8.5",
     "variant": "swoole",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:54:15Z",
+    "built_at": "2026-09-26T03:14:03Z",
     "size": 117796354,
     "critical": 0,
     "high": 0,
-    "pull_size": 43731157
+    "pull_size": 43731865
   },
   {
     "tag": "8.5-zts-alpine3.24",
     "version": "8.5",
     "variant": "zts",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:43:42Z",
+    "built_at": "2026-09-26T02:44:01Z",
     "size": 115938336,
     "critical": 0,
     "high": 0,
-    "pull_size": 40996325
+    "pull_size": 40997029
   },
   {
     "tag": "8.5-swow-alpine3.24",
     "version": "8.5",
     "variant": "swow",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T02:46:34Z",
+    "built_at": "2026-09-26T02:49:18Z",
     "size": 109864986,
     "critical": 0,
     "high": 0,
-    "pull_size": 42961839
+    "pull_size": 42960640
   },
   {
     "tag": "8.5-thread-alpine3.24",
     "version": "8.5",
     "variant": "thread",
     "distro": "alpine3.24",
-    "built_at": "2026-09-25T03:04:52Z",
+    "built_at": "2026-09-26T02:45:59Z",
     "size": 118116230,
     "critical": 0,
     "high": 0,
-    "pull_size": 43821752
+    "pull_size": 43821480
   },
   {
     "tag": "8.5-cli-alpine3.23",
     "version": "8.5",
     "variant": "cli",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:02:27Z",
+    "built_at": "2026-09-26T02:54:13Z",
     "size": 89255825,
     "critical": 0,
     "high": 0,
-    "pull_size": 34932240
+    "pull_size": 34931970
   },
   {
     "tag": "8.5-swoole-alpine3.23",
     "version": "8.5",
     "variant": "swoole",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T02:43:43Z",
+    "built_at": "2026-09-26T02:58:00Z",
     "size": 117613038,
     "critical": 0,
     "high": 0,
-    "pull_size": 43607958
+    "pull_size": 43606932
   },
   {
     "tag": "8.5-zts-alpine3.23",
     "version": "8.5",
     "variant": "zts",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T03:11:14Z",
+    "built_at": "2026-09-26T02:44:16Z",
     "size": 115858634,
     "critical": 0,
     "high": 0,
-    "pull_size": 40928090
+    "pull_size": 40928055
   },
   {
     "tag": "8.5-swow-alpine3.23",
     "version": "8.5",
     "variant": "swow",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T02:59:38Z",
+    "built_at": "2026-09-26T02:58:53Z",
     "size": 109681666,
     "critical": 0,
     "high": 0,
-    "pull_size": 42834150
+    "pull_size": 42832237
   },
   {
     "tag": "8.5-thread-alpine3.23",
     "version": "8.5",
     "variant": "thread",
     "distro": "alpine3.23",
-    "built_at": "2026-09-25T02:47:23Z",
+    "built_at": "2026-09-26T02:50:12Z",
     "size": 117932922,
     "critical": 0,
     "high": 0,
-    "pull_size": 43749577
+    "pull_size": 43749221
   }
 ]
