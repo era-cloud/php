@@ -314,6 +314,17 @@ RUN set -eux; \
 		ln -sT "/usr/include/$debMultiarch/curl" /usr/local/include/curl; \
 	fi; \
 {{ ) end -}}
+	case "$gnuArch" in \
+		'i686-linux-'*) \
+			# php zend jit assumes SSE registers, xmm0-7, are available (and "Pentium4"/SSE2 is a reasonable baseline)
+			# https://github.com/php/php-src/pull/22832
+			# so, allow it and use SSE/SSE2 floating-point unit instead of the legacy stack
+			export \
+				CFLAGS="$CFLAGS -msse2 -mfpmath=sse" \
+				CPPFLAGS="$CPPFLAGS -msse2 -mfpmath=sse" \
+			; \
+			;; \
+	esac; \
 	test "$PHP_INI_DIR" != "${PHP_INI_DIR%/php}"; \
 	./configure \
 		--build="$gnuArch" \
@@ -331,6 +342,8 @@ RUN set -eux; \
 # https://github.com/docker-library/php/issues/822
 		--with-pic \
 		\
+{{ ) elif env.variant | IN("zts", "thread") then ( -}}
+# no --enable-pic for ZTS builds; forcing PIC also removes -fpie from executable objects, preventing local-exec TLS: https://github.com/docker-library/php/pull/1692
 {{ ) else ( -}}
 # https://github.com/docker-library/php/issues/822
 # https://github.com/php/php-src/pull/21067/changes#diff-4b9db5b77bcd56aa33b310dc44c8bc99c729c9abb195df2e98e6985b81289ae8R130
@@ -376,7 +389,7 @@ RUN set -eux; \
 		\
 		--disable-cgi \
 {{ # zts + alpine special cased for embed (otherwise zts is effectively cli): https://github.com/docker-library/php/pull/1342 -}}
-{{ if (env.variant == "zts") or (env.variant == "cli" and (is_alpine | not)) then ( -}}
+{{ if env.variant == "zts" or (env.variant == "cli" and (is_alpine | not)) then ( -}}
 		\
 # https://github.com/docker-library/php/pull/939#issuecomment-730501748
 		--enable-embed \

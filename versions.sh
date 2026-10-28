@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
-rm -rf 8.{2,3,4,5}-rc
-mkdir 8.{2,3,4,5}-rc
 cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
 # TODO consume https://www.php.net/releases/branches.php and https://www.php.net/pre-release-builds.php?format=json here like in Go, Julia, etc (so we can have a canonical "here's all the versions possible" mode, and more automated metadata like EOL 👀)
