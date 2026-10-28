@@ -87,7 +87,9 @@ jobs:
         run: |
           last="$(jq -r --arg n "${{ matrix.name }}" '.[$n] // empty' .build-state.json 2>/dev/null || true)"
           variant_dir="$(dirname "${{ matrix.meta.dockerfiles[0] }}")"
-          paths="$variant_dir Dockerfile-linux.template versions.json docker-php-entrypoint docker-php-ext-configure docker-php-ext-enable docker-php-ext-install docker-php-source apply-templates.sh"
+          # 只看变体目录本身：Dockerfile 是模板渲染产物，docker-php-* 也被 apply-templates.sh 复制进目录，
+          # 所以"目录没变"即"渲染结果没变"，模板文件本身的改动不再连坐所有变体重建
+          paths="$variant_dir"
           changed="true"
           if [ -n "$last" ] && git diff --quiet "$last"..HEAD -- $paths; then
             changed="false"

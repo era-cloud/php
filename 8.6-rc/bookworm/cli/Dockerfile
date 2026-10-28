@@ -177,6 +177,8 @@ RUN set -eux; \
 # https://github.com/php/php-src/pull/21067/changes#diff-4b9db5b77bcd56aa33b310dc44c8bc99c729c9abb195df2e98e6985b81289ae8R130
 		--enable-pic \
 		\
+# --enable-mbstring is included here because otherwise there's no way to get the extension installers (PIE) to use it properly (see https://github.com/docker-library/php/issues/195)
+		--enable-mbstring \
 # --enable-mysqlnd is included here because it's harder to compile after the fact than extensions are (since it's a plugin for several extensions, not an extension in itself)
 		--enable-mysqlnd \
 # https://wiki.php.net/rfc/argon2_password_hash
@@ -236,6 +238,35 @@ RUN set -eux; \
 	; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*; \
+	\
+	# the PHP build purge above removed liblz4-dev/libzstd-dev; reinstall them for the phpredis build
+	apt-get update; \
+	apt-get install -y --no-install-recommends liblz4-dev libzstd-dev; \
+	\
+# install PIE (PHP Installer for Extensions), the official replacement for PECL
+# https://php.github.io/pie/ https://github.com/php/pie
+	curl -fL --output /usr/local/bin/pie 'https://github.com/php/pie/releases/latest/download/pie.phar'; \
+	chmod +x /usr/local/bin/pie; \
+	\
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check phpredis/phpredis \
+		--enable-redis \
+		--enable-redis-igbinary \
+		--enable-redis-lz4 \
+		--enable-redis-msgpack \
+		--enable-redis-zstd \
+		--with-liblz4=yes \
+		--with-libzstd=yes; \
+	# keep the runtime libs (liblz4-1/libzstd1) in the final image, drop the -dev packages
+	apt-mark manual liblz4-1 libzstd1; \
+	apt-get purge -y liblz4-dev libzstd-dev; \
+	rm -rf /var/lib/apt/lists/*; \
+	 \
+	rm -rf /tmp/*; \
+	rm -rf /root/.pie; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
 	\
 # smoke test
 	php --version

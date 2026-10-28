@@ -31,7 +31,8 @@
 	;
 	def install_pie:
 		# https://github.com/php/pie
-		IN(rcVersion; "8.2", "8.3", "8.4", "8.5")
+		# 本 fork 的所有支持版本（8.2+）一律走 PIE 安装扩展，不再按版本判断
+		true
 -}}
 FROM {{ env.from }}
 
