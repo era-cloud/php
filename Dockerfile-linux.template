@@ -33,6 +33,27 @@
 		# https://github.com/php/pie
 		# 本 fork 的所有支持版本（8.2+）一律走 PIE 安装扩展，不再按版本判断
 		true
+	;
+	def php86plus:
+		# PHP 8.6 的扩展生态尚未跟上：各扩展的正式版全部早于 8.6，
+		# 只有下面这些仓库的开发分支带了 8.6 的 API 适配，因此 8.6+ 固定到具体提交
+		(rcVersion | version_id) >= 80600
+	;
+	def pie_msgpack:
+		# https://github.com/msgpack/msgpack-php/pull/185 (unserialize_callback_func 改成 zend_string)
+		if php86plus then "msgpack/msgpack-php:dev-master#4a6890850a9065f9a211951df4fc39c5a4c498ab" else "msgpack/msgpack-php" end
+	;
+	def pie_igbinary:
+		# 3.2.17RC1 无 8.6 支持；master 2026-08 才修 unserialize_callback_func
+		if php86plus then "igbinary/igbinary:dev-master#2b1f5d62e3037b07c2a46499ac32091cdb41fb40" else "igbinary/igbinary:^3.2@RC" end
+	;
+	def pie_ds:
+		# https://github.com/php-ds/ext-ds/pull/233 (issue-8.6.0beta1)
+		if php86plus then "php-ds/ext-ds:dev-master#6e9d66812b0acb9445c446b8dfb79904e0a9bc13" else "php-ds/ext-ds" end
+	;
+	def pie_redis:
+		# 6.3.0 无 8.6 支持；默认分支是 develop
+		if php86plus then "phpredis/phpredis:dev-develop#10ae0080a333e86adf1ad850d5728b619473d62e" else "phpredis/phpredis" end
 -}}
 FROM {{ env.from }}
 
@@ -473,16 +494,20 @@ RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends liblz4-dev libzstd-dev; \
 {{ ) end -}}
+{{ if php86plus then ( -}}
+	# 8.6 的扩展只能从 VCS 装（没有 dist 包），需要临时安装 git
+	{{ if is_alpine then "apk add --no-cache --virtual .pie-vcs git;" else "apt-get install -y --no-install-recommends git;" end }} \
+{{ ) else "" end -}}
 	\
 # install PIE (PHP Installer for Extensions), the official replacement for PECL
 # https://php.github.io/pie/ https://github.com/php/pie
 	curl -fL --output /usr/local/bin/pie 'https://github.com/php/pie/releases/latest/download/pie.phar'; \
 	chmod +x /usr/local/bin/pie; \
 	\
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check phpredis/phpredis \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension '{{ pie_msgpack }}'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension '{{ pie_igbinary }}'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension '{{ pie_ds }}'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check '{{ pie_redis }}' \
 		--enable-redis \
 		--enable-redis-igbinary \
 		--enable-redis-lz4 \
@@ -490,6 +515,9 @@ RUN set -eux; \
 		--enable-redis-zstd \
 		--with-liblz4=yes \
 		--with-libzstd=yes; \
+{{ if php86plus then ( -}}
+	{{ if is_alpine then "apk del .pie-vcs;" else "apt-get purge -y --auto-remove git; " + clean_apt + ";" end }} \
+{{ ) else "" end -}}
 {{ if is_alpine then "" else ( -}}
 	# keep the runtime libs (liblz4-1/libzstd1) in the final image, drop the -dev packages
 	apt-mark manual liblz4-1 libzstd1; \

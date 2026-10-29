@@ -242,16 +242,18 @@ RUN set -eux; \
 	# the PHP build purge above removed liblz4-dev/libzstd-dev; reinstall them for the phpredis build
 	apt-get update; \
 	apt-get install -y --no-install-recommends liblz4-dev libzstd-dev; \
+	# 8.6 的扩展只能从 VCS 装（没有 dist 包），需要临时安装 git
+	apt-get install -y --no-install-recommends git; \
 	\
 # install PIE (PHP Installer for Extensions), the official replacement for PECL
 # https://php.github.io/pie/ https://github.com/php/pie
 	curl -fL --output /usr/local/bin/pie 'https://github.com/php/pie/releases/latest/download/pie.phar'; \
 	chmod +x /usr/local/bin/pie; \
 	\
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check phpredis/phpredis \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'msgpack/msgpack-php:dev-master#4a6890850a9065f9a211951df4fc39c5a4c498ab'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:dev-master#2b1f5d62e3037b07c2a46499ac32091cdb41fb40'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'php-ds/ext-ds:dev-master#6e9d66812b0acb9445c446b8dfb79904e0a9bc13'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'phpredis/phpredis:dev-develop#10ae0080a333e86adf1ad850d5728b619473d62e' \
 		--enable-redis \
 		--enable-redis-igbinary \
 		--enable-redis-lz4 \
@@ -259,6 +261,7 @@ RUN set -eux; \
 		--enable-redis-zstd \
 		--with-liblz4=yes \
 		--with-libzstd=yes; \
+	apt-get purge -y --auto-remove git; apt-get dist-clean; \
 	# keep the runtime libs (liblz4-1/libzstd1) in the final image, drop the -dev packages
 	apt-mark manual liblz4-1 libzstd1; \
 	apt-get purge -y liblz4-dev libzstd-dev; \

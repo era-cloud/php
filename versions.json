@@ -122,25 +122,13 @@
     "sha256": "93f208da9ae059bf6863b0e1d101e6c6475a7b0f0acbf6c084950ab522f514d8",
     "variants": [
       "trixie/cli",
-      "trixie/swoole",
       "trixie/zts",
-      "trixie/swow",
-      "trixie/thread",
       "bookworm/cli",
-      "bookworm/swoole",
       "bookworm/zts",
-      "bookworm/swow",
-      "bookworm/thread",
       "alpine3.24/cli",
-      "alpine3.24/swoole",
       "alpine3.24/zts",
-      "alpine3.24/swow",
-      "alpine3.24/thread",
       "alpine3.23/cli",
-      "alpine3.23/swoole",
-      "alpine3.23/zts",
-      "alpine3.23/swow",
-      "alpine3.23/thread"
+      "alpine3.23/zts"
     ]
   }
 }

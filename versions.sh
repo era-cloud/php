@@ -110,10 +110,9 @@ for version in "${versions[@]}"; do
 					) as $suite
 					| (
 						"cli",
-						"swoole",
-						"zts",
-						"swow",
-						"thread",
+						# swoole / swow 尚无任何可编译于 PHP 8.6 的版本（swoole master 的 composer.json 明写 <8.6），
+						# thread 依赖 swoole 线程模式，因此 8.6+ 只保留 cli 与 zts
+						(if env.rcVersion | IN("8.2", "8.3", "8.4", "8.5") then "swoole", "zts", "swow", "thread" else "zts" end),
 						empty
 					) as $variant
 					| "\($suite)/\($variant)"
