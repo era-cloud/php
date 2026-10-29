@@ -8,7 +8,7 @@ end='<!-- TAG-MATRIX-END -->'
 
 block="$(
 	jq -r '
-		def verid: (.version | split(".") | map(tonumber)) | .[0]*10000 + .[1]*100 + (.[2] // 0);
+		def verid: (.version | sub("-rc$"; "") | split(".") | map(tonumber)) | .[0]*10000 + .[1]*100 + (.[2] // 0);
 		def distroid: if .distro=="alpine3.24" then 0 elif .distro=="alpine3.23" then 1 elif .distro=="trixie" then 2 else 3 end;
 		def rowfields:
 			[
@@ -21,7 +21,7 @@ block="$(
 				(if (.critical == null and .high == null) then "待扫描" else ((.critical // 0 | tostring) + "/" + (.high // 0 | tostring)) end)
 			] | @tsv;
 
-		( [.[].version] | max ) as $lv
+		( [.[] | select(.version | endswith("-rc") | not) | .version] | max ) as $lv
 		| [ .[] | select(.version == $lv and .variant == "cli" and (.distro | startswith("alpine") | not)) ][0] as $latest
 		| (
 			["cli", "zts", "swoole", "thread", "swow"][] as $g
