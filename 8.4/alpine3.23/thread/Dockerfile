@@ -232,10 +232,10 @@ RUN set -eux; \
 	curl -fL --output /usr/local/bin/pie 'https://github.com/php/pie/releases/latest/download/pie.phar'; \
 	chmod +x /usr/local/bin/pie; \
 	\
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension msgpack/msgpack-php; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'msgpack/msgpack-php'; \
 	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension php-ds/ext-ds; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check phpredis/phpredis \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'php-ds/ext-ds'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'phpredis/phpredis' \
 		--enable-redis \
 		--enable-redis-igbinary \
 		--enable-redis-lz4 \
