@@ -884,87 +884,87 @@
     "version": "8.6-rc",
     "variant": "cli",
     "distro": "trixie",
-    "built_at": null,
-    "size": null,
-    "pull_size": null,
-    "critical": null,
-    "high": null
+    "built_at": "2026-10-29T19:15:28Z",
+    "size": 529572571,
+    "pull_size": 168252854,
+    "critical": 1,
+    "high": 62
   },
   {
     "tag": "8.6-rc-zts-trixie",
     "version": "8.6-rc",
     "variant": "zts",
     "distro": "trixie",
-    "built_at": null,
-    "size": null,
-    "pull_size": null,
-    "critical": null,
-    "high": null
+    "built_at": "2026-10-29T19:15:26Z",
+    "size": 529590076,
+    "pull_size": 168331768,
+    "critical": 1,
+    "high": 62
   },
   {
     "tag": "8.6-rc-cli-bookworm",
     "version": "8.6-rc",
     "variant": "cli",
     "distro": "bookworm",
-    "built_at": null,
-    "size": null,
-    "pull_size": null,
-    "critical": null,
-    "high": null
+    "built_at": "2026-10-29T19:14:42Z",
+    "size": 530953491,
+    "pull_size": 170674625,
+    "critical": 3,
+    "high": 83
   },
   {
     "tag": "8.6-rc-zts-bookworm",
     "version": "8.6-rc",
     "variant": "zts",
     "distro": "bookworm",
-    "built_at": null,
-    "size": null,
-    "pull_size": null,
-    "critical": null,
-    "high": null
+    "built_at": "2026-10-29T19:15:22Z",
+    "size": 530962804,
+    "pull_size": 170750309,
+    "critical": 3,
+    "high": 83
   },
   {
     "tag": "8.6-rc-cli-alpine3.24",
     "version": "8.6-rc",
     "variant": "cli",
     "distro": "alpine3.24",
-    "built_at": null,
-    "size": null,
-    "pull_size": null,
-    "critical": null,
-    "high": null
+    "built_at": "2026-10-29T19:16:00Z",
+    "size": 93281857,
+    "pull_size": 39111168,
+    "critical": 0,
+    "high": 0
   },
   {
     "tag": "8.6-rc-zts-alpine3.24",
     "version": "8.6-rc",
     "variant": "zts",
     "distro": "alpine3.24",
-    "built_at": null,
-    "size": null,
-    "pull_size": null,
-    "critical": null,
-    "high": null
+    "built_at": "2026-10-29T19:18:22Z",
+    "size": 120553709,
+    "pull_size": 45390733,
+    "critical": 0,
+    "high": 0
   },
   {
     "tag": "8.6-rc-cli-alpine3.23",
     "version": "8.6-rc",
     "variant": "cli",
     "distro": "alpine3.23",
-    "built_at": null,
-    "size": null,
-    "pull_size": null,
-    "critical": null,
-    "high": null
+    "built_at": "2026-10-29T19:20:23Z",
+    "size": 93019668,
+    "pull_size": 38894002,
+    "critical": 0,
+    "high": 0
   },
   {
     "tag": "8.6-rc-zts-alpine3.23",
     "version": "8.6-rc",
     "variant": "zts",
     "distro": "alpine3.23",
-    "built_at": null,
-    "size": null,
-    "pull_size": null,
-    "critical": null,
-    "high": null
+    "built_at": "2026-10-29T19:20:41Z",
+    "size": 120291520,
+    "pull_size": 45203760,
+    "critical": 0,
+    "high": 0
   }
 ]

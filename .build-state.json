@@ -278,5 +278,13 @@
   "8.4.27-swoole-bookworm": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",
   "8.2.35-thread-alpine3.24": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",
   "8.2.35-swoole-trixie": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",
-  "8.5.12-zts-trixie": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b"
+  "8.5.12-zts-trixie": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",
+  "8.6.0RC4-cli-trixie": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
+  "8.6.0RC4-zts-alpine3.24": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
+  "8.6.0RC4-zts-trixie": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
+  "8.6.0RC4-cli-bookworm": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
+  "8.6.0RC4-cli-alpine3.24": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
+  "8.6.0RC4-zts-alpine3.23": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
+  "8.6.0RC4-cli-alpine3.23": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
+  "8.6.0RC4-zts-bookworm": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e"
 }

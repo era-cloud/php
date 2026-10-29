@@ -61,10 +61,10 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.5-cli-alpine3.24 | 8.5 | alpine3.24 | 2026-10-29T12:49:17Z | 85.3 MB | 33.5 MB | 0/0 |
 | 8.5-cli-alpine3.23 | 8.5 | alpine3.23 | 2026-10-29T12:59:37Z | 85.2 MB | 33.4 MB | 0/0 |
 | 8.5-cli-bookworm | 8.5 | bookworm | 2026-10-29T12:48:26Z | 503 MB | 161.6 MB | 3/83 |
-| 8.6-rc-cli-alpine3.24 | 8.6-rc | alpine3.24 | 待构建 | 待扫描 | 待扫描 | 待扫描 |
-| 8.6-rc-cli-alpine3.23 | 8.6-rc | alpine3.23 | 待构建 | 待扫描 | 待扫描 | 待扫描 |
-| 8.6-rc-cli-trixie | 8.6-rc | trixie | 待构建 | 待扫描 | 待扫描 | 待扫描 |
-| 8.6-rc-cli-bookworm | 8.6-rc | bookworm | 待构建 | 待扫描 | 待扫描 | 待扫描 |
+| 8.6-rc-cli-alpine3.24 | 8.6-rc | alpine3.24 | 2026-10-29T19:16:00Z | 89 MB | 37.3 MB | 0/0 |
+| 8.6-rc-cli-alpine3.23 | 8.6-rc | alpine3.23 | 2026-10-29T19:20:23Z | 88.7 MB | 37.1 MB | 0/0 |
+| 8.6-rc-cli-trixie | 8.6-rc | trixie | 2026-10-29T19:15:28Z | 505 MB | 160.5 MB | 1/62 |
+| 8.6-rc-cli-bookworm | 8.6-rc | bookworm | 2026-10-29T19:14:42Z | 506.4 MB | 162.8 MB | 3/83 |
 | 8.4-cli-alpine3.24 | 8.4 | alpine3.24 | 2026-10-29T13:10:57Z | 76 MB | 32.5 MB | 0/0 |
 | 8.4-cli-alpine3.23 | 8.4 | alpine3.23 | 2026-10-29T12:57:53Z | 75.9 MB | 32.4 MB | 0/0 |
 | 8.4-cli-trixie | 8.4 | trixie | 2026-10-29T12:59:56Z | 487.9 MB | 157.4 MB | 1/62 |
@@ -80,10 +80,10 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 ### zts
 | tag | PHP | 发行版 | 构建时间 | 镜像大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- | --- |
-| 8.6-rc-zts-alpine3.24 | 8.6-rc | alpine3.24 | 待构建 | 待扫描 | 待扫描 | 待扫描 |
-| 8.6-rc-zts-alpine3.23 | 8.6-rc | alpine3.23 | 待构建 | 待扫描 | 待扫描 | 待扫描 |
-| 8.6-rc-zts-trixie | 8.6-rc | trixie | 待构建 | 待扫描 | 待扫描 | 待扫描 |
-| 8.6-rc-zts-bookworm | 8.6-rc | bookworm | 待构建 | 待扫描 | 待扫描 | 待扫描 |
+| 8.6-rc-zts-alpine3.24 | 8.6-rc | alpine3.24 | 2026-10-29T19:18:22Z | 115 MB | 43.3 MB | 0/0 |
+| 8.6-rc-zts-alpine3.23 | 8.6-rc | alpine3.23 | 2026-10-29T19:20:41Z | 114.7 MB | 43.1 MB | 0/0 |
+| 8.6-rc-zts-trixie | 8.6-rc | trixie | 2026-10-29T19:15:26Z | 505.1 MB | 160.5 MB | 1/62 |
+| 8.6-rc-zts-bookworm | 8.6-rc | bookworm | 2026-10-29T19:15:22Z | 506.4 MB | 162.8 MB | 3/83 |
 | 8.5-zts-alpine3.24 | 8.5 | alpine3.24 | 2026-10-29T12:52:26Z | 110.7 MB | 39.3 MB | 0/0 |
 | 8.5-zts-alpine3.23 | 8.5 | alpine3.23 | 2026-10-29T12:59:08Z | 110.6 MB | 39.2 MB | 0/0 |
 | 8.5-zts-trixie | 8.5 | trixie | 2026-10-29T12:56:26Z | 501.7 MB | 159.4 MB | 1/62 |
