@@ -5,7 +5,9 @@
 [![Security Scan](https://img.shields.io/github/actions/workflow/status/era-cloud/php/security-scan.yml?branch=main&label=Security%20Scan)](https://github.com/era-cloud/php/actions/workflows/security-scan.yml)
 [![License](https://img.shields.io/github/license/era-cloud/php)](https://github.com/era-cloud/php/blob/main/LICENSE)
 [![Last Updated](https://img.shields.io/github/last-commit/era-cloud/php)](https://github.com/era-cloud/php/commits/main)
-[![PHP](https://img.shields.io/badge/PHP-8.2%20%7C%208.3%20%7C%208.4%20%7C%208.5-777BB4)](https://www.php.net/)
+<!-- PHP-BADGE-START -->
+[![PHP](https://img.shields.io/badge/PHP-8.2%20%7C%208.3%20%7C%208.4%20%7C%208.5%20%7C%208.6-rc-777BB4)](https://www.php.net/)
+<!-- PHP-BADGE-END -->
 [![Repo Size](https://img.shields.io/github/repo-size/era-cloud/php)](https://github.com/era-cloud/php)
 [![Variants](https://img.shields.io/badge/variants-cli%20%7C%20zts%20%7C%20swoole%20%7C%20swow%20%7C%20thread-blue)](https://github.com/era-cloud/php/pkgs/container/php)
 [![Contributors](https://img.shields.io/github/contributors/era-cloud/php)](https://github.com/era-cloud/php/graphs/contributors)
@@ -26,14 +28,17 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 
 ## 版本矩阵
 
+<!-- VERSION-MATRIX-START -->
 | PHP | cli | zts | swoole | swow | thread |
-|-----|-----|-----|--------|------|--------|
-| **8.5** (8.5.9) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **8.4** (8.4.24) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **8.3** (8.3.33) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **8.2** (8.2.33) | ✅ | ✅ | ✅ | ✅ | ✅ |
+|-----|-----|-----|-----|-----|-----|
+| **8.6-rc** (8.6.0RC4) · 预发布 | ✅ | ✅ | — | — | — |
+| **8.5** (8.5.12) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **8.4** (8.4.27) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **8.3** (8.3.36) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **8.2** (8.2.35) | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-每个版本支持发行版：`trixie` / `bookworm` / `alpine3.24` / `alpine3.23`（共 80 个变体）。
+每个版本支持发行版：`trixie` / `bookworm` / `alpine3.24` / `alpine3.23`（共 88 个变体）。
+<!-- VERSION-MATRIX-END -->
 
 变体说明：
 

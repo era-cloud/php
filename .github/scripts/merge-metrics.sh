@@ -34,10 +34,18 @@ else
 	metrics="$base"
 fi
 
+# 把完整版本标签归一化成仓库里用的短标签：
+#   8.2.33-cli-trixie    -> 8.2-cli-trixie     （稳定版别名）
+#   8.6.0RC4-cli-trixie  -> 8.6-rc-cli-trixie  （预发布别名，对应 versions.json 的 "8.6-rc"）
+norm_tag() {
+	sed -E -e 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/' \
+		-e 's/^([0-9]+\.[0-9]+)\.[0-9]+[A-Za-z]+[0-9]*(-.*)$/\1-rc\2/'
+}
+
 # 2. merge image size / build time from uploaded artifacts (size-<tag>.json)
 #    artifact tags are full (8.2.33-cli-trixie); normalize to short (8.2-cli-trixie) to match base
 while IFS= read -r -d '' f; do
-	tag="$(jq -r '.tag' "$f" | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/')"
+	tag="$(jq -r '.tag' "$f" | norm_tag)"
 	size="$(jq -r '.size' "$f")"
 	built_at="$(jq -r '.built_at // ""' "$f")"
 	metrics="$(jq -c --arg t "$tag" --argjson s "$size" --arg b "$built_at" \
@@ -46,7 +54,7 @@ done < <(find . -path './.git' -prune -o -type f -name 'size-*.json' -print0 2>/
 
 # 2b. merge compressed (pull) size from pull-size-<tag>.json artifacts
 while IFS= read -r -d '' f; do
-	tag="$(jq -r '.tag' "$f" | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/')"
+	tag="$(jq -r '.tag' "$f" | norm_tag)"
 	pull_size="$(jq -r '.pull_size' "$f")"
 	metrics="$(jq -c --arg t "$tag" --argjson p "$pull_size" \
 		'map(if .tag == $t then .pull_size = $p else . end)' <<<"$metrics")"
@@ -57,7 +65,7 @@ done < <(find . -path './.git' -prune -o -type f -name 'pull-size-*.json' -print
 #    of the SARIF level: trivy emits HIGH at level "error" when a multi-value
 #    --severity filter is applied, so level-based counting is unreliable
 while IFS= read -r -d '' f; do
-	tag="$(basename "$f" | sed 's/^trivy-//; s/\.sarif$//' | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/')"
+	tag="$(basename "$f" | sed 's/^trivy-//; s/\.sarif$//' | norm_tag)"
 	critical="$(jq '[.runs[].results[]? | .message.text | capture("Severity: (?<s>[A-Z]+)") | select(.s == "CRITICAL")] | length' "$f" 2>/dev/null || echo 0)"
 	high="$(jq '[.runs[].results[]? | .message.text | capture("Severity: (?<s>[A-Z]+)") | select(.s == "HIGH")] | length' "$f" 2>/dev/null || echo 0)"
 	metrics="$(jq -c --arg t "$tag" --argjson c "$critical" --argjson h "$high" \
@@ -73,7 +81,7 @@ else
 	details='{}'
 fi
 while IFS= read -r -d '' f; do
-	tag="$(basename "$f" | sed 's/^trivy-//; s/\.sarif$//' | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+(-.*)$/\1\2/')"
+	tag="$(basename "$f" | sed 's/^trivy-//; s/\.sarif$//' | norm_tag)"
 	findings="$(jq -c '[.runs[].results[]? | .message.text as $t | ($t | capture("Severity: (?<s>[A-Z]+)").s // "") as $s | select(($s == "CRITICAL") or ($s == "HIGH")) | {
 		id: (.ruleId // "unknown"),
 		package: ($t | capture("Package: (?<p>[^\\n]*)").p // ""),

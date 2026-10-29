@@ -64,11 +64,62 @@ formatted="$(
 	done
 )"
 
-awk -v s="$start" -v e="$end" -v b="$formatted" '
-	$0 == s { print; print b; in_block = 1; next }
-	$0 == e { in_block = 0; print; next }
-	in_block { next }
-	{ print }
-' README.md > README.md.tmp && mv README.md.tmp README.md
+replace_block() { # <start-marker> <end-marker> <content>
+	awk -v s="$1" -v e="$2" -v b="$3" '
+		$0 == s { print; print b; in_block = 1; next }
+		$0 == e { in_block = 0; print; next }
+		in_block { next }
+		{ print }
+	' README.md > README.md.tmp && mv README.md.tmp README.md
+}
 
+replace_block "$start" "$end" "$formatted"
 echo "updated README tag matrix"
+
+# PHP 徽章：取自 versions.json 里所有仍在维护的版本
+badge="$(
+	jq -r '
+		to_entries
+		| map(select(.value))
+		| map(.key)
+		| sort
+		| join("%20%7C%20")
+	' versions.json
+)"
+replace_block '<!-- PHP-BADGE-START -->' '<!-- PHP-BADGE-END -->' \
+	"[![PHP](https://img.shields.io/badge/PHP-${badge}-777BB4)](https://www.php.net/)"
+echo "updated README php badge"
+
+# 版本矩阵：每个版本支持哪些变体（cli / zts / swoole / swow / thread）
+matrix="$(
+	jq -r '
+		def verid: (.value.version | sub("[a-zA-Z-].*$"; "") | split(".") | map(tonumber)) | .[0]*10000 + .[1]*100 + (.[2] // 0);
+		[ to_entries[] | select(.value) ] as $all
+		| [ "cli", "zts", "swoole", "swow", "thread" ] as $canon
+		| ( [ $all[].value.variants[] | split("/")[1] ] | unique ) as $present
+		| ( $canon | map(. as $c | select($present | index($c))) ) as $cols
+		| (
+			"| PHP | " + ($cols | join(" | ")) + " |",
+			"|" + ([ range(0; ($cols | length) + 1) | "-----" ] | join("|")) + "|",
+			(
+				$all
+				| sort_by(-verid)[]
+				| "| **" + .key + "** (" + .value.version + ")"
+					+ (if (.key | endswith("-rc")) then " · 预发布" else "" end)
+					+ " |"
+					+ ([ $cols[] as $c
+						| if (.value.variants | any(endswith("/" + $c))) then " ✅ |" else " — |" end ] | join(""))
+			),
+			"",
+			"每个版本支持发行版：" + (
+				[ "trixie", "bookworm", "alpine3.24", "alpine3.23" ] as $canonSuites
+				| [ $all[].value.variants[] | split("/")[0] ] | unique as $presentSuites
+				| [ $canonSuites[] | select($presentSuites | index(.)) ]
+				| map("`" + . + "`") | join(" / ")
+			)
+				+ "（共 " + ($all | map(.value.variants | length) | add | tostring) + " 个变体）。"
+		)
+	' versions.json
+)"
+replace_block '<!-- VERSION-MATRIX-START -->' '<!-- VERSION-MATRIX-END -->' "$matrix"
+echo "updated README version matrix"
