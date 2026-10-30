@@ -1,0 +1,94 @@
+name: Check Upstream Sync
+
+# 每周检查 docker-library/php 是否有新的提交尚未合并进本仓库。
+# 上次同步的上游提交记录在仓库根目录的 .upstream-sync 文件里；
+# 同步完成后请把它更新为新的 upstream/master sha。
+
+on:
+  schedule:
+    - cron: '0 4 * * 1' # 每周一 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+defaults:
+  run:
+    shell: 'bash -Eeuo pipefail -x {0}'
+
+jobs:
+  check:
+    name: Compare with docker-library/php
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Compare
+        id: cmp
+        run: |
+          upstream='https://github.com/docker-library/php.git'
+          last=''
+          [ -f .upstream-sync ] && last="$(tr -d '[:space:]' < .upstream-sync)"
+
+          git fetch --quiet --no-tags "$upstream" master
+          latest="$(git rev-parse FETCH_HEAD)"
+
+          if [ -z "$last" ]; then
+            echo "::warning file=.upstream-sync::尚未记录上次同步的上游提交，跳过比较"
+            echo "behind=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "$last" = "$latest" ]; then
+            echo "已是最新（$latest）"
+            echo "behind=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          behind="$(git rev-list --count "$last"..FETCH_HEAD)"
+          echo "behind=$behind" >> "$GITHUB_OUTPUT"
+          {
+            echo "behind=$behind"
+            echo "latest=$latest"
+            echo "last=$last"
+            echo 'commits<<EOF'
+            git log --oneline --no-decorate "$last"..FETCH_HEAD | head -50
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+          echo "::notice title=上游有新提交::落后 $behind 个提交（$last → $latest）"
+      - name: Open or update reminder issue
+        if: steps.cmp.outputs.behind != '0' && steps.cmp.outputs.behind != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          title='上游同步提醒：docker-library/php 有新提交'
+          body="$(cat <<EOF
+          检测到 \`docker-library/php\` 有 **${{ steps.cmp.outputs.behind }}** 个提交尚未合并。
+
+          - 上次同步：\`${{ steps.cmp.outputs.last }}\`
+          - 上游最新：\`${{ steps.cmp.outputs.latest }}\`
+
+          \`\`\`
+          ${{ steps.cmp.outputs.commits }}
+          \`\`\`
+
+          同步步骤（详见 AGENTS.md）：
+
+          1. \`git fetch upstream && git merge --no-ff upstream/master\`
+          2. 解冲突时保持 fork 语义（变体、8.6 限制、PIE pin）
+          3. \`./update.sh\`（无变化则跳过）与 \`./apply-templates.sh\`
+          4. 同步完成后把 \`.upstream-sync\` 更新为新的 upstream/master sha，并关闭本 issue
+
+          本 issue 由 \`.github/workflows/check-upstream.yml\` 自动创建/更新。
+          EOF
+          )"
+
+          num="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --search 'in:title 上游同步提醒' --json number --jq '.[0].number // empty')"
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --repo "$GITHUB_REPOSITORY" --body "$body"
+            echo "已更新已有 issue #$num"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"
+          fi

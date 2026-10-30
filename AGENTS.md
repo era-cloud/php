@@ -40,3 +40,8 @@
 - `.image-metrics.json` 的 tag 用短名（`8.5-cli-trixie`、`8.6-rc-cli-trixie`），`merge-metrics.sh` 的 `norm_tag()` 负责把 artifact 的完整版本标签归一化（`8.6.0RC4-cli-trixie` → `8.6-rc-cli-trixie`）。新增预发布形式时要同步这个正则。
 - README 的 PHP 徽章、版本矩阵、镜像矩阵全部由 `update-readme.sh` 生成（对应 `<!-- PHP-BADGE-* -->`、`<!-- VERSION-MATRIX-* -->`、`<!-- TAG-MATRIX-* -->` 三组标记），**不要手改这些区块内部**。
 
+### 上游同步
+
+- 上次同步的上游提交记录在仓库根目录的 `.upstream-sync`；**每次同步完成后必须更新这个文件**（写入 `git -C . rev-parse upstream/master`）。
+- `.github/workflows/check-upstream.yml` 每周一 04:00 UTC 比对，发现新提交会自动开/更新提醒 issue。
+- 同步流程：`git fetch upstream` → `git merge --no-ff upstream/master` → 解冲突（保持 fork 变体语义、8.6 限制、PIE pin）→ `./apply-templates.sh` → 校验 `8.2-8.5` 渲染结果未变 → 推送。

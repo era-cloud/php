@@ -47,6 +47,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 - `swoole` — 内置 [Swoole](https://github.com/swoole/swoole-src) 扩展
 - `swow` — 内置 [Swow](https://github.com/swow/swow) 扩展
 - `thread` — **ZTS PHP + Swoole 线程模式**（`--enable-swoole-thread`，单进程多线程）
+- **注意**：`8.6-rc` 目前只提供 `cli` 与 `zts`；`swoole` / `swow` / `thread` 尚无可编译于 PHP 8.6 的上游版本，等适配后再加入（见 `.github/workflows/check-86-extensions.yml` 的每周检查）
 
 ## 镜像 Tag 矩阵
 
