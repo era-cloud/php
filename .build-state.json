@@ -86,5 +86,13 @@
   "8.6.0RC4-cli-alpine3.24": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
   "8.6.0RC4-zts-alpine3.23": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
   "8.6.0RC4-cli-alpine3.23": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
-  "8.6.0RC4-zts-bookworm": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e"
+  "8.6.0RC4-zts-bookworm": "50cd91df6ff090b7eed9e9dd9c153d1c37068f0e",
+  "8.6.0RC5-cli-alpine3.23": "b8c4e1c4e5d7e6f1b8f339073da37df00eb8b3a7",
+  "8.6.0RC5-cli-bookworm": "b8c4e1c4e5d7e6f1b8f339073da37df00eb8b3a7",
+  "8.6.0RC5-cli-alpine3.24": "b8c4e1c4e5d7e6f1b8f339073da37df00eb8b3a7",
+  "8.6.0RC5-zts-alpine3.23": "b8c4e1c4e5d7e6f1b8f339073da37df00eb8b3a7",
+  "8.6.0RC5-zts-alpine3.24": "b8c4e1c4e5d7e6f1b8f339073da37df00eb8b3a7",
+  "8.6.0RC5-cli-trixie": "b8c4e1c4e5d7e6f1b8f339073da37df00eb8b3a7",
+  "8.6.0RC5-zts-trixie": "b8c4e1c4e5d7e6f1b8f339073da37df00eb8b3a7",
+  "8.6.0RC5-zts-bookworm": "b8c4e1c4e5d7e6f1b8f339073da37df00eb8b3a7"
 }
