@@ -884,52 +884,52 @@
     "version": "8.6-rc",
     "variant": "cli",
     "distro": "trixie",
-    "built_at": "2026-11-06T04:22:39Z",
-    "size": 182378659,
+    "built_at": "2026-11-13T04:16:35Z",
+    "size": 182422867,
     "pull_size": 168252854,
     "critical": 1,
-    "high": 64
+    "high": 121
   },
   {
     "tag": "8.6-rc-zts-trixie",
     "version": "8.6-rc",
     "variant": "zts",
     "distro": "trixie",
-    "built_at": "2026-11-06T04:22:04Z",
-    "size": 172461117,
+    "built_at": "2026-11-13T04:15:11Z",
+    "size": 173196073,
     "pull_size": 168331768,
     "critical": 1,
-    "high": 64
+    "high": 121
   },
   {
     "tag": "8.6-rc-cli-bookworm",
     "version": "8.6-rc",
     "variant": "cli",
     "distro": "bookworm",
-    "built_at": "2026-11-06T04:22:55Z",
-    "size": 175072321,
+    "built_at": "2026-11-13T04:15:42Z",
+    "size": 175089402,
     "pull_size": 170674625,
     "critical": 3,
-    "high": 61
+    "high": 120
   },
   {
     "tag": "8.6-rc-zts-bookworm",
     "version": "8.6-rc",
     "variant": "zts",
     "distro": "bookworm",
-    "built_at": "2026-11-06T04:21:35Z",
-    "size": 183516930,
+    "built_at": "2026-11-13T04:14:35Z",
+    "size": 183525155,
     "pull_size": 170750309,
     "critical": 3,
-    "high": 61
+    "high": 120
   },
   {
     "tag": "8.6-rc-cli-alpine3.24",
     "version": "8.6-rc",
     "variant": "cli",
     "distro": "alpine3.24",
-    "built_at": "2026-11-06T04:22:48Z",
-    "size": 39221886,
+    "built_at": "2026-11-13T04:16:43Z",
+    "size": 39694070,
     "pull_size": 39111168,
     "critical": 0,
     "high": 0
@@ -939,8 +939,8 @@
     "version": "8.6-rc",
     "variant": "zts",
     "distro": "alpine3.24",
-    "built_at": "2026-11-06T04:27:33Z",
-    "size": 45465062,
+    "built_at": "2026-11-13T04:18:08Z",
+    "size": 46086289,
     "pull_size": 45390733,
     "critical": 0,
     "high": 0
@@ -950,8 +950,8 @@
     "version": "8.6-rc",
     "variant": "cli",
     "distro": "alpine3.23",
-    "built_at": "2026-11-06T04:27:28Z",
-    "size": 38985969,
+    "built_at": "2026-11-13T04:21:10Z",
+    "size": 39009076,
     "pull_size": 38894002,
     "critical": 0,
     "high": 0
@@ -961,8 +961,8 @@
     "version": "8.6-rc",
     "variant": "zts",
     "distro": "alpine3.23",
-    "built_at": "2026-11-06T04:24:48Z",
-    "size": 45267491,
+    "built_at": "2026-11-13T04:21:13Z",
+    "size": 45354622,
     "pull_size": 45203760,
     "critical": 0,
     "high": 0
