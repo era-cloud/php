@@ -106,7 +106,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | --- | --- | --- | --- | --- | --- | --- |
 | 8.5-swoole-alpine3.24 | 8.5 | alpine3.24 | 2026-10-29T12:53:59Z | 112.7 MB | 41.9 MB | 0/0 |
 | 8.5-swoole-alpine3.23 | 8.5 | alpine3.23 | 2026-10-29T13:08:29Z | 112.5 MB | 41.8 MB | 0/0 |
-| 8.5-swoole-trixie | 8.5 | trixie | 2026-11-16T01:41:56Z | 186.4 MB | 172.3 MB | 1/121 |
+| 8.5-swoole-trixie | 8.5 | trixie | 2026-11-16T20:23:39Z | 185.8 MB | 172.5 MB | 1/121 |
 | 8.5-swoole-bookworm | 8.5 | bookworm | 2026-10-29T13:06:39Z | 498.6 MB | 160.9 MB | 4/83 |
 | 8.4-swoole-alpine3.24 | 8.4 | alpine3.24 | 2026-10-29T13:17:48Z | 103.2 MB | 40.8 MB | 0/0 |
 | 8.4-swoole-alpine3.23 | 8.4 | alpine3.23 | 2026-10-29T13:19:33Z | 103 MB | 40.7 MB | 0/0 |

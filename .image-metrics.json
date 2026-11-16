@@ -675,11 +675,11 @@
     "version": "8.5",
     "variant": "swoole",
     "distro": "trixie",
-    "built_at": "2026-11-16T01:41:56Z",
-    "size": 195430258,
+    "built_at": "2026-11-16T20:23:39Z",
+    "size": 194846242,
     "critical": 1,
     "high": 121,
-    "pull_size": 180719194
+    "pull_size": 180876006
   },
   {
     "tag": "8.5-zts-trixie",
