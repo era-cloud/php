@@ -675,10 +675,10 @@
     "version": "8.5",
     "variant": "swoole",
     "distro": "trixie",
-    "built_at": "2026-10-29T12:51:44Z",
-    "size": 559356708,
+    "built_at": "2026-11-16T01:41:56Z",
+    "size": 195430258,
     "critical": 1,
-    "high": 65,
+    "high": 121,
     "pull_size": 180719194
   },
   {
