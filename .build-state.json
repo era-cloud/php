@@ -101,6 +101,5 @@
   "8.6.0RC7-zts-alpine3.23": "edca7ff1bdb3126bc9fce89bf02b4a56977e9ce7",
   "8.6.0RC7-zts-trixie": "edca7ff1bdb3126bc9fce89bf02b4a56977e9ce7",
   "8.6.0RC7-cli-trixie": "edca7ff1bdb3126bc9fce89bf02b4a56977e9ce7",
-  "8.6.0RC7-zts-bookworm": "edca7ff1bdb3126bc9fce89bf02b4a56977e9ce7",
-  "8.5.12-swoole-trixie": "6e41c04d698e0b02274df791f097092adc0f5252"
+  "8.6.0RC7-zts-bookworm": "edca7ff1bdb3126bc9fce89bf02b4a56977e9ce7"
 }
