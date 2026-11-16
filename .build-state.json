@@ -27,7 +27,6 @@
   "8.3.36-swow-bookworm": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",
   "8.2.35-swow-alpine3.24": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",
   "8.3.36-thread-trixie": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",
-  "8.5.12-swoole-trixie": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",
   "8.4.27-zts-alpine3.24": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",
   "8.5.12-thread-trixie": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",
   "8.2.35-swoole-alpine3.23": "cacc5c3113b8aeed2c02daa4a13b1e2448f8907b",

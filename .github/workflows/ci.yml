@@ -101,7 +101,17 @@ jobs:
       - name: Login to the Github Container registry
         run: docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
       - name: Login to the Aliyun ACR registry
-        run: docker login --username ${{ vars.ACR_USERNAME }} --password ${{ secrets.ACR_TOKEN }}  ${{ vars.ACR_REGISTRY }}
+        run: |
+          # 阿里云 ACR 的 auth 端点偶发 connection reset（2026-11-15 实际踩到），加重试
+          for i in 1 2 3; do
+            if docker login --username '${{ vars.ACR_USERNAME }}' --password '${{ secrets.ACR_TOKEN }}' '${{ vars.ACR_REGISTRY }}'; then
+              exit 0
+            fi
+            echo "::warning title=ACR login retry::$i/3 失败，5s 后重试"
+            sleep 5
+          done
+          echo "::error title=ACR login failed::连续 3 次登录失败"
+          exit 1
       - name: Set up buildx (docker-container)
         if: steps.changed.outputs.changed == 'true'
         run: |
