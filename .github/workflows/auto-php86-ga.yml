@@ -1,0 +1,112 @@
+name: Auto PHP 8.6 GA Switch
+
+# PHP 8.6 正式版发布后自动把 8.6 纳入版本矩阵：
+#   - ./update.sh 8.6 生成 8.6/ 目录（按 versions.sh 的规则，8.6 只有 cli / zts，
+#     因为 swoole / swow 尚无支持 PHP 8.6 的版本）
+#   - generate-stackbrew-library.sh 的 aliases 从 8.5 切到 8.6（8 / latest）
+#   - 提交到 auto/php-8.6-ga 分支并开 PR，人工 review 合并后才真正构建发布
+# 重复运行是幂等的（已有 PR 就跳过）。
+
+on:
+  schedule:
+    - cron: '0 5 * * *' # 每天 05:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+defaults:
+  run:
+    shell: 'bash -Eeuo pipefail -x {0}'
+
+jobs:
+  ga-switch:
+    name: Detect PHP 8.6 GA and open PR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Detect PHP 8.6 GA
+        id: detect
+        run: |
+          set +e
+          ga="$(curl -fsSL 'https://www.php.net/releases/index.php?json&max=100&version=8.6' \
+            | jq -r 'keys[] | select(test("^8\\.6\\.[0-9]+$"))' 2>/dev/null | sort -V | tail -1)"
+          set -e
+          cur="$(jq -r '."8.6".version // empty' versions.json)"
+          echo "ga=${ga:-none} current=${cur:-none}"
+          printf 'ga=%s\ncur=%s\n' "${ga:-}" "${cur:-}" >> "$GITHUB_OUTPUT"
+          if [ -z "${ga:-}" ]; then
+            echo "::notice title=PHP 8.6::正式版尚未发布，跳过"
+          elif [ -n "$cur" ]; then
+            echo "::notice title=PHP 8.6::versions.json 里已有 8.6（$cur），无需切换"
+          else
+            echo "::notice title=PHP 8.6::检测到正式版 $ga，准备开 PR"
+          fi
+      - name: Build branch and open PR
+        if: steps.detect.outputs.ga != '' && steps.detect.outputs.cur == ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GA: ${{ steps.detect.outputs.ga }}
+        run: |
+          existing="$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --head auto/php-8.6-ga --json number --jq '.[0].number // empty')"
+          if [ -n "$existing" ]; then
+            echo "::notice title=PR 已存在::#${existing}，视为已处理，跳过"
+            exit 0
+          fi
+
+          git config user.name 'github-actions'
+          git config user.email 'github-actions@github.com'
+          git switch -c auto/php-8.6-ga
+
+          ./update.sh 8.6
+
+          python3 - <<'PY'
+          import sys
+          p = 'generate-stackbrew-library.sh'
+          s = open(p).read()
+          if '[8.6]=' in s:
+              print('aliases 已包含 8.6，跳过')
+              sys.exit(0)
+          if "[8.5]='8 latest'" not in s:
+              print("未找到 [8.5]='8 latest'，请人工确认", file=sys.stderr)
+              sys.exit(1)
+          s = s.replace("[8.5]='8 latest'", "[8.5]='8'\n\t[8.6]='8 latest'")
+          open(p, 'w').write(s)
+          PY
+
+          # 校验生成结果：8.6 只应有 cli / zts
+          test -f 8.6/trixie/cli/Dockerfile
+          test -f 8.6/trixie/zts/Dockerfile
+          ! test -d 8.6/trixie/swoole
+
+          git add versions.json .env.current.version 8.6 generate-stackbrew-library.sh
+          git commit \
+            -m "feat(8.6): PHP 8.6 正式版（${GA}）转正" \
+            -m "versions.json 增加 8.6 = ${GA}；生成 8.6/ 变体（cli / zts，swoole/swow/thread 暂无支持 8.6 的版本）。" \
+            -m "aliases: [8.5]='8'、[8.6]='8 latest'，latest 指向 8.6 cli。"
+
+          git push -u origin auto/php-8.6-ga
+
+          body="$(
+            printf '%s\n' \
+              "自动检测到 PHP **${GA}** 正式版发布，本 PR 由 \`.github/workflows/auto-php86-ga.yml\` 生成。" \
+              "" \
+              "**改动**" \
+              "- \`versions.json\`：新增 \`8.6 = ${GA}\`" \
+              "- \`8.6/\`：按现有变体规则生成，仅 **cli / zts**（swoole / swow / thread 尚无支持 PHP 8.6 的版本）" \
+              "- \`generate-stackbrew-library.sh\`：\`aliases\` 改为 \`[8.5]='8'\`、\`[8.6]='8 latest'\`" \
+              "" \
+              "**合并前请确认**" \
+              "- [ ] 8.6 的 cli / zts 能正常构建（合并后首次运行会立即验证）" \
+              "- [ ] 是否保留 \`8.6-rc\`（可保留一个周期后再删）" \
+              "- [ ] latest / 8 指向 8.6 是否符合预期"
+          )"
+
+          gh pr create --repo "$GITHUB_REPOSITORY" \
+            --base main --head auto/php-8.6-ga \
+            --title "PHP 8.6 正式版（${GA}）转正" \
+            --body "$body"

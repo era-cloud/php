@@ -115,13 +115,16 @@ for tag in $tags; do
 						| join(" ")
 					),
 					push: (
-						# aliyun mirror: re-tag the locally-loaded ghcr image and push (docker push -> gzip)
-						"retry_push() { for i in 1 2 3 4 5; do docker push \"$1\" && return 0; sleep 10; done; return 1; }; "
-						+ "src=" + ("ghcr.io/era-cloud/" + .tags[0] | @sh) + "; "
+						# aliyun mirror: skopeo 从 ghcr 复制，强制 gzip + Docker schema2 媒体类型。
+						# 不能用 docker tag + docker push：runner 使用 containerd 镜像存储后，
+						# buildx --load 会把 zstd 层原样留在本地，docker push 不再重新压缩，
+						# ACR 个人版会拒绝（error from registry: blob type invalid）。
+						"retry_copy() { for i in 1 2 3; do skopeo copy --quiet --all --format v2s2 --dest-compress-format gzip --dest-compress-level 6 --authfile \"$HOME/.docker/config.json\" \"$1\" \"$2\" && return 0; sleep 10; done; return 1; }; "
+						+ "src=" + ("docker://ghcr.io/era-cloud/" + .tags[0] | @sh) + "; "
 						+ (
 							.tags
 							| map(
-								. as $tag | "'${REGISTRYS_GZIP}'" | split(",") | map("docker tag $src " + (. + "/" + $tag | @sh) + " && retry_push " + (. + "/" + $tag | @sh)) | join(" && ")
+								. as $tag | "'${REGISTRYS_GZIP}'" | split(",") | map("retry_copy \"$src\" " + ("docker://" + . + "/" + $tag | @sh)) | join(" && ")
 							)
 							| join(" && ")
 						)
