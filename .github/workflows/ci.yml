@@ -112,13 +112,6 @@ jobs:
           done
           echo "::error title=ACR login failed::连续 3 次登录失败"
           exit 1
-      - name: Install skopeo
-        if: steps.changed.outputs.changed == 'true'
-        run: |
-          if command -v skopeo > /dev/null; then skopeo --version; exit 0; fi
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq skopeo
-          skopeo --version
       - name: Set up buildx (docker-container)
         if: steps.changed.outputs.changed == 'true'
         run: |

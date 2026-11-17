@@ -1,0 +1,96 @@
+name: Cleanup Old Image Tags
+
+# 定期清理 GHCR 上「已经不在 versions.json 里」的完整版本 tag：
+#   - 只清形如 8.5.9-* / 8.4.24-* / 8.6.0RC5-* 的完整版本 tag
+#   - 只要某个 package version 上还挂着任何「当前/别名」tag，就跳过不删
+#   - 别名 tag（8 / latest / 8.5 / 8.5-cli / 8.5-cli-trixie …）一律不碰
+#
+# 定时任务是 dry-run（只报告将要删除的内容）；手动 dispatch 时把 dry_run 关掉才真正删除。
+# 注意：只覆盖 GHCR；Aliyun ACR 需要在控制台或 aliyun CLI 清理。
+
+on:
+  schedule:
+    - cron: '0 6 1 * *' # 每月 1 日 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '只列出不删除（默认 true）'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: read
+  packages: write
+
+defaults:
+  run:
+    shell: 'bash -Eeuo pipefail -x {0}'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    env:
+      OWNER: era-cloud
+      PACKAGE: php
+    steps:
+      - uses: actions/checkout@v7
+      - name: Compute current versions
+        id: cur
+        run: |
+          # 当前完整版本（8.5.12 / 8.6.0RC7 …）与维护中的大版本（8.5 / 8.6-rc …）
+          full="$(jq -r 'to_entries[] | select(.value) | .value.version' versions.json | paste -sd' ' -)"
+          keys="$(jq -r 'to_entries[] | select(.value) | .key' versions.json | paste -sd' ' -)"
+          echo "full=$full" >> "$GITHUB_OUTPUT"
+          echo "keys=$keys" >> "$GITHUB_OUTPUT"
+          echo "完整版本：$full"
+          echo "版本键：$keys"
+      - name: List package versions
+        id: list
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --paginate "/orgs/$OWNER/packages/container/$PACKAGE/versions?per_page=100" > /tmp/versions.json
+          echo "共 $(jq 'length' /tmp/versions.json) 个 package version"
+      - name: Select deletable versions
+        id: pick
+        env:
+          FULL: ${{ steps.cur.outputs.full }}
+          KEYS: ${{ steps.cur.outputs.keys }}
+        run: |
+          # 生成「保留前缀」：完整版本 + 大版本键，任一 tag 以它们开头就保留
+          keep_re="$(printf '%s\n%s\n' "$FULL" "$KEYS" | tr ' ' '\n' | sed '/^$/d' | paste -sd'|' -)"
+          echo "保留前缀：$keep_re"
+          # 删除候选：所有 tag 都以「x.y.z 或 x.y.z<rc> 开头且不属于保留前缀」
+          jq -r --arg re "$keep_re" '
+            .[]
+            | select((.metadata.container.tags // []) | length > 0)
+            | . as $v
+            | ($v.metadata.container.tags) as $tags
+            | select( all($tags[]; test("^[0-9]+\\.[0-9]+\\.[0-9]+[A-Za-z]*[0-9]*(-|$)")) )
+            | select( all($tags[]; (test("^(" + $re + ")(-|$)")) | not) )
+            | [$v.id, ($tags | join(","))] | @tsv
+          ' /tmp/versions.json > /tmp/deletable.tsv
+          echo "候选 $(wc -l < /tmp/deletable.tsv) 个 package version"
+          cat /tmp/deletable.tsv | head -50
+      - name: Delete (or report)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || 'true' }}
+        run: |
+          if [ ! -s /tmp/deletable.tsv ]; then
+            echo "没有需要清理的 tag"; exit 0
+          fi
+          while IFS=$'\t' read -r id tags; do
+            if [ "$DRY_RUN" = "true" ]; then
+              echo "[dry-run] 将删除 $id ($tags)"
+            else
+              echo "删除 $id ($tags)"
+              gh api -X DELETE "/orgs/$OWNER/packages/container/$PACKAGE/versions/$id" || echo "::warning::删除失败 $id"
+            fi
+          done < /tmp/deletable.tsv
+      - name: Summary
+        run: |
+          count="$(wc -l < /tmp/deletable.tsv 2>/dev/null || echo 0)"
+          echo "### 镜像 tag 清理" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 候选：$count" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 模式：${{ github.event_name == 'workflow_dispatch' && inputs.dry_run == 'false' && '删除' || 'dry-run' }}" >> "$GITHUB_STEP_SUMMARY"

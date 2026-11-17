@@ -79,30 +79,42 @@ for tag in $tags; do
 				),
 				meta: { entries: [ . ] },
 				runs: {
+
 					build: (
 						[
-							# zstd-compressed layers via buildx (docker-container driver, set up in the job);
-							# --load keeps a local copy for the metrics/test steps
+							# zstd-compressed layers via buildx (docker-container driver, set up in the job)
 							"docker buildx build --progress plain"
 						]
 						+ [
 							# TODO error out on unsupported platforms, or just let the emulation go wild?
 							"--platform", .platform
 						]
-						+ (
-							.tags
-							| map(
-								. as $tag | "'${REGISTRYS_ZSTD}'" | split(",") | map("--tag " + (. + "/" + $tag | @sh)) | join(" ")
-							)
-						)
 						+ if .file != "Dockerfile" then
 							[ "--file", ((.directory + "/" + .file) | @sh) ]
 						else
 							[]
 						end
 						+ [
-							"--output", "type=image,push=true,compression=zstd,compression-level=3,force-compression=true,oci-mediatypes=true",
-							"--load",
+							# ghcr：zstd + OCI 媒体类型（拉取体积最小）
+							"--output",
+							(
+								.tags as $tags
+								| "${REGISTRYS_ZSTD}" | split(",") as $regs
+								| [ $regs[] as $r | $tags[] as $t | ($r + "/" + $t) ] | join(",")
+								| "type=image,push=true,name=" + . + ",compression=zstd,compression-level=3,force-compression=true,oci-mediatypes=true"
+							),
+							# ACR：同一次构建再导出 gzip + Docker schema2 直推。
+							# 不能用 --load 后 docker push：containerd 镜像存储会保留 zstd 层，
+							# ACR 个人版拒绝 zstd（error from registry: blob type invalid）。
+							"--output",
+							(
+								.tags as $tags
+								| "${REGISTRYS_GZIP}" | split(",") as $regs
+								| [ $regs[] as $r | $tags[] as $t | ($r + "/" + $t) ] | join(",")
+								| "type=image,push=true,name=" + . + ",compression=gzip,force-compression=true,oci-mediatypes=false"
+							),
+							# 本地留一份给 Test / History / 指标步骤（不能用 --tag，否则会被推给所有 push 输出）
+							"--output", ("type=docker,name=" + ("ghcr.io/era-cloud/" + .tags[0])),
 							# link the image to the source repository so ghcr inherits repository access
 							# permissions (org.opencontainers.image.source)
 							"--label", ("org.opencontainers.image.source=https://github.com/" + $repo | @sh),
@@ -115,19 +127,11 @@ for tag in $tags; do
 						| join(" ")
 					),
 					push: (
-						# aliyun mirror: skopeo 从 ghcr 复制，强制 gzip + Docker schema2 媒体类型。
-						# 不能用 docker tag + docker push：runner 使用 containerd 镜像存储后，
-						# buildx --load 会把 zstd 层原样留在本地，docker push 不再重新压缩，
-						# ACR 个人版会拒绝（error from registry: blob type invalid）。
-						"retry_copy() { for i in 1 2 3; do skopeo copy --quiet --all --format v2s2 --dest-compress-format gzip --dest-compress-level 6 --authfile \"$HOME/.docker/config.json\" \"$1\" \"$2\" && return 0; sleep 10; done; return 1; }; "
-						+ "src=" + ("docker://ghcr.io/era-cloud/" + .tags[0] | @sh) + "; "
-						+ (
-							.tags
-							| map(
-								. as $tag | "'${REGISTRYS_GZIP}'" | split(",") | map("retry_copy \"$src\" " + ("docker://" + . + "/" + $tag | @sh)) | join(" && ")
-							)
-							| join(" && ")
-						)
+						# ACR 镜像已在 build 阶段由 buildx 直接推送（gzip + Docker schema2），
+						# 这里只做一次校验，避免重复上传
+						.tags[0] as $t
+						| "${REGISTRYS_GZIP}" | split(",") | .[0] as $r
+						| "docker manifest inspect " + $r + "/" + $t + " > /dev/null && echo 'aliyun mirror already pushed by buildx'"
 					),
 					history: ("docker history " + ("ghcr.io/era-cloud/" + .tags[0] | @sh)),
 					test: (

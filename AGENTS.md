@@ -50,3 +50,18 @@
 
 - `.github/workflows/notify-failure.yml`：Release / 构建 / 安全扫描 / 各周检 workflow 失败时推飞书。
 - 需要仓库 secret `FEISHU_WEBHOOK`（未配置时只打 warning）。消息内容含失败 workflow、分支、提交、失败 job 列表与日志链接。
+
+### 镜像推送（两个 registry 的压缩方式不同）
+
+- `generate.sh` 的 build 步骤有 **三个输出**：
+  1. ghcr：`compression=zstd` + OCI 媒体类型（拉取体积最小）
+  2. Aliyun ACR：`compression=gzip` + Docker schema2（ACR 个人版不认 zstd）
+  3. `type=docker,name=ghcr.io/era-cloud/<tag>`：本地副本，供 Test / History / 指标步骤使用
+- **不要**用 `--tag` + `--load` + `docker push` 推 ACR：新 runner 的 containerd 镜像存储会保留 zstd 层，`docker push` 不再转 gzip，ACR 报 `blob type invalid`。
+- 后续步骤里的 `Push images` 只做 `docker manifest inspect` 校验，不再真正上传。
+
+### 陈旧 tag 清理
+
+- `.github/workflows/cleanup-old-tags.yml`：每月 1 日 06:00 UTC 跑一次（dry-run），手动 dispatch 时把 `dry_run` 设为 `false` 才真正删除。
+- 只清「完整版本 tag」（`8.5.9-*`、`8.6.0RC5-*` 等）；只要该 package version 上还挂着任何当前版本或别名 tag 就跳过；别名（`8`/`latest`/`8.5-cli`…）永不删除。
+- 仅覆盖 GHCR；ACR 需要控制台或 aliyun CLI 清理。

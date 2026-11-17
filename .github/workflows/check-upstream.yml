@@ -57,6 +57,25 @@ jobs:
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
           echo "::notice title=上游有新提交::落后 $behind 个提交（$last → $latest）"
+      - name: Notify Feishu for large gaps
+        if: steps.cmp.outputs.behind != '0' && steps.cmp.outputs.behind != ''
+        env:
+          WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          BEHIND: ${{ steps.cmp.outputs.behind }}
+          LATEST: ${{ steps.cmp.outputs.latest }}
+        run: |
+          if [ -z "${WEBHOOK:-}" ]; then
+            echo "::warning title=FEISHU_WEBHOOK 未配置::跳过飞书推送"
+            exit 0
+          fi
+          if [ "$BEHIND" -lt 10 ]; then
+            echo "落后 $BEHIND 个提交，未达 10，不推送"
+            exit 0
+          fi
+          text="【era-cloud/php】上游 docker-library/php 落后 ${BEHIND} 个提交（最新 ${LATEST:0:8}），建议安排同步"
+          payload="$(jq -n --arg t "$text" '{msg_type: "text", content: {text: $t}}')"
+          curl -sS -X POST -H 'Content-Type: application/json' -d "$payload" "$WEBHOOK" > /dev/null
+          echo "feishu 已推送"
       - name: Open or update reminder issue
         if: steps.cmp.outputs.behind != '0' && steps.cmp.outputs.behind != ''
         env:

@@ -59,6 +59,20 @@ jobs:
           probe swow swow/swow-extension "$SWOW_DEPS"
 
           echo "ready=$(echo $ready)" >> "$GITHUB_OUTPUT"
+      - name: Notify Feishu
+        if: steps.probe.outputs.ready != ''
+        env:
+          WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          READY: ${{ steps.probe.outputs.ready }}
+        run: |
+          if [ -z "${WEBHOOK:-}" ]; then
+            echo "::warning title=FEISHU_WEBHOOK 未配置::跳过飞书推送"
+            exit 0
+          fi
+          text="【era-cloud/php】PHP 8.6 扩展已可编译：${READY}。可以恢复 8.6 的 swoole/swow/thread 变体（详见 auto issue / versions.sh）"
+          payload="$(jq -n --arg t "$text" '{msg_type: "text", content: {text: $t}}')"
+          curl -sS -X POST -H 'Content-Type: application/json' -d "$payload" "$WEBHOOK" > /dev/null
+          echo "feishu 已推送"
       - name: Open reminder issue
         if: steps.probe.outputs.ready != ''
         env:
