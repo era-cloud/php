@@ -65,3 +65,16 @@
 - `.github/workflows/cleanup-old-tags.yml`：每月 1 日 06:00 UTC 跑一次（dry-run），手动 dispatch 时把 `dry_run` 设为 `false` 才真正删除。
 - 只清「完整版本 tag」（`8.5.9-*`、`8.6.0RC5-*` 等）；只要该 package version 上还挂着任何当前版本或别名 tag 就跳过；别名（`8`/`latest`/`8.5-cli`…）永不删除。
 - 仅覆盖 GHCR；ACR 需要控制台或 aliyun CLI 清理。
+
+### 全量重建是高成本操作
+
+- 触发一次全量重建 = 88 个变体 × 两份镜像（ghcr zstd + ACR gzip）上传，很容易撞上 ACR 个人版的带宽/配额限制。
+- 只在确有必要时触发（新 PHP 版本、模板变更导致渲染差异）；验证脚本/README/CI 逻辑改动**不需要**重建。
+- 强制重建单变体的正确姿势：删掉 `.build-state.json` 里对应键；**不要**清空整个文件。
+
+### ACR 同步是独立 job
+
+- `build` job 只负责构建并推 ghcr（+ 本地副本），**不再推 ACR**。
+- `mirror` job（同一个 matrix）负责 skopeo 转推到 ACR，`continue-on-error: true`：
+  ACR 失败不会让构建失败，失败时会推飞书并留待下一轮重试。
+- 只有 `changed=true` 的变体才会真正 mirror（其余变体只跑一次快速 check）。

@@ -100,25 +100,6 @@ jobs:
       #   run: docker login --username ${{ vars.DH_USERNAME  }} --password ${{ secrets.DH_TOKEN }}
       - name: Login to the Github Container registry
         run: docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
-      - name: Login to the Aliyun ACR registry
-        run: |
-          # 阿里云 ACR 的 auth 端点偶发 connection reset（2026-11-15 实际踩到），加重试
-          for i in 1 2 3; do
-            if docker login --username '${{ vars.ACR_USERNAME }}' --password '${{ secrets.ACR_TOKEN }}' '${{ vars.ACR_REGISTRY }}'; then
-              exit 0
-            fi
-            echo "::warning title=ACR login retry::$i/3 失败，5s 后重试"
-            sleep 5
-          done
-          echo "::error title=ACR login failed::连续 3 次登录失败"
-          exit 1
-      - name: Install skopeo
-        if: steps.changed.outputs.changed == 'true'
-        run: |
-          if command -v skopeo > /dev/null; then skopeo --version; exit 0; fi
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq skopeo
-          skopeo --version
       - name: Set up buildx (docker-container)
         if: steps.changed.outputs.changed == 'true'
         run: |
@@ -185,9 +166,6 @@ jobs:
             size-*.json
             trivy-*.sarif
           if-no-files-found: ignore
-      - name: Push images ${{ matrix.name }}
-        if: steps.changed.outputs.changed == 'true'
-        run: ${{ matrix.runs.push }}
       - name: Record pull size
         if: steps.changed.outputs.changed == 'true'
         run: |
@@ -209,6 +187,68 @@ jobs:
           name: pullsize-${{ matrix.name }}
           path: pull-size-${{ matrix.name }}.json
           if-no-files-found: ignore
+  mirror:
+    name: mirror ${{ matrix.name }}
+    needs: [build, generate-jobs]
+    if: ${{ !cancelled() }}
+    continue-on-error: true
+    strategy: ${{ fromJson(needs.generate-jobs.outputs.strategy) }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check variant changed
+        id: changed
+        run: |
+          last="$(jq -r --arg n "${{ matrix.name }}" '.[$n] // empty' .build-state.json 2>/dev/null || true)"
+          variant_dir="$(dirname "${{ matrix.meta.dockerfiles[0] }}")"
+          changed="true"
+          if [ -n "$last" ] && git diff --quiet "$last"..HEAD -- "$variant_dir"; then
+            changed="false"
+          fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          echo "last=$last changed=$changed"
+      - name: Login to the Github Container registry
+        if: steps.changed.outputs.changed == 'true'
+        run: docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+      - name: Login to the Aliyun ACR registry
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          for i in 1 2 3; do
+            if docker login --username '${{ vars.ACR_USERNAME }}' --password '${{ secrets.ACR_TOKEN }}' '${{ vars.ACR_REGISTRY }}'; then
+              exit 0
+            fi
+            echo "::warning title=ACR login retry::$i/3 失败，5s 后重试"
+            sleep 5
+          done
+          echo "::error title=ACR login failed::连续 3 次登录失败"
+          exit 1
+      - name: Install skopeo
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          if command -v skopeo > /dev/null; then skopeo --version; exit 0; fi
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq skopeo
+          skopeo --version
+      - name: Mirror to Aliyun ACR ${{ matrix.name }}
+        if: steps.changed.outputs.changed == 'true'
+        run: ${{ matrix.runs.push }}
+      - name: Notify Feishu on mirror failure
+        if: failure()
+        env:
+          WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          NAME: ${{ matrix.name }}
+        run: |
+          if [ -z "${WEBHOOK:-}" ]; then
+            echo "::warning title=FEISHU_WEBHOOK 未配置::跳过飞书推送"
+            exit 0
+          fi
+          text="【era-cloud/php】ACR 镜像同步失败：${NAME}（构建与 ghcr 已成功，mirror 将在下一轮重试）"
+          payload="$(jq -n --arg t "$text" '{msg_type: "text", content: {text: $t}}')"
+          curl -sS -X POST -H 'Content-Type: application/json' -d "$payload" "$WEBHOOK" > /dev/null
+          echo "feishu 已推送"
+
   changes:
     needs: build
     if: ${{ !cancelled() }}
