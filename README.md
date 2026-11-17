@@ -55,7 +55,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 
 <!-- TAG-MATRIX-START -->
 ### cli
-| tag | PHP | 发行版 | 构建时间 | 镜像大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
+| tag | PHP | 发行版 | 构建时间 | 压缩大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- | --- |
 | latest | 8.5 | trixie | 2026-10-29T13:14:46Z | 501.7 MB | 159.3 MB | 1/62 |
 | 8.5-cli-trixie | 8.5 | trixie | 2026-10-29T13:14:46Z | 501.7 MB | 159.3 MB | 1/62 |
@@ -79,7 +79,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.2-cli-trixie | 8.2 | trixie | 2026-10-29T13:16:41Z | 479 MB | 153.8 MB | 1/62 |
 | 8.2-cli-bookworm | 8.2 | bookworm | 2026-10-29T13:24:24Z | 480.2 MB | 156.1 MB | 3/83 |
 ### zts
-| tag | PHP | 发行版 | 构建时间 | 镜像大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
+| tag | PHP | 发行版 | 构建时间 | 压缩大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- | --- |
 | 8.6-rc-zts-alpine3.24 | 8.6-rc | alpine3.24 | 2026-11-13T04:18:08Z | 44 MB | 43.3 MB | 0/0 |
 | 8.6-rc-zts-alpine3.23 | 8.6-rc | alpine3.23 | 2026-11-13T04:21:13Z | 43.3 MB | 43.1 MB | 0/0 |
@@ -102,7 +102,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.2-zts-trixie | 8.2 | trixie | 2026-10-29T13:20:32Z | 479.1 MB | 153.9 MB | 1/62 |
 | 8.2-zts-bookworm | 8.2 | bookworm | 2026-10-29T13:27:07Z | 480.4 MB | 156.2 MB | 3/83 |
 ### swoole
-| tag | PHP | 发行版 | 构建时间 | 镜像大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
+| tag | PHP | 发行版 | 构建时间 | 压缩大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- | --- |
 | 8.5-swoole-alpine3.24 | 8.5 | alpine3.24 | 2026-10-29T12:53:59Z | 112.7 MB | 41.9 MB | 0/0 |
 | 8.5-swoole-alpine3.23 | 8.5 | alpine3.23 | 2026-10-29T13:08:29Z | 112.5 MB | 41.8 MB | 0/0 |
@@ -121,7 +121,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.2-swoole-trixie | 8.2 | trixie | 2026-10-29T13:29:11Z | 518.5 MB | 168.5 MB | 1/65 |
 | 8.2-swoole-bookworm | 8.2 | bookworm | 2026-10-29T13:20:57Z | 483.6 MB | 157 MB | 4/83 |
 ### thread
-| tag | PHP | 发行版 | 构建时间 | 镜像大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
+| tag | PHP | 发行版 | 构建时间 | 压缩大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- | --- |
 | 8.5-thread-alpine3.24 | 8.5 | alpine3.24 | 2026-10-29T13:21:33Z | 113 MB | 42 MB | 0/0 |
 | 8.5-thread-alpine3.23 | 8.5 | alpine3.23 | 2026-10-29T13:05:00Z | 112.8 MB | 41.9 MB | 0/0 |
@@ -140,7 +140,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.2-thread-trixie | 8.2 | trixie | 2026-10-29T13:32:06Z | 518.8 MB | 168.6 MB | 1/65 |
 | 8.2-thread-bookworm | 8.2 | bookworm | 2026-10-29T13:31:49Z | 483.9 MB | 157.1 MB | 4/83 |
 ### swow
-| tag | PHP | 发行版 | 构建时间 | 镜像大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
+| tag | PHP | 发行版 | 构建时间 | 压缩大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- | --- |
 | 8.5-swow-alpine3.24 | 8.5 | alpine3.24 | 2026-10-29T12:55:35Z | 105 MB | 41.1 MB | 0/0 |
 | 8.5-swow-alpine3.23 | 8.5 | alpine3.23 | 2026-10-29T13:14:12Z | 104.8 MB | 41 MB | 0/0 |

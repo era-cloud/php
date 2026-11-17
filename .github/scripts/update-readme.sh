@@ -28,7 +28,7 @@ block="$(
 			| select( [.[].variant] | index($g) )
 			| [
 				"### " + $g,
-				"tag\tPHP\t发行版\t构建时间\t镜像大小\t拉取大小\t安全扫描 CRITICAL/HIGH",
+				"tag\tPHP\t发行版\t构建时间\t压缩大小\t拉取大小\t安全扫描 CRITICAL/HIGH",
 				"---\t---\t---\t---\t---\t---\t---",
 				(
 					if $g == "cli" then
