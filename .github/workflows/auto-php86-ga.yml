@@ -64,6 +64,10 @@ jobs:
 
           ./update.sh 8.6
 
+          # GA 之后不再保留 8.6-rc（它会永远停在最后一个 RC）
+          jq 'del(."8.6-rc")' versions.json > versions.json.tmp && mv versions.json.tmp versions.json
+          rm -rf 8.6-rc
+
           python3 - <<'PY'
           import sys
           p = 'generate-stackbrew-library.sh'
@@ -83,11 +87,12 @@ jobs:
           test -f 8.6/trixie/zts/Dockerfile
           ! test -d 8.6/trixie/swoole
 
-          git add versions.json .env.current.version 8.6 generate-stackbrew-library.sh
+          git add -A versions.json .env.current.version 8.6 8.6-rc generate-stackbrew-library.sh
           git commit \
             -m "feat(8.6): PHP 8.6 正式版（${GA}）转正" \
             -m "versions.json 增加 8.6 = ${GA}；生成 8.6/ 变体（cli / zts，swoole/swow/thread 暂无支持 8.6 的版本）。" \
-            -m "aliases: [8.5]='8'、[8.6]='8 latest'，latest 指向 8.6 cli。"
+            -m "aliases: [8.5]='8'、[8.6]='8 latest'，latest 指向 8.6 cli。" \
+            -m "删除 8.6-rc（GA 后不会再更新，避免留下停在 RC7 的陈旧 tag）。"
 
           git push -u origin auto/php-8.6-ga
 
@@ -99,10 +104,11 @@ jobs:
               "- \`versions.json\`：新增 \`8.6 = ${GA}\`" \
               "- \`8.6/\`：按现有变体规则生成，仅 **cli / zts**（swoole / swow / thread 尚无支持 PHP 8.6 的版本）" \
               "- \`generate-stackbrew-library.sh\`：\`aliases\` 改为 \`[8.5]='8'\`、\`[8.6]='8 latest'\`" \
+              "- 删除 \`8.6-rc\`（GA 后不再更新）" \
               "" \
               "**合并前请确认**" \
               "- [ ] 8.6 的 cli / zts 能正常构建（合并后首次运行会立即验证）" \
-              "- [ ] 是否保留 \`8.6-rc\`（可保留一个周期后再删）" \
+              "- [ ] \`8.6-rc\` 已在本次 PR 中删除（如需保留请改回）" \
               "- [ ] latest / 8 指向 8.6 是否符合预期"
           )"
 

@@ -45,3 +45,8 @@
 - 上次同步的上游提交记录在仓库根目录的 `.upstream-sync`；**每次同步完成后必须更新这个文件**（写入 `git -C . rev-parse upstream/master`）。
 - `.github/workflows/check-upstream.yml` 每周一 04:00 UTC 比对，发现新提交会自动开/更新提醒 issue。
 - 同步流程：`git fetch upstream` → `git merge --no-ff upstream/master` → 解冲突（保持 fork 变体语义、8.6 限制、PIE pin）→ `./apply-templates.sh` → 校验 `8.2-8.5` 渲染结果未变 → 推送。
+
+### 告警
+
+- `.github/workflows/notify-failure.yml`：Release / 构建 / 安全扫描 / 各周检 workflow 失败时推飞书。
+- 需要仓库 secret `FEISHU_WEBHOOK`（未配置时只打 warning）。消息内容含失败 workflow、分支、提交、失败 job 列表与日志链接。
