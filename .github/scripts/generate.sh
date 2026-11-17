@@ -62,7 +62,7 @@ for tag in $tags; do
 				"froms": {{- json ($.ArchDockerFroms $arch $e) -}},
 				"platform": {{- json (ociPlatform $arch).String -}}
 			{{- "}" -}}
-		' "$bashbrewImage" | jq -c --arg repo "${GITHUB_REPOSITORY:-}" '
+		' "$bashbrewImage" | jq -c --arg repo "${GITHUB_REPOSITORY:-}" --arg zstd "${REGISTRYS_ZSTD}" --arg gzip "${REGISTRYS_GZIP}" '
 			{
 				name: .name,
 				os: (
@@ -99,7 +99,7 @@ for tag in $tags; do
 							"--output",
 							(
 								.tags as $tags
-								| "${REGISTRYS_ZSTD}" | split(",") as $regs
+								| $zstd | split(",") as $regs
 								| [ $regs[] as $r | $tags[] as $t | ($r + "/" + $t) ] | join(",")
 								| "type=image,push=true,name=" + . + ",compression=zstd,compression-level=3,force-compression=true,oci-mediatypes=true"
 							),
@@ -109,7 +109,7 @@ for tag in $tags; do
 							"--output",
 							(
 								.tags as $tags
-								| "${REGISTRYS_GZIP}" | split(",") as $regs
+								| $gzip | split(",") as $regs
 								| [ $regs[] as $r | $tags[] as $t | ($r + "/" + $t) ] | join(",")
 								| "type=image,push=true,name=" + . + ",compression=gzip,force-compression=true,oci-mediatypes=false"
 							),
@@ -130,7 +130,7 @@ for tag in $tags; do
 						# ACR 镜像已在 build 阶段由 buildx 直接推送（gzip + Docker schema2），
 						# 这里只做一次校验，避免重复上传
 						.tags[0] as $t
-						| "${REGISTRYS_GZIP}" | split(",") | .[0] as $r
+						| $gzip | split(",") | .[0] as $r
 						| "docker manifest inspect " + $r + "/" + $t + " > /dev/null && echo aliyun-mirror-already-pushed"
 					),
 					history: ("docker history " + ("ghcr.io/era-cloud/" + .tags[0] | @sh)),
