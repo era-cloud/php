@@ -98,20 +98,18 @@ for tag in $tags; do
 							# ghcr：zstd + OCI 媒体类型（拉取体积最小）
 							"--output",
 							(
-								.tags as $tags
-								| $zstd | split(",") as $regs
-								| [ $regs[] as $r | $tags[] as $t | ($r + "/" + $t) ] | join(",")
-								| "type=image,push=true,name=" + . + ",compression=zstd,compression-level=3,force-compression=true,oci-mediatypes=true"
+								.tags[0] as $first
+								| $zstd | split(",") | .[0] as $r
+								| "type=image,push=true,name=" + $r + "/" + $first + ",compression=zstd,compression-level=3,force-compression=true,oci-mediatypes=true"
 							),
 							# ACR：同一次构建再导出 gzip + Docker schema2 直推。
 							# 不能用 --load 后 docker push：containerd 镜像存储会保留 zstd 层，
 							# ACR 个人版拒绝 zstd（error from registry: blob type invalid）。
 							"--output",
 							(
-								.tags as $tags
-								| $gzip | split(",") as $regs
-								| [ $regs[] as $r | $tags[] as $t | ($r + "/" + $t) ] | join(",")
-								| "type=image,push=true,name=" + . + ",compression=gzip,force-compression=true,oci-mediatypes=false"
+								.tags[0] as $first
+								| $gzip | split(",") | .[0] as $r
+								| "type=image,push=true,name=" + $r + "/" + $first + ",compression=gzip,force-compression=true,oci-mediatypes=false"
 							),
 							# 本地留一份给 Test / History / 指标步骤（不能用 --tag，否则会被推给所有 push 输出）
 							"--output", ("type=docker,name=" + ("ghcr.io/era-cloud/" + .tags[0])),
@@ -127,11 +125,23 @@ for tag in $tags; do
 						| join(" ")
 					),
 					push: (
-						# ACR 镜像已在 build 阶段由 buildx 直接推送（gzip + Docker schema2），
-						# 这里只做一次校验，避免重复上传
-						.tags[0] as $t
-						| $gzip | split(",") | .[0] as $r
-						| "docker manifest inspect " + $r + "/" + $t + " > /dev/null && echo aliyun-mirror-already-pushed"
+						# buildx 的 type=image 输出只接受单个 name，其余 tag 用 imagetools 在
+						# 同一 registry 内复制清单（不重传层，媒体类型保持不变）。
+						.tags as $tags
+						| $tags[0] as $first
+						| (
+							[
+								( $zstd | split(",")[] ) as $r
+								| ( $tags[1:][] ) as $t
+								| "docker buildx imagetools create -t " + $r + "/" + $t + " " + $r + "/" + $first
+							]
+							+ [
+								( $gzip | split(",")[] ) as $r
+								| ( $tags[1:][] ) as $t
+								| "docker buildx imagetools create -t " + $r + "/" + $t + " " + $r + "/" + $first
+							]
+						) as $cmds
+						| if ($cmds | length) == 0 then "echo no-extra-tags" else ($cmds | join(" && ")) end
 					),
 					history: ("docker history " + ("ghcr.io/era-cloud/" + .tags[0] | @sh)),
 					test: (
