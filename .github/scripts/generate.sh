@@ -131,7 +131,7 @@ for tag in $tags; do
 						# 这里只做一次校验，避免重复上传
 						.tags[0] as $t
 						| "${REGISTRYS_GZIP}" | split(",") | .[0] as $r
-						| "docker manifest inspect " + $r + "/" + $t + " > /dev/null && echo 'aliyun mirror already pushed by buildx'"
+						| "docker manifest inspect " + $r + "/" + $t + " > /dev/null && echo aliyun-mirror-already-pushed"
 					),
 					history: ("docker history " + ("ghcr.io/era-cloud/" + .tags[0] | @sh)),
 					test: (
