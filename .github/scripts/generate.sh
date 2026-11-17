@@ -121,7 +121,7 @@ for tag in $tags; do
 						.tags as $tags
 						| $tags[0] as $first
 						| ( $gzip | split(",") | .[0] ) as $reg
-						| ( "retry_copy() { for i in 1 2 3 4; do timeout 600 skopeo copy --quiet --all --format v2s2 --dest-compress-format gzip --dest-compress-level 6 --authfile \"$HOME/.docker/config.json\" --retry-times 2 \"$1\" \"$2\" && return 0; echo \"skopeo attempt $i failed: $2\" >&2; sleep 15; done; return 1; }; "
+						| ( "retry_copy() { for i in 1 2 3; do timeout 1800 skopeo copy --quiet --all --format v2s2 --dest-compress-format gzip --dest-compress-level 6 --authfile \"$HOME/.docker/config.json\" --retry-times 2 \"$1\" \"$2\" && return 0; echo \"skopeo attempt $i failed: $2\" >&2; sleep 15; done; return 1; }; "
 								+ "src=" + ("docker://ghcr.io/era-cloud/" + $first) ) as $prelude
 						| ( [ $tags[] as $t | "retry_copy \"$src\" " + ("docker://" + $reg + "/" + $t | @sh) ] | join(" && ") ) as $cmds
 						| $prelude + "; " + $cmds

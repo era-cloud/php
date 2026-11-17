@@ -22,7 +22,6 @@
   "8.4.27-cli-alpine3.23": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
   "8.2.35-thread-trixie": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
   "8.5.12-cli-bookworm": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
-  "8.4.27-swoole-bookworm": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
   "8.2.35-swoole-alpine3.24": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
   "8.2.35-thread-alpine3.23": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
   "8.6.0RC7-cli-alpine3.24": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
