@@ -102,15 +102,6 @@ for tag in $tags; do
 								| $zstd | split(",") | .[0] as $r
 								| "type=image,push=true,name=" + $r + "/" + $first + ",compression=zstd,compression-level=3,force-compression=true,oci-mediatypes=true"
 							),
-							# ACR：同一次构建再导出 gzip + Docker schema2 直推。
-							# 不能用 --load 后 docker push：containerd 镜像存储会保留 zstd 层，
-							# ACR 个人版拒绝 zstd（error from registry: blob type invalid）。
-							"--output",
-							(
-								.tags[0] as $first
-								| $gzip | split(",") | .[0] as $r
-								| "type=image,push=true,name=" + $r + "/" + $first + ",compression=gzip,force-compression=true,oci-mediatypes=false"
-							),
 							# 本地留一份给 Test / History / 指标步骤（不能用 --tag，否则会被推给所有 push 输出）
 							"--output", ("type=docker,name=" + ("ghcr.io/era-cloud/" + .tags[0])),
 							# link the image to the source repository so ghcr inherits repository access
@@ -125,23 +116,15 @@ for tag in $tags; do
 						| join(" ")
 					),
 					push: (
-						# buildx 的 type=image 输出只接受单个 name，其余 tag 用 imagetools 在
-						# 同一 registry 内复制清单（不重传层，媒体类型保持不变）。
+						# ACR 只接受 gzip + Docker schema2；用 skopeo 从 ghcr 复制（host 侧执行，
+						# 每次 copy 加 15 分钟超时，避免 ACR 侧网络停顿导致无限挂起）。
 						.tags as $tags
 						| $tags[0] as $first
-						| (
-							[
-								( $zstd | split(",")[] ) as $r
-								| ( $tags[1:][] ) as $t
-								| "docker buildx imagetools create -t " + $r + "/" + $t + " " + $r + "/" + $first
-							]
-							+ [
-								( $gzip | split(",")[] ) as $r
-								| ( $tags[1:][] ) as $t
-								| "docker buildx imagetools create -t " + $r + "/" + $t + " " + $r + "/" + $first
-							]
-						) as $cmds
-						| if ($cmds | length) == 0 then "echo no-extra-tags" else ($cmds | join(" && ")) end
+						| ( $gzip | split(",") | .[0] ) as $reg
+						| ( "retry_copy() { for i in 1 2 3 4; do timeout 600 skopeo copy --quiet --all --format v2s2 --dest-compress-format gzip --dest-compress-level 6 --authfile \"$HOME/.docker/config.json\" --retry-times 2 \"$1\" \"$2\" && return 0; echo \"skopeo attempt $i failed: $2\" >&2; sleep 15; done; return 1; }; "
+								+ "src=" + ("docker://ghcr.io/era-cloud/" + $first) ) as $prelude
+						| ( [ $tags[] as $t | "retry_copy \"$src\" " + ("docker://" + $reg + "/" + $t | @sh) ] | join(" && ") ) as $cmds
+						| $prelude + "; " + $cmds
 					),
 					history: ("docker history " + ("ghcr.io/era-cloud/" + .tags[0] | @sh)),
 					test: (
