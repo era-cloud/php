@@ -85,5 +85,6 @@
   "8.2.35-zts-bookworm": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
   "8.3.36-swow-trixie": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
   "8.3.36-swoole-bookworm": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
-  "8.2.35-swow-bookworm": "3e17426a311fed0e3ee86b8e38ac23f87406858c"
+  "8.2.35-swow-bookworm": "3e17426a311fed0e3ee86b8e38ac23f87406858c",
+  "8.4.27-swoole-bookworm": "57c6dd7f583148347dd847ca55130412872949be"
 }

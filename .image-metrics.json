@@ -510,11 +510,11 @@
     "version": "8.4",
     "variant": "swoole",
     "distro": "bookworm",
-    "built_at": "2026-11-17T17:19:36Z",
-    "size": 172122526,
+    "built_at": "2026-11-17T18:32:10Z",
+    "size": 171890678,
     "critical": 4,
     "high": 125,
-    "pull_size": 167578171
+    "pull_size": 167647923
   },
   {
     "tag": "8.4-zts-bookworm",
