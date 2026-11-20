@@ -74,9 +74,9 @@ ENV PHP_LDFLAGS="-Wl,-O1 -pie"
 
 ENV GPG_KEYS D95C03BC702BE9515344AE3374E44BC9067701A5 016895DE9A475111D537A6E69134FF30BC5A99B5 5CFF17B64DC1C244F5D0EAC3E43535E2EB19010E
 
-ENV PHP_VERSION 8.6.0RC7
-ENV PHP_URL="https://downloads.php.net/~svpernova09/php-8.6.0RC7.tar.xz" PHP_ASC_URL="https://downloads.php.net/~svpernova09/php-8.6.0RC7.tar.xz.asc"
-ENV PHP_SHA256="63dba3b693d2f2689f12d5264d212d7b813acfd56fb375c620d04e1eef4bb00a"
+ENV PHP_VERSION 8.6.0
+ENV PHP_URL="https://www.php.net/distributions/php-8.6.0.tar.xz" PHP_ASC_URL="https://www.php.net/distributions/php-8.6.0.tar.xz.asc"
+ENV PHP_SHA256="5f84beaa3d763aee1e4feed99bf54ec692c383b322e25626807b589238c3a087"
 
 RUN set -eux; \
 	\
@@ -173,10 +173,7 @@ RUN set -eux; \
 # https://github.com/docker-library/php/issues/439
 		--with-mhash \
 		\
-# https://github.com/docker-library/php/issues/822
-# https://github.com/php/php-src/pull/21067/changes#diff-4b9db5b77bcd56aa33b310dc44c8bc99c729c9abb195df2e98e6985b81289ae8R130
-		--enable-pic \
-		\
+# no --enable-pic for ZTS builds; forcing PIC also removes -fpie from executable objects, preventing local-exec TLS: https://github.com/docker-library/php/pull/1692
 # --enable-mbstring is included here because otherwise there's no way to get the extension installers (PIE) to use it properly (see https://github.com/docker-library/php/issues/195)
 		--enable-mbstring \
 # --enable-mysqlnd is included here because it's harder to compile after the fact than extensions are (since it's a plugin for several extensions, not an extension in itself)
@@ -203,6 +200,10 @@ RUN set -eux; \
 		\
 # https://github.com/docker-library/php/pull/939#issuecomment-730501748
 		--enable-embed \
+		\
+		--enable-zts \
+# https://externals.io/message/118859
+		--disable-zend-signals \
 	; \
 	make -j "$(nproc)"; \
 	find -type f -name '*.a' -delete; \

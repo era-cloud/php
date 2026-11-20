@@ -78,7 +78,8 @@ jobs:
           if "[8.5]='8 latest'" not in s:
               print("未找到 [8.5]='8 latest'，请人工确认", file=sys.stderr)
               sys.exit(1)
-          s = s.replace("[8.5]='8 latest'", "[8.5]='8'\n\t[8.6]='8 latest'")
+          # 跟随上游：8 / latest 只指向 8.6，不再同时挂在 8.5 上
+          s = s.replace("[8.5]='8 latest'", "[8.6]='8 latest'")
           open(p, 'w').write(s)
           PY
 

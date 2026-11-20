@@ -4,42 +4,52 @@
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
 
-FROM alpine:3.23
+FROM debian:trixie-slim
+
+# prevent Debian's PHP packages from being installed
+# https://github.com/docker-library/php/pull/542
+RUN set -eux; \
+	{ \
+		echo 'Package: php*'; \
+		echo 'Pin: release *'; \
+		echo 'Pin-Priority: -1'; \
+	} > /etc/apt/preferences.d/no-debian-php
 
 # dependencies required for running "phpize"
-# these get automatically installed and removed by "docker-php-ext-*" (unless they're already installed)
+# (see persistent deps below)
 ENV PHPIZE_DEPS \
 	autoconf \
 	procps \
 	wget \
-	dpkg-dev dpkg \
+	dpkg-dev \
 	file \
 	g++ \
 	gcc \
 	libc-dev \
 	make \
-	pkgconf \
+	pkg-config \
 	re2c
 
 # persistent / runtime deps
-RUN apk add --no-cache \
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		$PHPIZE_DEPS \
+		apt-transport-https \
+		ca-certificates \
+		ncat \
 		ca-certificates \
 		curl \
-		lz4-libs \
-		openssl \
-		tar \
 		unzip \
-		xz \
-		zstd-libs
-
+		xz-utils \
+		adduser \
+	; \
+	apt-get dist-clean; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug
 # ensure app user exists
 RUN set -eux; \
-	addgroup -Sg 83 app; \
-	adduser -u 82 -D -S -s /sbin/nologin -G app -g app app
-# 82 is the standard uid/gid for "app" in Alpine
-# https://git.alpinelinux.org/aports/tree/main/apache2/apache2.pre-install?h=3.14-stable
-# https://git.alpinelinux.org/aports/tree/main/lighttpd/lighttpd.pre-install?h=3.14-stable
-# https://git.alpinelinux.org/aports/tree/main/nginx/nginx.pre-install?h=3.14-stable
+	addgroup --gid 82 --system app; \
+	adduser --uid 82 --no-create-home --disabled-login --disabled-password --system --ingroup app app;
 
 ENV PHP_INI_DIR=/usr/local/etc/php \
 	APP_ROOT=/app-src \
@@ -64,13 +74,16 @@ ENV PHP_LDFLAGS="-Wl,-O1 -pie"
 
 ENV GPG_KEYS D95C03BC702BE9515344AE3374E44BC9067701A5 016895DE9A475111D537A6E69134FF30BC5A99B5 5CFF17B64DC1C244F5D0EAC3E43535E2EB19010E
 
-ENV PHP_VERSION 8.6.0RC7
-ENV PHP_URL="https://downloads.php.net/~svpernova09/php-8.6.0RC7.tar.xz" PHP_ASC_URL="https://downloads.php.net/~svpernova09/php-8.6.0RC7.tar.xz.asc"
-ENV PHP_SHA256="63dba3b693d2f2689f12d5264d212d7b813acfd56fb375c620d04e1eef4bb00a"
+ENV PHP_VERSION 8.6.0
+ENV PHP_URL="https://www.php.net/distributions/php-8.6.0.tar.xz" PHP_ASC_URL="https://www.php.net/distributions/php-8.6.0.tar.xz.asc"
+ENV PHP_SHA256="5f84beaa3d763aee1e4feed99bf54ec692c383b322e25626807b589238c3a087"
 
 RUN set -eux; \
 	\
-	apk add --no-cache --virtual .fetch-deps gnupg; \
+	savedAptMark="$(apt-mark showmanual)"; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends gnupg; \
+	apt-get dist-clean; \
 	\
 	mkdir -p /usr/src; \
 	cd /usr/src; \
@@ -96,33 +109,29 @@ RUN set -eux; \
 	gpgconf --kill all; \
 	rm -rf "$GNUPGHOME"; \
 	\
-	apk del --no-network .fetch-deps
+	apt-mark auto '.*' > /dev/null; \
+	apt-mark manual $savedAptMark > /dev/null; \
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
 
 COPY docker-php-source /usr/local/bin/
 
 RUN set -eux; \
-	apk add --no-cache --virtual .build-deps \
-		$PHPIZE_DEPS \
-		argon2-dev \
-		coreutils \
-		curl-dev \
-		gnu-libiconv-dev \
-		libsodium-dev \
-		libxml2-dev \
-		linux-headers \
-		lz4 \
-		lz4-dev \
-		lz4-libs \
-		oniguruma-dev \
-		openssl-dev \
-		readline-dev \
-		sqlite-dev \
-		zstd-dev \
-		zstd-libs \
-	; \
 	\
-# make sure musl's iconv doesn't get used (https://www.php.net/manual/en/intro.iconv.php)
-	rm -vf /usr/include/iconv.h; \
+	savedAptMark="$(apt-mark showmanual)"; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		libargon2-dev \
+		libcurl4-openssl-dev \
+		liblz4-dev \
+		libonig-dev \
+		libreadline-dev \
+		libsodium-dev \
+		libsqlite3-dev \
+		libssl-dev \
+		libxml2-dev \
+		libzstd-dev \
+		zlib1g-dev \
+	; \
 	\
 	export \
 		CFLAGS="$PHP_CFLAGS" \
@@ -135,6 +144,11 @@ RUN set -eux; \
 	docker-php-source extract; \
 	cd /usr/src/php; \
 	gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"; \
+	debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
+# https://bugs.php.net/bug.php?id=74125
+	if [ ! -d /usr/include/curl ]; then \
+		ln -sT "/usr/include/$debMultiarch/curl" /usr/local/include/curl; \
+	fi; \
 	case "$gnuArch" in \
 		'i686-linux-'*) \
 			# php zend jit assumes SSE registers, xmm0-7, are available (and "Pentium4"/SSE2 is a reasonable baseline)
@@ -159,10 +173,7 @@ RUN set -eux; \
 # https://github.com/docker-library/php/issues/439
 		--with-mhash \
 		\
-# https://github.com/docker-library/php/issues/822
-# https://github.com/php/php-src/pull/21067/changes#diff-4b9db5b77bcd56aa33b310dc44c8bc99c729c9abb195df2e98e6985b81289ae8R130
-		--enable-pic \
-		\
+# no --enable-pic for ZTS builds; forcing PIC also removes -fpie from executable objects, preventing local-exec TLS: https://github.com/docker-library/php/pull/1692
 # --enable-mbstring is included here because otherwise there's no way to get the extension installers (PIE) to use it properly (see https://github.com/docker-library/php/issues/195)
 		--enable-mbstring \
 # --enable-mysqlnd is included here because it's harder to compile after the fact than extensions are (since it's a plugin for several extensions, not an extension in itself)
@@ -176,15 +187,23 @@ RUN set -eux; \
 		--with-sqlite3=/usr \
 		\
 		--with-curl \
-		--with-iconv=/usr \
+		--with-iconv \
 		--with-openssl \
 		--with-readline \
 		--with-zlib \
 		\
 # https://github.com/bwoebi/phpdbg-docs/issues/1#issuecomment-163872806 ("phpdbg is primarily a CLI debugger, and is not suitable for debugging an fpm stack.")
 		--disable-phpdbg \
+		--with-libdir="lib/$debMultiarch" \
 		\
 		--disable-cgi \
+		\
+# https://github.com/docker-library/php/pull/939#issuecomment-730501748
+		--enable-embed \
+		\
+		--enable-zts \
+# https://externals.io/message/118859
+		--disable-zend-signals \
 	; \
 	make -j "$(nproc)"; \
 	find -type f -name '*.a' -delete; \
@@ -206,25 +225,26 @@ RUN set -eux; \
 	cd /; \
 	docker-php-source delete; \
 	\
-	runDeps="$( \
-		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
-			| tr ',' '\n' \
-			| sort -u \
-			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-	)"; \
-	apk add --no-cache $runDeps; \
-	apk add --no-cache --virtual .build-deps \
-	g++ \
-	gcc \
-	libc-dev \
-	make \
-	pkgconf \
-	autoconf \
-	lz4-dev \
-	zstd-dev; \
+# reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
+	apt-mark auto '.*' > /dev/null; \
+	[ -z "$savedAptMark" ] || apt-mark manual $savedAptMark; \
+	find /usr/local -type f -executable -exec ldd '{}' ';' \
+		| awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }' \
+		| sort -u \
+		| xargs -rt dpkg-query --search \
+# https://manpages.debian.org/trixie/dpkg/dpkg-query.1.en.html#S (we ignore diversions and it'll be really unusual for more than one package to provide any given .so file)
+		| awk 'sub(":$", "", $1) { print $1 }' \
+		| sort -u \
+		| xargs -r apt-mark manual \
+	; \
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	apt-get dist-clean; \
 	\
+	# the PHP build purge above removed liblz4-dev/libzstd-dev; reinstall them for the phpredis build
+	apt-get update; \
+	apt-get install -y --no-install-recommends liblz4-dev libzstd-dev; \
 	# 8.6 的扩展只能从 VCS 装（没有 dist 包），需要临时安装 git
-	apk add --no-cache --virtual .pie-vcs git; \
+	apt-get install -y --no-install-recommends git; \
 	\
 # install PIE (PHP Installer for Extensions), the official replacement for PECL
 # https://php.github.io/pie/ https://github.com/php/pie
@@ -242,11 +262,15 @@ RUN set -eux; \
 		--enable-redis-zstd \
 		--with-liblz4=yes \
 		--with-libzstd=yes; \
-	apk del .pie-vcs; \
-	apk del --no-network .build-deps; \
+	apt-get purge -y --auto-remove git; apt-get dist-clean; \
+	# keep the runtime libs (liblz4-1/libzstd1) in the final image, drop the -dev packages
+	apt-mark manual liblz4-1 libzstd1; \
+	apt-get purge -y liblz4-dev libzstd-dev; \
+	apt-get dist-clean; \
+	 \
 	rm -rf /tmp/*; \
 	rm -rf /root/.pie; \
-	 \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
 	\
 # smoke test
 	php --version
