@@ -1722,16 +1722,6 @@
         "version": "5.36.0-7+deb12u4"
       },
       {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
         "id": "CVE-2026-53613",
         "package": "libsmartcols1",
         "version": "2.38.1-5+deb12u3"
@@ -2997,16 +2987,6 @@
         "version": "5.36.0-7+deb12u4"
       },
       {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
         "id": "CVE-2026-53613",
         "package": "libsmartcols1",
         "version": "2.38.1-5+deb12u3"
@@ -4270,16 +4250,6 @@
         "id": "CVE-2026-9538",
         "package": "libperl5.36",
         "version": "5.36.0-7+deb12u4"
-      },
-      {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
       },
       {
         "id": "CVE-2026-53613",
@@ -8067,16 +8037,6 @@
         "version": "5.36.0-7+deb12u4"
       },
       {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
         "id": "CVE-2026-53613",
         "package": "libsmartcols1",
         "version": "2.38.1-5+deb12u3"
@@ -9342,16 +9302,6 @@
         "version": "5.36.0-7+deb12u4"
       },
       {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
         "id": "CVE-2026-53613",
         "package": "libsmartcols1",
         "version": "2.38.1-5+deb12u3"
@@ -10615,16 +10565,6 @@
         "id": "CVE-2026-9538",
         "package": "libperl5.36",
         "version": "5.36.0-7+deb12u4"
-      },
-      {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
       },
       {
         "id": "CVE-2026-53613",
@@ -14412,16 +14352,6 @@
         "version": "5.36.0-7+deb12u4"
       },
       {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
         "id": "CVE-2026-53613",
         "package": "libsmartcols1",
         "version": "2.38.1-5+deb12u3"
@@ -15687,16 +15617,6 @@
         "version": "5.36.0-7+deb12u4"
       },
       {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
         "id": "CVE-2026-53613",
         "package": "libsmartcols1",
         "version": "2.38.1-5+deb12u3"
@@ -16960,16 +16880,6 @@
         "id": "CVE-2026-9538",
         "package": "libperl5.36",
         "version": "5.36.0-7+deb12u4"
-      },
-      {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
       },
       {
         "id": "CVE-2026-53613",
@@ -20757,16 +20667,6 @@
         "version": "5.36.0-7+deb12u4"
       },
       {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
         "id": "CVE-2026-53613",
         "package": "libsmartcols1",
         "version": "2.38.1-5+deb12u3"
@@ -22032,16 +21932,6 @@
         "version": "5.36.0-7+deb12u4"
       },
       {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
         "id": "CVE-2026-53613",
         "package": "libsmartcols1",
         "version": "2.38.1-5+deb12u3"
@@ -23305,16 +23195,6 @@
         "id": "CVE-2026-9538",
         "package": "libperl5.36",
         "version": "5.36.0-7+deb12u4"
-      },
-      {
-        "id": "CVE-2026-116325",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
-      },
-      {
-        "id": "CVE-2026-120142",
-        "package": "libpq5",
-        "version": "15.20-0+deb12u1"
       },
       {
         "id": "CVE-2026-53613",
