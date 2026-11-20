@@ -124,15 +124,17 @@ for tag in $tags; do
 							| "docker buildx imagetools create -t " + "ghcr.io/era-cloud/" + $t + " " + "ghcr.io/era-cloud/" + $first ] | join(" && ")
 					),
 					push: (
-						# ACR 只接受 gzip + Docker schema2；用 skopeo 从 ghcr 复制（host 侧执行，
-						# 每次 copy 30 分钟超时，避免 ACR 侧网络停顿导致无限挂起）。
+						# ACR：只上传一次完整版本 tag（skopeo 从 ghcr 复制并强制 gzip + Docker schema2），
+						# 其余别名 tag 在同一 registry 内复制（仅清单，不重传层），避免 5 倍流量。
+						# 每次 copy 限时 10 分钟 + 2 次尝试，避免 ACR 变慢时无限挂起。
 						.tags as $tags
 						| $tags[0] as $first
 						| ( $gzip | split(",") | .[0] ) as $acr
-						| ( "retry_copy() { for i in 1 2 3; do timeout 1800 skopeo copy --quiet --all --format v2s2 --dest-compress-format gzip --dest-compress-level 6 --authfile \"$HOME/.docker/config.json\" --retry-times 2 \"$1\" \"$2\" && return 0; echo \"skopeo attempt $i failed: $2\" >&2; sleep 15; done; return 1; }; "
-								+ "src=" + ("docker://ghcr.io/era-cloud/" + $first) ) as $prelude
-						| ( [ $tags[] as $t | "retry_copy \"$src\" " + ("docker://" + $acr + "/" + $t | @sh) ] | join(" && ") ) as $cmds
-						| $prelude + "; " + $cmds
+						| ( "retry_copy() { for i in 1 2; do timeout 600 skopeo copy --quiet --all --format v2s2 --dest-compress-format gzip --dest-compress-level 6 --authfile \"$HOME/.docker/config.json\" --retry-times 1 \"$1\" \"$2\" && return 0; echo \"skopeo attempt $i failed: $2\" >&2; sleep 10; done; return 1; }; " ) as $prelude
+						| ( "docker://" + $acr + "/" + $first ) as $acrFirst
+						| ( "retry_copy " + ("docker://ghcr.io/era-cloud/" + $first | @sh) + " " + ($acrFirst | @sh) ) as $upload
+						| ( [ $tags[1:][] as $t | "retry_copy " + ($acrFirst | @sh) + " " + (("docker://" + $acr + "/" + $t) | @sh) ] | join(" && ") ) as $alias
+						| $prelude + $upload + (if $alias == "" then "" else "; " + $alias end)
 					),
 					history: ("docker history " + ("ghcr.io/era-cloud/" + .tags[0] | @sh)),
 					test: (
