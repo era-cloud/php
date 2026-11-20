@@ -130,5 +130,6 @@
       "alpine3.23/cli",
       "alpine3.23/zts"
     ]
-  }
+  },
+  "8.6-rc": null
 }
