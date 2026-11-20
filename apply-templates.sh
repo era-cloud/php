@@ -21,6 +21,8 @@ export ext_ds_ver="$(jq -r '.["php-ds/ext-ds"].stable.version' extensions.json)"
 export ext_redis_ver="$(jq -r '.["phpredis/phpredis"].stable.version' extensions.json)"
 export ext_swoole_ver="$(jq -r '.["swoole/swoole"].stable.version' extensions.json)"
 export ext_swow_ver="$(jq -r '.["swow/swow-extension"].stable.version' extensions.json)"
+export ext_swoole_rc_ver="$(jq -r '.["swoole/swoole"].rc.version // ""' extensions.json)"
+export ext_swow_rc_ver="$(jq -r '.["swow/swow-extension"].rc.version // ""' extensions.json)"
 
 jqt='.jq-template.awk'
 if [ -n "${BASHBREW_SCRIPTS:-}" ]; then

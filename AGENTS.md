@@ -90,3 +90,11 @@
 - **PIE 不能按 tag 安装**（`pkg:6.2.6` / `pkg:v6.2.6` 都会报找不到），所以统一用 commit-sha pin。
 - 每个镜像写入 `cn.era-cloud.ext.<name>` label（可读版本号），`docker inspect` 可追溯。
 - README 的「扩展版本」区块由 `update-readme.sh` 从 extensions.json 生成（`<!-- EXT-VERSIONS-START/END -->`）。
+
+### 扩展 RC 轨
+
+- 变体名：`swoole-rc` / `thread-rc` / `swow-rc`，只在 `extensions.json` 里对应包存在 `rc` 且该 PHP 版本可用时生成（8.2–8.5；8.6 无 swoole）。
+- `swow` 的 pre-release 发布在核心仓库 `swow/swow`（v2.0.0-alpha.3），`swow-extension` 只有 v0.2.0-alpha.1：
+  `extensions.sh` 对 swow 特殊处理 —— 版本号取核心仓 tag，ref 指 `swow-extension` 的 develop HEAD。
+- 变体矩阵：8.2–8.5 各 32 个（cli/zts + swoole/swow/thread + 三条 rc 轨 × 4 suite），8.6 为 8 个，合计 136。
+- README 版本矩阵的列顺序：cli / zts / swoole / swoole-rc / swow / swow-rc / thread / thread-rc。

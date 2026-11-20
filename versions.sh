@@ -18,6 +18,8 @@ now="$(date --utc '+%s')"
 for version in "${versions[@]}"; do
 	rcVersion="${version%-rc}"
 	export version rcVersion
+	export has_swoole_rc="$(jq -r 'if .["swoole/swoole"].rc != null then "1" else "0" end' extensions.json)"
+	export has_swow_rc="$(jq -r 'if .["swow/swow-extension"].rc != null then "1" else "0" end' extensions.json)"
 
 	# scrape the relevant API based on whether we're looking for pre-releases
 	if [ "$rcVersion" = "$version" ]; then
@@ -110,9 +112,14 @@ for version in "${versions[@]}"; do
 					) as $suite
 					| (
 						"cli",
-						# swoole / swow 尚无任何可编译于 PHP 8.6 的版本（swoole master 的 composer.json 明写 <8.6），
-						# thread 依赖 swoole 线程模式，因此 8.6+ 只保留 cli 与 zts
-						(if env.rcVersion | IN("8.2", "8.3", "8.4", "8.5") then "swoole", "zts", "swow", "thread" else "zts" end),
+						# swoole / swow 尚无任何可编译于 PHP 8.6 的版本（swoole 源码里 #error require PHP <= 8.5），
+						# thread 依赖 swoole 线程模式，因此 8.6+ 只保留 cli 与 zts。
+						# 扩展 RC 轨按 extensions.json 里是否存在 rc 决定是否生成。
+						(if env.rcVersion | IN("8.2", "8.3", "8.4", "8.5") then
+							"zts", "swoole", "swow", "thread",
+							(if env.has_swoole_rc == "1" then "swoole-rc", "thread-rc" else empty end),
+							(if env.has_swow_rc == "1" then "swow-rc" else empty end)
+						 else "zts" end),
 						empty
 					) as $variant
 					| "\($suite)/\($variant)"

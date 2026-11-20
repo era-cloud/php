@@ -12,7 +12,9 @@ LABEL cn.era-cloud.ext.msgpack="v3.0.1" \
       cn.era-cloud.ext.ext-ds="v2.0.0" \
       cn.era-cloud.ext.phpredis="6.3.0" \
       cn.era-cloud.ext.swoole="v6.2.6" \
-      cn.era-cloud.ext.swow="v1.6.2"
+      cn.era-cloud.ext.swow="v1.6.2" \
+      cn.era-cloud.ext.swoole-rc="v6.3.0-rc2" \
+      cn.era-cloud.ext.swow-rc="v2.0.0-alpha.3"
 
 # prevent Debian's PHP packages from being installed
 # https://github.com/docker-library/php/pull/542

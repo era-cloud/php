@@ -87,7 +87,22 @@ for pkg in "${pkgs[@]}"; do
 	fi
 
 	rc_ref=""
-	if [ -z "$rc_ver" ]; then
+	# swow 的 pre-release 发布在核心仓库 swow/swow（swow-extension 只有 v0.2.0-alpha.1），
+	# 版本号取核心仓 tag，ref 指向 swow-extension 的 develop HEAD
+	if [ "$pkg" = "swow/swow-extension" ]; then
+		core_rc="$(gh_api "repos/swow/swow/tags?per_page=10" 2>/dev/null | jq -r '[.[].name | select(test("-"))] | sort | last // empty')"
+		if [ -n "$core_rc" ]; then
+			rc_ver="$core_rc"
+			dev_sha="$(gh_api "repos/swow/swow-extension/commits/develop" 2>/dev/null | jq -r '.sha // empty')"
+			if [ -n "$dev_sha" ]; then
+				rc_ref="dev-develop#$dev_sha"
+			fi
+		fi
+	fi
+
+	if [ "$pkg" = "swow/swow-extension" ] && [ -n "$rc_ref" ]; then
+		: # 已经用核心仓 tag + extension develop sha 组好，不再走 tag 解析
+	elif [ -z "$rc_ver" ]; then
 		rc_ver="$old_rc_ver"
 	else
 		rc_ref="$(resolve_ref "$pkg" "$rc_ver")"

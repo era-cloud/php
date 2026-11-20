@@ -95,7 +95,7 @@ matrix="$(
 	jq -r '
 		def verid: (.value.version | sub("[a-zA-Z-].*$"; "") | split(".") | map(tonumber)) | .[0]*10000 + .[1]*100 + (.[2] // 0);
 		[ to_entries[] | select(.value) ] as $all
-		| [ "cli", "zts", "swoole", "swow", "thread" ] as $canon
+		| [ "cli", "zts", "swoole", "swoole-rc", "swow", "swow-rc", "thread", "thread-rc" ] as $canon
 		| ( [ $all[].value.variants[] | split("/")[1] ] | unique ) as $present
 		| ( $canon | map(. as $c | select($present | index($c))) ) as $cols
 		| (

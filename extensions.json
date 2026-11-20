@@ -44,7 +44,10 @@
     }
   },
   "swow/swow-extension": {
-    "rc": null,
+    "rc": {
+      "ref": "dev-develop#f02d6a6e7439686c6088557e437305b2ddd914d3",
+      "version": "v2.0.0-alpha.3"
+    },
     "stable": {
       "ref": "dev-develop#a20ad19f7c548f5b49a836cd99957928ccb27f46",
       "version": "v1.6.2"

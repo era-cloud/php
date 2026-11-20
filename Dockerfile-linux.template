@@ -63,7 +63,9 @@ LABEL cn.era-cloud.ext.msgpack="{{ env.ext_msgpack_ver }}" \
       cn.era-cloud.ext.ext-ds="{{ env.ext_ds_ver }}" \
       cn.era-cloud.ext.phpredis="{{ env.ext_redis_ver }}" \
       cn.era-cloud.ext.swoole="{{ env.ext_swoole_ver }}" \
-      cn.era-cloud.ext.swow="{{ env.ext_swow_ver }}"
+      cn.era-cloud.ext.swow="{{ env.ext_swow_ver }}" \
+      cn.era-cloud.ext.swoole-rc="{{ env.ext_swoole_rc_ver }}" \
+      cn.era-cloud.ext.swow-rc="{{ env.ext_swow_rc_ver }}"
 
 {{ if is_alpine then "" else ( -}}
 # prevent Debian's PHP packages from being installed
@@ -558,7 +560,7 @@ RUN docker-php-ext-enable sodium; \
 	sed -i "s@memory_limit = 128M@memory_limit = 2048M@g" "$PHP_INI_DIR/php.ini"; \
 	php --ri redis
 
-{{ if env.variant | IN("swoole", "thread") then ( -}}
+{{ if env.variant | IN("swoole", "thread", "swoole-rc", "thread-rc") then ( -}}
 # swoole module
 ENV EXTRA_EXT \
 	bcmath bz2 calendar exif ffi gd gettext intl \
@@ -627,14 +629,14 @@ RUN set -ex; \
 	# swoole 6.2.2 fails to compile on newer g++ (GCC 15) without -fpermissive:
 	# "converting to 'bool' from 'std::nullptr_t' requires direct-initialization"
 	export CXXFLAGS="$CXXFLAGS -fpermissive"; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swoole/swoole:{{ env.ext_swoole }}' \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swoole/swoole:{{ if env.variant | endswith("-rc") then env.ext_swoole_rc else env.ext_swoole end }}' \
 		--enable-swoole-curl \
 		--enable-cares \
 		--enable-brotli \
 		--enable-swoole-pgsql \
 		--enable-swoole-sqlite \
 		--with-openssl-dir=/usr \
-{{ if env.variant == "thread" then ( -}}
+{{ if env.variant | IN("thread", "thread-rc") then ( -}}
 		--enable-swoole-thread \
 {{ ) else "" end -}}
 		; \
@@ -677,7 +679,7 @@ RUN set -ex; \
 	rm -rf /tmp/*; \
 	rm -rf /root/.pie
 {{ ) else "" end -}}
-{{ if env.variant == "swow" then ( -}}
+{{ if env.variant | IN("swow", "swow-rc") then ( -}}
 # swow
 ENV EXTRA_EXT \
 	bcmath bz2 calendar exif ffi gd gettext intl \
@@ -735,7 +737,7 @@ RUN set -ex; \
 	docker-php-ext-install sockets; \
 	docker-php-source extract; \
 	docker-php-source delete; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swow/swow-extension:{{ env.ext_swow }}'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swow/swow-extension:{{ if env.variant | endswith("-rc") then env.ext_swow_rc else env.ext_swow end }}'; \
 	echo "memory_limit=1G" >  /usr/local/etc/php/conf.d/00-default.ini; \
 	echo "opcache.enable_cli = 'On'" >>  /usr/local/etc/php/conf.d/50-opcache.ini; \
 	echo "extension=swow.so" > /usr/local/etc/php/conf.d/docker-php-ext-swow.ini; \
