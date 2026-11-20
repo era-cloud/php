@@ -191,11 +191,11 @@
     "version": "8.2",
     "variant": "zts",
     "distro": "alpine3.23",
-    "built_at": "2026-11-17T17:37:33Z",
-    "size": 35727639,
+    "built_at": "2026-11-20T10:43:50Z",
+    "size": 35382020,
     "critical": 0,
     "high": 0,
-    "pull_size": 35441288
+    "pull_size": 35456545
   },
   {
     "tag": "8.2-swow-alpine3.23",
