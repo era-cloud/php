@@ -213,11 +213,11 @@
     "version": "8.2",
     "variant": "thread",
     "distro": "alpine3.23",
-    "built_at": "2026-11-17T17:31:56Z",
-    "size": 40046291,
+    "built_at": "2026-11-20T10:24:04Z",
+    "size": 40242134,
     "critical": 0,
     "high": 0,
-    "pull_size": 40069184
+    "pull_size": 40085059
   },
   {
     "tag": "8.3-cli-trixie",
@@ -878,5 +878,93 @@
     "critical": 0,
     "high": 0,
     "pull_size": 44174517
+  },
+  {
+    "tag": "8.6-cli-trixie",
+    "version": "8.6",
+    "variant": "cli",
+    "distro": "trixie",
+    "built_at": "2026-11-20T10:16:26Z",
+    "size": 173122380,
+    "pull_size": 168473126,
+    "critical": 1,
+    "high": 121
+  },
+  {
+    "tag": "8.6-zts-trixie",
+    "version": "8.6",
+    "variant": "zts",
+    "distro": "trixie",
+    "built_at": "2026-11-20T10:15:46Z",
+    "size": 183143675,
+    "pull_size": 168524375,
+    "critical": 1,
+    "high": 121
+  },
+  {
+    "tag": "8.6-cli-bookworm",
+    "version": "8.6",
+    "variant": "cli",
+    "distro": "bookworm",
+    "built_at": "2026-11-20T10:15:02Z",
+    "size": 181641657,
+    "pull_size": 170774253,
+    "critical": 3,
+    "high": 123
+  },
+  {
+    "tag": "8.6-zts-bookworm",
+    "version": "8.6",
+    "variant": "zts",
+    "distro": "bookworm",
+    "built_at": "2026-11-20T10:16:32Z",
+    "size": 176874899,
+    "pull_size": 170844489,
+    "critical": 3,
+    "high": 123
+  },
+  {
+    "tag": "8.6-cli-alpine3.24",
+    "version": "8.6",
+    "variant": "cli",
+    "distro": "alpine3.24",
+    "built_at": "2026-11-20T10:17:12Z",
+    "size": 41732086,
+    "pull_size": 41752475,
+    "critical": 0,
+    "high": 0
+  },
+  {
+    "tag": "8.6-zts-alpine3.24",
+    "version": "8.6",
+    "variant": "zts",
+    "distro": "alpine3.24",
+    "built_at": "2026-11-20T10:18:41Z",
+    "size": 47969953,
+    "pull_size": 48044577,
+    "critical": 0,
+    "high": 0
+  },
+  {
+    "tag": "8.6-cli-alpine3.23",
+    "version": "8.6",
+    "variant": "cli",
+    "distro": "alpine3.23",
+    "built_at": "2026-11-20T10:21:02Z",
+    "size": 39489947,
+    "pull_size": 39077821,
+    "critical": 0,
+    "high": 0
+  },
+  {
+    "tag": "8.6-zts-alpine3.23",
+    "version": "8.6",
+    "variant": "zts",
+    "distro": "alpine3.23",
+    "built_at": "2026-11-20T10:16:11Z",
+    "size": 45834155,
+    "pull_size": 45362304,
+    "critical": 0,
+    "high": 0
   }
 ]

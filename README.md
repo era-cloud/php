@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/era-cloud/php)](https://github.com/era-cloud/php/blob/main/LICENSE)
 [![Last Updated](https://img.shields.io/github/last-commit/era-cloud/php)](https://github.com/era-cloud/php/commits/main)
 <!-- PHP-BADGE-START -->
-[![PHP](https://img.shields.io/badge/PHP-8.2%20%7C%208.3%20%7C%208.4%20%7C%208.5-777BB4)](https://www.php.net/)
+[![PHP](https://img.shields.io/badge/PHP-8.2%20%7C%208.3%20%7C%208.4%20%7C%208.5%20%7C%208.6-777BB4)](https://www.php.net/)
 <!-- PHP-BADGE-END -->
 [![Repo Size](https://img.shields.io/github/repo-size/era-cloud/php)](https://github.com/era-cloud/php)
 [![Variants](https://img.shields.io/badge/variants-cli%20%7C%20zts%20%7C%20swoole%20%7C%20swow%20%7C%20thread-blue)](https://github.com/era-cloud/php/pkgs/container/php)
@@ -31,12 +31,13 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 <!-- VERSION-MATRIX-START -->
 | PHP | cli | zts | swoole | swow | thread |
 |-----|-----|-----|-----|-----|-----|
+| **8.6** (8.6.0) | ✅ | ✅ | — | — | — |
 | **8.5** (8.5.13) | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **8.4** (8.4.28) | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **8.3** (8.3.37) | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **8.2** (8.2.36) | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-每个版本支持发行版：`trixie` / `bookworm` / `alpine3.24` / `alpine3.23`（共 80 个变体）。
+每个版本支持发行版：`trixie` / `bookworm` / `alpine3.24` / `alpine3.23`（共 88 个变体）。
 <!-- VERSION-MATRIX-END -->
 
 变体说明：
@@ -56,10 +57,14 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 ### cli
 | tag | PHP | 发行版 | 构建时间 | 压缩大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- | --- |
-| latest | 8.5 | trixie | 2026-11-20T05:00:57Z | 163.9 MB | 159.5 MB | 1/121 |
-| 8.5-cli-trixie | 8.5 | trixie | 2026-11-20T05:00:57Z | 163.9 MB | 159.5 MB | 1/121 |
+| latest | 8.6 | trixie | 2026-11-20T10:16:26Z | 165.1 MB | 160.7 MB | 1/121 |
+| 8.6-cli-trixie | 8.6 | trixie | 2026-11-20T10:16:26Z | 165.1 MB | 160.7 MB | 1/121 |
+| 8.6-cli-alpine3.24 | 8.6 | alpine3.24 | 2026-11-20T10:17:12Z | 39.8 MB | 39.8 MB | 0/0 |
+| 8.6-cli-alpine3.23 | 8.6 | alpine3.23 | 2026-11-20T10:21:02Z | 37.7 MB | 37.3 MB | 0/0 |
+| 8.6-cli-bookworm | 8.6 | bookworm | 2026-11-20T10:15:02Z | 173.2 MB | 162.9 MB | 3/123 |
 | 8.5-cli-alpine3.24 | 8.5 | alpine3.24 | 2026-11-20T05:11:36Z | 36 MB | 36 MB | 0/0 |
 | 8.5-cli-alpine3.23 | 8.5 | alpine3.23 | 2026-11-20T05:05:26Z | 33.6 MB | 33.6 MB | 0/0 |
+| 8.5-cli-trixie | 8.5 | trixie | 2026-11-20T05:00:57Z | 163.9 MB | 159.5 MB | 1/121 |
 | 8.5-cli-bookworm | 8.5 | bookworm | 2026-11-20T05:02:38Z | 167.5 MB | 161.8 MB | 3/123 |
 | 8.4-cli-alpine3.24 | 8.4 | alpine3.24 | 2026-11-20T05:02:03Z | 35 MB | 35 MB | 0/0 |
 | 8.4-cli-alpine3.23 | 8.4 | alpine3.23 | 2026-11-20T05:22:38Z | 32.5 MB | 32.6 MB | 0/0 |
@@ -76,6 +81,10 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 ### zts
 | tag | PHP | 发行版 | 构建时间 | 压缩大小 | 拉取大小 | 安全扫描 CRITICAL/HIGH |
 | --- | --- | --- | --- | --- | --- | --- |
+| 8.6-zts-alpine3.24 | 8.6 | alpine3.24 | 2026-11-20T10:18:41Z | 45.7 MB | 45.8 MB | 0/0 |
+| 8.6-zts-alpine3.23 | 8.6 | alpine3.23 | 2026-11-20T10:16:11Z | 43.7 MB | 43.3 MB | 0/0 |
+| 8.6-zts-trixie | 8.6 | trixie | 2026-11-20T10:15:46Z | 174.7 MB | 160.7 MB | 1/121 |
+| 8.6-zts-bookworm | 8.6 | bookworm | 2026-11-20T10:16:32Z | 168.7 MB | 162.9 MB | 3/123 |
 | 8.5-zts-alpine3.24 | 8.5 | alpine3.24 | 2026-11-20T05:14:49Z | 41.8 MB | 41.8 MB | 0/0 |
 | 8.5-zts-alpine3.23 | 8.5 | alpine3.23 | 2026-11-20T05:03:45Z | 39.4 MB | 39.4 MB | 0/0 |
 | 8.5-zts-trixie | 8.5 | trixie | 2026-11-20T05:16:35Z | 164 MB | 159.6 MB | 1/121 |
@@ -127,7 +136,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | 8.3-thread-trixie | 8.3 | trixie | 2026-11-20T05:02:38Z | 174.8 MB | 169.3 MB | 1/121 |
 | 8.3-thread-bookworm | 8.3 | bookworm | 2026-11-20T05:22:37Z | 168.1 MB | 157.8 MB | 4/123 |
 | 8.2-thread-alpine3.24 | 8.2 | alpine3.24 | 2026-11-20T05:30:20Z | 41 MB | 40.7 MB | 0/0 |
-| 8.2-thread-alpine3.23 | 8.2 | alpine3.23 | 2026-11-17T17:31:56Z | 38.2 MB | 38.2 MB | 0/0 |
+| 8.2-thread-alpine3.23 | 8.2 | alpine3.23 | 2026-11-20T10:24:04Z | 38.4 MB | 38.2 MB | 0/0 |
 | 8.2-thread-trixie | 8.2 | trixie | 2026-11-20T05:31:39Z | 182.1 MB | 168.7 MB | 1/121 |
 | 8.2-thread-bookworm | 8.2 | bookworm | 2026-11-20T05:32:33Z | 167.8 MB | 157.2 MB | 4/123 |
 ### swow
