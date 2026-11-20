@@ -78,3 +78,15 @@
 - `mirror` job（同一个 matrix）负责 skopeo 转推到 ACR，`continue-on-error: true`：
   ACR 失败不会让构建失败，失败时会推飞书并留待下一轮重试。
 - 只有 `changed=true` 的变体才会真正 mirror（其余变体只跑一次快速 check）。
+
+### 扩展版本跟踪（extensions.json）
+
+- `extensions.json` 记录 6 个扩展的 `stable` / `rc`（各含 `version` 与 `ref`）。
+- `extensions.sh` 每天从 Packagist + GitHub API 更新：取最新版本 → 解析成 `dev-<branch>#<sha>` → 写回。
+  - 跨大版本（6.x→7.x）不自动升，只打 warning
+  - 无纯正式版的包（如 igbinary）回退到最新版本
+  - 连续失败（限流/网络）时保留原值，不会把 pin 清空
+- 模板用 `env.ext_*` 渲染 `pie install 'pkg:dev-branch#sha'`；`update.sh` 已把 `./extensions.sh` 加在 `versions.sh` 之后。
+- **PIE 不能按 tag 安装**（`pkg:6.2.6` / `pkg:v6.2.6` 都会报找不到），所以统一用 commit-sha pin。
+- 每个镜像写入 `cn.era-cloud.ext.<name>` label（可读版本号），`docker inspect` 可追溯。
+- README 的「扩展版本」区块由 `update-readme.sh` 从 extensions.json 生成（`<!-- EXT-VERSIONS-START/END -->`）。

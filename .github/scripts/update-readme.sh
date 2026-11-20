@@ -123,3 +123,16 @@ matrix="$(
 )"
 replace_block '<!-- VERSION-MATRIX-START -->' '<!-- VERSION-MATRIX-END -->' "$matrix"
 echo "updated README version matrix"
+
+# 扩展版本：来自 extensions.json（stable / pre-release）
+ext_block="$(
+	jq -r '
+		to_entries
+		| sort_by(.key)
+		| .[] as $e
+		| "- `" + $e.key + "` — stable: **" + ($e.value.stable.version // "-") + "**"
+			+ (if $e.value.rc then " ｜ pre-release: " + $e.value.rc.version else "" end)
+	' extensions.json
+)"
+replace_block '<!-- EXT-VERSIONS-START -->' '<!-- EXT-VERSIONS-END -->' "$ext_block"
+echo "updated README extension versions"

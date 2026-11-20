@@ -6,6 +6,14 @@
 
 FROM debian:trixie-slim
 
+# 扩展版本（由 extensions.json 固定，便于 docker inspect 追溯）
+LABEL cn.era-cloud.ext.msgpack="v3.0.1" \
+      cn.era-cloud.ext.igbinary="3.2.17RC1" \
+      cn.era-cloud.ext.ext-ds="v2.0.0" \
+      cn.era-cloud.ext.phpredis="6.3.0" \
+      cn.era-cloud.ext.swoole="v6.2.6" \
+      cn.era-cloud.ext.swow="v1.6.2"
+
 # prevent Debian's PHP packages from being installed
 # https://github.com/docker-library/php/pull/542
 RUN set -eux; \
@@ -242,16 +250,18 @@ RUN set -eux; \
 	# the PHP build purge above removed liblz4-dev/libzstd-dev; reinstall them for the phpredis build
 	apt-get update; \
 	apt-get install -y --no-install-recommends liblz4-dev libzstd-dev; \
+	# 扩展用 commit-sha pin（dev-<branch>#<sha>），从 VCS 安装需要临时装 git
+	apt-get install -y --no-install-recommends git; \
 	\
 # install PIE (PHP Installer for Extensions), the official replacement for PECL
 # https://php.github.io/pie/ https://github.com/php/pie
 	curl -fL --output /usr/local/bin/pie 'https://github.com/php/pie/releases/latest/download/pie.phar'; \
 	chmod +x /usr/local/bin/pie; \
 	\
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'msgpack/msgpack-php'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'php-ds/ext-ds'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'phpredis/phpredis' \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'msgpack/msgpack-php:dev-master#e0a661605ac03459909f66802bc83a3ba16cc9da'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:dev-master#edda7101adf583df047d028a154abf3bf04ced61'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'php-ds/ext-ds:dev-master#132ca69b19c80fba8a447f87d656c27596f43cec'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'phpredis/phpredis:dev-develop#df4fab2de7fc327c54c94a13af2b9542e4fbd720' \
 		--enable-redis \
 		--enable-redis-igbinary \
 		--enable-redis-lz4 \
@@ -259,6 +269,7 @@ RUN set -eux; \
 		--enable-redis-zstd \
 		--with-liblz4=yes \
 		--with-libzstd=yes; \
+	apt-get purge -y --auto-remove git; apt-get dist-clean; \
 	# keep the runtime libs (liblz4-1/libzstd1) in the final image, drop the -dev packages
 	apt-mark manual liblz4-1 libzstd1; \
 	apt-get purge -y liblz4-dev libzstd-dev; \
@@ -329,7 +340,7 @@ RUN set -ex; \
 	# swoole 6.2.2 fails to compile on newer g++ (GCC 15) without -fpermissive:
 	# "converting to 'bool' from 'std::nullptr_t' requires direct-initialization"
 	export CXXFLAGS="$CXXFLAGS -fpermissive"; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check swoole/swoole \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swoole/swoole:dev-master#13d2f33664d60b72aaa9f102ff0ef4085c028513' \
 		--enable-swoole-curl \
 		--enable-cares \
 		--enable-brotli \

@@ -40,6 +40,17 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 每个版本支持发行版：`trixie` / `bookworm` / `alpine3.24` / `alpine3.23`（共 88 个变体）。
 <!-- VERSION-MATRIX-END -->
 
+## 扩展版本
+
+<!-- EXT-VERSIONS-START -->
+- `igbinary/igbinary` — stable: **3.2.17RC1** ｜ pre-release: 3.2.17RC1
+- `msgpack/msgpack-php` — stable: **v3.0.1**
+- `php-ds/ext-ds` — stable: **v2.0.0**
+- `phpredis/phpredis` — stable: **6.3.0** ｜ pre-release: 6.3.0RC1
+- `swoole/swoole` — stable: **v6.2.6** ｜ pre-release: v6.3.0-rc2
+- `swow/swow-extension` — stable: **v1.6.2**
+<!-- EXT-VERSIONS-END -->
+
 变体说明：
 
 - `cli` — 标准 CLI（默认）

@@ -6,6 +6,14 @@
 
 FROM alpine:3.23
 
+# 扩展版本（由 extensions.json 固定，便于 docker inspect 追溯）
+LABEL cn.era-cloud.ext.msgpack="v3.0.1" \
+      cn.era-cloud.ext.igbinary="3.2.17RC1" \
+      cn.era-cloud.ext.ext-ds="v2.0.0" \
+      cn.era-cloud.ext.phpredis="6.3.0" \
+      cn.era-cloud.ext.swoole="v6.2.6" \
+      cn.era-cloud.ext.swow="v1.6.2"
+
 # dependencies required for running "phpize"
 # these get automatically installed and removed by "docker-php-ext-*" (unless they're already installed)
 ENV PHPIZE_DEPS \
@@ -222,16 +230,18 @@ RUN set -eux; \
 	lz4-dev \
 	zstd-dev; \
 	\
+	# 扩展用 commit-sha pin（dev-<branch>#<sha>），从 VCS 安装需要临时装 git
+	apk add --no-cache --virtual .pie-vcs git; \
 	\
 # install PIE (PHP Installer for Extensions), the official replacement for PECL
 # https://php.github.io/pie/ https://github.com/php/pie
 	curl -fL --output /usr/local/bin/pie 'https://github.com/php/pie/releases/latest/download/pie.phar'; \
 	chmod +x /usr/local/bin/pie; \
 	\
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'msgpack/msgpack-php'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:^3.2@RC'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'php-ds/ext-ds'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'phpredis/phpredis' \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'msgpack/msgpack-php:dev-master#e0a661605ac03459909f66802bc83a3ba16cc9da'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:dev-master#edda7101adf583df047d028a154abf3bf04ced61'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'php-ds/ext-ds:dev-master#132ca69b19c80fba8a447f87d656c27596f43cec'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'phpredis/phpredis:dev-develop#df4fab2de7fc327c54c94a13af2b9542e4fbd720' \
 		--enable-redis \
 		--enable-redis-igbinary \
 		--enable-redis-lz4 \
@@ -239,6 +249,7 @@ RUN set -eux; \
 		--enable-redis-zstd \
 		--with-liblz4=yes \
 		--with-libzstd=yes; \
+	apk del .pie-vcs; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/*; \
 	rm -rf /root/.pie; \

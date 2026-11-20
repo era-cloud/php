@@ -1,0 +1,53 @@
+{
+  "igbinary/igbinary": {
+    "rc": {
+      "ref": "dev-master#edda7101adf583df047d028a154abf3bf04ced61",
+      "version": "3.2.17RC1"
+    },
+    "stable": {
+      "ref": "dev-master#edda7101adf583df047d028a154abf3bf04ced61",
+      "version": "3.2.17RC1"
+    }
+  },
+  "msgpack/msgpack-php": {
+    "rc": null,
+    "stable": {
+      "ref": "dev-master#e0a661605ac03459909f66802bc83a3ba16cc9da",
+      "version": "v3.0.1"
+    }
+  },
+  "php-ds/ext-ds": {
+    "rc": null,
+    "stable": {
+      "ref": "dev-master#132ca69b19c80fba8a447f87d656c27596f43cec",
+      "version": "v2.0.0"
+    }
+  },
+  "phpredis/phpredis": {
+    "rc": {
+      "ref": "dev-develop#ca25b6fd9f31958601c97fff04c9d18bb3918da3",
+      "version": "6.3.0RC1"
+    },
+    "stable": {
+      "ref": "dev-develop#df4fab2de7fc327c54c94a13af2b9542e4fbd720",
+      "version": "6.3.0"
+    }
+  },
+  "swoole/swoole": {
+    "rc": {
+      "ref": "dev-master#62310ca5fa8ae63d725226c53cd237bb00e7e581",
+      "version": "v6.3.0-rc2"
+    },
+    "stable": {
+      "ref": "dev-master#13d2f33664d60b72aaa9f102ff0ef4085c028513",
+      "version": "v6.2.6"
+    }
+  },
+  "swow/swow-extension": {
+    "rc": null,
+    "stable": {
+      "ref": "dev-develop#a20ad19f7c548f5b49a836cd99957928ccb27f46",
+      "version": "v1.6.2"
+    }
+  }
+}

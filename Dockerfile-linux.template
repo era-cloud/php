@@ -41,21 +41,29 @@
 	;
 	def pie_msgpack:
 		# https://github.com/msgpack/msgpack-php/pull/185 (unserialize_callback_func 改成 zend_string)
-		if php86plus then "msgpack/msgpack-php:dev-master#4a6890850a9065f9a211951df4fc39c5a4c498ab" else "msgpack/msgpack-php" end
+		if php86plus then "msgpack/msgpack-php:dev-master#4a6890850a9065f9a211951df4fc39c5a4c498ab" else ("msgpack/msgpack-php:" + env.ext_msgpack) end
 	;
 	def pie_igbinary:
 		# 3.2.17RC1 无 8.6 支持；master 2026-08 才修 unserialize_callback_func
-		if php86plus then "igbinary/igbinary:dev-master#2b1f5d62e3037b07c2a46499ac32091cdb41fb40" else "igbinary/igbinary:^3.2@RC" end
+		if php86plus then "igbinary/igbinary:dev-master#2b1f5d62e3037b07c2a46499ac32091cdb41fb40" else ("igbinary/igbinary:" + env.ext_igbinary) end
 	;
 	def pie_ds:
 		# https://github.com/php-ds/ext-ds/pull/233 (issue-8.6.0beta1)
-		if php86plus then "php-ds/ext-ds:dev-master#6e9d66812b0acb9445c446b8dfb79904e0a9bc13" else "php-ds/ext-ds" end
+		if php86plus then "php-ds/ext-ds:dev-master#6e9d66812b0acb9445c446b8dfb79904e0a9bc13" else ("php-ds/ext-ds:" + env.ext_ds) end
 	;
 	def pie_redis:
 		# 6.3.0 无 8.6 支持；默认分支是 develop
-		if php86plus then "phpredis/phpredis:dev-develop#10ae0080a333e86adf1ad850d5728b619473d62e" else "phpredis/phpredis" end
+		if php86plus then "phpredis/phpredis:dev-develop#10ae0080a333e86adf1ad850d5728b619473d62e" else ("phpredis/phpredis:" + env.ext_redis) end
 -}}
 FROM {{ env.from }}
+
+# 扩展版本（由 extensions.json 固定，便于 docker inspect 追溯）
+LABEL cn.era-cloud.ext.msgpack="{{ env.ext_msgpack_ver }}" \
+      cn.era-cloud.ext.igbinary="{{ env.ext_igbinary_ver }}" \
+      cn.era-cloud.ext.ext-ds="{{ env.ext_ds_ver }}" \
+      cn.era-cloud.ext.phpredis="{{ env.ext_redis_ver }}" \
+      cn.era-cloud.ext.swoole="{{ env.ext_swoole_ver }}" \
+      cn.era-cloud.ext.swow="{{ env.ext_swow_ver }}"
 
 {{ if is_alpine then "" else ( -}}
 # prevent Debian's PHP packages from being installed
@@ -494,10 +502,8 @@ RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends liblz4-dev libzstd-dev; \
 {{ ) end -}}
-{{ if php86plus then ( -}}
-	# 8.6 的扩展只能从 VCS 装（没有 dist 包），需要临时安装 git
+	# 扩展用 commit-sha pin（dev-<branch>#<sha>），从 VCS 安装需要临时装 git
 	{{ if is_alpine then "apk add --no-cache --virtual .pie-vcs git;" else "apt-get install -y --no-install-recommends git;" end }} \
-{{ ) else "" end -}}
 	\
 # install PIE (PHP Installer for Extensions), the official replacement for PECL
 # https://php.github.io/pie/ https://github.com/php/pie
@@ -515,9 +521,7 @@ RUN set -eux; \
 		--enable-redis-zstd \
 		--with-liblz4=yes \
 		--with-libzstd=yes; \
-{{ if php86plus then ( -}}
 	{{ if is_alpine then "apk del .pie-vcs;" else "apt-get purge -y --auto-remove git; " + clean_apt + ";" end }} \
-{{ ) else "" end -}}
 {{ if is_alpine then "" else ( -}}
 	# keep the runtime libs (liblz4-1/libzstd1) in the final image, drop the -dev packages
 	apt-mark manual liblz4-1 libzstd1; \
@@ -623,7 +627,7 @@ RUN set -ex; \
 	# swoole 6.2.2 fails to compile on newer g++ (GCC 15) without -fpermissive:
 	# "converting to 'bool' from 'std::nullptr_t' requires direct-initialization"
 	export CXXFLAGS="$CXXFLAGS -fpermissive"; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check swoole/swoole \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swoole/swoole:{{ env.ext_swoole }}' \
 		--enable-swoole-curl \
 		--enable-cares \
 		--enable-brotli \
@@ -731,7 +735,7 @@ RUN set -ex; \
 	docker-php-ext-install sockets; \
 	docker-php-source extract; \
 	docker-php-source delete; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check swow/swow-extension; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swow/swow-extension:{{ env.ext_swow }}'; \
 	echo "memory_limit=1G" >  /usr/local/etc/php/conf.d/00-default.ini; \
 	echo "opcache.enable_cli = 'On'" >>  /usr/local/etc/php/conf.d/50-opcache.ini; \
 	echo "extension=swow.so" > /usr/local/etc/php/conf.d/docker-php-ext-swow.ini; \

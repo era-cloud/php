@@ -6,6 +6,14 @@
 
 FROM debian:bookworm-slim
 
+# 扩展版本（由 extensions.json 固定，便于 docker inspect 追溯）
+LABEL cn.era-cloud.ext.msgpack="v3.0.1" \
+      cn.era-cloud.ext.igbinary="3.2.17RC1" \
+      cn.era-cloud.ext.ext-ds="v2.0.0" \
+      cn.era-cloud.ext.phpredis="6.3.0" \
+      cn.era-cloud.ext.swoole="v6.2.6" \
+      cn.era-cloud.ext.swow="v1.6.2"
+
 # prevent Debian's PHP packages from being installed
 # https://github.com/docker-library/php/pull/542
 RUN set -eux; \
@@ -243,7 +251,7 @@ RUN set -eux; \
 	# the PHP build purge above removed liblz4-dev/libzstd-dev; reinstall them for the phpredis build
 	apt-get update; \
 	apt-get install -y --no-install-recommends liblz4-dev libzstd-dev; \
-	# 8.6 的扩展只能从 VCS 装（没有 dist 包），需要临时安装 git
+	# 扩展用 commit-sha pin（dev-<branch>#<sha>），从 VCS 安装需要临时装 git
 	apt-get install -y --no-install-recommends git; \
 	\
 # install PIE (PHP Installer for Extensions), the official replacement for PECL

@@ -6,6 +6,14 @@
 
 FROM alpine:3.24
 
+# 扩展版本（由 extensions.json 固定，便于 docker inspect 追溯）
+LABEL cn.era-cloud.ext.msgpack="v3.0.1" \
+      cn.era-cloud.ext.igbinary="3.2.17RC1" \
+      cn.era-cloud.ext.ext-ds="v2.0.0" \
+      cn.era-cloud.ext.phpredis="6.3.0" \
+      cn.era-cloud.ext.swoole="v6.2.6" \
+      cn.era-cloud.ext.swow="v1.6.2"
+
 # dependencies required for running "phpize"
 # these get automatically installed and removed by "docker-php-ext-*" (unless they're already installed)
 ENV PHPIZE_DEPS \
@@ -223,7 +231,7 @@ RUN set -eux; \
 	lz4-dev \
 	zstd-dev; \
 	\
-	# 8.6 的扩展只能从 VCS 装（没有 dist 包），需要临时安装 git
+	# 扩展用 commit-sha pin（dev-<branch>#<sha>），从 VCS 安装需要临时装 git
 	apk add --no-cache --virtual .pie-vcs git; \
 	\
 # install PIE (PHP Installer for Extensions), the official replacement for PECL

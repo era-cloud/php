@@ -2,6 +2,25 @@
 set -Eeuo pipefail
 
 [ -f versions.json ] # run "versions.sh" first
+[ -f extensions.json ] # run "extensions.sh" first
+
+# 扩展版本（commit-sha pin）：PIE 按 tag 解析不可靠，统一用 dev-<branch>#<sha>
+export ext_msgpack="$(jq -r '.["msgpack/msgpack-php"].stable.ref' extensions.json)"
+export ext_igbinary="$(jq -r '.["igbinary/igbinary"].stable.ref' extensions.json)"
+export ext_ds="$(jq -r '.["php-ds/ext-ds"].stable.ref' extensions.json)"
+export ext_redis="$(jq -r '.["phpredis/phpredis"].stable.ref' extensions.json)"
+export ext_swoole="$(jq -r '.["swoole/swoole"].stable.ref' extensions.json)"
+export ext_swoole_rc="$(jq -r '.["swoole/swoole"].rc.ref // empty' extensions.json)"
+export ext_swow="$(jq -r '.["swow/swow-extension"].stable.ref' extensions.json)"
+export ext_swow_rc="$(jq -r '.["swow/swow-extension"].rc.ref // empty' extensions.json)"
+
+# 可读版本号（写进 OCI label，便于 docker inspect 追溯）
+export ext_msgpack_ver="$(jq -r '.["msgpack/msgpack-php"].stable.version' extensions.json)"
+export ext_igbinary_ver="$(jq -r '.["igbinary/igbinary"].stable.version' extensions.json)"
+export ext_ds_ver="$(jq -r '.["php-ds/ext-ds"].stable.version' extensions.json)"
+export ext_redis_ver="$(jq -r '.["phpredis/phpredis"].stable.version' extensions.json)"
+export ext_swoole_ver="$(jq -r '.["swoole/swoole"].stable.version' extensions.json)"
+export ext_swow_ver="$(jq -r '.["swow/swow-extension"].stable.version' extensions.json)"
 
 jqt='.jq-template.awk'
 if [ -n "${BASHBREW_SCRIPTS:-}" ]; then
