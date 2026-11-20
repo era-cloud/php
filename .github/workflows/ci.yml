@@ -210,7 +210,6 @@ jobs:
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
           echo "last=$last changed=$changed"
       - name: Login to the Github Container registry
-        if: steps.changed.outputs.changed == 'true'
         run: docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
       - name: Login to the Aliyun ACR registry
         if: steps.changed.outputs.changed == 'true'
@@ -231,6 +230,8 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq skopeo
           skopeo --version
+      - name: Sync ghcr alias tags ${{ matrix.name }}
+        run: ${{ matrix.runs.syncAliases }}
       - name: Mirror to Aliyun ACR ${{ matrix.name }}
         if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.push }}
