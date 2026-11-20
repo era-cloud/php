@@ -191,11 +191,11 @@
     "version": "8.2",
     "variant": "zts",
     "distro": "alpine3.23",
-    "built_at": "2026-11-20T10:43:50Z",
-    "size": 35382020,
+    "built_at": "2026-11-20T15:07:20Z",
+    "size": 38648619,
     "critical": 0,
     "high": 0,
-    "pull_size": 35456545
+    "pull_size": 38367956
   },
   {
     "tag": "8.2-swow-alpine3.23",
@@ -213,11 +213,11 @@
     "version": "8.2",
     "variant": "thread",
     "distro": "alpine3.23",
-    "built_at": "2026-11-20T10:24:04Z",
-    "size": 40242134,
+    "built_at": "2026-11-20T15:09:10Z",
+    "size": 43113081,
     "critical": 0,
     "high": 0,
-    "pull_size": 40085059
+    "pull_size": 42996288
   },
   {
     "tag": "8.3-cli-trixie",

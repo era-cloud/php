@@ -172,7 +172,7 @@
   "8.6.0-zts-alpine3.24": "6fc71ee1b0e318486725afaf146acca8746bea0a",
   "8.6.0-cli-alpine3.23": "6fc71ee1b0e318486725afaf146acca8746bea0a",
   "8.6.0-zts-trixie": "6fc71ee1b0e318486725afaf146acca8746bea0a",
-  "8.2.36-thread-alpine3.23": "5087e7302576c84705004d2ee054fbfc194df987",
+  "8.2.36-thread-alpine3.23": "690771ab3e2c650aef3fd1dbd2f6d9b24c117cf1",
   "8.6.0-cli-bookworm": "6fc71ee1b0e318486725afaf146acca8746bea0a",
-  "8.2.36-zts-alpine3.23": "b4e0b7c86685789db651f909ead7114b0e291627"
+  "8.2.36-zts-alpine3.23": "690771ab3e2c650aef3fd1dbd2f6d9b24c117cf1"
 }
