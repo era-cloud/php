@@ -29,6 +29,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 ## 版本矩阵
 
 <!-- VERSION-MATRIX-START -->
+### 稳定轨
 | PHP | cli | zts | swoole | swow | thread |
 |-----|-----|-----|-----|-----|-----|
 | **8.6** (8.6.0) | ✅ | ✅ | — | — | — |
@@ -37,7 +38,16 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 | **8.3** (8.3.37) | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **8.2** (8.2.36) | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-每个版本支持发行版：`trixie` / `bookworm` / `alpine3.24` / `alpine3.23`（共 88 个变体）。
+### 预发布轨
+| PHP | swoole-rc | swow-rc |
+|-----|-----|-----|
+| **8.6** (8.6.0) | — | — |
+| **8.5** (8.5.13) | ✅ | ✅ |
+| **8.4** (8.4.28) | ✅ | ✅ |
+| **8.3** (8.3.37) | ✅ | ✅ |
+| **8.2** (8.2.36) | ✅ | ✅ |
+
+每个版本支持发行版：`trixie` / `bookworm` / `alpine3.24` / `alpine3.23`（共 120 个变体）。
 <!-- VERSION-MATRIX-END -->
 
 ## 扩展版本
@@ -48,7 +58,7 @@ docker pull crpi-ae6l51vlbqurnd6c.cn-chengdu.personal.cr.aliyuncs.com/eracloud/p
 - `php-ds/ext-ds` — stable: **v2.0.0**
 - `phpredis/phpredis` — stable: **6.3.0** ｜ pre-release: 6.3.0RC1
 - `swoole/swoole` — stable: **v6.2.6** ｜ pre-release: v6.3.0-rc2
-- `swow/swow-extension` — stable: **v1.6.2**
+- `swow/swow-extension` — stable: **v1.6.2** ｜ pre-release: v2.0.0-alpha.3
 <!-- EXT-VERSIONS-END -->
 
 变体说明：

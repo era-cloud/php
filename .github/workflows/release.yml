@@ -11,6 +11,7 @@ env:
 permissions:
   contents: write
   packages: write
+  issues: write
 
 jobs:
   check:
@@ -24,6 +25,15 @@ jobs:
         [ -z "$status" ]
     - name: Update the Docker image Version
       run:  ./update.sh
+    - name: Report pending alpha updates
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        [ -s /tmp/extensions-alpha.tsv ] || { echo "no pending alpha updates"; exit 0; }
+        body="$(printf '检测到扩展有新的 alpha 预发布，**未自动采用**（alpha 每天可能变，需人工确认）。\n\n```\n包\t当前\t新版本\n%s\n```\n\n如需试用，手动修改 `extensions.json` 里对应包的 `rc` 字段后重跑 `./extensions.sh`。' "$(cat /tmp/extensions-alpha.tsv)")"
+        if [ "$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search 'in:title 扩展 alpha 预发布待确认' --json number --jq 'length')" -eq 0 ]; then
+          gh issue create --repo "$GITHUB_REPOSITORY" --title "扩展 alpha 预发布待确认" --body "$body"
+        fi
     - name: Apply Templates
       run: ./apply-templates.sh
     - name: Push changes

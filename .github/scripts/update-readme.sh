@@ -95,10 +95,13 @@ matrix="$(
 	jq -r '
 		def verid: (.value.version | sub("[a-zA-Z-].*$"; "") | split(".") | map(tonumber)) | .[0]*10000 + .[1]*100 + (.[2] // 0);
 		[ to_entries[] | select(.value) ] as $all
-		| [ "cli", "zts", "swoole", "swoole-rc", "swow", "swow-rc", "thread", "thread-rc" ] as $canon
+		| [ "cli", "zts", "swoole", "swow", "thread" ] as $stableCols
+		| [ "swoole-rc", "swow-rc", "thread-rc" ] as $rcCols
 		| ( [ $all[].value.variants[] | split("/")[1] ] | unique ) as $present
-		| ( $canon | map(. as $c | select($present | index($c))) ) as $cols
+		| ( $stableCols | map(. as $c | select($present | index($c))) ) as $cols
+		| ( $rcCols | map(. as $c | select($present | index($c))) ) as $rcols
 		| (
+			"### 稳定轨",
 			"| PHP | " + ($cols | join(" | ")) + " |",
 			"|" + ([ range(0; ($cols | length) + 1) | "-----" ] | join("|")) + "|",
 			(
@@ -108,6 +111,18 @@ matrix="$(
 					+ (if (.key | endswith("-rc")) then " · 预发布" else "" end)
 					+ " |"
 					+ ([ $cols[] as $c
+						| if (.value.variants | any(endswith("/" + $c))) then " ✅ |" else " — |" end ] | join(""))
+			),
+			"",
+			"### 预发布轨",
+			"| PHP | " + ($rcols | join(" | ")) + " |",
+			"|" + ([ range(0; ($rcols | length) + 1) | "-----" ] | join("|")) + "|",
+			(
+				$all
+				| sort_by(-verid)[]
+				| "| **" + .key + "** (" + .value.version + ")"
+					+ " |"
+					+ ([ $rcols[] as $c
 						| if (.value.variants | any(endswith("/" + $c))) then " ✅ |" else " — |" end ] | join(""))
 			),
 			"",

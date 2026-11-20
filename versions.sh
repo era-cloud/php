@@ -117,7 +117,7 @@ for version in "${versions[@]}"; do
 						# 扩展 RC 轨按 extensions.json 里是否存在 rc 决定是否生成。
 						(if env.rcVersion | IN("8.2", "8.3", "8.4", "8.5") then
 							"zts", "swoole", "swow", "thread",
-							(if env.has_swoole_rc == "1" then "swoole-rc", "thread-rc" else empty end),
+							(if env.has_swoole_rc == "1" then "swoole-rc" else empty end),
 							(if env.has_swow_rc == "1" then "swow-rc" else empty end)
 						 else "zts" end),
 						empty

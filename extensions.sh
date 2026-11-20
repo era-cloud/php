@@ -107,6 +107,14 @@ for pkg in "${pkgs[@]}"; do
 	else
 		rc_ref="$(resolve_ref "$pkg" "$rc_ver")"
 	fi
+	# alpha 级预发布不自动采用（swow 这类还在 alpha 的包每天变），记录到待确认清单
+	if [ -n "$rc_ver" ] && [ -n "$old_rc_ver" ] && [ "$rc_ver" != "$old_rc_ver" ] && [[ "$rc_ver" == *alpha* ]]; then
+		echo >&2 "notice: $pkg 出现新的 alpha 版本 $rc_ver（当前 $old_rc_ver），未自动采用"
+		printf '%s\t%s\t%s\n' "$pkg" "$old_rc_ver" "$rc_ver" >> "${ALPHA_REPORT:-/tmp/extensions-alpha.tsv}"
+		rc_ver="$old_rc_ver"
+		rc_ref="$(jq -r --arg p "$pkg" '.[$p].rc.ref // empty' <<<"$current")"
+	fi
+
 	if [ -n "$rc_ver" ] && [ -z "$rc_ref" ]; then
 		echo >&2 "warning: $pkg 无法解析 $rc_ver 的 commit，保持原值"
 		rc_ver="$old_rc_ver"
