@@ -27,6 +27,7 @@ ENV EXT_BUILD_LIBS \
 	libbrotli-dev \
 	libc-ares-dev \
 	libsqlite3-dev \
+	libpq-dev \
 	liblz4-dev \
 	libzstd-dev \
 	libxml2-dev \

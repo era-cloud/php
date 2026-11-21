@@ -27,6 +27,7 @@ ENV EXT_BUILD_LIBS \
 	brotli-dev \
 	c-ares-dev \
 	sqlite-dev \
+	libpq-dev \
 	lz4-dev \
 	zstd-dev \
 	linux-headers gnu-libiconv-dev \

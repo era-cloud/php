@@ -40,6 +40,7 @@ ENV EXT_BUILD_LIBS \
 	{{ if is_alpine then "brotli-dev" else "libbrotli-dev" end }} \
 	{{ if is_alpine then "c-ares-dev" else "libc-ares-dev" end }} \
 	{{ if is_alpine then "sqlite-dev" else "libsqlite3-dev" end }} \
+	libpq-dev \
 	{{ if is_alpine then "lz4-dev" else "liblz4-dev" end }} \
 	{{ if is_alpine then "zstd-dev" else "libzstd-dev" end }} \
 	{{ if is_alpine then "linux-headers gnu-libiconv-dev" else "libxml2-dev" end }} \
