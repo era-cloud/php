@@ -6,7 +6,10 @@ cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
 versions=( "$@" )
 if [ ${#versions[@]} -eq 0 ]; then
-	versions=( */ )
+	# 只认 8.x 版本目录；用 */ 会把 docs/ 之类也当成 PHP 版本
+	shopt -s nullglob
+	versions=( 8.*/ )
+	shopt -u nullglob
 	json='{}'
 else
 	json="$(< versions.json)"

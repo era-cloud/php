@@ -163,6 +163,5 @@
       "alpine3.23/zts"
     ]
   },
-  "8.6-rc": null,
-  "docs": null
+  "8.6-rc": null
 }

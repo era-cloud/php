@@ -50,6 +50,11 @@ generated_warning() {
 
 for version; do
 	export version
+	# 防御：只允许操作 8.x 版本目录，避免误删 docs/ 等目录
+	if [[ ! "$version" =~ ^8\.[0-9]+(-rc)?$ ]]; then
+		echo >&2 "skip: '$version' 不是 PHP 版本目录"
+		continue
+	fi
 	if [ -d $version ]; then
 		rm -rf "$version"
     # echo "文件夹存在"
