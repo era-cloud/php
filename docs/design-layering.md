@@ -95,14 +95,16 @@ swoole-rc / swoole-6.3-rc  RC 轨
 - 无 PHP 版本的 tag（`swoole`、`swoole-6.2`）指向「最新实际存在该扩展的 PHP 版本 + 最新 alpine suite」——当前为 php 8.5 + alpine3.24。
 - 不在扩展版本 tag 上使用 `latest` / `8` 等全局别名，避免歧义。
 
-### 4.2 规模估算（本地 dry-run，按当前 120 变体）
+### 4.2 规模（实施后实测，按当前 120 变体）
 
-| 规则 | 当前变体的 tag 数 |
+| 规则 | tag 数 |
 |---|---|
 | 现有规则 | 448 |
-| 全矩阵规则 | 1288 |
+| 全矩阵规则 | **846** |
+| 与 registry 现有 4279 的交集 | 459 |
+| 需要新建 | **387** |
 
-registry 现有 4279（含历史），实施后预计 **5000–6000**，后续随历史累积增长。
+registry 总量因此从 4279 涨到约 4666。
 
 ## 5. 文档站（VitePress）
 
@@ -144,6 +146,10 @@ docs/
 | D8 | 文档页结构 | base / extensions / tags 三页 + index 快速选择 |
 | D9 | 刷新时机 | 跟随构建（`workflow_run`） |
 | D10 | 历史 tag | 全量展示（ghcr API），标记已归档 |
+| D15 | rc 轨 tag | 只到 major.minor（`swoole-6.3-rc`），完整 rc 号只进 label |
+| D16 | thread 版本号 | 与 swoole 相同 |
+| D17 | 新 tag 落地方式 | 清空 `.build-state.json` 强制全量重建一次 |
+| D18 | docs 数据权限 | 内置 GITHUB_TOKEN（packages:read），失败自动降级 |
 | D11 | 构建顺序 | 实施分层前先验 `bashbrew list --build-order`（base 必须排在扩展前） |
 | D12 | docs 上线时机 | 先上线 VitePress 空站（骨架 + deploy-pages），再填 tag 数据 |
 | D13 | base 体积 | 接受 EXTRA_EXT 全进 base（实测 trixie cli 723MB → 806MB，+83MB 未压缩 / +20MB 压缩） |
