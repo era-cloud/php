@@ -41,11 +41,32 @@
 |---|---|
 | `Dockerfile-linux.template` | EXTRA_EXT 依赖与 `docker-php-ext-install` 从 swoole/swow 段移到 base 段 |
 | `Dockerfile-ext.template`（新建） | 只含扩展段：`FROM <base>` + swoole/swow 安装 + label + 清理 |
-| `apply-templates.sh` | 扩展变体走新模板；计算 `from`（短别名） |
+| `apply-templates.sh` | 扩展变体走新模板；计算 `from`（短别名）；扩展目录只留 Dockerfile |
 | `generate-stackbrew-library.sh` | `getArches` 让自引用父镜像继承 base 的架构列表（否则 `Architectures:` 为空） |
-| `ci.yml` | ghcr 别名同步从 `mirror` job 提前到 `build` job（否则首次发布时扩展变体拉不到 base 别名） |
+| `.github/scripts/generate.sh` | 矩阵节点增加 `phase`（base / ext） |
+| `.github/scripts/variant-changed.sh`（新建） | 统一「变体是否需要重建」判断；扩展层连带其 base 目录 |
+| `ci.yml` | 拆成 `build-base` → `build-ext` 两阶段；base job 内立即同步 ghcr 别名 |
 
-### 3.3 风险
+### 3.3 实际实现（2026-11-21）
+
+- **两阶段构建**：`build-base`（40 个：cli/zts × 5 版本 × 4 suite）先跑完并同步别名，
+  `build-ext`（80 个）由 `needs: build-base` 串起来。没有用 bashbrew 的「同仓父镜像合并」，
+  因为那会把 base + 扩展并进同一个 job，导致改扩展版本时连 base 一起重编，失去分层收益。
+- **别名同步前置**：`runs.syncAliases` 在 `build` job 内、Build 之后立即执行；
+  `mirror` job 里的同名步骤保留（幂等），仅兜底。
+- **changed 判断**：扩展层 Dockerfile 只有 `FROM 自家 base 短别名`，所以把 base 变体目录
+  一并纳入 `git diff` 范围 —— 否则 PHP 小版本升级（短别名不变）时扩展镜像不会被重建。
+- **架构继承**：`generate-stackbrew-library.sh` 预扫描所有 base 变体的 FROM，
+  建立 `<ver>-<cli|zts>-<suite>` → 上游父镜像的映射，扩展变体据此取 `Architectures:`。
+  本地验证渲染结果为 `amd64, arm32v5, arm32v7, arm64v8, i386, ppc64le, riscv64, s390x`。
+- **空矩阵兜底**：`workflow_dispatch` 用 `variants` 过滤到只剩一类时，
+  另一阶段矩阵为空会让 GitHub 报错，因此塞一个占位节点 + job 级 `if: count != 0`。
+- **本地验证**（2026-11-21）：`8.5/trixie/cli` 构建通过，`php -m` 含全部 EXTRA_EXT
+  （bcmath bz2 calendar exif FFI gd gettext intl mysqli pcntl pdo_mysql pdo_pgsql shmop
+  soap sockets sysvmsg sysvsem sysvshm tidy zip）+ ds/igbinary/msgpack/redis，镜像 768MB；
+  随后 `8.5/trixie/swoole` 以 `ghcr.io/era-cloud/php:8.5-cli-trixie` 为 base 构建。
+
+### 3.4 风险
 
 - 自引用 `FROM` 的构建顺序：依赖 `bashbrew list --build-order`；需在 push 前确认顺序正确。
 - 官方 `oi/test/run.sh` 继续对扩展变体执行；若断言失败，按实际报错调整（不改测试语义）。
