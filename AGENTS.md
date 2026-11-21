@@ -8,6 +8,20 @@
 - 禁止 `docker compose down`（depend/ 基础设施——除非用户明确授权）
 - 操作前先用 `docker ps` 核对容器名归属；不确定则不操作
 
+## 分层构建（2026-11-21 起）
+
+- `cli` / `zts` 是 **base**：编译 PHP + 全部 `EXTRA_EXT`（bcmath/bz2/calendar/exif/ffi/gd/gettext/
+  intl/mysqli/pcntl/pdo_mysql/pdo_pgsql/shmop/soap/sockets/sysv*/tidy/zip），8.6 同样安装。
+- `swoole` / `swow` / `thread` 及 rc 轨是 **扩展层**：`Dockerfile-ext.template`，
+  `FROM ghcr.io/era-cloud/php:<ver>-<cli|zts>-<suite>`，只装扩展本体。
+  → 扩展版本升级不再重编 PHP（~10 分钟 → ~1 分钟）。
+- 扩展变体目录**只保留 Dockerfile**（`docker-php-*` 全部继承自 base）。
+- CI 分两阶段：`build-base` → `build-ext`（`needs`），base 构建后**立即同步 ghcr 别名**
+  （扩展层的 FROM 是短别名，mirror job 太晚）。
+- 扩展层的 `changed` 判断必须连带其 base 变体目录（见 `.github/scripts/variant-changed.sh`），
+  否则 PHP 小版本升级（短别名不变）时扩展镜像不会重建。
+- 扩展层编译依赖要自带：base 清理阶段会清掉 `-dev` 包（如 `--enable-swoole-pgsql` 需要 `libpq-dev`）。
+
 ## 构建与变体约束（踩过坑，勿回退）
 
 ### 变体矩阵
@@ -78,6 +92,8 @@
 - `mirror` job（同一个 matrix）负责 skopeo 转推到 ACR，`continue-on-error: true`：
   ACR 失败不会让构建失败，失败时会推飞书并留待下一轮重试。
 - 只有 `changed=true` 的变体才会真正 mirror（其余变体只跑一次快速 check）。
+- **只同步扩展变体**（swoole / swow / thread 及其 rc 轨）：base（cli/zts）体积大（~800MB）、
+  用量少，只在 ghcr 提供，不进 ACR。
 
 ### 扩展版本跟踪（extensions.json）
 
