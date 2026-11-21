@@ -7,14 +7,12 @@
 FROM debian:bookworm-slim
 
 # 扩展版本（由 extensions.json 固定，便于 docker inspect 追溯）
-LABEL cn.era-cloud.ext.msgpack="v3.0.1" \
+# 注意：swoole / swow 的版本 label 在扩展层（Dockerfile-ext.template）里
+LABEL cn.era-cloud.layer="base" \
+      cn.era-cloud.ext.msgpack="v3.0.1" \
       cn.era-cloud.ext.igbinary="3.2.17RC1" \
       cn.era-cloud.ext.ext-ds="v2.0.0" \
-      cn.era-cloud.ext.phpredis="6.3.0" \
-      cn.era-cloud.ext.swoole="v6.2.6" \
-      cn.era-cloud.ext.swow="v1.6.2" \
-      cn.era-cloud.ext.swoole-rc="v6.3.0-rc2" \
-      cn.era-cloud.ext.swow-rc="v2.0.0-alpha.3"
+      cn.era-cloud.ext.phpredis="6.3.0"
 
 # prevent Debian's PHP packages from being installed
 # https://github.com/docker-library/php/pull/542
@@ -301,6 +299,49 @@ RUN docker-php-ext-enable sodium; \
 	sed -i "s@max_execution_time = 30@max_execution_time = 1800M@g" "$PHP_INI_DIR/php.ini"; \
 	sed -i "s@memory_limit = 128M@memory_limit = 2048M@g" "$PHP_INI_DIR/php.ini"; \
 	php --ri redis
+
+# base 层统一安装 EXTRA_EXT（bcmath/gd/intl/zip…）。
+# - cli / zts 与扩展变体的 base 完全一致：扩展层（swoole/swow）不再是"唯一带这些扩展"的镜像，
+#   也不再需要为装扩展而重编 PHP。
+# - 8.6 同样安装，便于 swoole 支持 8.6 后直接复用同一个 base。
+ENV EXTRA_EXT \
+	bcmath bz2 calendar exif ffi gd gettext intl \
+	mysqli pcntl pdo_mysql pdo_pgsql shmop soap \
+	sockets sysvmsg sysvsem sysvshm tidy zip
+
+ENV EXTRA_LIBS \
+	autoconf \
+	libbz2-dev \
+	libffi-dev \
+	zlib1g-dev \
+	libpng-dev \
+	libicu-dev \
+	libpq-dev \
+	libxml2-dev \
+	libzip-dev \
+	libtidy-dev
+
+RUN set -ex; \
+	savedAptMark="$(apt-mark showmanual)"; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends $EXTRA_LIBS; \
+	rm -rf /var/lib/apt/lists/*; \
+	docker-php-ext-install $EXTRA_EXT; \
+	php -m; \
+	# 只保留编译产物实际链接的运行时库，丢弃 -dev 构建依赖
+	apt-mark auto '.*' > /dev/null; \
+	apt-mark manual $savedAptMark; \
+	find /usr/local -type f -executable -exec ldd '{}' ';' \
+		| awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }' \
+		| sort -u \
+		| xargs -r dpkg-query --search \
+		| awk 'sub(":$", "", $1) { print $1 }' \
+		| sort -u \
+		| xargs -r apt-mark manual; \
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	rm -rf /var/lib/apt/lists/*; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
+	rm -rf /tmp/*
 
 
 RUN set -eux; \

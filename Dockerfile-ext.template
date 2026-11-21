@@ -1,0 +1,189 @@
+# 扩展层：在自家 base 镜像（cli / zts）上安装 swoole / swow。
+# - base 层已编译 PHP + 全部 EXTRA_EXT（bcmath/gd/intl/zip…），并已启用
+#   sodium / ds / igbinary / msgpack / redis。
+# - 这里只装扩展本体，因此扩展版本升级时不会重编 PHP。
+# - env.from 是自家镜像的短别名（如 ghcr.io/era-cloud/php:8.5-cli-trixie），
+#   架构与 base 完全一致，由 generate-stackbrew-library.sh 继承。
+{{
+	def is_alpine:
+		env.suite | startswith("alpine")
+	;
+	def clean_apt:
+		if env.suite | contains("bookworm") then
+			"rm -rf /var/lib/apt/lists/*"
+		else "apt-get dist-clean" end
+	;
+	def is_swoole:
+		env.variant | IN("swoole", "thread", "swoole-rc")
+	;
+	def is_swow:
+		env.variant | IN("swow", "swow-rc")
+	;
+	def is_rc:
+		env.variant | endswith("-rc")
+-}}
+FROM {{ env.from }}
+
+# 分层信息：便于 docker inspect 追溯这一层是基于哪个 base 构建的
+LABEL cn.era-cloud.layer="extension" \
+      cn.era-cloud.base="{{ env.from }}" \
+      cn.era-cloud.ext.swoole="{{ env.ext_swoole_ver }}" \
+      cn.era-cloud.ext.swow="{{ env.ext_swow_ver }}" \
+      cn.era-cloud.ext.swoole-rc="{{ env.ext_swoole_rc_ver }}" \
+      cn.era-cloud.ext.swow-rc="{{ env.ext_swow_rc_ver }}"
+
+{{ if is_swoole then ( -}}
+# swoole module（PHP 与 EXTRA_EXT 已由 base 层提供，这里只准备 swoole 的编译依赖）
+ENV EXT_BUILD_LIBS \
+	{{ if is_alpine then "curl-dev" else "libcurl4-openssl-dev" end }} \
+	{{ if is_alpine then "openssl-dev" else "libssl-dev" end }} \
+	{{ if is_alpine then "brotli-dev" else "libbrotli-dev" end }} \
+	{{ if is_alpine then "c-ares-dev" else "libc-ares-dev" end }} \
+	{{ if is_alpine then "sqlite-dev" else "libsqlite3-dev" end }} \
+	{{ if is_alpine then "lz4-dev" else "liblz4-dev" end }} \
+	{{ if is_alpine then "zstd-dev" else "libzstd-dev" end }} \
+	{{ if is_alpine then "linux-headers gnu-libiconv-dev" else "libxml2-dev" end }} \
+	autoconf
+
+RUN set -ex; \
+{{ if is_alpine then ( -}}
+	apk add --no-cache --virtual .build-deps \
+	g++ \
+	gcc \
+	libc-dev \
+	make \
+	pkgconf \
+	autoconf \
+	$EXT_BUILD_LIBS; \
+{{ ) else ( -}}
+	savedAptMark="$(apt-mark showmanual)"; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends $EXT_BUILD_LIBS; \
+	{{ clean_apt }}; \
+{{ ) end -}}
+	docker-php-source extract; \
+	# swoole 6.2.2 fails to compile on newer g++ (GCC 15) without -fpermissive:
+	# "converting to 'bool' from 'std::nullptr_t' requires direct-initialization"
+	export CXXFLAGS="$CXXFLAGS -fpermissive"; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swoole/swoole:{{ if is_rc then env.ext_swoole_rc else env.ext_swoole end }}' \
+		--enable-swoole-curl \
+		--enable-cares \
+		--enable-brotli \
+		--enable-swoole-pgsql \
+		--enable-swoole-sqlite \
+		--with-openssl-dir=/usr \
+{{ if env.variant == "thread" then ( -}}
+		--enable-swoole-thread \
+{{ ) else "" end -}}
+		; \
+	docker-php-ext-enable swoole; \
+	docker-php-source delete; \
+	php --version; \
+	php -m; \
+	{ \
+	echo "[swoole]"; \
+	echo "extension=swoole"; \
+	echo "swoole.unixsock_buffer_size=512M"; \
+	echo "swoole.use_shortname=Off"; \
+	echo "swoole.enable_preemptive_scheduler=On"; \
+	} | tee /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini; \
+{{ if is_alpine then ( -}}
+	runDeps="$( \
+		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
+			| tr ',' '\n' \
+			| sort -u \
+			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+	)"; \
+	apk add --no-cache $runDeps; \
+	apk del --no-network .build-deps; \
+{{ ) else ( -}}
+	# 只保留编译产物实际链接的运行时库，丢弃 -dev 构建依赖
+	apt-mark auto '.*' > /dev/null; \
+	apt-mark manual $savedAptMark; \
+	find /usr/local -type f -executable -exec ldd '{}' ';' \
+		| awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }' \
+		| sort -u \
+		| xargs -r dpkg-query --search \
+		| awk 'sub(":$", "", $1) { print $1 }' \
+		| sort -u \
+		| xargs -r apt-mark manual; \
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	{{ clean_apt }}; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
+{{ ) end -}}
+	rm -rf /tmp/*; \
+	rm -rf /root/.pie
+{{ ) else "" end -}}
+{{ if is_swow then ( -}}
+# swow
+ENV EXT_BUILD_LIBS \
+	{{ if is_alpine then "curl-dev" else "libcurl4-openssl-dev" end }} \
+	{{ if is_alpine then "openssl-dev" else "libssl-dev" end }} \
+	{{ if is_alpine then "pcre-dev pcre2-dev linux-headers gettext-dev" else "libxml2-dev" end }} \
+	openssl \
+	git \
+	bash \
+	autoconf
+
+RUN set -ex; \
+{{ if is_alpine then ( -}}
+	apk add --no-cache --virtual .build-deps \
+	g++ \
+	gcc \
+	libc-dev \
+	make \
+	pkgconf \
+	$PHPIZE_DEPS \
+	$EXT_BUILD_LIBS; \
+{{ ) else ( -}}
+	savedAptMark="$(apt-mark showmanual)"; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends $PHPIZE_DEPS $EXT_BUILD_LIBS; \
+	{{ clean_apt }}; \
+{{ ) end -}}
+	docker-php-source extract; \
+	docker-php-source delete; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swow/swow-extension:{{ if is_rc then env.ext_swow_rc else env.ext_swow end }}'; \
+	echo "memory_limit=1G" >  /usr/local/etc/php/conf.d/00-default.ini; \
+	echo "opcache.enable_cli = 'On'" >>  /usr/local/etc/php/conf.d/50-opcache.ini; \
+	echo "extension=swow.so" > /usr/local/etc/php/conf.d/docker-php-ext-swow.ini; \
+	php --version; \
+	php -m; \
+	php --ri swow; \
+{{ if is_alpine then ( -}}
+	runDeps="$( \
+		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
+			| tr ',' '\n' \
+			| sort -u \
+			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+	)"; \
+	apk add --no-cache $runDeps; \
+	apk del --no-network .build-deps; \
+{{ ) else ( -}}
+	# 只保留编译产物实际链接的运行时库，丢弃 -dev 构建依赖
+	apt-mark auto '.*' > /dev/null; \
+	apt-mark manual $savedAptMark; \
+	find /usr/local -type f -executable -exec ldd '{}' ';' \
+		| awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }' \
+		| sort -u \
+		| xargs -r dpkg-query --search \
+		| awk 'sub(":$", "", $1) { print $1 }' \
+		| sort -u \
+		| xargs -r apt-mark manual; \
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	{{ clean_apt }}; \
+	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
+{{ ) end -}}
+	rm -rf /tmp/*; \
+	rm -rf /root/.pie
+{{ ) else "" end -}}
+
+ENTRYPOINT ["docker-php-entrypoint"]
+STOPSIGNAL SIGWINCH
+
+WORKDIR ${APP_ROOT}
+
+EXPOSE 80\
+	443
+
+CMD {{ env.cmd }}

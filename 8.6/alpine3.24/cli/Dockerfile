@@ -7,14 +7,12 @@
 FROM alpine:3.24
 
 # 扩展版本（由 extensions.json 固定，便于 docker inspect 追溯）
-LABEL cn.era-cloud.ext.msgpack="v3.0.1" \
+# 注意：swoole / swow 的版本 label 在扩展层（Dockerfile-ext.template）里
+LABEL cn.era-cloud.layer="base" \
+      cn.era-cloud.ext.msgpack="v3.0.1" \
       cn.era-cloud.ext.igbinary="3.2.17RC1" \
       cn.era-cloud.ext.ext-ds="v2.0.0" \
-      cn.era-cloud.ext.phpredis="6.3.0" \
-      cn.era-cloud.ext.swoole="v6.2.6" \
-      cn.era-cloud.ext.swow="v1.6.2" \
-      cn.era-cloud.ext.swoole-rc="v6.3.0-rc2" \
-      cn.era-cloud.ext.swow-rc="v2.0.0-alpha.3"
+      cn.era-cloud.ext.phpredis="6.3.0"
 
 # dependencies required for running "phpize"
 # these get automatically installed and removed by "docker-php-ext-*" (unless they're already installed)
@@ -276,6 +274,53 @@ RUN docker-php-ext-enable sodium; \
 	sed -i "s@max_execution_time = 30@max_execution_time = 1800M@g" "$PHP_INI_DIR/php.ini"; \
 	sed -i "s@memory_limit = 128M@memory_limit = 2048M@g" "$PHP_INI_DIR/php.ini"; \
 	php --ri redis
+
+# base 层统一安装 EXTRA_EXT（bcmath/gd/intl/zip…）。
+# - cli / zts 与扩展变体的 base 完全一致：扩展层（swoole/swow）不再是"唯一带这些扩展"的镜像，
+#   也不再需要为装扩展而重编 PHP。
+# - 8.6 同样安装，便于 swoole 支持 8.6 后直接复用同一个 base。
+ENV EXTRA_EXT \
+	bcmath bz2 calendar exif ffi gd gettext intl \
+	mysqli pcntl pdo_mysql pdo_pgsql shmop soap \
+	sockets sysvmsg sysvsem sysvshm tidy zip
+
+ENV EXTRA_LIBS \
+	autoconf \
+	bzip2-dev \
+	libffi-dev \
+	zlib-dev \
+	libpng-dev \
+	icu-dev \
+	libpq-dev \
+	libxml2-dev \
+	libzip-dev \
+	linux-headers \
+	pcre-dev \
+	pcre2-dev \
+	libintl \
+	gettext-dev \
+	tidyhtml-dev
+
+RUN set -ex; \
+	apk add --no-cache --virtual .build-deps \
+	g++ \
+	gcc \
+	libc-dev \
+	make \
+	pkgconf \
+	autoconf \
+	$EXTRA_LIBS; \
+	docker-php-ext-install $EXTRA_EXT; \
+	php -m; \
+	runDeps="$( \
+		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
+			| tr ',' '\n' \
+			| sort -u \
+			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+	)"; \
+	apk add --no-cache $runDeps; \
+	apk del --no-network .build-deps; \
+	rm -rf /tmp/*
 
 
 RUN set -eux; \

@@ -58,14 +58,12 @@
 FROM {{ env.from }}
 
 # 扩展版本（由 extensions.json 固定，便于 docker inspect 追溯）
-LABEL cn.era-cloud.ext.msgpack="{{ env.ext_msgpack_ver }}" \
+# 注意：swoole / swow 的版本 label 在扩展层（Dockerfile-ext.template）里
+LABEL cn.era-cloud.layer="base" \
+      cn.era-cloud.ext.msgpack="{{ env.ext_msgpack_ver }}" \
       cn.era-cloud.ext.igbinary="{{ env.ext_igbinary_ver }}" \
       cn.era-cloud.ext.ext-ds="{{ env.ext_ds_ver }}" \
-      cn.era-cloud.ext.phpredis="{{ env.ext_redis_ver }}" \
-      cn.era-cloud.ext.swoole="{{ env.ext_swoole_ver }}" \
-      cn.era-cloud.ext.swow="{{ env.ext_swow_ver }}" \
-      cn.era-cloud.ext.swoole-rc="{{ env.ext_swoole_rc_ver }}" \
-      cn.era-cloud.ext.swow-rc="{{ env.ext_swow_rc_ver }}"
+      cn.era-cloud.ext.phpredis="{{ env.ext_redis_ver }}"
 
 {{ if is_alpine then "" else ( -}}
 # prevent Debian's PHP packages from being installed
@@ -560,8 +558,10 @@ RUN docker-php-ext-enable sodium; \
 	sed -i "s@memory_limit = 128M@memory_limit = 2048M@g" "$PHP_INI_DIR/php.ini"; \
 	php --ri redis
 
-{{ if env.variant | IN("swoole", "thread", "swoole-rc", "thread-rc") then ( -}}
-# swoole module
+# base 层统一安装 EXTRA_EXT（bcmath/gd/intl/zip…）。
+# - cli / zts 与扩展变体的 base 完全一致：扩展层（swoole/swow）不再是"唯一带这些扩展"的镜像，
+#   也不再需要为装扩展而重编 PHP。
+# - 8.6 同样安装，便于 swoole 支持 8.6 后直接复用同一个 base。
 ENV EXTRA_EXT \
 	bcmath bz2 calendar exif ffi gd gettext intl \
 	mysqli pcntl pdo_mysql pdo_pgsql shmop soap \
@@ -578,33 +578,15 @@ ENV EXTRA_LIBS \
 	libxml2-dev \
 	libzip-dev \
 {{ if is_alpine then ( -}}
-	curl-dev \
 	linux-headers \
-	openssl-dev \
 	pcre-dev \
 	pcre2-dev \
 	libintl \
 	gettext-dev \
-	brotli-dev \
-	sqlite-dev \
-	lz4 \
-	lz4-dev \
-	lz4-libs \
-	zstd-dev \
-	zstd-libs \
-	gnu-libiconv-dev \
+	tidyhtml-dev
 {{ ) else ( -}}
-	libssl-dev \
-	libcurl4-openssl-dev \
-	libbrotli1 \
-	libbrotli-dev \
-	liblz4-dev \
-	libzstd-dev \
-	libsqlite3-dev \
+	libtidy-dev
 {{ ) end -}}
-	{{ if is_alpine then "tidyhtml-dev" else "libtidy-dev" end }} \
-	{{ if is_alpine then "c-ares-dev" else "libc-ares-dev" end }} \
-	{{ if is_alpine then "zlib-dev" else "libzip-dev" end }}
 
 RUN set -ex; \
 {{ if is_alpine then ( -}}
@@ -623,34 +605,7 @@ RUN set -ex; \
 	{{ clean_apt }}; \
 {{ ) end -}}
 	docker-php-ext-install $EXTRA_EXT; \
-	docker-php-ext-enable redis; \
-	docker-php-ext-install sockets; \
-	docker-php-source extract; \
-	# swoole 6.2.2 fails to compile on newer g++ (GCC 15) without -fpermissive:
-	# "converting to 'bool' from 'std::nullptr_t' requires direct-initialization"
-	export CXXFLAGS="$CXXFLAGS -fpermissive"; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swoole/swoole:{{ if env.variant | endswith("-rc") then env.ext_swoole_rc else env.ext_swoole end }}' \
-		--enable-swoole-curl \
-		--enable-cares \
-		--enable-brotli \
-		--enable-swoole-pgsql \
-		--enable-swoole-sqlite \
-		--with-openssl-dir=/usr \
-{{ if env.variant | IN("thread", "thread-rc") then ( -}}
-		--enable-swoole-thread \
-{{ ) else "" end -}}
-		; \
-	docker-php-ext-enable swoole; \
-	docker-php-source delete; \
-	php --version; \
 	php -m; \
-	{ \
-	echo "[swoole]"; \
-	echo "extension=swoole"; \
-	echo "swoole.unixsock_buffer_size=512M"; \
-	echo "swoole.use_shortname=Off"; \
-	echo "swoole.enable_preemptive_scheduler=On"; \
-	} | tee /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini; \
 {{ if is_alpine then ( -}}
 	runDeps="$( \
 		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
@@ -661,8 +616,7 @@ RUN set -ex; \
 	apk add --no-cache $runDeps; \
 	apk del --no-network .build-deps; \
 {{ ) else ( -}}
-	# drop the -dev build dependencies while keeping the runtime libs the
-	# compiled extensions actually link against (mirrors the PHP build above)
+	# 只保留编译产物实际链接的运行时库，丢弃 -dev 构建依赖
 	apt-mark auto '.*' > /dev/null; \
 	apt-mark manual $savedAptMark; \
 	find /usr/local -type f -executable -exec ldd '{}' ';' \
@@ -676,102 +630,8 @@ RUN set -ex; \
 	{{ clean_apt }}; \
 	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
 {{ ) end -}}
-	rm -rf /tmp/*; \
-	rm -rf /root/.pie
-{{ ) else "" end -}}
-{{ if env.variant | IN("swow", "swow-rc") then ( -}}
-# swow
-ENV EXTRA_EXT \
-	bcmath bz2 calendar exif ffi gd gettext intl \
-	mysqli pcntl pdo_mysql pdo_pgsql shmop soap \
-	sockets sysvmsg sysvsem sysvshm tidy zip
+	rm -rf /tmp/*
 
-ENV EXTRA_LIBS \
-  	autoconf \
-	$PHPIZE_DEPS \
-	{{ if is_alpine then "bzip2-dev" else "libbz2-dev" end }} \
-  	libffi-dev \
-	{{ if is_alpine then "zlib-dev" else "zlib1g-dev" end }} \
-  	libpng-dev \
-	{{ if is_alpine then "icu-dev" else "libicu-dev" end }} \
-	libpq-dev \
-	libxml2-dev \
-	libzip-dev \
-	openssl \
-	git \
-	bash \
-{{ if is_alpine then ( -}}
-	curl-dev \
-	linux-headers \
-	openssl-dev \
-	pcre-dev \
-	pcre2-dev \
-	libintl \
-	gettext-dev \
-{{ ) else ( -}}
-	libssl-dev \
-	libcurl4-openssl-dev \
-{{ ) end -}}
-	{{ if is_alpine then "tidyhtml-dev" else "libtidy-dev" end }} \
-	{{ if is_alpine then "c-ares-dev" else "libc-ares-dev" end }} \
-	{{ if is_alpine then "zlib-dev" else "libzip-dev" end }}
-
-RUN set -ex; \
-{{ if is_alpine then ( -}}
-	apk add --no-cache --virtual .build-deps \
-	g++ \
-	gcc \
-	libc-dev \
-	make \
-	pkgconf \
-	autoconf \
-	$EXTRA_LIBS; \
-{{ ) else ( -}}
-	savedAptMark="$(apt-mark showmanual)"; \
-	apt-get update; \
-	apt-get install -y --no-install-recommends $EXTRA_LIBS; \
-	{{ clean_apt }}; \
-{{ ) end -}}
-	docker-php-ext-install $EXTRA_EXT; \
-	docker-php-ext-enable redis; \
-	docker-php-ext-install sockets; \
-	docker-php-source extract; \
-	docker-php-source delete; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swow/swow-extension:{{ if env.variant | endswith("-rc") then env.ext_swow_rc else env.ext_swow end }}'; \
-	echo "memory_limit=1G" >  /usr/local/etc/php/conf.d/00-default.ini; \
-	echo "opcache.enable_cli = 'On'" >>  /usr/local/etc/php/conf.d/50-opcache.ini; \
-	echo "extension=swow.so" > /usr/local/etc/php/conf.d/docker-php-ext-swow.ini; \
-	php --version; \
-	php -m; \
-	php --ri swow; \
-{{ if is_alpine then ( -}}
-	runDeps="$( \
-		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
-			| tr ',' '\n' \
-			| sort -u \
-			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-	)"; \
-	apk add --no-cache $runDeps; \
-	apk del --no-network .build-deps; \
-{{ ) else ( -}}
-	# drop the -dev build dependencies while keeping the runtime libs the
-	# compiled extensions actually link against (mirrors the PHP build above)
-	apt-mark auto '.*' > /dev/null; \
-	apt-mark manual $savedAptMark; \
-	find /usr/local -type f -executable -exec ldd '{}' ';' \
-		| awk '/=>/ { so = $(NF-1); if (index(so, "/usr/local/") == 1) { next }; gsub("^/(usr/)?", "", so); printf "*%s\n", so }' \
-		| sort -u \
-		| xargs -r dpkg-query --search \
-		| awk 'sub(":$", "", $1) { print $1 }' \
-		| sort -u \
-		| xargs -r apt-mark manual; \
-	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-	{{ clean_apt }}; \
-	rm -rf /usr/share/doc /usr/share/man /usr/share/info /usr/share/bug; \
-{{ ) end -}}
-	rm -rf /tmp/*; \
-	rm -rf /root/.pie
-{{ ) else "" end -}}
 
 RUN set -eux; \
 	curl -o /usr/local/bin/composer https://mirrors.aliyun.com/composer/composer.phar; \

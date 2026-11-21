@@ -4,319 +4,33 @@
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
 
-FROM alpine:3.24
+# 扩展层：在自家 base 镜像（cli / zts）上安装 swoole / swow。
+# - base 层已编译 PHP + 全部 EXTRA_EXT（bcmath/gd/intl/zip…），并已启用
+#   sodium / ds / igbinary / msgpack / redis。
+# - 这里只装扩展本体，因此扩展版本升级时不会重编 PHP。
+# - env.from 是自家镜像的短别名（如 ghcr.io/era-cloud/php:8.5-cli-trixie），
+#   架构与 base 完全一致，由 generate-stackbrew-library.sh 继承。
+FROM ghcr.io/era-cloud/php:8.4-zts-alpine3.24
 
-# 扩展版本（由 extensions.json 固定，便于 docker inspect 追溯）
-LABEL cn.era-cloud.ext.msgpack="v3.0.1" \
-      cn.era-cloud.ext.igbinary="3.2.17RC1" \
-      cn.era-cloud.ext.ext-ds="v2.0.0" \
-      cn.era-cloud.ext.phpredis="6.3.0" \
+# 分层信息：便于 docker inspect 追溯这一层是基于哪个 base 构建的
+LABEL cn.era-cloud.layer="extension" \
+      cn.era-cloud.base="ghcr.io/era-cloud/php:8.4-zts-alpine3.24" \
       cn.era-cloud.ext.swoole="v6.2.6" \
       cn.era-cloud.ext.swow="v1.6.2" \
       cn.era-cloud.ext.swoole-rc="v6.3.0-rc2" \
       cn.era-cloud.ext.swow-rc="v2.0.0-alpha.3"
 
-# dependencies required for running "phpize"
-# these get automatically installed and removed by "docker-php-ext-*" (unless they're already installed)
-ENV PHPIZE_DEPS \
-	autoconf \
-	procps \
-	wget \
-	dpkg-dev dpkg \
-	file \
-	g++ \
-	gcc \
-	libc-dev \
-	make \
-	pkgconf \
-	re2c
-
-# persistent / runtime deps
-RUN apk add --no-cache \
-		ca-certificates \
-		curl \
-		lz4-libs \
-		openssl \
-		tar \
-		unzip \
-		xz \
-		zstd-libs
-
-# ensure app user exists
-RUN set -eux; \
-	addgroup -Sg 83 app; \
-	adduser -u 82 -D -S -s /sbin/nologin -G app -g app app
-# 82 is the standard uid/gid for "app" in Alpine
-# https://git.alpinelinux.org/aports/tree/main/apache2/apache2.pre-install?h=3.14-stable
-# https://git.alpinelinux.org/aports/tree/main/lighttpd/lighttpd.pre-install?h=3.14-stable
-# https://git.alpinelinux.org/aports/tree/main/nginx/nginx.pre-install?h=3.14-stable
-
-ENV PHP_INI_DIR=/usr/local/etc/php \
-	APP_ROOT=/app-src \
-	PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/app-src:/app-src/bin
-RUN set -eux; \
-	mkdir -p "$PHP_INI_DIR/conf.d"; \
-# allow running as an arbitrary user (https://github.com/docker-library/php/issues/743)
-	[ ! -d ${APP_ROOT} ]; \
-	mkdir -p ${APP_ROOT}; \
-	chown app:app ${APP_ROOT}; \
-	chmod 1777 ${APP_ROOT}
-
-# Apply stack smash protection to functions using local buffers and alloca()
-# Make PHP's main executable position-independent (improves ASLR security mechanism, and has no performance impact on x86_64)
-# Enable optimization (-O2)
-# Enable linker optimization (this sorts the hash buckets to improve cache locality, and is non-default)
-# https://github.com/docker-library/php/issues/272
-# -D_LARGEFILE_SOURCE and -D_FILE_OFFSET_BITS=64 (https://www.php.net/manual/en/intro.filesystem.php)
-ENV PHP_CFLAGS="-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
-ENV PHP_CPPFLAGS="$PHP_CFLAGS"
-ENV PHP_LDFLAGS="-Wl,-O1 -pie"
-
-ENV GPG_KEYS AFD8691FDAEDF03BDF6E460563F15A9B715376CA 9D7F99A0CB8F05C8A6958D6256A97AF7600A39A6 0616E93D95AF471243E26761770426E17EBBB3DD
-
-ENV PHP_VERSION 8.4.28
-ENV PHP_URL="https://www.php.net/distributions/php-8.4.28.tar.xz" PHP_ASC_URL="https://www.php.net/distributions/php-8.4.28.tar.xz.asc"
-ENV PHP_SHA256="0c8ec360e5dd8154f270b2fd50cd44ecc824e6ee39c85f911312b80d4daecd72"
-
-RUN set -eux; \
-	\
-	apk add --no-cache --virtual .fetch-deps gnupg; \
-	\
-	mkdir -p /usr/src; \
-	cd /usr/src; \
-	\
-	curl -fsSL -o php.tar.xz "$PHP_URL"; \
-	\
-	if [ -n "$PHP_SHA256" ]; then \
-		echo "$PHP_SHA256 *php.tar.xz" | sha256sum -c -; \
-	fi; \
-	\
-	curl -fsSL -o php.tar.xz.asc "$PHP_ASC_URL"; \
-	export GNUPGHOME="$(mktemp -d)"; \
-	for key in $GPG_KEYS; do \
-		i=0; \
-		until gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key"; do \
-			i=$((i+1)); \
-			if [ "$i" -ge 3 ]; then exit 1; fi; \
-			echo "gpg: keyserver timeout, retry $i/3 for key $key"; \
-			sleep 5; \
-		done; \
-	done; \
-	gpg --batch --verify php.tar.xz.asc php.tar.xz; \
-	gpgconf --kill all; \
-	rm -rf "$GNUPGHOME"; \
-	\
-	apk del --no-network .fetch-deps
-
-COPY docker-php-source /usr/local/bin/
-
-RUN set -eux; \
-	apk add --no-cache --virtual .build-deps \
-		$PHPIZE_DEPS \
-		argon2-dev \
-		coreutils \
-		curl-dev \
-		gnu-libiconv-dev \
-		libsodium-dev \
-		libxml2-dev \
-		linux-headers \
-		lz4 \
-		lz4-dev \
-		lz4-libs \
-		oniguruma-dev \
-		openssl-dev \
-		readline-dev \
-		sqlite-dev \
-		zstd-dev \
-		zstd-libs \
-	; \
-	\
-# make sure musl's iconv doesn't get used (https://www.php.net/manual/en/intro.iconv.php)
-	rm -vf /usr/include/iconv.h; \
-	\
-	export \
-		CFLAGS="$PHP_CFLAGS" \
-		CPPFLAGS="$PHP_CPPFLAGS" \
-		LDFLAGS="$PHP_LDFLAGS" \
-# https://github.com/php/php-src/blob/d6299206dd828382753453befd1b915491b741c6/configure.ac#L1496-L1511
-		PHP_BUILD_PROVIDER='https://github.com/docker-library/php' \
-		PHP_UNAME='Linux - Docker' \
-	; \
-	docker-php-source extract; \
-	cd /usr/src/php; \
-	gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"; \
-	case "$gnuArch" in \
-		'i686-linux-'*) \
-			# php zend jit assumes SSE registers, xmm0-7, are available (and "Pentium4"/SSE2 is a reasonable baseline)
-			# https://github.com/php/php-src/pull/22832
-			# so, allow it and use SSE/SSE2 floating-point unit instead of the legacy stack
-			export \
-				CFLAGS="$CFLAGS -msse2 -mfpmath=sse" \
-				CPPFLAGS="$CPPFLAGS -msse2 -mfpmath=sse" \
-			; \
-			;; \
-	esac; \
-	test "$PHP_INI_DIR" != "${PHP_INI_DIR%/php}"; \
-	./configure \
-		--build="$gnuArch" \
-		--sysconfdir="${PHP_INI_DIR%/php}" \
-		--with-config-file-path="$PHP_INI_DIR" \
-		--with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
-		\
-# make sure invalid --configure-flags are fatal errors instead of just warnings
-		--enable-option-checking=fatal \
-		\
-# https://github.com/docker-library/php/issues/439
-		--with-mhash \
-		\
-# https://github.com/docker-library/php/issues/822
-		--with-pic \
-		\
-# --enable-mbstring is included here because otherwise there's no way to get the extension installers (PIE) to use it properly (see https://github.com/docker-library/php/issues/195)
-		--enable-mbstring \
-# --enable-mysqlnd is included here because it's harder to compile after the fact than extensions are (since it's a plugin for several extensions, not an extension in itself)
-		--enable-mysqlnd \
-# https://wiki.php.net/rfc/argon2_password_hash
-		--with-password-argon2 \
-# https://wiki.php.net/rfc/libsodium
-		--with-sodium=shared \
-# always build against system sqlite3 (https://github.com/php/php-src/commit/6083a387a81dbbd66d6316a3a12a63f06d5f7109)
-		--with-pdo-sqlite=/usr \
-		--with-sqlite3=/usr \
-		\
-		--with-curl \
-		--with-iconv=/usr \
-		--with-openssl \
-		--with-readline \
-		--with-zlib \
-		\
-# https://github.com/bwoebi/phpdbg-docs/issues/1#issuecomment-163872806 ("phpdbg is primarily a CLI debugger, and is not suitable for debugging an fpm stack.")
-		--disable-phpdbg \
-		\
-		--disable-cgi \
-		\
-		--enable-zts \
-# https://externals.io/message/118859
-		--disable-zend-signals \
-	; \
-	make -j "$(nproc)"; \
-	find -type f -name '*.a' -delete; \
-	make install; \
-	find \
-		/usr/local \
-		-type f \
-		-perm '/0111' \
-		-exec sh -euxc ' \
-			strip --strip-all "$@" || : \
-		' -- '{}' + \
-	; \
-	make clean; \
-	\
-# https://github.com/docker-library/php/issues/692 (copy default example "php.ini" files somewhere easily discoverable)
-	cp -v php.ini-* "$PHP_INI_DIR/"; \
-	cp -v php.ini-production "$PHP_INI_DIR/php.ini"; \
-	\
-	cd /; \
-	docker-php-source delete; \
-	\
-	runDeps="$( \
-		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
-			| tr ',' '\n' \
-			| sort -u \
-			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-	)"; \
-	apk add --no-cache $runDeps; \
-	apk add --no-cache --virtual .build-deps \
-	g++ \
-	gcc \
-	libc-dev \
-	make \
-	pkgconf \
-	autoconf \
-	lz4-dev \
-	zstd-dev; \
-	\
-	# 扩展用 commit-sha pin（dev-<branch>#<sha>），从 VCS 安装需要临时装 git
-	apk add --no-cache --virtual .pie-vcs git; \
-	\
-# install PIE (PHP Installer for Extensions), the official replacement for PECL
-# https://php.github.io/pie/ https://github.com/php/pie
-	curl -fL --output /usr/local/bin/pie 'https://github.com/php/pie/releases/latest/download/pie.phar'; \
-	chmod +x /usr/local/bin/pie; \
-	\
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'msgpack/msgpack-php:dev-master#e0a661605ac03459909f66802bc83a3ba16cc9da'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'igbinary/igbinary:dev-master#edda7101adf583df047d028a154abf3bf04ced61'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check --skip-enable-extension 'php-ds/ext-ds:dev-master#132ca69b19c80fba8a447f87d656c27596f43cec'; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'phpredis/phpredis:dev-develop#df4fab2de7fc327c54c94a13af2b9542e4fbd720' \
-		--enable-redis \
-		--enable-redis-igbinary \
-		--enable-redis-lz4 \
-		--enable-redis-msgpack \
-		--enable-redis-zstd \
-		--with-liblz4=yes \
-		--with-libzstd=yes; \
-	apk del .pie-vcs; \
-	apk del --no-network .build-deps; \
-	rm -rf /tmp/*; \
-	rm -rf /root/.pie; \
-	 \
-	\
-# smoke test
-	php --version
-
-COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
-
-# enable OPcache by default (https://wiki.php.net/rfc/make_opcache_required)
-RUN docker-php-ext-enable opcache
-
-# sodium was built as a shared module (so that it can be replaced later if so desired), so let's enable it too (https://github.com/docker-library/php/issues/598)
-RUN docker-php-ext-enable sodium; \
-	docker-php-ext-enable ds; \
-	docker-php-ext-enable igbinary; \
-	docker-php-ext-enable msgpack; \
-	docker-php-ext-enable redis; \
-	sed -i "s@;date.timezone =@date.timezone = Asia/Shanghai@g" "$PHP_INI_DIR/php.ini"; \
-	sed -i "s@upload_max_filesize = 2M@upload_max_filesize = 2048M@g" "$PHP_INI_DIR/php.ini"; \
-	sed -i "s@post_max_size = 8M@post_max_size = 2048M@g" "$PHP_INI_DIR/php.ini"; \
-	sed -i "s@max_input_time = 60@max_input_time = 1800@g" "$PHP_INI_DIR/php.ini"; \
-	sed -i "s@max_execution_time = 30@max_execution_time = 1800M@g" "$PHP_INI_DIR/php.ini"; \
-	sed -i "s@memory_limit = 128M@memory_limit = 2048M@g" "$PHP_INI_DIR/php.ini"; \
-	php --ri redis
-
-# swoole module
-ENV EXTRA_EXT \
-	bcmath bz2 calendar exif ffi gd gettext intl \
-	mysqli pcntl pdo_mysql pdo_pgsql shmop soap \
-	sockets sysvmsg sysvsem sysvshm tidy zip
-
-ENV EXTRA_LIBS \
-	autoconf \
-	bzip2-dev \
-	libffi-dev \
-	zlib-dev \
-	libpng-dev \
-	icu-dev \
-	libpq-dev \
-	libxml2-dev \
-	libzip-dev \
+# swoole module（PHP 与 EXTRA_EXT 已由 base 层提供，这里只准备 swoole 的编译依赖）
+ENV EXT_BUILD_LIBS \
 	curl-dev \
-	linux-headers \
 	openssl-dev \
-	pcre-dev \
-	pcre2-dev \
-	libintl \
-	gettext-dev \
 	brotli-dev \
-	sqlite-dev \
-	lz4 \
-	lz4-dev \
-	lz4-libs \
-	zstd-dev \
-	zstd-libs \
-	gnu-libiconv-dev \
-	tidyhtml-dev \
 	c-ares-dev \
-	zlib-dev
+	sqlite-dev \
+	lz4-dev \
+	zstd-dev \
+	linux-headers gnu-libiconv-dev \
+	autoconf
 
 RUN set -ex; \
 	apk add --no-cache --virtual .build-deps \
@@ -326,10 +40,7 @@ RUN set -ex; \
 	make \
 	pkgconf \
 	autoconf \
-	$EXTRA_LIBS; \
-	docker-php-ext-install $EXTRA_EXT; \
-	docker-php-ext-enable redis; \
-	docker-php-ext-install sockets; \
+	$EXT_BUILD_LIBS; \
 	docker-php-source extract; \
 	# swoole 6.2.2 fails to compile on newer g++ (GCC 15) without -fpermissive:
 	# "converting to 'bool' from 'std::nullptr_t' requires direct-initialization"
@@ -364,11 +75,6 @@ RUN set -ex; \
 	apk del --no-network .build-deps; \
 	rm -rf /tmp/*; \
 	rm -rf /root/.pie
-
-RUN set -eux; \
-	curl -o /usr/local/bin/composer https://mirrors.aliyun.com/composer/composer.phar; \
-	chmod a+x /usr/local/bin/composer; \
-	composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 ENTRYPOINT ["docker-php-entrypoint"]
 STOPSIGNAL SIGWINCH

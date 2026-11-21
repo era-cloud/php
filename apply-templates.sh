@@ -79,31 +79,52 @@ for version; do
 		else
 			from="debian:$suite-slim"
 		fi
-		export from alpineVer
+
+		# 分层：cli / zts 是 base（编译 PHP + 全部 EXTRA_EXT），
+		# 其余变体（swoole / swow / thread 及 rc 轨）只装扩展，FROM 自家 base 的短别名。
+		case "$variant" in
+		'cli' | 'zts')
+			layer='base'
+			template='Dockerfile-linux.template'
+			;;
+		*)
+			layer='ext'
+			template='Dockerfile-ext.template'
+			case "$variant" in
+			'thread') baseVariant='zts' ;;
+			*) baseVariant='cli' ;;
+			esac
+			from="ghcr.io/era-cloud/php:$version-$baseVariant-$suite"
+			;;
+		esac
+		export layer from alpineVer
 
 		case "$variant" in
 		*) cmd='["php", "-a"]' ;;
 		esac
 		export cmd
 
-		echo "processing $version/$dir ..."
+		echo "processing $version/$dir ($layer) ..."
 		mkdir -p "$version/$dir"
-		echo "$version/$dir"
-		echo $jqt
 		{
 			generated_warning
-			gawk -f "$jqt" 'Dockerfile-linux.template'
+			gawk -f "$jqt" "$template"
 		} >"$version/$dir/Dockerfile"
 
-		cp -a \
-			docker-php-entrypoint \
-			docker-php-ext-* \
-			docker-php-source \
-			"$version/$dir/"
+		if [ "$layer" = 'base' ]; then
+			cp -a \
+				docker-php-entrypoint \
+				docker-php-ext-* \
+				docker-php-source \
+				"$version/$dir/"
 
-		cmd="$(jq <<<"$cmd" -r '.[0]')"
-		if [ "$cmd" != 'php' ]; then
-			sed -i -e 's! php ! '"$cmd"' !g' "$version/$dir/docker-php-entrypoint"
+			cmd="$(jq <<<"$cmd" -r '.[0]')"
+			if [ "$cmd" != 'php' ]; then
+				sed -i -e 's! php ! '"$cmd"' !g' "$version/$dir/docker-php-entrypoint"
+			fi
+		else
+			# 扩展层不含 docker-php-*（全部继承自 base），目录里只保留 Dockerfile
+			rm -f "$version/$dir"/docker-php-*
 		fi
 	done
 done

@@ -56,6 +56,27 @@ getArches() {
 }
 getArches 'php'
 
+# 分层：扩展变体 FROM 自家 base 镜像（ghcr.io/era-cloud/php:<ver>-<cli|zts>-<suite>）。
+# 这种自引用在 official-images 里查不到架构，这里先把每个 base 变体的 tag 映射到它真正的
+# 上游父镜像（debian:trixie-slim / alpine:3.x）的架构列表，扩展变体再继承这份列表。
+declare -A selfTagArches=()
+selfRepo='ghcr.io/era-cloud/php'
+for version; do
+	export version
+	variants="$(jq -r '.[env.version].variants // [] | map(@sh) | join(" ")' versions.json 2>/dev/null || true)"
+	[ -n "$variants" ] || continue
+	eval "vs=( $variants )"
+	for dir in "${vs[@]}"; do
+		[ -f "$version/$dir/Dockerfile" ] || continue
+		parent="$(awk 'toupper($1) == "FROM" { print $2; exit }' "$version/$dir/Dockerfile")"
+		case "$parent" in
+		"$selfRepo":*) continue ;; # base 层不会是自引用
+		esac
+		selfTagArches["$version-${dir##*/}-${dir%%/*}"]="${parentRepoToArches[$parent]}"
+	done
+	unset vs variants
+done
+
 cat <<-EOH
 # this file is generated via https://github.com/era-cloud/php/blob/$(fileCommit "$self")/$self
 
@@ -141,8 +162,16 @@ for version; do
 		variantAliases=( "${suiteVariantAliases[@]}" ${variantAliases[@]+"${variantAliases[@]}"} )
 		variantAliases=( "${variantAliases[@]//latest-/}" )
 
-		variantParent="$(awk 'toupper($1) == "FROM" { print $2 }' "$dir/Dockerfile")"
-		variantArches="${parentRepoToArches[$variantParent]}"
+		variantParent="$(awk 'toupper($1) == "FROM" { print $2; exit }' "$dir/Dockerfile")"
+		case "$variantParent" in
+		"$selfRepo":*)
+			# 扩展层：继承自家 base 变体的架构列表
+			variantArches="${selfTagArches[${variantParent#"$selfRepo":}]}"
+			;;
+		*)
+			variantArches="${parentRepoToArches[$variantParent]}"
+			;;
+		esac
 
 		# php segfaults on arm32v6 for these pre-releases
 		# https://github.com/docker-library/php/issues/1675

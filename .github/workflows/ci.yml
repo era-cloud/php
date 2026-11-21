@@ -47,6 +47,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       strategy: ${{ steps.generate-jobs.outputs.strategy }}
+      strategy_base: ${{ steps.generate-jobs.outputs.strategy_base }}
+      strategy_ext: ${{ steps.generate-jobs.outputs.strategy_ext }}
+      count_base: ${{ steps.generate-jobs.outputs.count_base }}
+      count_ext: ${{ steps.generate-jobs.outputs.count_ext }}
     steps:
       - uses: actions/checkout@v7
       - name: Clone bashbrew
@@ -68,14 +72,38 @@ jobs:
         run: |
           strategy="$("./.github/scripts/generate.sh")"
 
-          EOF="EOF-$RANDOM-$RANDOM-$RANDOM"
-          echo "strategy<<$EOF" >> "$GITHUB_OUTPUT"
-          jq <<<"$strategy" . | tee -a "$GITHUB_OUTPUT"
-          echo "$EOF" >> "$GITHUB_OUTPUT"
+          # 分层：base（cli/zts，编译 PHP）必须全部构建完并同步别名后，才开始扩展层
+          # matrix 为空时 GitHub 会直接报错，所以空集合塞一个占位节点 + 用 job 级 if 跳过
+          dummy='{"fail-fast":false,"matrix":{"include":[{"name":"(none)","os":"ubuntu-latest","phase":"none","meta":{"entries":[],"dockerfiles":[],"froms":[]},"runs":{}}]}}'
+          subset() {
+            jq -c --arg p "$1" --argjson dummy "$dummy" '
+              .matrix.include |= [ .[] | select(.phase == $p) ]
+              | if (.matrix.include | length) == 0 then $dummy else . end
+            ' <<<"$strategy"
+          }
+          count_of() {
+            jq -r --arg p "$1" '[ .matrix.include[] | select(.phase == $p) ] | length' <<<"$strategy"
+          }
+          for key in strategy strategy_base strategy_ext; do
+            case "$key" in
+              strategy) json="$strategy" ;;
+              strategy_base) json="$(subset base)" ;;
+              strategy_ext) json="$(subset ext)" ;;
+            esac
+            EOF="EOF-$RANDOM-$RANDOM-$RANDOM"
+            echo "$key<<$EOF" >> "$GITHUB_OUTPUT"
+            jq <<<"$json" . | tee -a "$GITHUB_OUTPUT"
+            echo "$EOF" >> "$GITHUB_OUTPUT"
+          done
+          {
+            echo "count_base=$(count_of base)"
+            echo "count_ext=$(count_of ext)"
+          } >> "$GITHUB_OUTPUT"
 
-  build:
+  build-base:
     needs: generate-jobs
-    strategy: ${{ fromJson(needs.generate-jobs.outputs.strategy) }}
+    if: needs.generate-jobs.outputs.count_base != '0'
+    strategy: ${{ fromJson(needs.generate-jobs.outputs.strategy_base) }}
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -90,12 +118,24 @@ jobs:
           # 只看变体目录本身：Dockerfile 是模板渲染产物，docker-php-* 也被 apply-templates.sh 复制进目录，
           # 所以"目录没变"即"渲染结果没变"，模板文件本身的改动不再连坐所有变体重建
           paths="$variant_dir"
+          # 扩展层的 Dockerfile 只有 FROM 自家 base，base 变了（PHP 小版本升级等）也要重建
+          from="$(awk 'toupper($1) == "FROM" { print $2; exit }' "$variant_dir/Dockerfile")"
+          case "$from" in
+            ghcr.io/era-cloud/php:*)
+              suite="$(basename "$(dirname "$variant_dir")")"
+              verdir="$(dirname "$(dirname "$variant_dir")")"
+              base_variant="$(sed -E 's#.*-(cli|zts)-[^-]+$#\1#' <<<"$from")"
+              if [ -d "$verdir/$suite/$base_variant" ]; then
+                paths="$paths $verdir/$suite/$base_variant"
+              fi
+              ;;
+          esac
           changed="true"
           if [ -n "$last" ] && git diff --quiet "$last"..HEAD -- $paths; then
             changed="false"
           fi
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
-          echo "last=$last changed=$changed"
+          echo "last=$last paths=$paths changed=$changed"
       # - name: Login to the Docker registry
       #   run: docker login --username ${{ vars.DH_USERNAME  }} --password ${{ secrets.DH_TOKEN }}
       - name: Login to the Github Container registry
@@ -114,6 +154,143 @@ jobs:
       - name: Build ${{ matrix.name }}
         if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.build }}
+      - name: Sync ghcr alias tags ${{ matrix.name }}
+        # 分层后扩展层 FROM 自家 base 的短别名，base 的别名必须在本 job 内立即同步，
+        # 否则 build-ext 阶段拉不到 base（mirror job 太晚了）
+        if: steps.changed.outputs.changed == 'true'
+        run: ${{ matrix.runs.syncAliases }}
+      - name: History ${{ matrix.name }}
+        if: steps.changed.outputs.changed == 'true'
+        run: ${{ matrix.runs.history }}
+      - name: Test ${{ matrix.name }}
+        if: steps.changed.outputs.changed == 'true'
+        run: ${{ matrix.runs.test }}
+      - name: '"Docker images"'
+        if: steps.changed.outputs.changed == 'true'
+        run: ${{ matrix.runs.images }}
+      - name: Record image metrics
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          size="$(docker image inspect --format '{{.Size}}' ghcr.io/era-cloud/php:${{ matrix.name }})"
+          built_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          jq -n --arg t "${{ matrix.name }}" --argjson s "$size" --arg b "$built_at" \
+            '{tag:$t,size:$s,built_at:$b}' > size-${{ matrix.name }}.json
+      - name: Trivy security scan
+        id: scan
+        if: steps.changed.outputs.changed == 'true'
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: image
+          image-ref: ghcr.io/era-cloud/php:${{ matrix.name }}
+          severity: CRITICAL,HIGH
+          limit-severities-for-sarif: "true"
+          ignore-policy: rego-policy.rego
+          exit-code: '0'
+          format: sarif
+          output: trivy-${{ matrix.name }}.sarif
+      - name: Fix Trivy SARIF levels
+        if: steps.scan.outcome == 'success'
+        run: |
+          # trivy 0.73.0 emits HIGH findings at level "error" when a multi-value
+          # --severity filter is applied; restore HIGH -> "warning" so code
+          # scanning shows the correct severity
+          jq '(.runs[].results[]? | select((.message.text // "") | contains("Severity: HIGH"))) |= (.level = "warning")' \
+            trivy-${{ matrix.name }}.sarif > trivy-${{ matrix.name }}.fixed.sarif
+          mv trivy-${{ matrix.name }}.fixed.sarif trivy-${{ matrix.name }}.sarif
+      - name: Upload Trivy SARIF
+        if: ${{ steps.scan.outcome == 'success' }}
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: trivy-${{ matrix.name }}.sarif
+      - name: Upload metrics artifact
+        if: ${{ always() && steps.changed.outputs.changed == 'true' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: metrics-${{ matrix.name }}
+          path: |
+            size-*.json
+            trivy-*.sarif
+          if-no-files-found: ignore
+      - name: Record pull size
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          # compressed (zstd) layer size of the pushed ghcr image = what a pull downloads.
+          # docker manifest inspect uses the docker-login credentials (GITHUB_TOKEN as a
+          # raw bearer is rejected by ghcr's /v2 API with 403).
+          mf="$(docker manifest inspect ghcr.io/era-cloud/php:${{ matrix.name }})"
+          if ! jq -e '.layers' <<<"$mf" >/dev/null 2>&1; then
+            digest="$(jq -r '.manifests[]? | select((.platform.os // "") == "linux" and (.platform.architecture // "") == "amd64") | .digest' <<<"$mf" | head -1)"
+            mf="$(docker manifest inspect ghcr.io/era-cloud/php:${{ matrix.name }}@$digest)"
+          fi
+          pull_size="$(jq '[.layers[]?.size] | add' <<<"$mf")"
+          jq -n --arg t "${{ matrix.name }}" --argjson p "$pull_size" '{tag:$t, pull_size:$p}' > pull-size-${{ matrix.name }}.json
+          echo "pull_size=$pull_size"
+      - name: Upload pull size artifact
+        if: ${{ always() && steps.changed.outputs.changed == 'true' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: pullsize-${{ matrix.name }}
+          path: pull-size-${{ matrix.name }}.json
+          if-no-files-found: ignore
+  build-ext:
+    needs: [generate-jobs, build-base]
+    if: needs.generate-jobs.outputs.count_ext != '0'
+    strategy: ${{ fromJson(needs.generate-jobs.outputs.strategy_ext) }}
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check variant changed
+        id: changed
+        run: |
+          last="$(jq -r --arg n "${{ matrix.name }}" '.[$n] // empty' .build-state.json 2>/dev/null || true)"
+          variant_dir="$(dirname "${{ matrix.meta.dockerfiles[0] }}")"
+          # 只看变体目录本身：Dockerfile 是模板渲染产物，docker-php-* 也被 apply-templates.sh 复制进目录，
+          # 所以"目录没变"即"渲染结果没变"，模板文件本身的改动不再连坐所有变体重建
+          paths="$variant_dir"
+          # 扩展层的 Dockerfile 只有 FROM 自家 base，base 变了（PHP 小版本升级等）也要重建
+          from="$(awk 'toupper($1) == "FROM" { print $2; exit }' "$variant_dir/Dockerfile")"
+          case "$from" in
+            ghcr.io/era-cloud/php:*)
+              suite="$(basename "$(dirname "$variant_dir")")"
+              verdir="$(dirname "$(dirname "$variant_dir")")"
+              base_variant="$(sed -E 's#.*-(cli|zts)-[^-]+$#\1#' <<<"$from")"
+              if [ -d "$verdir/$suite/$base_variant" ]; then
+                paths="$paths $verdir/$suite/$base_variant"
+              fi
+              ;;
+          esac
+          changed="true"
+          if [ -n "$last" ] && git diff --quiet "$last"..HEAD -- $paths; then
+            changed="false"
+          fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          echo "last=$last paths=$paths changed=$changed"
+      # - name: Login to the Docker registry
+      #   run: docker login --username ${{ vars.DH_USERNAME  }} --password ${{ secrets.DH_TOKEN }}
+      - name: Login to the Github Container registry
+        run: docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+      - name: Set up buildx (docker-container)
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          # docker-container driver is required for zstd layer compression
+          docker buildx create --driver docker-container --name ci-builder --use --bootstrap
+      - name: Prepare Environment
+        if: steps.changed.outputs.changed == 'true'
+        run: ${{ matrix.runs.prepare }}
+      - name: Pull Dependencies
+        if: steps.changed.outputs.changed == 'true'
+        run: ${{ matrix.runs.pull }}
+      - name: Build ${{ matrix.name }}
+        if: steps.changed.outputs.changed == 'true'
+        run: ${{ matrix.runs.build }}
+      - name: Sync ghcr alias tags ${{ matrix.name }}
+        # 分层后扩展层 FROM 自家 base 的短别名，base 的别名必须在本 job 内立即同步，
+        # 否则 build-ext 阶段拉不到 base（mirror job 太晚了）
+        if: steps.changed.outputs.changed == 'true'
+        run: ${{ matrix.runs.syncAliases }}
       - name: History ${{ matrix.name }}
         if: steps.changed.outputs.changed == 'true'
         run: ${{ matrix.runs.history }}
@@ -189,7 +366,7 @@ jobs:
           if-no-files-found: ignore
   mirror:
     name: mirror ${{ matrix.name }}
-    needs: [build, generate-jobs]
+    needs: [build-base, build-ext, generate-jobs]
     if: ${{ !cancelled() }}
     continue-on-error: true
     strategy: ${{ fromJson(needs.generate-jobs.outputs.strategy) }}
@@ -251,7 +428,7 @@ jobs:
           echo "feishu 已推送"
 
   changes:
-    needs: build
+    needs: [build-base, build-ext]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
@@ -278,7 +455,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   aggregate-metrics:
-    needs: [build, changes]
+    needs: [build-base, build-ext, changes]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:

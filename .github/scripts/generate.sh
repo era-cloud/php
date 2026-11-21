@@ -54,7 +54,7 @@ for tag in $tags; do
 			{{- $arch := $e.HasArchitecture arch | ternary arch ($e.Architectures | first) -}}
 			{{- "{" -}}
 				"name": {{- json ($e.Tags | first) -}},
-				"tags": {{- json ($.Tags namespace false $e) -}},
+				"tags": {{- json ($.Tags "" false $e) -}},
 				"directory": {{- json ($e.ArchDirectory $arch) -}},
 				"file": {{- json ($e.ArchFile $arch) -}},
 				"builder": {{- json ($e.ArchBuilder $arch) -}},
@@ -65,6 +65,11 @@ for tag in $tags; do
 		' "$bashbrewImage" | jq -c --arg repo "${GITHUB_REPOSITORY:-}" --arg zstd "${REGISTRYS_ZSTD}" --arg gzip "${REGISTRYS_GZIP}" '
 			{
 				name: .name,
+				# 分层：cli / zts 是 base（编译 PHP），其余变体只装扩展、FROM 自家 base
+				phase: (
+					(.directory | split("/")) as $d
+					| if $d[2] == "cli" or $d[2] == "zts" then "base" else "ext" end
+				),
 				os: (
 					if (.constraints | contains(["windowsservercore-ltsc2022"])) or (.constraints | contains(["nanoserver-ltsc2022"])) then
 						"windows-2022"
