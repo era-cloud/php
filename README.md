@@ -14,7 +14,19 @@
 
 基于 [Docker 官方 php 镜像](https://github.com/docker-library/php) 构建的增强镜像，内置 **swoole / swow / thread（ZTS + swoole 线程模式）** 及 **redis 增强（igbinary/msgpack/lz4/zstd）**，扩展安装全面采用 [PIE](https://php.github.io/pie/)（PECL 已弃用并下线）。
 
-提供 **ghcr.io** 与**国内 Aliyun ACR** 双镜像源。
+提供 **ghcr.io** 与**国内 Aliyun ACR** 双镜像源（ACR 只同步扩展变体，base 的 `cli`/`zts` 只在 ghcr）。
+
+> 📖 **完整文档站**：<https://era-cloud.github.io/php/> — 快速选择、基础镜像、扩展镜像、**全部 tag 索引**
+> （含历史/已归档，可按 PHP 版本、变体、suite 筛选）。
+
+## 分层结构
+
+```
+base   cli / zts                      编译 PHP + 全部常用扩展（bcmath gd intl zip soap …）
+ext    swoole / swow / thread (+ rc)  FROM 自家 base，只编译扩展本体
+```
+
+扩展版本升级不会重编 PHP，因此扩展变体重建只需约 2 分钟（base 为 7–13 分钟）。
 
 ## 镜像源
 
