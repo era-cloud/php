@@ -14,3 +14,9 @@ deploy/caddy/.env
 metrics-artifacts/
 
 .playwright-mcp/
+
+# docs（VitePress）
+docs/node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+docs/public/data/

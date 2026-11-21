@@ -1,0 +1,15 @@
+{
+  "name": "era-cloud-php-docs",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.21.0",
+  "scripts": {
+    "collect": "node scripts/collect.mjs",
+    "dev": "node scripts/collect.mjs && vitepress dev",
+    "build": "node scripts/collect.mjs && vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}

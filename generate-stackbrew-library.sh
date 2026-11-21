@@ -77,6 +77,60 @@ for version; do
 	unset vs variants
 done
 
+# 扩展版本维度（分层后的 tag 矩阵）。
+# 「无 PHP 版本」的短 tag（swoole / swoole-6.2 …）只指向「最新可用 PHP 版本 + 最新 alpine suite」，
+# 否则同一个 tag 会被多个版本重复声明。
+declare -A latestVerForVariant=()
+declare -A extTagsForVariant=()
+declare -A extFullTagForVariant=()
+for version; do
+	export version
+	variants="$(jq -r '.[env.version].variants // [] | map(@sh) | join(" ")' versions.json 2>/dev/null || true)"
+	[ -n "$variants" ] || continue
+	eval "vs=( $variants )"
+	for dir in "${vs[@]}"; do
+		variant="${dir##*/}"
+		# 版本已按 sort -rV 降序，第一次见到即最新
+		[ -n "${latestVerForVariant[$variant]:-}" ] || latestVerForVariant["$variant"]="$version"
+	done
+	unset vs variants
+done
+
+for variant in swoole swoole-rc swow swow-rc thread; do
+	case "$variant" in
+	swoole | swoole-rc | thread) extPkg='swoole/swoole' ;;
+	swow | swow-rc) extPkg='swow/swow-extension' ;;
+	esac
+	if [ "${variant%-rc}" != "$variant" ]; then
+		extVer="$(jq -r --arg p "$extPkg" '.[$p].rc.version // empty' extensions.json)"
+	else
+		extVer="$(jq -r --arg p "$extPkg" '.[$p].stable.version // empty' extensions.json)"
+	fi
+	extVer="${extVer#v}"
+	[ -n "$extVer" ] || continue
+	IFS=. read -r -a parts <<<"${extVer%%-*}"
+	major="${parts[0]:-}"
+	minor="$major${parts[1]:+.${parts[1]}}"
+	full="$minor${parts[2]:+.${parts[2]}}"
+	tags=()
+	if [ "${variant%-rc}" != "$variant" ]; then
+		# rc 轨只用「轨道 / major / major.minor」+ -rc 后缀（swoole-rc / swoole-6-rc / swoole-6.3-rc），
+		# 完整身份（如 6.3.0-rc2）只进 OCI label
+		stem="${variant%-rc}"
+		[ -n "$major" ] && tags+=( "$stem-$major-rc" )
+		[ -n "$parts[1]" ] && tags+=( "$stem-$minor-rc" )
+		tags+=( "$variant" )
+	else
+		[ -n "$major" ] && tags+=( "$variant-$major" )
+		[ -n "$parts[1]" ] && tags+=( "$variant-$minor" )
+		[ -n "$parts[2]" ] && tags+=( "$variant-$full" )
+		tags+=( "$variant" )
+	fi
+	extTagsForVariant["$variant"]="$(printf '%s\n' "${tags[@]}")"
+	# 精确 pin 用：php 完整版本 + 扩展完整版本
+	[ "${variant%-rc}" != "$variant" ] || extFullTagForVariant["$variant"]="$full"
+done
+
 cat <<-EOH
 # this file is generated via https://github.com/era-cloud/php/blob/$(fileCommit "$self")/$self
 
@@ -161,6 +215,31 @@ for version; do
 		fi
 		variantAliases=( "${suiteVariantAliases[@]}" ${variantAliases[@]+"${variantAliases[@]}"} )
 		variantAliases=( "${variantAliases[@]//latest-/}" )
+
+		# 扩展版本维度（只对扩展层生效，base 的 cli/zts 没有）
+		if [ -n "${extTagsForVariant[$variant]:-}" ]; then
+			mapfile -t eTags <<<"${extTagsForVariant[$variant]}"
+			ext=()
+			# 无 PHP 版本：仅「该变体最新版本 + 最新 alpine suite」
+			if [ "${latestVerForVariant[$variant]:-}" = "$version" ] && [ "$suite" = "$defaultAlpineVariant" ]; then
+				ext+=( "${eTags[@]}" )
+			fi
+			for e in "${eTags[@]}"; do
+				[ "$suite" = "$defaultDebianVariant" ] && ext+=( "$version-$e" )
+				ext+=( "$version-$e-$suite" )
+				[ "$suite" = "$defaultAlpineVariant" ] && ext+=( "$version-$e-alpine" )
+			done
+			# php 完整版本 + 扩展完整版本（精确 pin；rc 轨不生成）
+			if [ -n "${extFullTagForVariant[$variant]:-}" ]; then
+				e="${extFullTagForVariant[$variant]}"
+				[ "$suite" = "$defaultDebianVariant" ] && ext+=( "$fullVersion-$variant-$e" )
+				ext+=( "$fullVersion-$variant-$e-$suite" )
+			fi
+			variantAliases+=( "${ext[@]}" )
+		fi
+
+		# 去重（扩展版本维度会与原有别名重叠，例如 8.5-swoole；保留首次出现的顺序，主 tag 仍在最前）
+		mapfile -t variantAliases < <(printf '%s\n' "${variantAliases[@]}" | awk '!seen[$0]++')
 
 		variantParent="$(awk 'toupper($1) == "FROM" { print $2; exit }' "$dir/Dockerfile")"
 		case "$variantParent" in
