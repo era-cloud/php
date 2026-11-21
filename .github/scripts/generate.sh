@@ -262,7 +262,14 @@ strategy="$(
 	done | jq -cs '
 		{
 			"fail-fast": false,
-			matrix: { include: . },
+			matrix: {
+				# ACR 只同步扩展变体（base 体积大、只在 ghcr 提供），base 的 push 留空；
+				# 顺带让 job outputs（两个矩阵 JSON）稳稳低于 1 MB 上限。
+				include: [
+					.[]
+					| .runs.push = (if .phase == "base" then "" else .runs.push end)
+				],
+			},
 		}
 	'
 )"

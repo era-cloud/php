@@ -46,7 +46,6 @@ jobs:
     name: Generate Jobs
     runs-on: ubuntu-latest
     outputs:
-      strategy: ${{ steps.generate-jobs.outputs.strategy }}
       strategy_base: ${{ steps.generate-jobs.outputs.strategy_base }}
       strategy_ext: ${{ steps.generate-jobs.outputs.strategy_ext }}
       count_base: ${{ steps.generate-jobs.outputs.count_base }}
@@ -84,15 +83,16 @@ jobs:
           count_of() {
             jq -r --arg p "$1" '[ .matrix.include[] | select(.phase == $p) ] | length' <<<"$strategy"
           }
-          for key in strategy strategy_base strategy_ext; do
+          # 注意：job outputs 总量上限 1 MB，所以只导出两个子矩阵（不再额外导出一份全量），
+          # 且用 jq -c 压缩输出。mirror 只同步扩展变体，用 strategy_ext 即可。
+          for key in strategy_base strategy_ext; do
             case "$key" in
-              strategy) json="$strategy" ;;
               strategy_base) json="$(subset base)" ;;
               strategy_ext) json="$(subset ext)" ;;
             esac
             EOF="EOF-$RANDOM-$RANDOM-$RANDOM"
             echo "$key<<$EOF" >> "$GITHUB_OUTPUT"
-            jq <<<"$json" . | tee -a "$GITHUB_OUTPUT"
+            jq -c . <<<"$json" | tee -a "$GITHUB_OUTPUT"
             echo "$EOF" >> "$GITHUB_OUTPUT"
           done
           {
@@ -323,7 +323,8 @@ jobs:
     needs: [build-base, build-ext, generate-jobs]
     if: ${{ !cancelled() }}
     continue-on-error: true
-    strategy: ${{ fromJson(needs.generate-jobs.outputs.strategy) }}
+    # ACR 只同步扩展变体，所以这里直接用扩展矩阵（不再需要全量矩阵，也避免 outputs 超限）
+    strategy: ${{ fromJson(needs.generate-jobs.outputs.strategy_ext) }}
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7

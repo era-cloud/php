@@ -59,6 +59,10 @@
 - **架构继承**：`generate-stackbrew-library.sh` 预扫描所有 base 变体的 FROM，
   建立 `<ver>-<cli|zts>-<suite>` → 上游父镜像的映射，扩展变体据此取 `Architectures:`。
   本地验证渲染结果为 `amd64, arm32v5, arm32v7, arm64v8, i386, ppc64le, riscv64, s390x`。
+- **job outputs 上限**：GitHub 对单个 job 的 outputs 有 **1 MB** 上限（超了 job 直接 failure，
+  报错 `Job outputs exceed 1,048,576 bytes`）。所以只导出两个子矩阵（不再导出一份全量），
+  用 `jq -c` 压缩，并把 base 的 `runs.push`（ACR 命令）留空 —— 现在 base 82.6 KB + ext 220.7 KB。
+  `mirror` job 因此直接用 `strategy_ext`（ACR 只同步扩展变体）。
 - **空矩阵兜底**：`workflow_dispatch` 用 `variants` 过滤到只剩一类时，
   另一阶段矩阵为空会让 GitHub 报错，因此塞一个占位节点 + job 级 `if: count != 0`。
 - **本地验证**（2026-11-21）：`8.5/trixie/cli` 构建通过，`php -m` 含全部 EXTRA_EXT
