@@ -69,12 +69,14 @@ const parseTag = (tag) => {
   let suite = null
   let variant = null
   const extTokens = []
-  for (const t of tokens) {
+  for (const [i, t] of tokens.entries()) {
     if (suite === null && SUITE_RE.test(t)) {
       suite = t
       continue
     }
-    if (php === null && PHP_RE.test(t)) {
+    // PHP 版本只会出现在第一个片段（8.5 / 8.5.13 / 8）；
+    // 否则 swoole-6.2 里的 6.2 会被误判成 PHP 版本
+    if (i === 0 && php === null && PHP_RE.test(t)) {
       php = t
       continue
     }
