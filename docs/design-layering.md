@@ -64,7 +64,9 @@
 - **本地验证**（2026-11-21）：`8.5/trixie/cli` 构建通过，`php -m` 含全部 EXTRA_EXT
   （bcmath bz2 calendar exif FFI gd gettext intl mysqli pcntl pdo_mysql pdo_pgsql shmop
   soap sockets sysvmsg sysvsem sysvshm tidy zip）+ ds/igbinary/msgpack/redis，镜像 768MB；
-  随后 `8.5/trixie/swoole` 以 `ghcr.io/era-cloud/php:8.5-cli-trixie` 为 base 构建。
+  随后 `8.5/trixie/swoole` 以 `ghcr.io/era-cloud/php:8.5-cli-trixie` 为 base 构建
+  （swoole 6.2.6 正常，label 含 base 引用）。alpine 路线同样验证通过：
+  `8.5/alpine3.24/cli` 157MB、`8.5/alpine3.24/swoole` 173MB。
 
 ### 3.4 风险
 
@@ -140,3 +142,5 @@ docs/
 | D10 | 历史 tag | 全量展示（ghcr API），标记已归档 |
 | D11 | 构建顺序 | 实施分层前先验 `bashbrew list --build-order`（base 必须排在扩展前） |
 | D12 | docs 上线时机 | 先上线 VitePress 空站（骨架 + deploy-pages），再填 tag 数据 |
+| D13 | base 体积 | 接受 EXTRA_EXT 全进 base（实测 trixie cli 723MB → 806MB，+83MB 未压缩 / +20MB 压缩） |
+| D14 | ACR 同步范围 | 只同步扩展变体（swoole/swow/thread），base 只在 ghcr 提供 |

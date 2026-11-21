@@ -335,7 +335,8 @@ jobs:
       - name: Login to the Github Container registry
         run: docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
       - name: Login to the Aliyun ACR registry
-        if: steps.changed.outputs.changed == 'true'
+        # ACR 只同步扩展变体：base（cli/zts）体积大且用量少，只在 ghcr 提供
+        if: steps.changed.outputs.changed == 'true' && matrix.phase == 'ext'
         run: |
           for i in 1 2 3; do
             if docker login --username '${{ vars.ACR_USERNAME }}' --password '${{ secrets.ACR_TOKEN }}' '${{ vars.ACR_REGISTRY }}'; then
@@ -347,7 +348,7 @@ jobs:
           echo "::error title=ACR login failed::连续 3 次登录失败"
           exit 1
       - name: Install skopeo
-        if: steps.changed.outputs.changed == 'true'
+        if: steps.changed.outputs.changed == 'true' && matrix.phase == 'ext'
         run: |
           if command -v skopeo > /dev/null; then skopeo --version; exit 0; fi
           sudo apt-get update -qq
@@ -356,7 +357,7 @@ jobs:
       - name: Sync ghcr alias tags ${{ matrix.name }}
         run: ${{ matrix.runs.syncAliases }}
       - name: Mirror to Aliyun ACR ${{ matrix.name }}
-        if: steps.changed.outputs.changed == 'true'
+        if: steps.changed.outputs.changed == 'true' && matrix.phase == 'ext'
         run: ${{ matrix.runs.push }}
       - name: Notify Feishu on mirror failure
         if: failure()
