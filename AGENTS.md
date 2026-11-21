@@ -22,6 +22,32 @@
   否则 PHP 小版本升级（短别名不变）时扩展镜像不会重建。
 - 扩展层编译依赖要自带：base 清理阶段会清掉 `-dev` 包（如 `--enable-swoole-pgsql` 需要 `libpq-dev`）。
 
+## tag 规范（2026-11-21 起）
+
+- base（`cli` / `zts`）：`<phpFull>-<variant>-<suite>`、`<phpMinor>-<variant>-<suite>`、
+  `<phpMinor>-<variant>`、`<phpMinor>-<suite>`、`<phpMinor>`，`8` / `latest` 指向最新稳定版。
+- 扩展层额外带**扩展版本维度**（`swoole` / `swoole-6` / `swoole-6.2` / `swoole-6.2.6`）：
+  - 组合：`8.5-swoole-6.2`、`8.5-swoole-6.2.6-alpine3.24`、`8.5.13-swoole-6.2.6(-suite)`
+  - **不绑 PHP 版本的短 tag**（`swoole`、`swoole-6.2`）只指向「该变体最新可用 PHP 版本 +
+    最新 alpine suite」，且在生成时只会由一个变体目录产出（否则 tag 冲突）。
+  - rc 轨只到 `major.minor`：`swoole-rc` / `swoole-6-rc` / `swoole-6.3-rc`；
+    完整 rc 号（`6.3.0-rc2`）只写进 `cn.era-cloud.ext.*` label。
+  - `thread` 复用 swoole 的版本号（`thread` / `thread-6.2.6`）。
+- 一个变体的**第一个 tag** 必须保持 `<phpFull>-<variant>-<suite>`：它是 `matrix.name`，
+  也是 `.build-state.json` / `.image-metrics.json` 的键，改动会打乱增量构建。
+- tag 数与 registry 规模：当前规则 **846** 个（原 448）；registry 总量见文档站。
+
+## 文档站（docs/，GitHub Pages）
+
+- VitePress（中文、pnpm），站点根目录 `docs/`，线上 <https://era-cloud.github.io/php/>。
+- `docs/scripts/collect.mjs`：拉 ghcr 包版本全量 tag + 合并 `versions.json` / `extensions.json` /
+  `.image-metrics.json` / `.build-state.json`，输出 `docs/public/data/*.json`（已 gitignore）；
+  **无 token / API 失败时自动降级**为仓库内数据。
+- `docs/.vitepress/config.ts` 的 `srcExclude` 排除了 `design-layering.md`（内部设计文档）。
+- `.github/workflows/docs.yml`：`ci.yml` 成功后自动构建部署，也可 `workflow_dispatch`。
+- `docs/design-layering.md` 只放**内部设计**，不要往站点页面里引。
+- 改 `docs/` 只触发 Release→ci（变体全部 skipped）→docs，不会重建镜像。
+
 ## 构建与变体约束（踩过坑，勿回退）
 
 ### 变体矩阵
