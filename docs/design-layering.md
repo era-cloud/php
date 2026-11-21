@@ -96,8 +96,12 @@ docs/
 
 ## 6. 执行顺序
 
-1. 第一轮：分层（第 3 节全部改动）→ 本地验 `8.5/trixie/cli` + `8.5/trixie/swoole` → 推送 → 120 变体重建。
-2. 第二轮：全矩阵 tag（第 4 节）+ VitePress（第 5 节）→ 推送。
+0. **预检**：先只改 `generate-stackbrew-library.sh` 让扩展变体 FROM 自家镜像，跑
+   `bashbrew list --build-order` 确认 base 排在扩展前；不对先修。
+1. **docs 骨架先上线**：VitePress 空站（config + 三页占位 + `docs.yml` + deploy-pages），
+   先跑通 Pages 链路，与 tag 改造解耦。
+2. 第一轮：分层（第 3 节全部改动）→ 本地验 `8.5/trixie/cli` + `8.5/trixie/swoole` → 推送 → 120 变体重建。
+3. 第二轮：全矩阵 tag（第 4 节）→ 填充 docs 数据（第 5 节）→ 推送。
 
 ## 7. 决策
 
@@ -113,3 +117,5 @@ docs/
 | D8 | 文档页结构 | base / extensions / tags 三页 + index 快速选择 |
 | D9 | 刷新时机 | 跟随构建（`workflow_run`） |
 | D10 | 历史 tag | 全量展示（ghcr API），标记已归档 |
+| D11 | 构建顺序 | 实施分层前先验 `bashbrew list --build-order`（base 必须排在扩展前） |
+| D12 | docs 上线时机 | 先上线 VitePress 空站（骨架 + deploy-pages），再填 tag 数据 |
