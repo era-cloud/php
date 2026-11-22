@@ -9,7 +9,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 184538155,
-    "size_uncompressed": 184576000
+    "size_uncompressed": 549137920
   },
   {
     "tag": "8.2-zts-trixie",
@@ -21,7 +21,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 184660193,
-    "size_uncompressed": 184698368
+    "size_uncompressed": 549340672
   },
   {
     "tag": "8.2-swoole-trixie",
@@ -33,7 +33,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 187885906,
-    "size_uncompressed": 187928576
+    "size_uncompressed": 563494912
   },
   {
     "tag": "8.2-swow-trixie",
@@ -45,7 +45,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 186714429,
-    "size_uncompressed": 186757120
+    "size_uncompressed": 554334720
   },
   {
     "tag": "8.2-thread-trixie",
@@ -57,7 +57,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 188039977,
-    "size_uncompressed": 188082688
+    "size_uncompressed": 563959296
   },
   {
     "tag": "8.2-swoole-rc-trixie",
@@ -69,7 +69,7 @@
     "pull_size": 188253826,
     "critical": 1,
     "high": 121,
-    "size_uncompressed": 188296704
+    "size_uncompressed": 565059072
   },
   {
     "tag": "8.2-swow-rc-trixie",
@@ -81,7 +81,7 @@
     "pull_size": 187095393,
     "critical": 1,
     "high": 124,
-    "size_uncompressed": 187138048
+    "size_uncompressed": 555368448
   },
   {
     "tag": "8.2-cli-bookworm",
@@ -93,7 +93,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 165389983,
-    "size_uncompressed": 165428736
+    "size_uncompressed": 512613376
   },
   {
     "tag": "8.2-zts-bookworm",
@@ -105,7 +105,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 165493657,
-    "size_uncompressed": 165532672
+    "size_uncompressed": 512820224
   },
   {
     "tag": "8.2-swoole-bookworm",
@@ -117,7 +117,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 168772193,
-    "size_uncompressed": 168815104
+    "size_uncompressed": 527393792
   },
   {
     "tag": "8.2-swow-bookworm",
@@ -129,7 +129,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 167585263,
-    "size_uncompressed": 167628288
+    "size_uncompressed": 517743104
   },
   {
     "tag": "8.2-thread-bookworm",
@@ -141,7 +141,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 168941468,
-    "size_uncompressed": 168985088
+    "size_uncompressed": 527863296
   },
   {
     "tag": "8.2-swoole-rc-bookworm",
@@ -153,7 +153,7 @@
     "pull_size": 169135062,
     "critical": 4,
     "high": 123,
-    "size_uncompressed": 169178112
+    "size_uncompressed": 528979968
   },
   {
     "tag": "8.2-swow-rc-bookworm",
@@ -165,7 +165,7 @@
     "pull_size": 167955737,
     "critical": 4,
     "high": 123,
-    "size_uncompressed": 167998976
+    "size_uncompressed": 518777856
   },
   {
     "tag": "8.2-cli-alpine3.24",
@@ -177,7 +177,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 42522367,
-    "size_uncompressed": 42557440
+    "size_uncompressed": 92996608
   },
   {
     "tag": "8.2-zts-alpine3.24",
@@ -189,7 +189,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 46686077,
-    "size_uncompressed": 46721536
+    "size_uncompressed": 109268992
   },
   {
     "tag": "8.2-swoole-alpine3.24",
@@ -201,7 +201,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 45570060,
-    "size_uncompressed": 45609984
+    "size_uncompressed": 106550784
   },
   {
     "tag": "8.2-swow-alpine3.24",
@@ -213,7 +213,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 44640480,
-    "size_uncompressed": 44679680
+    "size_uncompressed": 98117120
   },
   {
     "tag": "8.2-thread-alpine3.24",
@@ -225,7 +225,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 49805125,
-    "size_uncompressed": 49844736
+    "size_uncompressed": 123089920
   },
   {
     "tag": "8.2-swoole-rc-alpine3.24",
@@ -237,7 +237,7 @@
     "pull_size": 45967173,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 46007296
+    "size_uncompressed": 108079616
   },
   {
     "tag": "8.2-swow-rc-alpine3.24",
@@ -249,7 +249,7 @@
     "pull_size": 44999716,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 45039104
+    "size_uncompressed": 99146240
   },
   {
     "tag": "8.2-cli-alpine3.23",
@@ -261,7 +261,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 39797884,
-    "size_uncompressed": 39833600
+    "size_uncompressed": 92667392
   },
   {
     "tag": "8.2-zts-alpine3.23",
@@ -273,7 +273,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 43982780,
-    "size_uncompressed": 44018688
+    "size_uncompressed": 108939776
   },
   {
     "tag": "8.2-swoole-alpine3.23",
@@ -285,7 +285,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 42845638,
-    "size_uncompressed": 42886144
+    "size_uncompressed": 106221056
   },
   {
     "tag": "8.2-swow-alpine3.23",
@@ -297,7 +297,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 41915469,
-    "size_uncompressed": 41955328
+    "size_uncompressed": 97787904
   },
   {
     "tag": "8.2-thread-alpine3.23",
@@ -309,7 +309,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 47101850,
-    "size_uncompressed": 47141888
+    "size_uncompressed": 122760192
   },
   {
     "tag": "8.2-swoole-rc-alpine3.23",
@@ -321,7 +321,7 @@
     "pull_size": 43247260,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 43288064
+    "size_uncompressed": 107749888
   },
   {
     "tag": "8.2-swow-rc-alpine3.23",
@@ -333,7 +333,7 @@
     "pull_size": 42274933,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 42314752
+    "size_uncompressed": 98817024
   },
   {
     "tag": "8.3-cli-trixie",
@@ -345,7 +345,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 185226778,
-    "size_uncompressed": 185264640
+    "size_uncompressed": 552939008
   },
   {
     "tag": "8.3-zts-trixie",
@@ -357,7 +357,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 181781911,
-    "size_uncompressed": 181819904
+    "size_uncompressed": 553122816
   },
   {
     "tag": "8.3-swoole-trixie",
@@ -369,7 +369,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 188577124,
-    "size_uncompressed": 188619776
+    "size_uncompressed": 567301120
   },
   {
     "tag": "8.3-swow-trixie",
@@ -381,7 +381,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 187401941,
-    "size_uncompressed": 187444224
+    "size_uncompressed": 558134784
   },
   {
     "tag": "8.3-thread-trixie",
@@ -393,7 +393,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 185300042,
-    "size_uncompressed": 185342976
+    "size_uncompressed": 567750144
   },
   {
     "tag": "8.3-swoole-rc-trixie",
@@ -405,7 +405,7 @@
     "pull_size": 188938430,
     "critical": 1,
     "high": 121,
-    "size_uncompressed": 188981248
+    "size_uncompressed": 568874496
   },
   {
     "tag": "8.3-swow-rc-trixie",
@@ -417,7 +417,7 @@
     "pull_size": 187784902,
     "critical": 1,
     "high": 124,
-    "size_uncompressed": 187827200
+    "size_uncompressed": 559171584
   },
   {
     "tag": "8.3-cli-bookworm",
@@ -429,7 +429,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 166037537,
-    "size_uncompressed": 166075904
+    "size_uncompressed": 516410368
   },
   {
     "tag": "8.3-zts-bookworm",
@@ -441,7 +441,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 166142760,
-    "size_uncompressed": 166180352
+    "size_uncompressed": 516621312
   },
   {
     "tag": "8.3-swoole-bookworm",
@@ -453,7 +453,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 169421915,
-    "size_uncompressed": 169465344
+    "size_uncompressed": 531195904
   },
   {
     "tag": "8.3-swow-bookworm",
@@ -465,7 +465,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 168234190,
-    "size_uncompressed": 168277504
+    "size_uncompressed": 521539584
   },
   {
     "tag": "8.3-thread-bookworm",
@@ -477,7 +477,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 169611147,
-    "size_uncompressed": 169653760
+    "size_uncompressed": 531677696
   },
   {
     "tag": "8.3-swoole-rc-bookworm",
@@ -489,7 +489,7 @@
     "pull_size": 169783930,
     "critical": 4,
     "high": 123,
-    "size_uncompressed": 169827328
+    "size_uncompressed": 532787712
   },
   {
     "tag": "8.3-swow-rc-bookworm",
@@ -501,7 +501,7 @@
     "pull_size": 168603272,
     "critical": 4,
     "high": 123,
-    "size_uncompressed": 168646656
+    "size_uncompressed": 522573312
   },
   {
     "tag": "8.3-cli-alpine3.24",
@@ -513,7 +513,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 43089791,
-    "size_uncompressed": 43124736
+    "size_uncompressed": 95703552
   },
   {
     "tag": "8.3-zts-alpine3.24",
@@ -525,7 +525,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 47333401,
-    "size_uncompressed": 47368192
+    "size_uncompressed": 113043968
   },
   {
     "tag": "8.3-swoole-alpine3.24",
@@ -537,7 +537,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 46142728,
-    "size_uncompressed": 46181888
+    "size_uncompressed": 109270528
   },
   {
     "tag": "8.3-swow-alpine3.24",
@@ -549,7 +549,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 45206196,
-    "size_uncompressed": 45245440
+    "size_uncompressed": 100822016
   },
   {
     "tag": "8.3-thread-alpine3.24",
@@ -561,7 +561,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 50461938,
-    "size_uncompressed": 50501632
+    "size_uncompressed": 126873600
   },
   {
     "tag": "8.3-swoole-rc-alpine3.24",
@@ -573,7 +573,7 @@
     "pull_size": 46535632,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 46575104
+    "size_uncompressed": 110800896
   },
   {
     "tag": "8.3-swow-rc-alpine3.24",
@@ -585,7 +585,7 @@
     "pull_size": 45562615,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 45601792
+    "size_uncompressed": 101853696
   },
   {
     "tag": "8.3-cli-alpine3.23",
@@ -597,7 +597,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 40364630,
-    "size_uncompressed": 40399360
+    "size_uncompressed": 95374336
   },
   {
     "tag": "8.3-zts-alpine3.23",
@@ -609,7 +609,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 44625299,
-    "size_uncompressed": 44660224
+    "size_uncompressed": 112714752
   },
   {
     "tag": "8.3-swoole-alpine3.23",
@@ -621,7 +621,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 43417526,
-    "size_uncompressed": 43456512
+    "size_uncompressed": 108940800
   },
   {
     "tag": "8.3-swow-alpine3.23",
@@ -633,7 +633,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 42480330,
-    "size_uncompressed": 42519552
+    "size_uncompressed": 100492800
   },
   {
     "tag": "8.3-thread-alpine3.23",
@@ -645,7 +645,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 47747752,
-    "size_uncompressed": 47787520
+    "size_uncompressed": 126544384
   },
   {
     "tag": "8.3-swoole-rc-alpine3.23",
@@ -657,7 +657,7 @@
     "pull_size": 43810425,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 43849728
+    "size_uncompressed": 110471168
   },
   {
     "tag": "8.3-swow-rc-alpine3.23",
@@ -669,7 +669,7 @@
     "pull_size": 42837267,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 42876416
+    "size_uncompressed": 101524480
   },
   {
     "tag": "8.4-cli-trixie",
@@ -681,7 +681,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 188480410,
-    "size_uncompressed": 188518400
+    "size_uncompressed": 558811136
   },
   {
     "tag": "8.4-zts-trixie",
@@ -693,7 +693,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 185018566,
-    "size_uncompressed": 185056768
+    "size_uncompressed": 559006720
   },
   {
     "tag": "8.4-swoole-trixie",
@@ -705,7 +705,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 191834664,
-    "size_uncompressed": 191877632
+    "size_uncompressed": 573266432
   },
   {
     "tag": "8.4-swow-trixie",
@@ -717,7 +717,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 190681257,
-    "size_uncompressed": 190723584
+    "size_uncompressed": 564088832
   },
   {
     "tag": "8.4-thread-trixie",
@@ -729,7 +729,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 188536204,
-    "size_uncompressed": 188579328
+    "size_uncompressed": 573731840
   },
   {
     "tag": "8.4-swoole-rc-trixie",
@@ -741,7 +741,7 @@
     "pull_size": 192208653,
     "critical": 1,
     "high": 121,
-    "size_uncompressed": 192251392
+    "size_uncompressed": 574839808
   },
   {
     "tag": "8.4-swow-rc-trixie",
@@ -753,7 +753,7 @@
     "pull_size": 191070694,
     "critical": 1,
     "high": 124,
-    "size_uncompressed": 191113216
+    "size_uncompressed": 565159424
   },
   {
     "tag": "8.4-cli-bookworm",
@@ -765,7 +765,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 169291054,
-    "size_uncompressed": 169329152
+    "size_uncompressed": 522273792
   },
   {
     "tag": "8.4-zts-bookworm",
@@ -777,7 +777,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 169400192,
-    "size_uncompressed": 169438208
+    "size_uncompressed": 522492928
   },
   {
     "tag": "8.4-swoole-bookworm",
@@ -789,7 +789,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 172723969,
-    "size_uncompressed": 172766720
+    "size_uncompressed": 537154048
   },
   {
     "tag": "8.4-swow-bookworm",
@@ -801,7 +801,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 171504662,
-    "size_uncompressed": 171547648
+    "size_uncompressed": 527485952
   },
   {
     "tag": "8.4-thread-bookworm",
@@ -813,7 +813,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 172878196,
-    "size_uncompressed": 172920320
+    "size_uncompressed": 537648640
   },
   {
     "tag": "8.4-swoole-rc-bookworm",
@@ -825,7 +825,7 @@
     "pull_size": 173086758,
     "critical": 4,
     "high": 123,
-    "size_uncompressed": 173129728
+    "size_uncompressed": 538745856
   },
   {
     "tag": "8.4-swow-rc-bookworm",
@@ -837,7 +837,7 @@
     "pull_size": 171889120,
     "critical": 4,
     "high": 123,
-    "size_uncompressed": 171932160
+    "size_uncompressed": 528558592
   },
   {
     "tag": "8.4-cli-alpine3.24",
@@ -849,7 +849,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 45494840,
-    "size_uncompressed": 45530624
+    "size_uncompressed": 98646528
   },
   {
     "tag": "8.4-zts-alpine3.24",
@@ -861,7 +861,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 50588380,
-    "size_uncompressed": 50624512
+    "size_uncompressed": 118972928
   },
   {
     "tag": "8.4-swoole-alpine3.24",
@@ -873,7 +873,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 48584625,
-    "size_uncompressed": 48624640
+    "size_uncompressed": 112306688
   },
   {
     "tag": "8.4-swow-alpine3.24",
@@ -885,7 +885,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 47637702,
-    "size_uncompressed": 47677952
+    "size_uncompressed": 103846912
   },
   {
     "tag": "8.4-thread-alpine3.24",
@@ -897,7 +897,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 53734672,
-    "size_uncompressed": 53775872
+    "size_uncompressed": 132899840
   },
   {
     "tag": "8.4-swoole-rc-alpine3.24",
@@ -909,7 +909,7 @@
     "pull_size": 48937755,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 48977920
+    "size_uncompressed": 113837568
   },
   {
     "tag": "8.4-swow-rc-alpine3.24",
@@ -921,7 +921,7 @@
     "pull_size": 48004051,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 48044032
+    "size_uncompressed": 104909312
   },
   {
     "tag": "8.4-cli-alpine3.23",
@@ -933,7 +933,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 42775953,
-    "size_uncompressed": 42810880
+    "size_uncompressed": 98321408
   },
   {
     "tag": "8.4-zts-alpine3.23",
@@ -945,7 +945,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 47903957,
-    "size_uncompressed": 47939072
+    "size_uncompressed": 118643712
   },
   {
     "tag": "8.4-swoole-alpine3.23",
@@ -957,7 +957,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 45865677,
-    "size_uncompressed": 45904896
+    "size_uncompressed": 111981056
   },
   {
     "tag": "8.4-swow-alpine3.23",
@@ -969,7 +969,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 44917979,
-    "size_uncompressed": 44957184
+    "size_uncompressed": 103521792
   },
   {
     "tag": "8.4-thread-alpine3.23",
@@ -981,7 +981,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 51049983,
-    "size_uncompressed": 51089920
+    "size_uncompressed": 132570112
   },
   {
     "tag": "8.4-swoole-rc-alpine3.23",
@@ -993,7 +993,7 @@
     "pull_size": 46218745,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 46258176
+    "size_uncompressed": 113511936
   },
   {
     "tag": "8.4-swow-rc-alpine3.23",
@@ -1005,7 +1005,7 @@
     "pull_size": 45284795,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 45324288
+    "size_uncompressed": 104584192
   },
   {
     "tag": "8.5-cli-trixie",
@@ -1017,7 +1017,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 186878107,
-    "size_uncompressed": 186915328
+    "size_uncompressed": 573200384
   },
   {
     "tag": "8.5-zts-trixie",
@@ -1029,7 +1029,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 187006420,
-    "size_uncompressed": 187043328
+    "size_uncompressed": 573264384
   },
   {
     "tag": "8.5-swoole-trixie",
@@ -1041,7 +1041,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 190368113,
-    "size_uncompressed": 190410240
+    "size_uncompressed": 587783680
   },
   {
     "tag": "8.5-swow-trixie",
@@ -1053,7 +1053,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 195743450,
-    "size_uncompressed": 195785216
+    "size_uncompressed": 578527232
   },
   {
     "tag": "8.5-thread-trixie",
@@ -1065,7 +1065,7 @@
     "critical": 1,
     "high": 121,
     "pull_size": 190576557,
-    "size_uncompressed": 190618112
+    "size_uncompressed": 588116992
   },
   {
     "tag": "8.5-swoole-rc-trixie",
@@ -1077,7 +1077,7 @@
     "pull_size": 190729438,
     "critical": 1,
     "high": 121,
-    "size_uncompressed": 190771712
+    "size_uncompressed": 589357568
   },
   {
     "tag": "8.5-swow-rc-trixie",
@@ -1089,7 +1089,7 @@
     "pull_size": 196127699,
     "critical": 1,
     "high": 124,
-    "size_uncompressed": 196169216
+    "size_uncompressed": 579587072
   },
   {
     "tag": "8.5-cli-bookworm",
@@ -1101,7 +1101,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 171326077,
-    "size_uncompressed": 171363328
+    "size_uncompressed": 536756224
   },
   {
     "tag": "8.5-zts-bookworm",
@@ -1113,7 +1113,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 171373811,
-    "size_uncompressed": 171411456
+    "size_uncompressed": 536823296
   },
   {
     "tag": "8.5-swoole-bookworm",
@@ -1125,7 +1125,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 174750768,
-    "size_uncompressed": 174792704
+    "size_uncompressed": 551765504
   },
   {
     "tag": "8.5-swow-bookworm",
@@ -1137,7 +1137,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 173556357,
-    "size_uncompressed": 173597696
+    "size_uncompressed": 542002688
   },
   {
     "tag": "8.5-thread-bookworm",
@@ -1149,7 +1149,7 @@
     "critical": 4,
     "high": 123,
     "pull_size": 174903684,
-    "size_uncompressed": 174946304
+    "size_uncompressed": 552107008
   },
   {
     "tag": "8.5-swoole-rc-bookworm",
@@ -1161,7 +1161,7 @@
     "pull_size": 175128564,
     "critical": 4,
     "high": 123,
-    "size_uncompressed": 175170560
+    "size_uncompressed": 553357312
   },
   {
     "tag": "8.5-swow-rc-bookworm",
@@ -1173,7 +1173,7 @@
     "pull_size": 173935481,
     "critical": 4,
     "high": 123,
-    "size_uncompressed": 173977088
+    "size_uncompressed": 543068672
   },
   {
     "tag": "8.5-cli-alpine3.24",
@@ -1185,7 +1185,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 46565606,
-    "size_uncompressed": 46599680
+    "size_uncompressed": 108516864
   },
   {
     "tag": "8.5-zts-alpine3.24",
@@ -1197,7 +1197,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 52614258,
-    "size_uncompressed": 52648448
+    "size_uncompressed": 135162368
   },
   {
     "tag": "8.5-swoole-alpine3.24",
@@ -1209,7 +1209,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 49664594,
-    "size_uncompressed": 49702400
+    "size_uncompressed": 122278912
   },
   {
     "tag": "8.5-swow-alpine3.24",
@@ -1221,7 +1221,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 48718271,
-    "size_uncompressed": 48755712
+    "size_uncompressed": 113747456
   },
   {
     "tag": "8.5-thread-alpine3.24",
@@ -1233,7 +1233,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 55791252,
-    "size_uncompressed": 55829504
+    "size_uncompressed": 149190656
   },
   {
     "tag": "8.5-swoole-rc-alpine3.24",
@@ -1245,7 +1245,7 @@
     "pull_size": 50051878,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 50089984
+    "size_uncompressed": 123809792
   },
   {
     "tag": "8.5-swow-rc-alpine3.24",
@@ -1257,7 +1257,7 @@
     "pull_size": 49087626,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 49124864
+    "size_uncompressed": 114815488
   },
   {
     "tag": "8.5-cli-alpine3.23",
@@ -1269,7 +1269,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 43855265,
-    "size_uncompressed": 43889664
+    "size_uncompressed": 108187136
   },
   {
     "tag": "8.5-zts-alpine3.23",
@@ -1281,7 +1281,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 49904174,
-    "size_uncompressed": 49938432
+    "size_uncompressed": 134832640
   },
   {
     "tag": "8.5-swoole-alpine3.23",
@@ -1293,7 +1293,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 46953562,
-    "size_uncompressed": 46991872
+    "size_uncompressed": 121949696
   },
   {
     "tag": "8.5-swow-alpine3.23",
@@ -1305,7 +1305,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 46007973,
-    "size_uncompressed": 46045696
+    "size_uncompressed": 113417728
   },
   {
     "tag": "8.5-thread-alpine3.23",
@@ -1317,7 +1317,7 @@
     "critical": 0,
     "high": 0,
     "pull_size": 53081053,
-    "size_uncompressed": 53118976
+    "size_uncompressed": 148861440
   },
   {
     "tag": "8.5-swoole-rc-alpine3.23",
@@ -1329,7 +1329,7 @@
     "pull_size": 47341603,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 47379968
+    "size_uncompressed": 123480576
   },
   {
     "tag": "8.5-swow-rc-alpine3.23",
@@ -1341,7 +1341,7 @@
     "pull_size": 46377734,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 46415360
+    "size_uncompressed": 114485760
   },
   {
     "tag": "8.6-cli-trixie",
@@ -1353,7 +1353,7 @@
     "pull_size": 188257592,
     "critical": 1,
     "high": 121,
-    "size_uncompressed": 188294656
+    "size_uncompressed": 577107456
   },
   {
     "tag": "8.6-zts-trixie",
@@ -1365,7 +1365,7 @@
     "pull_size": 188323032,
     "critical": 1,
     "high": 121,
-    "size_uncompressed": 188360704
+    "size_uncompressed": 577175040
   },
   {
     "tag": "8.6-cli-bookworm",
@@ -1377,7 +1377,7 @@
     "pull_size": 172584178,
     "critical": 4,
     "high": 123,
-    "size_uncompressed": 172621824
+    "size_uncompressed": 540658688
   },
   {
     "tag": "8.6-zts-bookworm",
@@ -1389,7 +1389,7 @@
     "pull_size": 172667304,
     "critical": 4,
     "high": 123,
-    "size_uncompressed": 172704256
+    "size_uncompressed": 540713472
   },
   {
     "tag": "8.6-cli-alpine3.24",
@@ -1401,7 +1401,7 @@
     "pull_size": 47619550,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 47653888
+    "size_uncompressed": 109686272
   },
   {
     "tag": "8.6-zts-alpine3.24",
@@ -1413,7 +1413,7 @@
     "pull_size": 53938890,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 53972992
+    "size_uncompressed": 137012736
   },
   {
     "tag": "8.6-cli-alpine3.23",
@@ -1425,7 +1425,7 @@
     "pull_size": 44913515,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 44947968
+    "size_uncompressed": 109311488
   },
   {
     "tag": "8.6-zts-alpine3.23",
@@ -1437,6 +1437,6 @@
     "pull_size": 51217781,
     "critical": 0,
     "high": 0,
-    "size_uncompressed": 51252224
+    "size_uncompressed": 136637952
   }
 ]
