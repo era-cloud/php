@@ -43,6 +43,16 @@
 - `docs/scripts/collect.mjs`：拉 ghcr 包版本全量 tag + 合并 `versions.json` / `extensions.json` /
   `.image-metrics.json` / `.build-state.json`，输出 `docs/public/data/*.json`（已 gitignore）；
   **无 token / API 失败时自动降级**为仓库内数据。
+- **每个 tag 必须解析成具体镜像**：表格里不能出现 `PHP=8 / 变体=—`（用户没法判断
+  `docker pull era-cloud/php:8` 到底拉到什么）。`collect.mjs` 的 `resolveTag` 负责把
+  `8` / `latest` / `cli` / `trixie` / `8.5-swoole` / `swoole-6.2` 解析成
+  `php 完整版本 + 变体 + suite`，缺字段的 tag 额外显示一行 `→ 8.6.0-cli-trixie`。
+  规则：不带 PHP 版本的纯轨道 tag（`swoole`、`swoole-6.2`）落在**最新 alpine**；
+  带 PHP 版本但没写 suite 的（`8.5-swoole`）落在**默认 debian**（trixie）。
+- 数据拆分：`current.json`（约 350KB）默认加载，`archived.json`（约 1.5MB）勾选「含历史」时才拉。
+- 体积口径：**解压后 = `docker export` 展开后的字节数**，下载 = registry 清单压缩层总量。
+  ⚠️ 不要用 `docker save`：containerd 镜像存储下它导出的是压缩块（实测 192MB vs export 547MB），
+  `docker image inspect .Size` 在 CI 上同样是压缩值。回填用 `measure-size.yml`（手动 dispatch）。
 - `docs/.vitepress/config.ts` 的 `srcExclude` 排除了 `design-layering.md`（内部设计文档）。
 - `.github/workflows/docs.yml`：`ci.yml` 成功后自动构建部署，也可 `workflow_dispatch`。
 - `docs/design-layering.md` 只放**内部设计**，不要往站点页面里引。
