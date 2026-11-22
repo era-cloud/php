@@ -47,9 +47,14 @@ norm_tag() {
 while IFS= read -r -d '' f; do
 	tag="$(jq -r '.tag' "$f" | norm_tag)"
 	size="$(jq -r '.size' "$f")"
+	size_uncompressed="$(jq -r '.size_uncompressed // empty' "$f")"
 	built_at="$(jq -r '.built_at // ""' "$f")"
 	metrics="$(jq -c --arg t "$tag" --argjson s "$size" --arg b "$built_at" \
 		'map(if .tag == $t then .size = $s | .built_at = $b else . end)' <<<"$metrics")"
+	if [ -n "$size_uncompressed" ] && [ "$size_uncompressed" != "0" ]; then
+		metrics="$(jq -c --arg t "$tag" --argjson u "$size_uncompressed" \
+			'map(if .tag == $t then .size_uncompressed = $u else . end)' <<<"$metrics")"
+	fi
 done < <(find . -path './.git' -prune -o -type f -name 'size-*.json' -print0 2>/dev/null)
 
 # 2b. merge compressed (pull) size from pull-size-<tag>.json artifacts

@@ -1,0 +1,58 @@
+name: Measure Uncompressed Size
+
+# 一次性/偶尔运行：把当前所有镜像拉下来，记录 `docker save` 的字节数（解压后体积）
+# 写进 .image-metrics.json 的 size_uncompressed 字段。不构建、不推送镜像。
+#
+# 为什么要单独跑：CI 跑在 containerd 镜像存储上，`docker image inspect .Size`
+# 拿到的是压缩值，不能当"解压后体积"。只有真正 save 一次才准确。
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: read
+
+defaults:
+  run:
+    shell: 'bash -Eeuo pipefail -x {0}'
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Login to the Github Container registry
+        run: docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+      - name: Measure uncompressed sizes
+        run: |
+          tags="$(jq -r '.[].tag' .image-metrics.json | sort -u)"
+          echo "共 $(wc -l <<<"$tags") 个 tag"
+          while IFS= read -r tag; do
+            [ -n "$tag" ] || continue
+            ref="ghcr.io/era-cloud/php:$tag"
+            if ! docker pull -q "$ref" > /dev/null; then
+              echo "::warning::pull 失败，跳过 $tag"
+              continue
+            fi
+            bytes="$(docker save "$ref" | wc -c)"
+            jq --arg t "$tag" --argjson b "$bytes" \
+              'map(if .tag == $t then .size_uncompressed = $b else . end)' \
+              .image-metrics.json > /tmp/metrics.json
+            mv /tmp/metrics.json .image-metrics.json
+            echo "$tag -> $bytes"
+            docker rmi -f "$ref" > /dev/null 2>&1 || true
+          done <<<"$tags"
+      - name: Commit
+        run: |
+          if git diff --exit-code .image-metrics.json; then
+            echo "没有任何变化"
+            exit 0
+          fi
+          git config --global user.name 'GitHub Actions'
+          git config user.email github-actions@github.com
+          git add .image-metrics.json
+          git commit -m "ci: measure uncompressed image sizes"
+          git config pull.rebase false
+          git pull
+          git push

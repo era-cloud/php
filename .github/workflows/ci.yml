@@ -149,9 +149,12 @@ jobs:
         if: steps.changed.outputs.changed == 'true'
         run: |
           size="$(docker image inspect --format '{{.Size}}' ghcr.io/era-cloud/php:${{ matrix.name }})"
+          # 解压后体积：docker save 出来的 tar 字节数（CI 跑在 containerd 镜像存储上，
+          # `docker image inspect .Size` 给的是压缩值，不能直接当"解压后体积"用）
+          size_uncompressed="$(docker save "ghcr.io/era-cloud/php:${{ matrix.name }}" | wc -c)" || size_uncompressed=0
           built_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          jq -n --arg t "${{ matrix.name }}" --argjson s "$size" --arg b "$built_at" \
-            '{tag:$t,size:$s,built_at:$b}' > size-${{ matrix.name }}.json
+          jq -n --arg t "${{ matrix.name }}" --argjson s "$size" --argjson u "$size_uncompressed" --arg b "$built_at" \
+            '{tag:$t,size:$s,size_uncompressed:$u,built_at:$b}' > size-${{ matrix.name }}.json
       - name: Trivy security scan
         id: scan
         if: steps.changed.outputs.changed == 'true'

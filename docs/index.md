@@ -40,6 +40,11 @@ PHP 运行时的 Docker 镜像，额外带 swoole / swow 扩展，发布到两�
 （ACR 上残留的 cli/zts tag 已停止更新，请勿使用）。
 :::
 
+::: tip `docker pull era-cloud/php:8` 到底是什么？
+文档站的表格会把每个别名 tag 解析成具体镜像（PHP 完整版本 + 变体 + suite），
+不要靠猜 —— 见 [全部 tag 索引](/tags)。
+:::
+
 ::: tip 两个约定
 - 不绑 PHP 版本的短 tag（`swoole`、`swoole-6.2`）指向**最新一个实际存在该扩展的 PHP 版本** + **最新 alpine suite**，当前即 PHP 8.5 + alpine3.24。
 - 所有 tag 的完整清单（含历史/已归档）见 [全部 tag 索引](/tags)。
