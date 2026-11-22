@@ -177,8 +177,22 @@ const main = async () => {
   // 裸 tag（不带 suite）回落到该变体的默认 suite，便于仍显示扫描结果
   const scanFor = (parsed) => {
     const v = parsed.variant || 'cli'
-    const minor = parsed.php ? parsed.php.split('.').slice(0, 2).join('.') : null
-    if (!minor) return scans[`${parsed.php}-${v}-${parsed.suite}`] || null
+    let minor = null
+    if (parsed.php) {
+      const parts = parsed.php.split('.')
+      // 只写大版本（8）时，取当前最新的 8.x
+      minor = parts.length === 1
+        ? [...currentPhp.keys()].filter((k) => k.startsWith(`${parts[0]}.`)).sort().reverse()[0] || null
+        : parts.slice(0, 2).join('.')
+    }
+    if (!minor) {
+      // 无 PHP 版本：latest 这类别名按 cli 处理，轨道 tag 取「存在该变体的最新版本」
+      const minis = [...new Set([...currentCombos].map((c) => c.split('|')).filter((c) => c[2] === v).map((c) => c[0]))]
+      const latest = minis.sort((a, b) => b.localeCompare(a, 'en'))[0]
+      if (!latest) return null
+      if (parsed.suite) return scans[`${latest}-${v}-${parsed.suite}`] || null
+      return scans[`${latest}-${v}-trixie`] || scans[`${latest}-${v}-alpine3.24`] || null
+    }
     if (parsed.suite) return scans[`${minor}-${v}-${parsed.suite}`] || null
     return scans[`${minor}-${v}-trixie`] || scans[`${minor}-${v}-alpine3.24`] || null
   }
