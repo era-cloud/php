@@ -1,6 +1,6 @@
 name: Measure Uncompressed Size
 
-# 一次性/偶尔运行：把当前所有镜像拉下来，记录 `docker save` 的字节数（解压后体积）
+# 一次性/偶尔运行：把当前所有镜像拉下来，记录展开后文件系统的字节数（解压后体积）
 # 写进 .image-metrics.json 的 size_uncompressed 字段。不构建、不推送镜像。
 #
 # 为什么要单独跑：CI 跑在 containerd 镜像存储上，`docker image inspect .Size`
@@ -35,7 +35,11 @@ jobs:
               echo "::warning::pull 失败，跳过 $tag"
               continue
             fi
-            bytes="$(docker save "$ref" | wc -c)"
+            # 用 docker export（展开后的文件系统）而不是 docker save：
+            # containerd 存储下 save 导出的仍是压缩块，量出来接近 pull 体积
+            cid="$(docker create "$ref")"
+            bytes="$(docker export "$cid" | wc -c)"
+            docker rm "$cid" > /dev/null
             jq --arg t "$tag" --argjson b "$bytes" \
               'map(if .tag == $t then .size_uncompressed = $b else . end)' \
               .image-metrics.json > /tmp/metrics.json
