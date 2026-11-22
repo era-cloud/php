@@ -5542,6 +5542,11 @@
         "version": "3.46.1-7+deb13u2"
       },
       {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
         "id": "CVE-2026-16742",
         "package": "libsystemd0",
         "version": "257.13-1~deb13u1"
@@ -5660,6 +5665,16 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -14397,6 +14412,11 @@
         "version": "3.46.1-7+deb13u2"
       },
       {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
         "id": "CVE-2026-16742",
         "package": "libsystemd0",
         "version": "257.13-1~deb13u1"
@@ -14515,6 +14535,16 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -23252,6 +23282,11 @@
         "version": "3.46.1-7+deb13u2"
       },
       {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
         "id": "CVE-2026-16742",
         "package": "libsystemd0",
         "version": "257.13-1~deb13u1"
@@ -23370,6 +23405,16 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -32107,6 +32152,11 @@
         "version": "3.46.1-7+deb13u2"
       },
       {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
         "id": "CVE-2026-16742",
         "package": "libsystemd0",
         "version": "257.13-1~deb13u1"
@@ -32225,6 +32275,16 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
