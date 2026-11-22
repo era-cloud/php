@@ -120,6 +120,8 @@
 - 只有 `changed=true` 的变体才会真正 mirror（其余变体只跑一次快速 check）。
 - **只同步扩展变体**（swoole / swow / thread 及其 rc 轨）：base（cli/zts）体积大（~800MB）、
   用量少，只在 ghcr 提供，不进 ACR。
+- 因此 ACR 上的 cli/zts tag 会**停留在停止同步那一刻**；README / 文档站必须标注这一点，
+  不要再往 ACR 推 base（否则又变成"部分更新"的假象）。
 
 ### 扩展版本跟踪（extensions.json）
 

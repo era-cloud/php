@@ -12,6 +12,7 @@ on:
       - Auto PHP 8.6 GA Switch
       - Check Upstream Sync
       - Check PHP 8.6 Extension Support
+      - Docs
     types: [completed]
 
 permissions:

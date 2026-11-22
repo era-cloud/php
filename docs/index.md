@@ -35,6 +35,11 @@ PHP 运行时的 Docker 镜像，额外带 swoole / swow 扩展，发布到两�
 | 钉死扩展版本 | `8.5-swoole-6.2.6-trixie` |
 | 不关心 PHP 版本，只要最新可用 | `swoole` / `swow` / `thread` |
 
+::: warning ACR 只提供扩展变体
+阿里云 ACR 只同步 `swoole` / `swow` / `thread` 及其 rc 轨。**基础镜像 `cli` / `zts` 只在 ghcr 提供**
+（ACR 上残留的 cli/zts tag 已停止更新，请勿使用）。
+:::
+
 ::: tip 两个约定
 - 不绑 PHP 版本的短 tag（`swoole`、`swoole-6.2`）指向**最新一个实际存在该扩展的 PHP 版本** + **最新 alpine suite**，当前即 PHP 8.5 + alpine3.24。
 - 所有 tag 的完整清单（含历史/已归档）见 [全部 tag 索引](/tags)。
@@ -52,6 +57,7 @@ PHP 运行时的 Docker 镜像，额外带 swoole / swow 扩展，发布到两�
       <code v-for="(v, k) in s.extensions" :key="k" style="margin-right: 8px">{{ k }} = {{ v }}</code>
     </td></tr>
     <tr><td>tag 总数</td><td>{{ s.counts.tags }}（当前 {{ s.counts.current }} / 历史归档 {{ s.counts.archived }}）</td></tr>
+    <tr><td>安全扫描</td><td>已覆盖 {{ s.scanned_variants }} 个变体；当前 tag 中 {{ s.counts.with_critical }} 个带 CRITICAL、{{ s.counts.with_high }} 个带 HIGH</td></tr>
     <tr><td>数据更新时间</td><td>{{ s.generated_at }}</td></tr>
   </tbody>
 </table>

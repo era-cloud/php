@@ -14,6 +14,10 @@
 | 全局别名 | `8`、`latest` | 当前最新的稳定 PHP（8.6） |
 | alpine 简写 | `8.5-cli-alpine` | 最新 alpine suite（当前 alpine3.24） |
 
+::: warning 只在 ghcr 提供
+`cli` / `zts` 不推送到阿里云 ACR，请使用 `ghcr.io/era-cloud/php:<tag>`。
+:::
+
 ## 包含什么
 
 - PHP 本体（CLI / ZTS），`opcache` 默认开启（8.5+ 为内置）

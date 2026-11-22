@@ -32,6 +32,19 @@ const versions = readJSON('versions.json', {})
 const extensions = readJSON('extensions.json', {})
 const metricsRaw = readJSON('.image-metrics.json', [])
 const buildState = readJSON('.build-state.json', {})
+const scanRaw = readJSON('.scan-results.json', {})
+// 键形如 "8.5-cli-trixie"（php minor + 变体 + suite）
+const scans = {}
+for (const [key, val] of Object.entries(scanRaw || {})) {
+  if (!val || typeof val !== 'object') continue
+  const critical = Array.isArray(val.critical) ? val.critical : []
+  const high = Array.isArray(val.high) ? val.high : []
+  scans[key] = {
+    critical: critical.length,
+    high: high.length,
+    ids: [...critical, ...high].map((v) => (typeof v === 'string' ? v : v && v.id)).filter(Boolean).slice(0, 6),
+  }
+}
 
 // .image-metrics.json 是数组（每项带 tag），兼容对象形式
 const metrics = Array.isArray(metricsRaw)
@@ -161,6 +174,15 @@ const main = async () => {
     registry = [...known].map((t) => ({ tag: t, created_at: null, updated_at: null }))
   }
 
+  // 裸 tag（不带 suite）回落到该变体的默认 suite，便于仍显示扫描结果
+  const scanFor = (parsed) => {
+    const v = parsed.variant || 'cli'
+    const minor = parsed.php ? parsed.php.split('.').slice(0, 2).join('.') : null
+    if (!minor) return scans[`${parsed.php}-${v}-${parsed.suite}`] || null
+    if (parsed.suite) return scans[`${minor}-${v}-${parsed.suite}`] || null
+    return scans[`${minor}-${v}-trixie`] || scans[`${minor}-${v}-alpine3.24`] || null
+  }
+
   const seen = new Set()
   const rows = []
   for (const r of registry) {
@@ -168,6 +190,7 @@ const main = async () => {
     seen.add(r.tag)
     const parsed = parseTag(r.tag)
     const m = metrics[r.tag] || {}
+    const scan = scanFor(parsed)
     rows.push({
       tag: r.tag,
       ...parsed,
@@ -176,6 +199,9 @@ const main = async () => {
       archived: !isCurrent(parsed),
       size: m.size || null,
       pull_size: m.pull_size || null,
+      critical: scan ? scan.critical : null,
+      high: scan ? scan.high : null,
+      vuln_ids: scan ? scan.ids : null,
       built_at: m.built_at || r.updated_at || r.created_at || null,
     })
   }
@@ -193,7 +219,10 @@ const main = async () => {
       archived: rows.filter((r) => r.archived).length,
       base: rows.filter((r) => r.layer === 'base').length,
       ext: rows.filter((r) => r.layer === 'ext').length,
+      with_critical: rows.filter((r) => (r.critical || 0) > 0).length,
+      with_high: rows.filter((r) => (r.high || 0) > 0).length,
     },
+    scanned_variants: Object.keys(scans).length,
   }
 
   fs.mkdirSync(outDir, { recursive: true })

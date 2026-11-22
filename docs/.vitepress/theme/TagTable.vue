@@ -17,6 +17,7 @@ const fVariant = ref('')
 const fSuite = ref('')
 const fQ = ref('')
 const showArchived = ref(false)
+const onlyVuln = ref(false)
 
 onMounted(async () => {
   try {
@@ -43,6 +44,7 @@ const filtered = computed(() => {
   const q = fQ.value.trim().toLowerCase()
   return scoped.value
     .filter((r) => (showArchived.value ? true : !r.archived))
+    .filter((r) => (onlyVuln.value ? (r.critical || 0) > 0 || (r.high || 0) > 0 : true))
     .filter((r) => !fPhp.value || r.php === fPhp.value)
     .filter((r) => !fVariant.value || r.variant === fVariant.value)
     .filter((r) => !fSuite.value || r.suite === fSuite.value)
@@ -66,6 +68,7 @@ const reset = () => {
   <select v-model="fVariant"><option value="">全部变体</option><option v-for="v in variants" :key="v" :value="v">{{ v }}</option></select>
   <select v-model="fSuite"><option value="">全部 suite</option><option v-for="s in suites" :key="s" :value="s">{{ s }}</option></select>
   <label class="archived"><input type="checkbox" v-model="showArchived" /> 含历史/已归档</label>
+  <label class="archived"><input type="checkbox" v-model="onlyVuln" /> 只看有 CRITICAL/HIGH</label>
   <button @click="reset">清空</button>
 </div>
 
@@ -78,7 +81,7 @@ const reset = () => {
 <table v-if="!loading && !error">
   <thead>
     <tr>
-      <th>tag</th><th>PHP</th><th>变体</th><th>suite</th><th>扩展版本</th><th>体积</th><th>拉取</th><th>构建时间</th>
+      <th>tag</th><th>PHP</th><th>变体</th><th>suite</th><th>扩展版本</th><th>安全</th><th>体积</th><th>拉取</th><th>构建时间</th>
     </tr>
   </thead>
   <tbody>
@@ -88,6 +91,14 @@ const reset = () => {
       <td>{{ r.variant || '—' }}</td>
       <td>{{ r.suite || '—' }}</td>
       <td>{{ r.ext_version || '—' }}</td>
+      <td class="sec" :title="(r.vuln_ids || []).join(', ')">
+        <template v-if="r.critical === null && r.high === null">—</template>
+        <template v-else>
+          <span v-if="r.critical" class="crit">C{{ r.critical }}</span>
+          <span v-if="r.high" class="high">H{{ r.high }}</span>
+          <span v-if="!r.critical && !r.high" class="clean">无</span>
+        </template>
+      </td>
       <td>{{ mb(r.size) }}</td>
       <td>{{ mb(r.pull_size) }}</td>
       <td>{{ r.built_at ? r.built_at.slice(0, 10) : '—' }}</td>
@@ -143,6 +154,25 @@ table {
 }
 tr.archived td {
   opacity: 0.55;
+}
+.sec span {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 11px;
+}
+.crit {
+  background: var(--vp-c-danger-soft);
+  color: var(--vp-c-danger-1);
+}
+.high {
+  background: var(--vp-c-warning-soft);
+  color: var(--vp-c-warning-1);
+}
+.clean {
+  background: var(--vp-c-default-soft);
+  color: var(--vp-c-text-2);
 }
 .badge {
   margin-left: 6px;
