@@ -20,6 +20,8 @@ const fSuite = ref('')
 const fQ = ref('')
 const showArchived = ref(false)
 const onlyVuln = ref(false)
+const page = ref(1)
+const PAGE_SIZE = 200
 
 const getJSON = async (name) => {
   const res = await fetch(withBase(`/data/${name}`), { cache: 'no-cache' })
@@ -75,6 +77,12 @@ const filtered = computed(() => {
     .sort((a, b) => a.tag.localeCompare(b.tag, 'en'))
 })
 
+const totalPages = computed(() => Math.max(1, Math.ceil(filtered.value.length / PAGE_SIZE)))
+const pageRows = computed(() => filtered.value.slice((page.value - 1) * PAGE_SIZE, page.value * PAGE_SIZE))
+watch([fPhp, fVariant, fSuite, fQ, onlyVuln, showArchived], () => {
+  page.value = 1
+})
+
 const mb = (n) => (n ? `${(n / 1048576).toFixed(0)} MB` : '—')
 const resolvedName = (r) => [r.php_full, r.variant, r.suite].filter(Boolean).join('-')
 const reset = () => {
@@ -110,14 +118,15 @@ const reset = () => {
         <th>变体</th>
         <th>suite</th>
         <th>扩展版本</th>
+        <th>基于</th>
         <th>安全</th>
-        <th>解压后</th>
+        <th>内容大小</th>
         <th>下载</th>
         <th>构建时间</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="r in filtered.slice(0, 500)" :key="r.tag" :class="{ archived: r.archived }">
+      <tr v-for="r in pageRows" :key="r.tag" :class="{ archived: r.archived }">
         <td>
           <code>{{ r.tag }}</code>
           <span v-if="r.archived" class="badge">历史</span>
@@ -127,6 +136,7 @@ const reset = () => {
         <td>{{ r.variant || '—' }}</td>
         <td>{{ r.suite || '—' }}</td>
         <td>{{ r.ext_version || '—' }}</td>
+        <td class="based"><code v-if="r.based_on">{{ r.based_on }}</code><template v-else>—</template></td>
         <td class="sec" :title="(r.vuln_ids || []).join(', ')">
           <template v-if="r.critical === null && r.high === null">—</template>
           <template v-else>
@@ -142,9 +152,12 @@ const reset = () => {
     </tbody>
   </table>
 
-  <p v-if="!loading && !error && filtered.length > 500" class="meta">
-    只显示前 500 行，请用上方筛选缩小范围。
-  </p>
+  <div v-if="!loading && !error && totalPages > 1" class="pager">
+    <button :disabled="page <= 1" @click="page = page - 1">上一页</button>
+    <span>第 {{ page }} / {{ totalPages }} 页</span>
+    <button :disabled="page >= totalPages" @click="page = page + 1">下一页</button>
+    <button @click="page = 1">回到首页</button>
+  </div>
 </template>
 
 <style scoped>
@@ -173,6 +186,30 @@ const reset = () => {
   gap: 4px;
   font-size: 13px;
   color: var(--vp-c-text-2);
+}
+.based code {
+  font-size: 11px;
+}
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+}
+.pager button {
+  padding: 4px 10px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  font-size: 13px;
+  cursor: pointer;
+}
+.pager button:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 .meta {
   font-size: 13px;

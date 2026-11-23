@@ -73,4 +73,6 @@ docker inspect --format '{{json .Config.Labels}}' ghcr.io/era-cloud/php:8.5-swoo
 
 ## tag 列表
 
+下表的「基于」列就是这一层 `FROM` 的自家 base tag（`thread` 用 `zts`，其余用 `cli`）。
+
 <TagTable layer="ext" />

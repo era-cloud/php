@@ -1,0 +1,28 @@
+version: 2
+
+updates:
+  # GitHub Actions：及时发现 action 弃用/大版升级（checkout / setup-node / upload-artifact …）
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci(deps)"
+    labels:
+      - dependencies
+      - github-actions
+
+  # 文档站（docs/，pnpm；Dependabot 认 pnpm-lock.yaml）
+  - package-ecosystem: npm
+    directory: /docs
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "docs(deps)"
+    labels:
+      - dependencies
+      - docs

@@ -51,4 +51,6 @@ docker inspect --format '{{json .Config.Labels}}' ghcr.io/era-cloud/php:8.5-cli-
 
 ## tag 列表
 
+下表的「基于」列是官方父镜像（`debian:<suite>-slim` 或 `alpine:<ver>`）。
+
 <TagTable layer="base" />

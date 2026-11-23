@@ -183,6 +183,19 @@ const resolveTag = (parsed) => {
   return { php_full: phpFull, variant, suite, ambiguous }
 }
 
+// 「基于」：base 行显示官方父镜像（debian:<suite>-slim / alpine:<ver>），
+// 扩展行显示它 FROM 的自家 base tag
+const basedOn = (resolved) => {
+  const { php_full: phpFull, variant, suite } = resolved
+  if (!phpFull || !suite) return null
+  const minor = phpFull.split('.').slice(0, 2).join('.')
+  if (['swoole', 'swoole-rc', 'swow', 'swow-rc', 'thread', 'thread-rc'].includes(variant)) {
+    const baseVariant = variant === 'thread' || variant === 'thread-rc' ? 'zts' : 'cli'
+    return `${minor}-${baseVariant}-${suite}`
+  }
+  return suite.startsWith('alpine') ? `alpine:${suite.slice('alpine'.length)}` : `debian:${suite}-slim`
+}
+
 const isCurrent = (resolved, parsed) => {
   if (parsed && parsed.prerelease) return false
   const { php_full: phpFull, variant, suite } = resolved
@@ -274,7 +287,8 @@ const main = async () => {
       // 轨道（swoole / swoole-rc / …）
       track: parsed.variant,
       ext: parsed.ext,
-      layer: ['zts', 'thread'].includes(resolved.variant) ? 'base-zts' : ['swoole', 'swoole-rc', 'swow', 'swow-rc', 'thread', 'thread-rc'].includes(resolved.variant) ? 'ext' : 'base',
+      layer: ['swoole', 'swoole-rc', 'swow', 'swow-rc', 'thread', 'thread-rc'].includes(resolved.variant) ? 'ext' : 'base',
+      based_on: basedOn(resolved),
       ext_version:
         (parsed.ext && parsed.ext.endsWith('rc')
           ? extVersion[`${resolved.variant}-rc`] || extVersion[resolved.variant]
