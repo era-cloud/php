@@ -25,8 +25,8 @@
   },
   "phpredis/phpredis": {
     "rc": {
-      "ref": "dev-develop#ca25b6fd9f31958601c97fff04c9d18bb3918da3",
-      "version": "6.3.0RC1"
+      "ref": "dev-develop#a807c0bc08a53f43b19b6042f5fae9a6306a4780",
+      "version": "6.4.0RC1"
     },
     "stable": {
       "ref": "dev-develop#df4fab2de7fc327c54c94a13af2b9542e4fbd720",
