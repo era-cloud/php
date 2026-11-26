@@ -1827,6 +1827,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -2476,6 +2481,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -2637,286 +2647,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -3010,6 +2740,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -3130,6 +2870,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -3253,286 +3013,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -3626,6 +3106,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -3746,6 +3236,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -4355,6 +3865,11 @@
         "id": "CVE-2026-86144",
         "package": "libxml2",
         "version": "2.9.14+dfsg-1.3~deb12u6"
+      },
+      {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
       },
       {
         "id": "CVE-2026-53613",
@@ -5006,6 +4521,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -5167,286 +4687,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -5540,6 +4780,11 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-124709",
@@ -5667,8 +4912,18 @@
         "version": "6.5+20250216-2"
       },
       {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
         "id": "CVE-2026-124709",
         "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
         "version": "3.5.9-1~deb13u1"
       },
       {
@@ -5798,286 +5053,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -6171,6 +5146,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -6291,6 +5276,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -6902,6 +5907,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -7063,286 +6073,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -7436,6 +6166,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -7556,6 +6296,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -10697,6 +9457,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -11346,6 +10111,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -11507,286 +10277,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -11880,6 +10370,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -12000,6 +10500,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -12123,286 +10643,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -12496,6 +10736,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -12616,6 +10866,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -13225,6 +11495,11 @@
         "id": "CVE-2026-86144",
         "package": "libxml2",
         "version": "2.9.14+dfsg-1.3~deb12u6"
+      },
+      {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
       },
       {
         "id": "CVE-2026-53613",
@@ -13876,6 +12151,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -14037,286 +12317,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -14410,6 +12410,11 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-124709",
@@ -14537,8 +12542,18 @@
         "version": "6.5+20250216-2"
       },
       {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
         "id": "CVE-2026-124709",
         "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
         "version": "3.5.9-1~deb13u1"
       },
       {
@@ -14668,286 +12683,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -15041,6 +12776,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -15161,6 +12906,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -15772,6 +13537,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -15933,286 +13703,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -16306,6 +13796,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -16426,6 +13926,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -19567,6 +17087,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -20216,6 +17741,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -20377,286 +17907,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -20750,6 +18000,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -20870,6 +18130,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -20993,286 +18273,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -21366,6 +18366,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -21486,6 +18496,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -22095,6 +19125,11 @@
         "id": "CVE-2026-86144",
         "package": "libxml2",
         "version": "2.9.14+dfsg-1.3~deb12u6"
+      },
+      {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
       },
       {
         "id": "CVE-2026-53613",
@@ -22746,6 +19781,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -22907,286 +19947,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -23280,6 +20040,11 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-124709",
@@ -23407,8 +20172,18 @@
         "version": "6.5+20250216-2"
       },
       {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
         "id": "CVE-2026-124709",
         "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
         "version": "3.5.9-1~deb13u1"
       },
       {
@@ -23538,286 +20313,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -23911,6 +20406,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -24031,6 +20536,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -24642,6 +21167,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -24803,286 +21333,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -25176,6 +21426,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -25296,6 +21556,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -28437,6 +24717,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -29086,6 +25371,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -29247,286 +25537,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -29620,6 +25630,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -29740,6 +25760,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -29863,286 +25903,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -30236,6 +25996,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -30356,6 +26126,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -30965,6 +26755,11 @@
         "id": "CVE-2026-86144",
         "package": "libxml2",
         "version": "2.9.14+dfsg-1.3~deb12u6"
+      },
+      {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
       },
       {
         "id": "CVE-2026-53613",
@@ -31616,6 +27411,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -31777,286 +27577,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -32150,6 +27670,11 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-124709",
@@ -32277,8 +27802,18 @@
         "version": "6.5+20250216-2"
       },
       {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
         "id": "CVE-2026-124709",
         "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
         "version": "3.5.9-1~deb13u1"
       },
       {
@@ -32408,286 +27943,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -32781,6 +28036,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -32901,6 +28166,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
@@ -33512,6 +28797,11 @@
         "version": "2.9.14+dfsg-1.3~deb12u6"
       },
       {
+        "id": "CVE-2026-124851",
+        "package": "libzstd1",
+        "version": "1.5.4+dfsg2-5"
+      },
+      {
         "id": "CVE-2026-53613",
         "package": "mount",
         "version": "2.38.1-5+deb12u3"
@@ -33673,286 +28963,6 @@
         "version": "8.14.1-2+deb13u7"
       },
       {
-        "id": "CVE-2026-107364",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libgssapi-krb5-2",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libk5crypto3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5-3",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-107364",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112315",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112316",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112317",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112318",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112319",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112320",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112321",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112322",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-112323",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-118380",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-119079",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71199",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
-        "id": "CVE-2026-71200",
-        "package": "libkrb5support0",
-        "version": "1.21.3-5+deb13u1"
-      },
-      {
         "id": "CVE-2026-76642",
         "package": "liblastlog2-2",
         "version": "2.41.5-0+deb13u1"
@@ -34046,6 +29056,16 @@
         "id": "CVE-2026-119379",
         "package": "libsqlite3-0",
         "version": "3.46.1-7+deb13u2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "libssl3t64",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-16742",
@@ -34166,6 +29186,26 @@
         "id": "CVE-2025-69720",
         "package": "ncurses-bin",
         "version": "6.5+20250216-2"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-107494",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
+      },
+      {
+        "id": "CVE-2026-124709",
+        "package": "openssl-provider-legacy",
+        "version": "3.5.9-1~deb13u1"
       },
       {
         "id": "CVE-2026-9538",
