@@ -15,7 +15,7 @@ FROM ghcr.io/era-cloud/php:8.2-cli-alpine3.23
 # 分层信息：便于 docker inspect 追溯这一层是基于哪个 base 构建的
 LABEL cn.era-cloud.layer="extension" \
       cn.era-cloud.base="ghcr.io/era-cloud/php:8.2-cli-alpine3.23" \
-      cn.era-cloud.ext.swoole="v6.3.0" \
+      cn.era-cloud.ext.swoole="v6.1.14" \
       cn.era-cloud.ext.swow="v1.6.2" \
       cn.era-cloud.ext.swoole-rc="v6.3.0-rc2" \
       cn.era-cloud.ext.swow-rc="v2.0.0-alpha.3"

@@ -15,7 +15,7 @@ FROM ghcr.io/era-cloud/php:8.3-cli-alpine3.23
 # 分层信息：便于 docker inspect 追溯这一层是基于哪个 base 构建的
 LABEL cn.era-cloud.layer="extension" \
       cn.era-cloud.base="ghcr.io/era-cloud/php:8.3-cli-alpine3.23" \
-      cn.era-cloud.ext.swoole="v6.3.0" \
+      cn.era-cloud.ext.swoole="v6.1.14" \
       cn.era-cloud.ext.swow="v1.6.2" \
       cn.era-cloud.ext.swoole-rc="v6.3.0-rc2" \
       cn.era-cloud.ext.swow-rc="v2.0.0-alpha.3"
@@ -46,7 +46,7 @@ RUN set -ex; \
 	# swoole 6.2.2 fails to compile on newer g++ (GCC 15) without -fpermissive:
 	# "converting to 'bool' from 'std::nullptr_t' requires direct-initialization"
 	export CXXFLAGS="$CXXFLAGS -fpermissive"; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swoole/swoole:dev-master#e0d606594e13cecd7790baafc5f1e1ead816b77c' \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swoole/swoole:dev-master#cacbc065616e2929137bbe6e9bc8a4d4a42fd83b' \
 		--enable-swoole-curl \
 		--enable-cares \
 		--enable-brotli \

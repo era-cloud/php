@@ -39,8 +39,8 @@
       "version": "v6.3.0-rc2"
     },
     "stable": {
-      "ref": "dev-master#e0d606594e13cecd7790baafc5f1e1ead816b77c",
-      "version": "v6.3.0"
+      "ref": "dev-master#cacbc065616e2929137bbe6e9bc8a4d4a42fd83b",
+      "version": "v6.1.14"
     }
   },
   "swow/swow-extension": {
