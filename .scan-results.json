@@ -4053,7 +4053,43 @@
   },
   "8.2-swow-rc-alpine3.23": {
     "critical": [],
-    "high": []
+    "high": [
+      {
+        "id": "CVE-2026-11979",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86138",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86139",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86140",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86142",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86143",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86144",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      }
+    ]
   },
   "8.2-swow-rc-alpine3.24": {
     "critical": [],
@@ -11838,7 +11874,43 @@
   },
   "8.3-swow-rc-alpine3.23": {
     "critical": [],
-    "high": []
+    "high": [
+      {
+        "id": "CVE-2026-11979",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86138",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86139",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86140",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86142",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86143",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86144",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      }
+    ]
   },
   "8.3-swow-rc-alpine3.24": {
     "critical": [],
@@ -19623,7 +19695,43 @@
   },
   "8.4-swow-rc-alpine3.23": {
     "critical": [],
-    "high": []
+    "high": [
+      {
+        "id": "CVE-2026-11979",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86138",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86139",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86140",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86142",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86143",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86144",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      }
+    ]
   },
   "8.4-swow-rc-alpine3.24": {
     "critical": [],
@@ -27377,7 +27485,43 @@
   },
   "8.5-swow-rc-alpine3.23": {
     "critical": [],
-    "high": []
+    "high": [
+      {
+        "id": "CVE-2026-11979",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86138",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86139",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86140",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86142",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86143",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      },
+      {
+        "id": "CVE-2026-86144",
+        "package": "libxml2",
+        "version": "2.13.9-r1"
+      }
+    ]
   },
   "8.5-swow-rc-alpine3.24": {
     "critical": [],
