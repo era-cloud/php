@@ -41,7 +41,7 @@ RUN set -ex; \
 	$EXT_BUILD_LIBS; \
 	docker-php-source extract; \
 	docker-php-source delete; \
-	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swow/swow-extension:dev-develop#7486e5422c357f4626b176ab87f842b3d2340497'; \
+	pie install --no-cache --no-build-tools-check --no-system-dependencies-check 'swow/swow-extension:dev-develop#dd7b438a85119c22f0be4ca071b895ed735d2ecf'; \
 	echo "memory_limit=1G" >  /usr/local/etc/php/conf.d/00-default.ini; \
 	echo "opcache.enable_cli = 'On'" >>  /usr/local/etc/php/conf.d/50-opcache.ini; \
 	echo "extension=swow.so" > /usr/local/etc/php/conf.d/docker-php-ext-swow.ini; \
